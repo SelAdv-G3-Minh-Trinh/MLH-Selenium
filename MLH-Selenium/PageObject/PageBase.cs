@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Firefox;
 using System;
 using MLH_Selenium.Extension;
+using System.Threading;
 
 namespace MLH_Selenium.PageObject
 {
@@ -24,6 +25,12 @@ namespace MLH_Selenium.PageObject
                     element = Constant.driver.mFindElement(By.Id(input));
                 else if (m == Constant.method.name)
                     element = Constant.driver.mFindElement(By.Name(input));
+
+                if (Constant.debug)
+                {
+                    element.mHighlightElement();
+                    Thread.Sleep(1000);
+                }
             }
             catch (Exception)
             {
