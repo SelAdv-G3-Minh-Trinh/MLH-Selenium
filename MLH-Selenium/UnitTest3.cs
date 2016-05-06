@@ -9,7 +9,8 @@ namespace MLH_Selenium
         [TestMethod]
         public void TestMethod1()
         {
-            //abc
+            //Hoang Ha
+            //HoangHa
         }
     }
 }
