@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MLH_Selenium.PageObject;
+using MLH_Selenium.Extension;
 
 namespace MLH_Selenium.TestCases
 {
@@ -10,7 +11,7 @@ namespace MLH_Selenium.TestCases
         [TestMethod]
         public void DA_LOGIN_TC001()
         {         
-            Constant.driver.Navigate().GoToUrl(Constant.url);
+            Constant.driver.mNavigate(Constant.url);
             LoginPage loginPage = new LoginPage();
             loginPage.loginWithValidUser("SampleRepository", "administrator", null); 
         }

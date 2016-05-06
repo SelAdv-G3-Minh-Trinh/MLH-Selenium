@@ -20,7 +20,7 @@ namespace MLH_Selenium.PageObject
         {
             get
             {
-                return PageBase.convertToIWebElement("repository1", Constant.method.id);
+                return PageBase.convertToIWebElement("repository", Constant.method.id);
             }
         }
 

@@ -19,5 +19,10 @@ namespace MLH_Selenium.Extension
             }
             return driver.FindElement(by);
         }
+
+        public static void mNavigate(this IWebDriver driver, string url)
+        {
+            driver.Navigate().GoToUrl(url);
+        }
     }
 }
