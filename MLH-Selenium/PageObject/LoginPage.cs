@@ -49,7 +49,7 @@ namespace MLH_Selenium.PageObject
         #endregion
 
         #region HighLevelAction   
-        public DashboardPage Login(string repositoryName, string username, string password)
+        public DashboardPage loginWithValidUser(string repositoryName, string username, string password)
         {
             Repository_ComboBox.SendKeys(repositoryName);
             UserName_TextBox.SendKeys(username);
@@ -59,6 +59,16 @@ namespace MLH_Selenium.PageObject
             return new DashboardPage();
         }
         #endregion
+
+        public LoginPage loginWithInvalidUser(string repositoryName, string username, string password)
+        {
+            Repository_ComboBox.SendKeys(repositoryName);
+            UserName_TextBox.SendKeys(username);
+            if (password != null)
+                Password_TextBox.SendKeys(password);
+            Login_Button.Click();
+            return this;
+        }
 
     }
 }

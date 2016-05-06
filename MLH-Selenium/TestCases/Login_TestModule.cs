@@ -12,7 +12,7 @@ namespace MLH_Selenium.TestCases
         {         
             Constant.driver.Navigate().GoToUrl(Constant.url);
             LoginPage loginPage = new LoginPage();
-            loginPage.Login("SampleRepository", "administrator", null);
+            loginPage.loginWithValidUser("SampleRepository", "administrator", null); 
         }
     }
 }
