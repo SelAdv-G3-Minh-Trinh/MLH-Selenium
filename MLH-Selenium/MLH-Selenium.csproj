@@ -40,6 +40,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>WebDriver\WebDriver.dll</HintPath>
     </Reference>
+    <Reference Include="WebDriver.Support, Version=2.53.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\WebDriver.Support.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -56,20 +60,20 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Extension\IWebElementExtension.cs" />
+    <Compile Include="Extension\WebDriverExtension.cs" />
     <Compile Include="PageObject\DashboardPage.cs" />
     <Compile Include="PageObject\PageBase.cs" />
     <Compile Include="PageObject\Constant.cs" />
     <Compile Include="PageObject\LoginPage.cs" />
     <Compile Include="TestCases\Login_TestModule.cs" />
     <Compile Include="TestCases\TestBase.cs" />
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitTest2.cs" />
-    <Compile Include="UnitTest3.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="WebDriver\WebDriver.dll" />
+    <Content Include="DLL\WebDriver.dll" />
+    <Content Include="DLL\WebDriver.Support.dll" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

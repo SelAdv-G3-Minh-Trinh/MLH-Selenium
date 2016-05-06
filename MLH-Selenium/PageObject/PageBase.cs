@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using System;
+using MLH_Selenium.Extension;
 
 namespace MLH_Selenium.PageObject
 {
@@ -9,19 +10,20 @@ namespace MLH_Selenium.PageObject
         public static void openFireFoxBrowser()
         {
             Constant.driver = new FirefoxDriver();
+            Constant.driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(Constant.implicitlyTimeSeconds));
         }
 
         public static IWebElement convertToIWebElement(string input, Constant.method m = Constant.method.xpath)
         {
             IWebElement element = null;
             try
-            {
+            {             
                 if (m == Constant.method.xpath)
-                    element = Constant.driver.FindElement(By.XPath(input));
+                    element = Constant.driver.mFindElement(By.XPath(input));
                 else if (m == Constant.method.id)
-                    element = Constant.driver.FindElement(By.Id(input));
+                    element = Constant.driver.mFindElement(By.Id(input));
                 else if (m == Constant.method.name)
-                    element = Constant.driver.FindElement(By.Name(input));
+                    element = Constant.driver.mFindElement(By.Name(input));
             }
             catch (Exception)
             {

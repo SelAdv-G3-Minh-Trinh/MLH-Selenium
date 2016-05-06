@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MLH_Selenium.Extension;
 
 namespace MLH_Selenium.PageObject
 {
@@ -14,12 +15,12 @@ namespace MLH_Selenium.PageObject
 
         }
 
-        #region WebElement
+        #region Elements
         public IWebElement Repository_ComboBox
         {
             get
             {
-                return PageBase.convertToIWebElement("repository", Constant.method.id);
+                return PageBase.convertToIWebElement("repository1", Constant.method.id);
             }
         }
 
@@ -48,27 +49,26 @@ namespace MLH_Selenium.PageObject
         }
         #endregion
 
-        #region HighLevelAction   
+        #region Actions   
         public DashboardPage loginWithValidUser(string repositoryName, string username, string password)
         {
-            Repository_ComboBox.SendKeys(repositoryName);
-            UserName_TextBox.SendKeys(username);
+            Repository_ComboBox.mSendKeys(repositoryName);
+            UserName_TextBox.mSendKeys(username);
             if (password != null)
-                Password_TextBox.SendKeys(password);
-            Login_Button.Click();
+                Password_TextBox.mSendKeys(password);
+            Login_Button.mClick();
             return new DashboardPage();
         }
-        #endregion
 
         public LoginPage loginWithInvalidUser(string repositoryName, string username, string password)
         {
-            Repository_ComboBox.SendKeys(repositoryName);
-            UserName_TextBox.SendKeys(username);
+            Repository_ComboBox.mSendKeys(repositoryName);
+            UserName_TextBox.mSendKeys(username);
             if (password != null)
-                Password_TextBox.SendKeys(password);
-            Login_Button.Click();
+                Password_TextBox.mSendKeys(password);
+            Login_Button.mClick();
             return this;
         }
-
+        #endregion
     }
 }
