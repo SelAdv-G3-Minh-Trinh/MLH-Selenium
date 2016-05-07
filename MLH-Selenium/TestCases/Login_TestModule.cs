@@ -1,6 +1,11 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MLH_Selenium.PageObject;
+using MLH_Selenium.Extension;
+using System.Threading;
+using System.Drawing;
+using System.Runtime.InteropServices;
+using OpenQA.Selenium;
 
 namespace MLH_Selenium.TestCases
 {
@@ -10,9 +15,10 @@ namespace MLH_Selenium.TestCases
         [TestMethod]
         public void DA_LOGIN_TC001()
         {         
-            Constant.driver.Navigate().GoToUrl(Constant.url);
+            Constant.driver.mNavigate(Constant.url);
             LoginPage loginPage = new LoginPage();
-            loginPage.Login("SampleRepository", "administrator", null);
-        }
+            DashboardPage dashboardPage = loginPage.loginWithValidUser("SampleRepository", "administrator", null);
+            dashboardPage.widget_head_panel.mDragAndDropElement(600, 900);                    
+        }       
     }
 }
