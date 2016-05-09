@@ -5,7 +5,7 @@ using MLH_Selenium.PageObject;
 namespace MLH_Selenium.TestCases
 {
     [TestClass]
-    public class Login_TestModule : TestBase
+    public class LoginTestSuite : TestBase
     {
         [TestMethod]
         public void DA_LOGIN_TC001()

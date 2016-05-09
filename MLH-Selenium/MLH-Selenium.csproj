@@ -76,7 +76,7 @@
     <Compile Include="PageObject\LoginPage.cs" />
     <Compile Include="PageObject\PageBase.cs" />
     <Compile Include="Properties\Resources.Designer.cs" />
-    <Compile Include="TestCases\Login_TestModule.cs" />
+    <Compile Include="TestCases\LoginTestSuite.cs" />
     <Compile Include="TestCases\TestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
