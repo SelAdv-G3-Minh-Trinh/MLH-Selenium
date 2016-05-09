@@ -8,7 +8,7 @@ namespace MLH_Selenium.TestCases
     public class Login_TestModule : TestBase
     {
         [TestMethod]
-        public void DA_LOGIN_TC01()
+        public void DA_LOGIN_TC001()
         {
             string repo = "SampleRepository";
             string user = "administrator";

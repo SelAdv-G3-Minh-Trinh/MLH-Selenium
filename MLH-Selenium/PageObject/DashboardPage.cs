@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using MLH_Selenium.Extension;
+using MLH_Selenium.Common;
 
 namespace MLH_Selenium.PageObject
 {
@@ -10,7 +11,7 @@ namespace MLH_Selenium.PageObject
         {
             get
             {
-                return PageBase.convertToIWebElement("//div[@class='widget-head']/div[@title='Test Modules Execution Result Details by Date']");
+                return PageBase.findElementByStringAndMethod("//div[@class='widget-head']/div[@title='Test Modules Execution Result Details by Date']");
             }
         }
         #endregion

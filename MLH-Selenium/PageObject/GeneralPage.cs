@@ -1,31 +1,27 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using System.Linq;
+using MLH_Selenium.Common;
+using MLH_Selenium.Extension;
 
 namespace MLH_Selenium.PageObject
 {
     public class GeneralPage
     {
-        #region Locators
-        static readonly By _btnLogout = By.XPath("//a[@href = 'logout.do' and text() = 'Logout']");
-        static readonly By _btnUser = By.XPath("//a[@href='#Welcome']");
-        static readonly By _btnRepository = By.XPath("//a[@href = '#Repository']/span");
-        #endregion
-
         #region Elements
-        public IWebElement BtnLogout
+        public WebElement BtnLogout
         {
-            get { return Constant.driver.FindElement(_btnLogout); }
+            get { return PageBase.findElementByStringAndMethod("//a[@href = 'logout.do' and text() = 'Logout']"); }
         }
 
-        public IWebElement BtnUser
+        public WebElement BtnUser
         {
-            get { return Constant.driver.FindElement(_btnUser); }
+            get { return PageBase.findElementByStringAndMethod("//a[@href='#Welcome']"); }
         }
 
-        public IWebElement BtnRepository
+        public WebElement BtnRepository
         {
-            get { return Constant.driver.FindElement(_btnRepository); }
+            get { return PageBase.findElementByStringAndMethod("//a[@href = '#Repository']/span"); }
         }
 
         #endregion

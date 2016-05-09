@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Firefox;
 using System;
 using MLH_Selenium.Extension;
+using MLH_Selenium.Common;
 using System.Threading;
 
 namespace MLH_Selenium.PageObject
@@ -10,25 +11,27 @@ namespace MLH_Selenium.PageObject
     {
         public static void openFireFoxBrowser()
         {
-            Constant.driver = new FirefoxDriver();
+            Constant.driver = new WebDriver(new FirefoxDriver());
             Constant.driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(Constant.implicitlyTimeSeconds));
         }
 
-        public static IWebElement convertToIWebElement(string input, Constant.method m = Constant.method.xpath)
+        public static WebElement findElementByStringAndMethod(string input, Constant.method m = Constant.method.xpath)
         {
             IWebElement element = null;
+            WebElement elementOutput = null;
             try
-            {             
+            {
                 if (m == Constant.method.xpath)
-                    element = Constant.driver.mFindElement(By.XPath(input));
+                    element = Constant.driver.FindElement(By.XPath(input), 3);
                 else if (m == Constant.method.id)
-                    element = Constant.driver.mFindElement(By.Id(input));
+                    element = Constant.driver.FindElement(By.Id(input), 3);
                 else if (m == Constant.method.name)
-                    element = Constant.driver.mFindElement(By.Name(input));
+                    element = Constant.driver.FindElement(By.Name(input), 3);
 
-                if (Constant.debug)
+                elementOutput = new WebElement(element);
+                if (Constant.debug && elementOutput != null)
                 {
-                    element.mHighlightElement();
+                    elementOutput.HighlightElement();
                     Thread.Sleep(1000);
                 }
             }
@@ -36,7 +39,7 @@ namespace MLH_Selenium.PageObject
             {
                 throw;
             }
-            return element;
+            return elementOutput;
         }      
     }
 }
