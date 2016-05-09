@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using MLH_Selenium.Extension;
 
-namespace MLH_Selenium.PageObject  
+namespace MLH_Selenium.PageObject
 {
     public class LoginPage: GeneralPage
     {
@@ -50,6 +50,15 @@ namespace MLH_Selenium.PageObject
         }
 
         public LoginPage loginWithInvalidUser(string repositoryName, string username, string password)
+        {
+            //Submit login credentails
+            submitLoginForm(repositoryName, username, password);
+
+            //Login page returns
+            return this;
+        }
+
+        public LoginPage loginWithBlankUser(string repositoryName, string username, string password)
         {
             //Submit login credentails
             submitLoginForm(repositoryName, username, password);
