@@ -1,40 +1,41 @@
 ﻿using OpenQA.Selenium;
 using MLH_Selenium.Extension;
+using MLH_Selenium.Common;
 
-namespace MLH_Selenium.PageObject  
+namespace MLH_Selenium.PageObject
 {
     public class LoginPage: GeneralPage
     {
         #region Elements
-        public IWebElement Repository_ComboBox
+        public WebElement Repository_ComboBox
         {
             get
             {
-                return PageBase.convertToIWebElement("repository", Constant.method.id);
+                return PageBase.findElementByStringAndMethod("repository", Constant.method.id);
             }
         }
 
-        public IWebElement UserName_TextBox
+        public WebElement UserName_TextBox
         {
             get
             {
-                return PageBase.convertToIWebElement("username", Constant.method.id);
+                return PageBase.findElementByStringAndMethod("username", Constant.method.id);
             }
         }
 
-        public IWebElement Password_TextBox
+        public WebElement Password_TextBox
         {
             get
             {
-                return PageBase.convertToIWebElement("password", Constant.method.id);
+                return PageBase.findElementByStringAndMethod("password", Constant.method.id);
             }
         }
 
-        public IWebElement Login_Button
+        public WebElement Login_Button
         {
             get
             {
-                return PageBase.convertToIWebElement("//div[@class='btn-login']");
+                return PageBase.findElementByStringAndMethod("//div[@class='btn-login']");
             }
         }
         #endregion
@@ -58,19 +59,28 @@ namespace MLH_Selenium.PageObject
             return this;
         }
 
+        public LoginPage loginWithBlankUser(string repositoryName, string username, string password)
+        {
+            //Submit login credentails
+            submitLoginForm(repositoryName, username, password);
+
+            //Login page returns
+            return this;
+        }
+
         public void submitLoginForm(string repositoryName, string username, string password)
         {
             //Submit login credentails 
-            Repository_ComboBox.mSendKeys(repositoryName);
-            UserName_TextBox.mSendKeys(username);
+            Repository_ComboBox.SendKeys(repositoryName);
+            UserName_TextBox.SendKeys(username);
             if (password != null)
-                Password_TextBox.mSendKeys(password);
-            Login_Button.mClick();
+                Password_TextBox.SendKeys(password);
+            Login_Button.Click();
         }
 
         public LoginPage open()
         {
-            Constant.driver.mNavigate(Constant.url);
+            Constant.driver.Navigate().GoToUrl(Constant.url);            
             return this;
         }
         #endregion
