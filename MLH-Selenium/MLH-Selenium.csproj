@@ -39,8 +39,13 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.XML" />
     <Reference Include="WebDriver, Version=2.53.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>DLL\WebDriver.dll</HintPath>
@@ -67,21 +72,20 @@
   <ItemGroup>
     <Compile Include="Extension\WebDriver.cs" />
     <Compile Include="Extension\WebElement.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Common\Constant.cs" />
+    <Compile Include="ObjectData\Page.cs" />
+    <Compile Include="PageObject\ManagePagesPage.cs" />
     <Compile Include="PageObject\DashboardPage.cs" />
     <Compile Include="PageObject\GeneralPage.cs" />
     <Compile Include="PageObject\LoginPage.cs" />
     <Compile Include="PageObject\PageBase.cs" />
     <Compile Include="Properties\Resources.Designer.cs" />
     <Compile Include="TestCases\LoginTestSuite.cs" />
+    <Compile Include="TestCases\ManagePagesTestSuite.cs" />
     <Compile Include="TestCases\TestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="obj\Debug\MLH_Selenium.Properties.Resources.resources" />
     <EmbeddedResource Include="Properties\Resources.resx" />
   </ItemGroup>
   <ItemGroup>
@@ -90,14 +94,13 @@
     <Content Include="bin\Debug\MLH-Selenium.pdb" />
     <Content Include="bin\Debug\WebDriver.dll" />
     <Content Include="bin\Debug\WebDriver.Support.dll" />
+    <Content Include="DLL\log4net.dll" />
     <Content Include="DLL\WebDriver.dll" />
     <Content Include="DLL\WebDriver.Support.dll" />
-    <Content Include="obj\Debug\MLH-Selenium.csproj.FileListAbsolute.txt" />
-    <Content Include="obj\Debug\MLH-Selenium.dll" />
-    <Content Include="obj\Debug\MLH-Selenium.pdb" />
-    <Content Include="obj\Debug\TempPE\Properties.Resources.Designer.cs.dll" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="obj\Debug\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="bin\Debug\MLH-Selenium.dll.lastcodeanalysissucceeded" />
     <None Include="obj\Debug\DesignTimeResolveAssemblyReferences.cache" />

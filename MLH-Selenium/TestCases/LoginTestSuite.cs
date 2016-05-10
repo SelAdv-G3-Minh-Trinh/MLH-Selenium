@@ -9,7 +9,7 @@ namespace MLH_Selenium.TestCases
     {
         [TestMethod]
         public void DA_LOGIN_TC001()
-        {
+        {            
             string repo = "SampleRepository";
             string user = "administrator";
             string pass = "";
@@ -23,7 +23,7 @@ namespace MLH_Selenium.TestCases
             //2. Enter valid username and password
             //3. Click on "Login" button
             DashboardPage dashboard = new DashboardPage();
-            dashboard = loginPage.loginWithValidUser(repo, user, pass);
+            dashboard = loginPage.LoginWithValidUser(repo, user, pass);
 
             //VP. Verify that Dashboard Mainpage appears
             string actual = dashboard.getUserLogin(user);
@@ -50,7 +50,7 @@ namespace MLH_Selenium.TestCases
             //2. Enter invalid username and password
             //3. Click on "Login" button
             //VP. Verify that Dashboard Error message "Username or password is invalid" appears
-            string actual = loginPage.loginWithInvalidUser(repo, user, pass).getAlertMessage();
+            string actual = loginPage.LoginWithInvalidUser(repo, user, pass).GetAlertMessage();
             string expected = "Username or password is invalid";
             Assert.AreEqual(expected, actual);
 
@@ -74,7 +74,7 @@ namespace MLH_Selenium.TestCases
             //2. Enter valid username and invalid password
             //3. Click on "Login" button
             //VP. Verify that Dashboard Error message "Username or password is invalid" appears
-            string actual = loginPage.loginWithInvalidUser(repo, user, pass).getAlertMessage();
+            string actual = loginPage.LoginWithInvalidUser(repo, user, pass).GetAlertMessage();
             string expected = "Username or password is invalid";
             Assert.AreEqual(expected, actual);
 
@@ -100,13 +100,13 @@ namespace MLH_Selenium.TestCases
             //3. Click on "Login" button
             //4. Click on "Logout" button 
             DashboardPage dashboard = new DashboardPage();
-            dashboard = loginPage.loginWithValidUser(repo1, user, pass);
+            dashboard = loginPage.LoginWithValidUser(repo1, user, pass);
             dashboard.Logout();
 
             //5. Select a different repository
             //6. Enter valid username and password of this repository
             //VP. Verify that Dashboard Mainpage appears
-            string actual = loginPage.loginWithValidUser(repo2, user, pass).getUserLogin(user);
+            string actual = loginPage.LoginWithValidUser(repo2, user, pass).getUserLogin(user);
             string expected = user;
             Assert.AreEqual(expected, actual);
 
@@ -131,12 +131,12 @@ namespace MLH_Selenium.TestCases
 
             //2. Login with valid account for the first repository
             DashboardPage dashboard = new DashboardPage();
-            dashboard = loginPage.loginWithValidUser(repo1, user, pass);
+            dashboard = loginPage.LoginWithValidUser(repo1, user, pass);
 
             //3. Choose another repository in Repository list
             //VP1. There is no Login Repository dialog
             //VP2. The Repository menu displays name of switched repository
-            string actual = dashboard.changeRepository(repo2).getRepositoryName();
+            string actual = dashboard.ChangeRepository(repo2).getRepositoryName();
             string expected = repo2;
             Assert.AreEqual(expected, actual);
 
@@ -148,8 +148,8 @@ namespace MLH_Selenium.TestCases
         public void DA_LOGIN_TC006()
         {
             string repo = "SampleRepository";
-            string user = "hoangha";
-            string pass = "PASSWORD";
+            string user = "test";
+            string pass = "ADMIN";
 
             Console.WriteLine(@"DA_LOGIN_TC006 - Verify that 'Password' input is case sensitive");
 
@@ -160,7 +160,7 @@ namespace MLH_Selenium.TestCases
             //2. Enter valid username and password in uppercase
             //3. Click on "Login" button
             //VP. Verify that Dashboard Error message "Username or password is invalid" appears
-            string actual = loginPage.loginWithInvalidUser(repo, user, pass).getAlertMessage();
+            string actual = loginPage.LoginWithInvalidUser(repo, user, pass).GetAlertMessage();
             string expected = "Username or password is invalid";
             Assert.AreEqual(expected, actual);
 
@@ -184,7 +184,7 @@ namespace MLH_Selenium.TestCases
             //2. Enter username in uppercase and valid password
             //3. Click on "Login" button
             DashboardPage dashboard = new DashboardPage();
-            dashboard = loginPage.loginWithValidUser(repo, user, pass);
+            dashboard = loginPage.LoginWithValidUser(repo, user, pass);
 
             //VP. Verify that Dashboard Mainpage appears
             string actual = dashboard.getUserLogin(user);
@@ -199,7 +199,7 @@ namespace MLH_Selenium.TestCases
         public void DA_LOGIN_TC008()
         {
             string repo = "SampleRepository";
-            string user = "hoang.ha";
+            string user = "test1";
             string pass = "!@#$%^&*()";
 
             Console.WriteLine("DA_LOGIN_TC008 - Verify that password with special characters is working correctly");
@@ -211,7 +211,7 @@ namespace MLH_Selenium.TestCases
             //2. Enter valid username and password with special characters
             //3. Click on "Login" button
             DashboardPage dashboard = new DashboardPage();
-            dashboard = loginPage.loginWithValidUser(repo, user, pass);
+            dashboard = loginPage.LoginWithValidUser(repo, user, pass);
 
             //VP. Verify that Dashboard Mainpage appears
             string actual = dashboard.getUserLogin(user);
@@ -226,7 +226,7 @@ namespace MLH_Selenium.TestCases
         public void DA_LOGIN_TC009()
         {
             string repo = "SampleRepository";
-            string user = "hoang.ha@logigear.com";
+            string user = "test@logigear.com";
             string pass = "";
 
             Console.WriteLine("DA_LOGIN_TC009 - Verify that username with special characters is working correctly");
@@ -238,7 +238,7 @@ namespace MLH_Selenium.TestCases
             //2. Enter username  with special characters and valid password
             //3. Click on "Login" button
             DashboardPage dashboard = new DashboardPage();
-            dashboard = loginPage.loginWithValidUser(repo, user, pass);
+            dashboard = loginPage.LoginWithValidUser(repo, user, pass);
 
             //VP. Verify that Dashboard Mainpage appears
             string actual = dashboard.getUserLogin(user);
@@ -265,7 +265,7 @@ namespace MLH_Selenium.TestCases
             //2. Do not enter username and password
             //3. Click on "Login" button
             //VP. Verify that Dashboard Error message "Please enter username!" appears
-            string actual = loginPage.loginWithBlankUser(repo, user, pass).getAlertMessage();
+            string actual = loginPage.LoginWithBlankUser(repo, user, pass).GetAlertMessage();
             string expected = "Please enter username!";
             Assert.AreEqual(expected, actual);
 

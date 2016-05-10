@@ -1,28 +1,25 @@
 ﻿using OpenQA.Selenium;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using OpenQA.Selenium.Interactions;
+using MLH_Selenium.Common;
 
 namespace MLH_Selenium.Extension
 {
     public class WebElement : IWebElement
     {
-        public IWebElement element;
+        private IWebElement element;
 
         public WebElement(IWebElement element)
         {
-            this.element = element;
+            Element = element;
         }
 
         public bool Displayed
         {
             get
             {
-                return element.Displayed;
+                return Element.Displayed;
             }
         }
 
@@ -30,14 +27,14 @@ namespace MLH_Selenium.Extension
         {
             get
             {
-                return element.Enabled;
+                return Element.Enabled;
             }
         }
 
         public System.Drawing.Point Location {
             get
             {
-                return element.Location;
+                return Element.Location;
             }
         }
 
@@ -45,7 +42,7 @@ namespace MLH_Selenium.Extension
         {
             get
             {
-                return element.Selected;
+                return Element.Selected;
             }
         }
 
@@ -53,7 +50,7 @@ namespace MLH_Selenium.Extension
         {
             get
             {
-                return element.Size;
+                return Element.Size;
             }
         }
 
@@ -61,74 +58,117 @@ namespace MLH_Selenium.Extension
         {
             get
             {
-                return element.TagName;
+                return Element.TagName;
             }
-        }
-
-        internal void HighlightElement()
-        {
-            throw new NotImplementedException();
-        }
+        }      
 
         public string Text
         {
             get
             {
-                return element.Text;
+                return Element.Text;
+            }
+        }
+
+        public IWebElement Element
+        {
+            get
+            {
+                return element;
+            }
+
+            set
+            {
+                element = value;
             }
         }
 
         public void Clear()
         {
-            element.Clear();
+            Element.Clear();
         }
 
         public void Click()
         {
-            element.Click();
+            Element.Click();
         }
 
         public IWebElement FindElement(By by)
         {
-            return element.FindElement(by);
+            return Element.FindElement(by);
         }
 
         public ReadOnlyCollection<IWebElement> FindElements(By by)
         {
-            return element.FindElements(by);
+            return Element.FindElements(by);
         }
 
         public string GetAttribute(string attributeName)
         {
-            return element.GetAttribute(attributeName);
+            return Element.GetAttribute(attributeName);
         }
 
         public string GetCssValue(string propertyName)
         {
-            return element.GetCssValue(propertyName);
+            return Element.GetCssValue(propertyName);
         }
 
         public void SendKeys(string text)
         {
-            element.SendKeys(text);
+            Element.SendKeys(text);
         }
 
         public void Submit()
         {
-            element.Submit();
+            Element.Submit();
         }
 
         public void DragAndDropElement(WebDriver driver, int X, int Y)
         {
-            Actions builder = new Actions(driver);
-            builder.DragAndDropToOffset(element, X, Y).Build().Perform();
+            Actions builder = new Actions(driver.Driver);
+            builder.DragAndDropToOffset(Element, X, Y).Build().Perform();
+        }
+
+        public void MouseHover(WebDriver driver)
+        {
+            Actions action = new Actions(Constant.driver.Driver);
+            action.MoveToElement(Element).Perform();
+        }
+
+        public void Check()
+        {
+            if (!Element.Selected)
+                element.Click();
+        }
+
+        public void UnCheck()
+        {
+            if (Element.Selected)
+                element.Click();
         }
 
         public void HighlightElement(WebDriver driver)
-        {
-            var jsDriver = (IJavaScriptExecutor)driver;
+        {            
             string highlightJavascript = @"arguments[0].style.cssText = ""border-width: 2px; border-style: solid; border-color: red"";";
-            jsDriver.ExecuteScript(highlightJavascript, new object[] { element });
+            driver.ParseToJavaScriptExecutor().ExecuteScript(highlightJavascript, new object[] { Element });
+        }
+
+        public void MouseHover(IWebElement element, WebDriver driver)
+        {
+            Actions actions = new Actions(driver);
+            actions.MoveToElement(element).Build().Perform();           
+        }
+
+        public void Check(IWebElement element)
+        {
+            if (!element.Selected)
+                element.Click();
+        }
+
+        public void Uncheck(IWebElement element)
+        {
+            if (element.Selected)
+                element.Click();
         }
     }
 }

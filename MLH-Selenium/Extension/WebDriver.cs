@@ -11,18 +11,18 @@ namespace MLH_Selenium.Extension
 {
     public class WebDriver : IWebDriver
     {
-        public IWebDriver driver;
+        private IWebDriver driver;
 
         public WebDriver(IWebDriver driver)
         {
-            this.driver = driver;
+            Driver = driver;
         }
 
         public string CurrentWindowHandle
         {
             get
             {
-                return driver.CurrentWindowHandle;
+                return Driver.CurrentWindowHandle;
             }
         }
 
@@ -30,7 +30,7 @@ namespace MLH_Selenium.Extension
         {
             get
             {
-                return driver.PageSource;
+                return Driver.PageSource;
             }
         }
 
@@ -38,7 +38,7 @@ namespace MLH_Selenium.Extension
         {
             get
             {
-                return driver.Title;
+                return Driver.Title;
             }
         }
 
@@ -46,12 +46,12 @@ namespace MLH_Selenium.Extension
         {
             get
             {
-                return driver.Url;
+                return Driver.Url;
             }
 
             set
             {
-                driver.Url = value;
+                Driver.Url = value;
             }
         }
 
@@ -59,58 +59,81 @@ namespace MLH_Selenium.Extension
         {
             get
             {
-                return driver.WindowHandles;
+                return Driver.WindowHandles;
+            }
+        }
+
+        public IWebDriver Driver
+        {
+            get
+            {
+                return driver;
+            }
+
+            set
+            {
+                driver = value;
             }
         }
 
         public void Close()
         {
-            driver.Close();
+            Driver.Close();
         }
 
         public void Dispose()
         {
-            driver.Dispose();
+            Driver.Dispose();
         }
 
         public IWebElement FindElement(By by)
         {
-            return driver.FindElement(by);
+            return Driver.FindElement(by);
         }
 
         public ReadOnlyCollection<IWebElement> FindElements(By by)
         {
-            return driver.FindElements(by);
+            return Driver.FindElements(by);
         }
 
         public IOptions Manage()
         {
-            return driver.Manage();
+            return Driver.Manage();
         }
 
         public INavigation Navigate()
         {
-            return driver.Navigate();
+            return Driver.Navigate();
         }
 
         public void Quit()
         {
-            driver.Quit();
+            Driver.Quit();
         }
 
         public ITargetLocator SwitchTo()
         {
-            return driver.SwitchTo();
+            return Driver.SwitchTo();
         }
 
         public IWebElement FindElement(By by, int seconds)
         {
             if (seconds > 0)
             {
-                var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(seconds));
+                var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(seconds));
                 return wait.Until(drv => drv.FindElement(by));
             }
-            return driver.FindElement(by);
+            return Driver.FindElement(by);
+        }
+
+        public IJavaScriptExecutor ParseToJavaScriptExecutor()
+        {
+            return (IJavaScriptExecutor)Driver;
+        }
+
+        public IAlert SwitchToAlert()
+        {
+            return Driver.SwitchTo().Alert();
         }
     }
 }
