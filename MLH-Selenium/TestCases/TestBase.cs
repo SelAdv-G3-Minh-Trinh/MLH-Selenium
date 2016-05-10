@@ -1,7 +1,10 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MLH_Selenium.PageObject;
-using MLH_Selenium.Extension;
+using log4net.Config;
+using log4net;
+using System.Diagnostics;
+using System.IO;
 
 namespace MLH_Selenium.TestCases
 {
@@ -10,8 +13,14 @@ namespace MLH_Selenium.TestCases
     {
         [TestInitialize]
         public void BeforeMethod()
-        {
+        {           
             PageBase.openFireFoxBrowser();
+        }
+
+        [AssemblyInitialize]
+        public static void AssemblyInitialize(TestContext context)
+        { 
+            XmlConfigurator.Configure();            
         }
     }
 }
