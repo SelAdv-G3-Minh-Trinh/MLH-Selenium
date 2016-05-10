@@ -81,6 +81,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="obj\Debug\MLH_Selenium.Properties.Resources.resources" />
     <EmbeddedResource Include="Properties\Resources.resx" />
   </ItemGroup>
   <ItemGroup>
@@ -91,10 +92,18 @@
     <Content Include="bin\Debug\WebDriver.Support.dll" />
     <Content Include="DLL\WebDriver.dll" />
     <Content Include="DLL\WebDriver.Support.dll" />
+    <Content Include="obj\Debug\MLH-Selenium.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\MLH-Selenium.dll" />
+    <Content Include="obj\Debug\MLH-Selenium.pdb" />
+    <Content Include="obj\Debug\TempPE\Properties.Resources.Designer.cs.dll" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <None Include="bin\Debug\MLH-Selenium.dll.lastcodeanalysissucceeded" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\MLH-Selenium.csproj.GenerateResource.Cache" />
+    <None Include="obj\Debug\MLH-Selenium.csprojResolveAssemblyReference.cache" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
