@@ -30,12 +30,10 @@ namespace MLH_Selenium.PageObject
 
         public LoginPage Logout()
         {
-            Actions action = new Actions(Constant.driver);
-            
-            //Hover on Logged user name
-            action.MoveToElement(BtnUser).Perform();
-            
-            //Click Logout
+            //hover on user name
+            BtnUser.MouseHover(BtnUser, Constant.driver);
+
+            //click logout button
             BtnLogout.Click();
 
             //Login page return

@@ -1,9 +1,5 @@
 ﻿using OpenQA.Selenium;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using OpenQA.Selenium.Interactions;
 
@@ -129,6 +125,24 @@ namespace MLH_Selenium.Extension
             var jsDriver = (IJavaScriptExecutor)driver;
             string highlightJavascript = @"arguments[0].style.cssText = ""border-width: 2px; border-style: solid; border-color: red"";";
             jsDriver.ExecuteScript(highlightJavascript, new object[] { element });
+        }
+
+        public void MouseHover(IWebElement element, WebDriver driver)
+        {
+            Actions actions = new Actions(driver);
+            actions.MoveToElement(element).Build().Perform();           
+        }
+
+        public void Check(IWebElement element)
+        {
+            if (!element.Selected)
+                element.Click();
+        }
+
+        public void Uncheck(IWebElement element)
+        {
+            if (element.Selected)
+                element.Click();
         }
     }
 }
