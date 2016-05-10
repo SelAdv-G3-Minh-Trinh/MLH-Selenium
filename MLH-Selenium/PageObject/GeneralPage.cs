@@ -9,17 +9,17 @@ namespace MLH_Selenium.PageObject
     public class GeneralPage
     {
         #region Elements
-        public WebElement BtnLogout
+        public WebElement Logout_Link
         {
             get { return PageBase.findElementByStringAndMethod("//a[@href = 'logout.do' and text() = 'Logout']"); }
         }
 
-        public WebElement BtnUser
+        public WebElement Welcome_Link
         {
             get { return PageBase.findElementByStringAndMethod("//a[@href='#Welcome']"); }
         }
 
-        public WebElement BtnRepository
+        public WebElement Repository_Link
         {
             get { return PageBase.findElementByStringAndMethod("//a[@href = '#Repository']/span"); }
         }
@@ -30,15 +30,8 @@ namespace MLH_Selenium.PageObject
 
         public LoginPage Logout()
         {
-            Actions action = new Actions(Constant.driver);
-            
-            //Hover on Logged user name
-            action.MoveToElement(BtnUser).Perform();
-            
-            //Click Logout
-            BtnLogout.Click();
-
-            //Login page return
+            Welcome_Link.MouseHover(Constant.driver);                        
+            Logout_Link.Click();            
             return new LoginPage();
         }
 
@@ -47,19 +40,13 @@ namespace MLH_Selenium.PageObject
             Constant.driver.Dispose();
         }
 
-        public DashboardPage changeRepository(string repositoryName)
+        public DashboardPage ChangeRepository(string repositoryName)
         {
             string xpathRepoName = "//a[text()='{0}']";
             string repoName = string.Format(xpathRepoName,repositoryName);
 
-            //Hover on Repository menu
-            Actions action = new Actions(Constant.driver);
-            action.MoveToElement(BtnRepository).Perform();
-
-            //Click on repository name
+            Repository_Link.MouseHover(Constant.driver);                     
             Constant.driver.FindElement(By.XPath(repoName)).Click();
-
-            //Dashboard return
             return new DashboardPage();
       
         }
@@ -72,13 +59,12 @@ namespace MLH_Selenium.PageObject
         public string getRepositoryName()
         {
             NavigatetoCurrentPage();
-            return BtnRepository.Text;
+            return Repository_Link.Text;
         }
 
-        public string getAlertMessage()
+        public string GetAlertMessage()
         {
-            IAlert alert = Constant.driver.SwitchTo().Alert();
-            return alert.Text;
+            return Constant.driver.SwitchToAlert().Text;
         }
         #endregion
     }

@@ -11,7 +11,8 @@ namespace MLH_Selenium.PageObject
     {
         public static void openFireFoxBrowser()
         {
-            Constant.driver = new WebDriver(new FirefoxDriver());
+            IWebDriver driver = new FirefoxDriver();
+            Constant.driver = new WebDriver(driver);
             Constant.driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(Constant.implicitlyTimeSeconds));
         }
 
@@ -31,7 +32,7 @@ namespace MLH_Selenium.PageObject
                 elementOutput = new WebElement(element);
                 if (Constant.debug && elementOutput != null)
                 {
-                    elementOutput.HighlightElement();
+                    elementOutput.HighlightElement(Constant.driver);
                     Thread.Sleep(1000);
                 }
             }

@@ -9,66 +9,54 @@ namespace MLH_Selenium.PageObject
         #region Elements
         public WebElement Repository_ComboBox
         {
-            get
-            {
-                return PageBase.findElementByStringAndMethod("repository", Constant.method.id);
-            }
+            get{ return PageBase.findElementByStringAndMethod("repository", Constant.method.id); }
         }
 
         public WebElement UserName_TextBox
         {
-            get
-            {
-                return PageBase.findElementByStringAndMethod("username", Constant.method.id);
-            }
+            get{ return PageBase.findElementByStringAndMethod("username", Constant.method.id); }
         }
 
         public WebElement Password_TextBox
         {
-            get
-            {
-                return PageBase.findElementByStringAndMethod("password", Constant.method.id);
-            }
+            get{ return PageBase.findElementByStringAndMethod("password", Constant.method.id); }
         }
 
         public WebElement Login_Button
         {
-            get
-            {
-                return PageBase.findElementByStringAndMethod("//div[@class='btn-login']");
-            }
+            get{ return PageBase.findElementByStringAndMethod("//div[@class='btn-login']"); }
         }
         #endregion
 
         #region Actions   
-        public DashboardPage loginWithValidUser(string repositoryName, string username, string password)
+        public DashboardPage LoginWithValidUser(string repositoryName, string username, string password)
         {
             //Submit login credentails
-            submitLoginForm(repositoryName, username, password);
+            SubmitLoginForm(repositoryName, username, password);
 
             //Dashboard page returns
             return new DashboardPage();
         }
 
-        public LoginPage loginWithInvalidUser(string repositoryName, string username, string password)
+        public LoginPage LoginWithInvalidUser(string repositoryName, string username, string password)
         {
             //Submit login credentails
-            submitLoginForm(repositoryName, username, password);
+            SubmitLoginForm(repositoryName, username, password);
 
             //Login page returns
             return this;
         }
 
-        public LoginPage loginWithBlankUser(string repositoryName, string username, string password)
+        public LoginPage LoginWithBlankUser(string repositoryName, string username, string password)
         {
             //Submit login credentails
-            submitLoginForm(repositoryName, username, password);
+            SubmitLoginForm(repositoryName, username, password);
 
             //Login page returns
             return this;
         }
 
-        public void submitLoginForm(string repositoryName, string username, string password)
+        public void SubmitLoginForm(string repositoryName, string username, string password)
         {
             //Submit login credentails 
             Repository_ComboBox.SendKeys(repositoryName);
