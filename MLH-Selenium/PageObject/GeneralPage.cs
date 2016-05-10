@@ -30,15 +30,8 @@ namespace MLH_Selenium.PageObject
 
         public LoginPage Logout()
         {
-            Actions action = new Actions(Constant.driver);
-            
-            //Hover on Logged user name
-            action.MoveToElement(BtnUser).Perform();
-            
-            //Click Logout
-            BtnLogout.Click();
-
-            //Login page return
+            Welcome_Link.MouseHover(Constant.driver);
+            Logout_Link.Click();
             return new LoginPage();
         }
 
@@ -50,12 +43,12 @@ namespace MLH_Selenium.PageObject
         public DashboardPage ChangeRepository(string repositoryName)
         {
             string xpathRepoName = "//a[text()='{0}']";
-            string repoName = string.Format(xpathRepoName,repositoryName);
+            string repoName = string.Format(xpathRepoName, repositoryName);
 
-            Repository_Link.MouseHover(Constant.driver);                     
+            Repository_Link.MouseHover(Constant.driver);
             Constant.driver.FindElement(By.XPath(repoName)).Click();
             return new DashboardPage();
-      
+
         }
 
         public void NavigatetoCurrentPage()

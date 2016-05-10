@@ -1,5 +1,9 @@
 ﻿using OpenQA.Selenium;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using OpenQA.Selenium.Interactions;
 using MLH_Selenium.Common;
@@ -31,7 +35,8 @@ namespace MLH_Selenium.Extension
             }
         }
 
-        public System.Drawing.Point Location {
+        public System.Drawing.Point Location
+        {
             get
             {
                 return Element.Location;
@@ -60,7 +65,7 @@ namespace MLH_Selenium.Extension
             {
                 return Element.TagName;
             }
-        }      
+        }
 
         public string Text
         {
@@ -148,27 +153,9 @@ namespace MLH_Selenium.Extension
         }
 
         public void HighlightElement(WebDriver driver)
-        {            
+        {
             string highlightJavascript = @"arguments[0].style.cssText = ""border-width: 2px; border-style: solid; border-color: red"";";
             driver.ParseToJavaScriptExecutor().ExecuteScript(highlightJavascript, new object[] { Element });
-        }
-
-        public void MouseHover(IWebElement element, WebDriver driver)
-        {
-            Actions actions = new Actions(driver);
-            actions.MoveToElement(element).Build().Perform();           
-        }
-
-        public void Check(IWebElement element)
-        {
-            if (!element.Selected)
-                element.Click();
-        }
-
-        public void Uncheck(IWebElement element)
-        {
-            if (element.Selected)
-                element.Click();
         }
     }
 }

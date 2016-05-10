@@ -1,30 +1,29 @@
-﻿using OpenQA.Selenium;
-using MLH_Selenium.Extension;
+﻿using MLH_Selenium.Extension;
 using MLH_Selenium.Common;
 
 namespace MLH_Selenium.PageObject
 {
-    public class LoginPage: GeneralPage
+    public class LoginPage : GeneralPage
     {
         #region Elements
         public WebElement Repository_ComboBox
         {
-            get{ return PageBase.findElementByStringAndMethod("repository", Constant.method.id); }
+            get { return PageBase.findElementByStringAndMethod("repository", Constant.method.id); }
         }
 
         public WebElement UserName_TextBox
         {
-            get{ return PageBase.findElementByStringAndMethod("username", Constant.method.id); }
+            get { return PageBase.findElementByStringAndMethod("username", Constant.method.id); }
         }
 
         public WebElement Password_TextBox
         {
-            get{ return PageBase.findElementByStringAndMethod("password", Constant.method.id); }
+            get { return PageBase.findElementByStringAndMethod("password", Constant.method.id); }
         }
 
         public WebElement Login_Button
         {
-            get{ return PageBase.findElementByStringAndMethod("//div[@class='btn-login']"); }
+            get { return PageBase.findElementByStringAndMethod("//div[@class='btn-login']"); }
         }
         #endregion
 
@@ -68,7 +67,7 @@ namespace MLH_Selenium.PageObject
 
         public LoginPage open()
         {
-            Constant.driver.Navigate().GoToUrl(Constant.url);            
+            Constant.driver.Navigate().GoToUrl(Constant.url);
             return this;
         }
         #endregion

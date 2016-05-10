@@ -13,14 +13,14 @@ namespace MLH_Selenium.TestCases
     {
         [TestInitialize]
         public void BeforeMethod()
-        {           
+        {
             PageBase.openFireFoxBrowser();
         }
 
         [AssemblyInitialize]
         public static void AssemblyInitialize(TestContext context)
-        { 
-            XmlConfigurator.Configure();            
+        {
+            XmlConfigurator.Configure();
         }
     }
 }

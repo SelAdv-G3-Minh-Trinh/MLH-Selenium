@@ -41,6 +41,6 @@ namespace MLH_Selenium.PageObject
                 throw;
             }
             return elementOutput;
-        }      
+        }
     }
 }

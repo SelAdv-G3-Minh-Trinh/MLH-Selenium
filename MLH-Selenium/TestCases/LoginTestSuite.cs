@@ -9,7 +9,7 @@ namespace MLH_Selenium.TestCases
     {
         [TestMethod]
         public void DA_LOGIN_TC001()
-        {            
+        {
             string repo = "SampleRepository";
             string user = "administrator";
             string pass = "";
@@ -168,8 +168,8 @@ namespace MLH_Selenium.TestCases
             loginPage.Close();
         }
 
-       [TestMethod]
-       public void DA_LOGIN_TC007()
+        [TestMethod]
+        public void DA_LOGIN_TC007()
         {
             string repo = "SampleRepository";
             string user = "ADMINISTRATOR";
@@ -195,7 +195,7 @@ namespace MLH_Selenium.TestCases
             dashboard.Close();
         }
 
-      [TestMethod]
+        [TestMethod]
         public void DA_LOGIN_TC008()
         {
             string repo = "SampleRepository";
