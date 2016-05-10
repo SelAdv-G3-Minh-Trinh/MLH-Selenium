@@ -1,6 +1,7 @@
 ﻿using MLH_Selenium.Extension;
 using MLH_Selenium.ObjectData;
 using OpenQA.Selenium.Support.UI;
+using MLH_Selenium.Common;
 using System;
 
 namespace MLH_Selenium.PageObject
@@ -9,7 +10,7 @@ namespace MLH_Selenium.PageObject
     {
         #region Elements
 
-        public WebElement TxtPageName
+        public WebElement PageName_Txt
         {
             get
             {
@@ -17,7 +18,7 @@ namespace MLH_Selenium.PageObject
             }
         }
 
-        public SelectElement CboParentPage
+        public SelectElement ParentPage_Cmb
         {
             get
             {
@@ -25,7 +26,7 @@ namespace MLH_Selenium.PageObject
             }
         }
 
-        public SelectElement CboNumberPage
+        public SelectElement NumberPage_Cmb
         {
             get
             {
@@ -33,7 +34,7 @@ namespace MLH_Selenium.PageObject
             }
         }
 
-        public SelectElement CboAfterPage
+        public SelectElement AfterPage_Cmb
         {
             get
             {
@@ -41,7 +42,7 @@ namespace MLH_Selenium.PageObject
             }
         }
 
-        public WebElement ChkPublic
+        public WebElement Public_Chk
         {
             get
             {
@@ -49,7 +50,7 @@ namespace MLH_Selenium.PageObject
             }
         }
 
-        public WebElement BtnOK
+        public WebElement OK_Btn
         {
             get
             {
@@ -57,7 +58,7 @@ namespace MLH_Selenium.PageObject
             }
         }
 
-        public WebElement BtnCancel
+        public WebElement Cancel_Btn
         {
             get
             {
@@ -71,15 +72,15 @@ namespace MLH_Selenium.PageObject
         public void submitPageInformation (Page page)
         {
             //Provide page's information
-            TxtPageName.SendKeys(page.PageName);
-            CboParentPage.SelectByText(page.ParentPage);
-            CboNumberPage.SelectByText(page.NumberOfColumns.ToString());
-            CboAfterPage.SelectByText(page.AfterPage);
+            PageName_Txt.SendKeys(page.PageName);
+            ParentPage_Cmb.SelectByText(page.ParentPage);
+            NumberPage_Cmb.SelectByText(page.NumberOfColumns.ToString());
+            AfterPage_Cmb.SelectByText(page.AfterPage);
             if (page.IsPublic == true)
-                ChkPublic.Check(ChkPublic);
+                Public_Chk.Check();
 
             //Click Ok button
-            BtnOK.Click();  
+            OK_Btn.Click();  
         }
 
         public DashboardPage addNewpage(Page page)

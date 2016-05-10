@@ -7,7 +7,7 @@ namespace MLH_Selenium.PageObject
     public class DashboardPage: GeneralPage
     {
         #region Elements
-       
+
         #endregion
 
         #region Actions
@@ -17,7 +17,6 @@ namespace MLH_Selenium.PageObject
             string loginuser = string.Format(xpathLoginUser, username);
             return Constant.driver.FindElement(By.XPath(loginuser)).Text;
         }
-
         #endregion
     }
 }

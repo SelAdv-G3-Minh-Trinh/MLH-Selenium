@@ -46,6 +46,15 @@
         #region Constructors
 
         public Page() { }
+
+        public void InitPageInformation()
+        {
+            this.PageName = "";
+            this.ParentPage = "Select parent";
+            this.NumberOfColumns = 2;
+            this.AfterPage = "Overview";
+            IsPublic = false;
+        }
         #endregion
     }
 }
