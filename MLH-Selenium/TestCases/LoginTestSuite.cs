@@ -148,8 +148,8 @@ namespace MLH_Selenium.TestCases
         public void DA_LOGIN_TC006()
         {
             string repo = "SampleRepository";
-            string user = "hoangha";
-            string pass = "PASSWORD";
+            string user = "test";
+            string pass = "ADMIN";
 
             Console.WriteLine(@"DA_LOGIN_TC006 - Verify that 'Password' input is case sensitive");
 
@@ -199,7 +199,7 @@ namespace MLH_Selenium.TestCases
         public void DA_LOGIN_TC008()
         {
             string repo = "SampleRepository";
-            string user = "hoang.ha";
+            string user = "test1";
             string pass = "!@#$%^&*()";
 
             Console.WriteLine("DA_LOGIN_TC008 - Verify that password with special characters is working correctly");
@@ -226,7 +226,7 @@ namespace MLH_Selenium.TestCases
         public void DA_LOGIN_TC009()
         {
             string repo = "SampleRepository";
-            string user = "hoang.ha@logigear.com";
+            string user = "test@logigear.com";
             string pass = "";
 
             Console.WriteLine("DA_LOGIN_TC009 - Verify that username with special characters is working correctly");
