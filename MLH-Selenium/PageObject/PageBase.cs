@@ -9,31 +9,39 @@ namespace MLH_Selenium.PageObject
 {
     public class PageBase
     {
-        public static void openFireFoxBrowser()
+        public WebDriver driver;
+
+        public PageBase()
         {
-            IWebDriver driver = new FirefoxDriver();
-            Constant.driver = new WebDriver(driver);
-            Constant.driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(Constant.implicitlyTimeSeconds));
+            if(driver==null)
+                driver = (WebDriver)Constant.driverTable[Thread.CurrentThread.ManagedThreadId];
         }
 
-        public static WebElement findElementByStringAndMethod(string input, Constant.method m = Constant.method.xpath)
+        public void openFireFoxBrowser()
+        {
+            IWebDriver IDriver = new FirefoxDriver();
+            driver = new WebDriver(IDriver);
+            driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(Constant.implicitlyTimeSeconds));
+        }
+
+        public WebElement findElementByStringAndMethod(string input, Constant.method m = Constant.method.xpath)
         {
             IWebElement element = null;
             WebElement elementOutput = null;
             try
             {
                 if (m == Constant.method.xpath)
-                    element = Constant.driver.FindElement(By.XPath(input), 3);
+                    element = driver.FindElement(By.XPath(input), 3);
                 else if (m == Constant.method.id)
-                    element = Constant.driver.FindElement(By.Id(input), 3);
+                    element = driver.FindElement(By.Id(input), 3);
                 else if (m == Constant.method.name)
-                    element = Constant.driver.FindElement(By.Name(input), 3);
+                    element = driver.FindElement(By.Name(input), 3);
 
                 elementOutput = new WebElement(element);
                 if (Constant.debug && elementOutput != null)
                 {
-                    elementOutput.HighlightElement(Constant.driver);
-                    Thread.Sleep(1000);
+                    elementOutput.HighlightElement(driver);
+                    Thread.Sleep(500);
                 }
             }
             catch (Exception)
@@ -41,6 +49,11 @@ namespace MLH_Selenium.PageObject
                 throw;
             }
             return elementOutput;
+        }
+
+        public void Close()
+        {
+            driver.Quit();
         }
     }
 }

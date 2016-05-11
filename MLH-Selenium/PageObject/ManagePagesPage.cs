@@ -9,12 +9,11 @@ namespace MLH_Selenium.PageObject
     public class ManagePagesPage: GeneralPage
     {
         #region Elements
-
         public WebElement PageName_Txt
         {
             get
             {
-                return PageBase.findElementByStringAndMethod("//input[@id='name']");
+                return findElementByStringAndMethod("//input[@id='name']");
             }
         }
 
@@ -22,7 +21,7 @@ namespace MLH_Selenium.PageObject
         {
             get
             {
-                return new SelectElement(PageBase.findElementByStringAndMethod("//select[@id='parent']"));
+                return new SelectElement(findElementByStringAndMethod("//select[@id='parent']"));
             }
         }
 
@@ -30,7 +29,7 @@ namespace MLH_Selenium.PageObject
         {
             get
             {
-                return new SelectElement(PageBase.findElementByStringAndMethod("//select[@id='columnnumber']"));
+                return new SelectElement(findElementByStringAndMethod("//select[@id='columnnumber']"));
             }
         }
 
@@ -38,7 +37,7 @@ namespace MLH_Selenium.PageObject
         {
             get
             {
-                return new SelectElement(PageBase.findElementByStringAndMethod("//select[@id='afterpage']"));
+                return new SelectElement(findElementByStringAndMethod("//select[@id='afterpage']"));
             }
         }
 
@@ -46,7 +45,7 @@ namespace MLH_Selenium.PageObject
         {
             get
             {
-                return PageBase.findElementByStringAndMethod("//input[@id='ispublic']");
+                return findElementByStringAndMethod("//input[@id='ispublic']");
             }
         }
 
@@ -54,7 +53,7 @@ namespace MLH_Selenium.PageObject
         {
             get
             {
-                return PageBase.findElementByStringAndMethod("//input[@id='OK']");
+                return findElementByStringAndMethod("//input[@id='OK']");
             }
         }
 
@@ -62,7 +61,7 @@ namespace MLH_Selenium.PageObject
         {
             get
             {
-                return PageBase.findElementByStringAndMethod("//input[@id='Cancel']");
+                return findElementByStringAndMethod("//input[@id='Cancel']");
             }
         }
         #endregion
