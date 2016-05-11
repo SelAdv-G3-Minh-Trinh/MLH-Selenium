@@ -167,8 +167,8 @@ namespace MLH_Selenium.TestCases
             dashboard = loginPage.LoginWithValidUser(repo, user, pass);
 
             //VP. Verify that Dashboard Mainpage appears
-            string actual = dashboard.getUserLogin(user);
-            string expected = user;
+            string actual = dashboard.getUserLogin(user.ToLower());
+            string expected = user.ToLower();
             Assert.AreEqual(expected, actual);           
         }
 
