@@ -2,40 +2,41 @@
 using System.Linq;
 using MLH_Selenium.Common;
 using MLH_Selenium.Extension;
+using System.Threading;
 
 namespace MLH_Selenium.PageObject
 {
-    public class GeneralPage
+    public class GeneralPage : PageBase
     {
         #region Elements
         public WebElement Logout_Link
         {
-            get { return PageBase.findElementByStringAndMethod("//a[@href = 'logout.do' and text() = 'Logout']"); }
+            get { return findElementByStringAndMethod("//a[@href = 'logout.do' and text() = 'Logout']"); }
         }
 
         public WebElement Welcome_Link
         {
-            get { return PageBase.findElementByStringAndMethod("//a[@href='#Welcome']"); }
+            get { return findElementByStringAndMethod("//a[@href='#Welcome']"); }
         }
 
         public WebElement Repository_Link
         {
-            get { return PageBase.findElementByStringAndMethod("//a[@href = '#Repository']/span"); }
+            get { return findElementByStringAndMethod("//a[@href = '#Repository']/span"); }
         }
 
         public WebElement GlobalSetting_Lnk
         {
-            get { return PageBase.findElementByStringAndMethod("//li[@class = 'mn-setting']"); }
+            get { return findElementByStringAndMethod("//li[@class = 'mn-setting']"); }
         }
 
         public WebElement AddPage_Lnk
         {
-            get { return PageBase.findElementByStringAndMethod("//a[@class='add' and text()='Add Page']"); }
+            get { return findElementByStringAndMethod("//a[@class='add' and text()='Add Page']"); }
         }
 
         public WebElement DeletePage_Lnk
         {
-            get { return PageBase.findElementByStringAndMethod("//a[@class='delete' and text()='Delete']"); }
+            get { return findElementByStringAndMethod("//a[@class='delete' and text()='Delete']"); }
         }
 
         #endregion
@@ -44,46 +45,34 @@ namespace MLH_Selenium.PageObject
 
         public LoginPage Logout()
         {
-            Welcome_Link.MouseHover(Constant.driver);
+            Welcome_Link.MouseHover(driver);
             Logout_Link.Click();
             return new LoginPage();
-        }
-
-        public void Close()
-        {
-            Constant.driver.Dispose();
-        }
+        }       
 
         public DashboardPage ChangeRepository(string repositoryName)
         {
-            string xpathRepoName = "//a[text()='{0}']";
-            string repoName = string.Format(xpathRepoName, repositoryName);
-
-            Repository_Link.MouseHover(Constant.driver);
-            Constant.driver.FindElement(By.XPath(repoName)).Click();
+            string repoName = string.Format("//a[text()='{0}']", repositoryName);
+            Repository_Link.MouseHover(driver);
+            findElementByStringAndMethod(repoName).Click();
             return new DashboardPage();
 
         }
 
-        public void NavigatetoCurrentPage()
-        {
-            Constant.driver.SwitchTo().Window(Constant.driver.WindowHandles.Last());
-        }
-
         public string getRepositoryName()
         {
-            NavigatetoCurrentPage();
+            Thread.Sleep(500);
             return Repository_Link.Text;
         }
 
         public string GetAlertMessage()
         {
-            return Constant.driver.SwitchToAlert().Text;
+            return driver.SwitchToAlert().Text;
         }
 
         public ManagePagesPage goToAddPage()
         {
-            GlobalSetting_Lnk.MouseHover(Constant.driver);
+            GlobalSetting_Lnk.MouseHover(driver);
             AddPage_Lnk.Click();
             return new ManagePagesPage();
         }
@@ -99,10 +88,9 @@ namespace MLH_Selenium.PageObject
 
         public bool isPageVisible(string pagename)
         {
-            string xpathPageName = "//a[text()='{0}']";
-            string page = string.Format(xpathPageName, pagename);
+            string page = string.Format("//a[text()='{0}']", pagename);
 
-            if (!Constant.driver.FindElement(By.XPath(page)).Displayed)
+            if (!driver.FindElement(By.XPath(page)).Displayed)
                 return false;
             else
                 return true;
@@ -110,15 +98,14 @@ namespace MLH_Selenium.PageObject
 
         public void deleteAPage(string pagename)
         {
-            string xpathPageName = "//a[text()='{0}']";
-            string page = string.Format(xpathPageName, pagename);
+            string page = string.Format("//a[text()='{0}']", pagename);
 
-            Constant.driver.FindElement(By.XPath(page)).Click();
+            driver.FindElement(By.XPath(page)).Click();
 
-            GlobalSetting_Lnk.MouseHover(Constant.driver);
+            GlobalSetting_Lnk.MouseHover(driver);
             DeletePage_Lnk.Click();
 
-            Constant.driver.SwitchToAlert().Accept();
+            driver.SwitchToAlert().Accept();
         }
 
         public string getNamePageNextTo(string newpage)
@@ -126,7 +113,7 @@ namespace MLH_Selenium.PageObject
             string xpathnewPage = ("//li[a[text()='{0}']]/following-sibling::li[1]/a");
             string newPage = string.Format(xpathnewPage,newpage);
 
-            return Constant.driver.FindElement(By.XPath(newPage)).Text.ToString();
+            return driver.FindElement(By.XPath(newPage)).Text.ToString();
         }
         #endregion
     }

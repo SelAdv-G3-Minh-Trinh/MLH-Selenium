@@ -5,22 +5,29 @@ using log4net.Config;
 using log4net;
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
+using MLH_Selenium.Common;
 
 namespace MLH_Selenium.TestCases
 {
     [TestClass]
     public class TestBase
     {
+        PageBase page;
+
         [TestInitialize]
         public void BeforeMethod()
         {
-            PageBase.openFireFoxBrowser();
-        }
+            page = new PageBase();
+            page.openFireFoxBrowser();
+            int currentThread = Thread.CurrentThread.ManagedThreadId;
+            Constant.driverTable.Add(currentThread, page.driver);
+        }       
 
-        [AssemblyInitialize]
-        public static void AssemblyInitialize(TestContext context)
+        [TestCleanup]
+        public void AfterMethod()
         {
-            XmlConfigurator.Configure();
+            page.Close();
         }
     }
 }

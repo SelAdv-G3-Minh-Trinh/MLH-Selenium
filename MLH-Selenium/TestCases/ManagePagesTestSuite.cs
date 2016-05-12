@@ -73,7 +73,6 @@ namespace MLH_Selenium.TestCases
             page.PageName = pagename;
 
             dashboard = pages.addNewpage(page);
-            dashboard.NavigatetoCurrentPage();
 
             //6. VP Check "Test" page is displayed besides "Overview" page
             string actual = dashboard.getNamePageNextTo(pagenext);
@@ -140,7 +139,6 @@ namespace MLH_Selenium.TestCases
             page.IsPublic = true;
 
             dashboard = pages.addNewpage(page);
-            dashboard.NavigatetoCurrentPage();
 
             //7. Click on Log out link
             //8. Log in with another valid account

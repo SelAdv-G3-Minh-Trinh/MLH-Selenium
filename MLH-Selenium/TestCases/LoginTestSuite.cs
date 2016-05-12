@@ -29,9 +29,6 @@ namespace MLH_Selenium.TestCases
             string actual = dashboard.getUserLogin(user);
             string expected = user;
             Assert.AreEqual(expected, actual);
-
-            //Pos: close
-            dashboard.Close();
         }
 
         [TestMethod]
@@ -53,9 +50,6 @@ namespace MLH_Selenium.TestCases
             string actual = loginPage.LoginWithInvalidUser(repo, user, pass).GetAlertMessage();
             string expected = "Username or password is invalid";
             Assert.AreEqual(expected, actual);
-
-            // Pos. close:
-            loginPage.Close();
         }
 
         [TestMethod]
@@ -77,9 +71,6 @@ namespace MLH_Selenium.TestCases
             string actual = loginPage.LoginWithInvalidUser(repo, user, pass).GetAlertMessage();
             string expected = "Username or password is invalid";
             Assert.AreEqual(expected, actual);
-
-            // Pos. close:
-            loginPage.Close();
         }
 
         [TestMethod]
@@ -99,8 +90,7 @@ namespace MLH_Selenium.TestCases
             //2. Enter valid username and password of default repository
             //3. Click on "Login" button
             //4. Click on "Logout" button 
-            DashboardPage dashboard = new DashboardPage();
-            dashboard = loginPage.LoginWithValidUser(repo1, user, pass);
+            DashboardPage dashboard = loginPage.LoginWithValidUser(repo1, user, pass);
             dashboard.Logout();
 
             //5. Select a different repository
@@ -108,11 +98,7 @@ namespace MLH_Selenium.TestCases
             //VP. Verify that Dashboard Mainpage appears
             string actual = loginPage.LoginWithValidUser(repo2, user, pass).getUserLogin(user);
             string expected = user;
-            Assert.AreEqual(expected, actual);
-
-            //Pos: close
-            dashboard.Close();
-
+            Assert.AreEqual(expected, actual);           
         }
 
         [TestMethod]
@@ -139,9 +125,6 @@ namespace MLH_Selenium.TestCases
             string actual = dashboard.ChangeRepository(repo2).getRepositoryName();
             string expected = repo2;
             Assert.AreEqual(expected, actual);
-
-            //Pos: close
-            dashboard.Close();
         }
 
         [TestMethod]
@@ -163,9 +146,6 @@ namespace MLH_Selenium.TestCases
             string actual = loginPage.LoginWithInvalidUser(repo, user, pass).GetAlertMessage();
             string expected = "Username or password is invalid";
             Assert.AreEqual(expected, actual);
-
-            // Pos. close:
-            loginPage.Close();
         }
 
         [TestMethod]
@@ -187,12 +167,9 @@ namespace MLH_Selenium.TestCases
             dashboard = loginPage.LoginWithValidUser(repo, user, pass);
 
             //VP. Verify that Dashboard Mainpage appears
-            string actual = dashboard.getUserLogin(user);
-            string expected = user;
-            Assert.AreEqual(expected, actual);
-
-            //Pos: close
-            dashboard.Close();
+            string actual = dashboard.getUserLogin(user.ToLower());
+            string expected = user.ToLower();
+            Assert.AreEqual(expected, actual);           
         }
 
         [TestMethod]
@@ -217,9 +194,6 @@ namespace MLH_Selenium.TestCases
             string actual = dashboard.getUserLogin(user);
             string expected = user;
             Assert.AreEqual(expected, actual);
-
-            //Pos: close
-            dashboard.Close();
         }
 
         [TestMethod]
@@ -243,10 +217,7 @@ namespace MLH_Selenium.TestCases
             //VP. Verify that Dashboard Mainpage appears
             string actual = dashboard.getUserLogin(user);
             string expected = user;
-            Assert.AreEqual(expected, actual);
-
-            //Pos: close
-            dashboard.Close();
+            Assert.AreEqual(expected, actual);            
         }
 
         [TestMethod]
@@ -268,9 +239,6 @@ namespace MLH_Selenium.TestCases
             string actual = loginPage.LoginWithBlankUser(repo, user, pass).GetAlertMessage();
             string expected = "Please enter username!";
             Assert.AreEqual(expected, actual);
-
-            // Pos. close:
-            loginPage.Close();
         }
     }
 }

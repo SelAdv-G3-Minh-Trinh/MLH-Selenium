@@ -136,7 +136,7 @@ namespace MLH_Selenium.Extension
 
         public void MouseHover(WebDriver driver)
         {
-            Actions action = new Actions(Constant.driver.Driver);
+            Actions action = new Actions(driver.Driver);
             action.MoveToElement(Element).Perform();
         }
 
