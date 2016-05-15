@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MLH_Selenium.PageObject;
 using MLH_Selenium.ObjectData;
+using MLH_Selenium.Common;
 
 namespace MLH_Selenium.TestCases
 {
@@ -178,6 +179,46 @@ namespace MLH_Selenium.TestCases
             //Post - Condition  Log in  as creator page account and delete newly added page and its parent page
             //      Close TA Dashboard Main Page
 
+        }
+
+        [TestMethod]
+        public void DA_MP_TC024()
+        {
+            Console.WriteLine("DA_MP_TC024 - Verify that \"Bread Crums\" navigation is correct");
+
+            //1. Navigate to Dashboard login page
+            //2. Login with valid account
+            LoginPage loginPage = new LoginPage();
+            loginPage.open();
+            DashboardPage dashboardPage = loginPage.LoginWithValidUser(Constant.mainRepository, Constant.adminUser, Constant.adminPassword);
+
+            //3. Go to Global Setting -> Add page            
+            //4. Enter info into all required fields on New Page dialog            
+            ManagePagesPage pages = dashboardPage.goToAddPage();
+            Page page1 = new Page();
+            page1.InitPageInformation();
+            page1.ParentPage = "Overview";
+            page1.PageName = "Page1" + Utilities.randomString();
+            page1.AfterPage = "Select page";
+            page1.IsPublic = true;
+            dashboardPage = pages.addNewpage(page1);            
+
+            //5. Go to Global Setting -> Add page
+            //6. Enter info into all required fields on New Page dialog
+            pages = dashboardPage.goToAddPage();       
+            Page page2 = new Page();
+            page2.InitPageInformation();
+            page2.ParentPage = "    " + page1.PageName;
+            page2.PageName = "Page2" + Utilities.randomString();
+            page2.AfterPage = "Select page";
+            page2.IsPublic = true;
+            dashboardPage = pages.addNewpage(page2);
+                        
+            //7. Click the first breadcrums
+            //8. VP The first page is navigated
+            //9. Observe the current page
+            //10. Click the second breadcrums
+            //11. VP The second page is navigated
         }
     }
 }

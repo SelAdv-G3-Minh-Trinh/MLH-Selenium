@@ -9,8 +9,12 @@ namespace MLH_Selenium.Common
     {
         public static Hashtable driverTable = new Hashtable();
         public const string url = @"http://groupba.dyndns.org:54000/TADashboard/login.jsp";
-        public const int implicitlyTimeSeconds = 30;
+        public const int implicitlyTimeSeconds = 5;
         public const bool debug = false;
+        public const string adminUser = "administrator";
+        public const string adminPassword = "";
+        public const string mainRepository = "SampleRepository";
+        public const string subRepository = "TestRepository";
         public enum method
         {
             xpath,

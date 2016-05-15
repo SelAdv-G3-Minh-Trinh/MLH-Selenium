@@ -1,15 +1,16 @@
 ﻿using MLH_Selenium.Extension;
 using MLH_Selenium.Common;
 using System.Threading;
+using OpenQA.Selenium.Support.UI;
 
 namespace MLH_Selenium.PageObject
 {
     public class LoginPage : GeneralPage
     {      
         #region Elements
-        public WebElement Repository_ComboBox
+        public SelectElement Repository_ComboBox
         {
-            get { return findElementByStringAndMethod("repository", Constant.method.id); }
+            get { return new SelectElement(findElementByStringAndMethod("repository", Constant.method.id)); }
         }
 
         public WebElement UserName_TextBox
@@ -49,7 +50,7 @@ namespace MLH_Selenium.PageObject
 
         public void SubmitLoginForm(string repositoryName, string username, string password)
         {
-            Repository_ComboBox.SendKeys(repositoryName);
+            Repository_ComboBox.SelectByText(repositoryName);
             UserName_TextBox.SendKeys(username);
             if (password != null)
                 Password_TextBox.SendKeys(password);
