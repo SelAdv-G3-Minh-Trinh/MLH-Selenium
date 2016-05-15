@@ -70,6 +70,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Common\CommonMethod.cs" />
     <Compile Include="Extension\WebDriver.cs" />
     <Compile Include="Extension\WebElement.cs" />
     <Compile Include="Common\Constant.cs" />
@@ -98,9 +99,7 @@
     <Content Include="DLL\WebDriver.dll" />
     <Content Include="DLL\WebDriver.Support.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="obj\Debug\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="bin\Debug\MLH-Selenium.dll.lastcodeanalysissucceeded" />
     <None Include="obj\Debug\DesignTimeResolveAssemblyReferences.cache" />

@@ -11,6 +11,8 @@ namespace MLH_Selenium.Common
         public const string url = @"http://groupba.dyndns.org:54000/TADashboard/login.jsp";
         public const int implicitlyTimeSeconds = 30;
         public const bool debug = false;
+        public const string AlphanumericCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
         public enum method
         {
             xpath,

@@ -6,7 +6,7 @@ using System;
 
 namespace MLH_Selenium.PageObject
 {
-    public class ManagePagesPage: GeneralPage
+    public class ManagePagesPage : GeneralPage
     {
         #region Elements
         public WebElement PageName_Txt
@@ -68,7 +68,7 @@ namespace MLH_Selenium.PageObject
 
         #region Actions
 
-        public void submitPageInformation (Page page)
+        public void submitPageInformation(Page page)
         {
             //Provide page's information
             PageName_Txt.SendKeys(page.PageName);
@@ -79,7 +79,7 @@ namespace MLH_Selenium.PageObject
                 Public_Chk.Check();
 
             //Click Ok button
-            OK_Btn.Click();  
+            OK_Btn.Click();
         }
 
         public DashboardPage addNewpage(Page page)
@@ -88,7 +88,14 @@ namespace MLH_Selenium.PageObject
             submitPageInformation(page);
 
             //return Dashboard page
-            return new DashboardPage(); 
+            return new DashboardPage();
+        }
+
+        public DashboardPage editPage(Page page)
+        {
+            submitPageInformation(page);
+
+            return new DashboardPage();
         }
 
         #endregion
