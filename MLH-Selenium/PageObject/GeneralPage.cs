@@ -67,7 +67,6 @@ namespace MLH_Selenium.PageObject
             Repository_Link.MouseHover(driver);
             findElementByStringAndMethod(repoName).Click();
             return new DashboardPage();
-
         }
 
         public string getRepositoryName()
@@ -79,19 +78,23 @@ namespace MLH_Selenium.PageObject
         public string GetAlertMessage()
         {
             string message = driver.SwitchToAlert().Text;
-            driver.SwitchToAlert().Accept();
-
+            driver.SwitchToAlert().Accept();        
             return message;
         }
 
-        public void goToPage(string pagename)
+        public void goToPage(string linkPath)
         {
-            driver.FindElement(By.XPath(string.Format("//a[text()='{0}']", pagename))).Click();
+            string[] links = linkPath.Split('/');
+            for (int i = 0; i < links.Length - 1; i++)
+            {
+                findElementByStringAndMethod(string.Format("//a[text()='{0}']", links[i])).MouseHover(driver);
+            }
+            findElementByStringAndMethod(string.Format("//a[text()='{0}']", links[links.Length - 1])).Click();
         }
 
-        public void deleteAPage(string pagename)
+        public void deleteAPage(string linkPath)
         {
-            goToPage(pagename);
+            goToPage(linkPath);
             GlobalSetting_Lnk.MouseHover(driver);
             DeletePage_Lnk.Click();
             driver.SwitchToAlert().Accept();
@@ -102,10 +105,8 @@ namespace MLH_Selenium.PageObject
             goToPage(pagename);
             GlobalSetting_Lnk.MouseHover(driver);
             DeletePage_Lnk.Click();
-
             string message = driver.SwitchToAlert().Text;
             driver.SwitchToAlert().Accept();
-
             return message;
         }
 
@@ -141,7 +142,6 @@ namespace MLH_Selenium.PageObject
                 return false;
             else
                 return true;
-
         }
 
         public bool checkDeleteLnk()
@@ -166,22 +166,26 @@ namespace MLH_Selenium.PageObject
                    
             }
             return page;
-   
         }
         
-        public bool isPageVisible(string pagename)
+        public bool isPageLinkDisplayed(string pageLink)
         {
-            string page = string.Format("//a[text()='{0}']", pagename);
+            string link = string.Format("//a[text()='{0}']", pageLink);
 
-            if (!driver.FindElement(By.XPath(page)).Displayed)
+            if (!driver.FindElement(By.XPath(link)).Displayed)
                 return false;
             else
                 return true;
         }
 
+        public bool isPageVisible(string pagename)
+        {
+            return driver.Title == "TestArchitect ™ - " + pagename ? true : false;
+        }
+
         public bool isPopUpDisplayed(string popupname)
         {
-            if (driver.FindElement(By.XPath(string.Format("//h2[text () = '{0}']", popupname))).Displayed)
+            if (driver.FindElement(By.XPath(string.Format("//h2[text() = '{0}']", popupname))).Displayed)
                 return true;
             else
                 return false;

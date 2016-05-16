@@ -174,7 +174,7 @@ namespace MLH_Selenium.TestCases
             dashboard = loginpage.LoginWithValidUser(repo, user2, pass2);
 
             //9     VP newly added page is visibled
-            Assert.IsTrue(dashboard.isPageVisible(page.PageName));
+            Assert.IsTrue(dashboard.isPageLinkDisplayed(page.PageName));
 
             //Post    Log in  as creator page account and delete newly added page	
             //post    Close TA Dashboard Main Page
@@ -235,7 +235,7 @@ namespace MLH_Selenium.TestCases
             dashboard = loginpage.LoginWithValidUser(repo, user2, pass2);
 
             //14    VP children is invisibled
-            Assert.IsFalse(dashboard.isPageVisible(second.PageName));
+            Assert.IsFalse(dashboard.isPageLinkDisplayed(second.PageName));
             //Post - Condition  Log in  as creator page account and delete newly added page and its parent page
             //      Close TA Dashboard Main Page
             dashboard.Logout();
@@ -319,8 +319,8 @@ namespace MLH_Selenium.TestCases
 
             //22    VP  "Test" Page is visible and can be accessed
             //23    VP  "Another Test" page is invisible
-            Assert.IsTrue(dashboard.isPageVisible(first.PageName));
-            Assert.IsFalse(dashboard.isPageVisible(second.PageName));
+            Assert.IsTrue(dashboard.isPageLinkDisplayed(first.PageName));
+            Assert.IsFalse(dashboard.isPageLinkDisplayed(second.PageName));
 
             //Post - Condition  Log in  as creator page account and delete newly added page
             //Close TA Dashboard Main Page
@@ -391,7 +391,7 @@ namespace MLH_Selenium.TestCases
             string actualchild = dashboard.getDeletMessage(child.PageName);
             string expectedchild = deletepage;
             Assert.AreEqual(expectedchild, actualchild);
-            Assert.IsFalse(dashboard.isPageVisible(child.PageName));
+            Assert.IsFalse(dashboard.isPageLinkDisplayed(child.PageName));
 
             //16   Click on parent page
             //17   Click "Delete" link
@@ -402,7 +402,7 @@ namespace MLH_Selenium.TestCases
             string actual = dashboard.getDeletMessage(parent.PageName);
             string expected = deletepage;
             Assert.AreEqual(expected, actual);
-            Assert.IsFalse(dashboard.isPageVisible(parent.PageName));
+            Assert.IsFalse(dashboard.isPageLinkDisplayed(parent.PageName));
 
             //21   Click on "Overview" page
             //22   VP "Delete" link disappears
@@ -468,7 +468,7 @@ namespace MLH_Selenium.TestCases
             dashboard = pages.addNewpage(child2);
 
             //16  VP "Test Child 2" is added successfully
-            Assert.IsTrue(dashboard.isPageVisible(child2.PageName));
+            Assert.IsTrue(dashboard.isPageLinkDisplayed(child2.PageName));
 
             //Post - Condition  Log in  as creator page account and delete newly added page, its sibling page and parent page
             //    Close TA Dashboard Main Page
@@ -506,7 +506,7 @@ namespace MLH_Selenium.TestCases
             child.InitPageInformation();
 
             dashboard = pages.addNewpage(child);
-            Assert.IsTrue(dashboard.isPageVisible(child.PageName));
+            Assert.IsTrue(dashboard.isPageLinkDisplayed(child.PageName));
 
             //Post - Condition  Close TA Dashboard
             dashboard.Close();
@@ -561,7 +561,7 @@ namespace MLH_Selenium.TestCases
             //14   Click Ok button on Confirmation Delete page
             //15  VP Page 2 is deleted successfully
             dashboard.deleteAPage(second.PageName);
-            Assert.IsFalse(dashboard.isPageVisible(second.PageName));
+            Assert.IsFalse(dashboard.isPageLinkDisplayed(second.PageName));
 
             //Post - Condition  Close TA Dashboard
             dashboard.deleteAPage(first.PageName);
@@ -781,12 +781,69 @@ namespace MLH_Selenium.TestCases
             page2.AfterPage = "Select page";
             page2.IsPublic = true;
             dashboardPage = pages.addNewpage(page2);
-                        
+
             //7. Click the first breadcrums
             //8. VP The first page is navigated
-            //9. Observe the current page
-            //10. Click the second breadcrums
-            //11. VP The second page is navigated
+            dashboardPage.goToPage("Overview/" + page1.PageName);            
+            Assert.AreEqual(true, dashboardPage.isPageVisible(page1.PageName), string.Format("Error: page '{0}' does not exist", page1.PageName));
+            
+            //9. Click the second breadcrums
+            //10. VP The second page is navigated
+            dashboardPage.goToPage("Overview/" + page1.PageName + "/" + page2.PageName);                        
+            Assert.AreEqual(true, dashboardPage.isPageVisible(page2.PageName), string.Format("Error: page '{0}' does not exist", page2.PageName));
+
+            //Post - Condition
+            dashboardPage.deleteAPage("Overview/" + page1.PageName + "/" + page2.PageName);
+            dashboardPage.deleteAPage("Overview/" + page1.PageName);
+        }
+
+        [TestMethod]
+        public void DA_MP_TC025()
+        {
+            Console.WriteLine("DA_MP_TC025 - Verify that page listing is correct when user edit \"Display After\" field of a specific page");
+
+            //1. Navigate to Dashboard login page
+            //2. Login with valid account
+            LoginPage loginPage = new LoginPage();
+            loginPage.open();
+            DashboardPage dashboardPage = loginPage.LoginWithValidUser(Constant.mainRepository, Constant.adminUser, Constant.adminPassword);
+
+            //3. Go to Global Setting -> Add page            
+            //4. Enter info into all required fields on New Page dialog            
+            ManagePagesPage pages = dashboardPage.goToAddPage();
+            Page page1 = new Page();
+            page1.InitPageInformation();            
+            page1.PageName = "Page1" + Utilities.GenerateRandomString(6);            
+            dashboardPage = pages.addNewpage(page1);
+
+            //5. Go to Global Setting -> Add page
+            //6. Enter info into all required fields on New Page dialog
+            pages = dashboardPage.goToAddPage();
+            Page page2 = new Page();
+            page2.InitPageInformation();            
+            page2.PageName = "Page2" + Utilities.GenerateRandomString(6);            
+            dashboardPage = pages.addNewpage(page2);
+
+            //7. Click Edit link for the second created page
+            //8. Change value Display After for the second created page to after Overview page
+            //9. Click Ok button on Edit Page dialog
+            page2.AfterPage = "Overview";
+            pages.gotoEditPage(page2.PageName);
+            dashboardPage = pages.editPage(page2);
+
+            ////7. Click the first breadcrums
+            ////8. VP The first page is navigated
+            //dashboardPage.goToPage("Overview/" + page1.PageName);
+            //Assert.AreEqual(true, dashboardPage.isPageVisible(page1.PageName), string.Format("Error: page '{0}' does not exist", page1.PageName));
+
+            ////9. Click the second breadcrums
+            ////10. VP The second page is navigated
+            //dashboardPage.goToPage("Overview/" + page1.PageName + "/" + page2.PageName);
+            //Assert.AreEqual(true, dashboardPage.isPageVisible(page2.PageName), string.Format("Error: page '{0}' does not exist", page2.PageName));
+
+            ////Post - Condition
+            //dashboardPage.deleteAPage("Overview/" + page1.PageName + "/" + page2.PageName);
+            //dashboardPage.deleteAPage("Overview/" + page1.PageName);
         }
     }
 }
