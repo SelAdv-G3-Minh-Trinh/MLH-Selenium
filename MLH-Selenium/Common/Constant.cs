@@ -11,6 +11,8 @@ namespace MLH_Selenium.Common
         public const string url = @"http://groupba.dyndns.org:54000/TADashboard/login.jsp";
         public const int implicitlyTimeSeconds = 5;
         public const bool debug = false;
+        public const string AlphanumericCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
         public const string adminUser = "administrator";
         public const string adminPassword = "";
         public const string mainRepository = "SampleRepository";

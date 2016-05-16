@@ -1,8 +1,9 @@
 ﻿using OpenQA.Selenium;
-using System.Linq;
-using MLH_Selenium.Common;
 using MLH_Selenium.Extension;
 using System.Threading;
+using OpenQA.Selenium.Support.UI;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace MLH_Selenium.PageObject
 {
@@ -39,6 +40,16 @@ namespace MLH_Selenium.PageObject
             get { return findElementByStringAndMethod("//a[@class='delete' and text()='Delete']"); }
         }
 
+        public WebElement EditPage_Lnk
+        {
+            get { return findElementByStringAndMethod("//a[@class='edit' and text()='Edit']"); }
+        }
+
+        public WebElement ActivePage_Lnk
+        {
+            get { return findElementByStringAndMethod("//a[@class = 'active']"); }
+        }
+
         #endregion
 
         #region Actions
@@ -67,7 +78,41 @@ namespace MLH_Selenium.PageObject
 
         public string GetAlertMessage()
         {
-            return driver.SwitchToAlert().Text;
+            string message = driver.SwitchToAlert().Text;
+            driver.SwitchToAlert().Accept();
+
+            return message;
+        }
+
+        public void goToPage(string pagename)
+        {
+            driver.FindElement(By.XPath(string.Format("//a[text()='{0}']", pagename))).Click();
+        }
+
+        public void deleteAPage(string pagename)
+        {
+            goToPage(pagename);
+            GlobalSetting_Lnk.MouseHover(driver);
+            DeletePage_Lnk.Click();
+            driver.SwitchToAlert().Accept();
+        }
+
+        public string getDeletMessage(string pagename)
+        {
+            goToPage(pagename);
+            GlobalSetting_Lnk.MouseHover(driver);
+            DeletePage_Lnk.Click();
+
+            string message = driver.SwitchToAlert().Text;
+            driver.SwitchToAlert().Accept();
+
+            return message;
+        }
+
+        public void accessDeleteLnk()
+        {
+            GlobalSetting_Lnk.MouseHover(driver);
+            DeletePage_Lnk.Click();
         }
 
         public ManagePagesPage goToAddPage()
@@ -77,15 +122,53 @@ namespace MLH_Selenium.PageObject
             return new ManagePagesPage();
         }
 
+        public ManagePagesPage gotoEditPage(string pagename)
+        {
+            goToPage(pagename);
+            GlobalSetting_Lnk.MouseHover(driver);
+            EditPage_Lnk.Click();
+            return new ManagePagesPage();
+        }
+
+        public string getActivePageName()
+        {
+            return ActivePage_Lnk.Text;
+        }
+        
         public bool checkSettingDisplay()
         {
-            if (!GlobalSetting_Lnk.Displayed)
+            if (!GlobalSetting_Lnk.Enabled)
                 return false;
             else
                 return true;
 
         }
 
+        public bool checkDeleteLnk()
+        {
+            if (DeletePage_Lnk.Displayed)
+                return true;
+            else
+                return false;
+        }
+
+        public string getNamePageNextTo(string afterpage,string pagename)
+        {
+            ReadOnlyCollection<IWebElement> pages = driver.FindElements(By.XPath(string.Format("//li[a[text()='{0}']]/following-sibling::li/a", afterpage)));
+            string page = "";
+            for (int i = 1; i <=pages.Count; i++)
+            {
+                if (pages[i].Text == pagename)
+                {
+                    page = pages[i].Text;
+                    break;
+                }
+                   
+            }
+            return page;
+   
+        }
+        
         public bool isPageVisible(string pagename)
         {
             string page = string.Format("//a[text()='{0}']", pagename);
@@ -96,24 +179,12 @@ namespace MLH_Selenium.PageObject
                 return true;
         }
 
-        public void deleteAPage(string pagename)
+        public bool isPopUpDisplayed(string popupname)
         {
-            string page = string.Format("//a[text()='{0}']", pagename);
-
-            driver.FindElement(By.XPath(page)).Click();
-
-            GlobalSetting_Lnk.MouseHover(driver);
-            DeletePage_Lnk.Click();
-
-            driver.SwitchToAlert().Accept();
-        }
-
-        public string getNamePageNextTo(string newpage)
-        {
-            string xpathnewPage = ("//li[a[text()='{0}']]/following-sibling::li[1]/a");
-            string newPage = string.Format(xpathnewPage,newpage);
-
-            return driver.FindElement(By.XPath(newPage)).Text.ToString();
+            if (driver.FindElement(By.XPath(string.Format("//h2[text () = '{0}']", popupname))).Displayed)
+                return true;
+            else
+                return false;
         }
         #endregion
     }

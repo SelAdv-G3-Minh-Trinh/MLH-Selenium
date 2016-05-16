@@ -8,10 +8,10 @@ namespace MLH_Selenium.Common
 {
     public class Utilities
     {
-        public static string randomString()
+        public static string GenerateRandomString(int length)
         {
-            Random ran = new Random();
-            return ran.Next(0, 9).ToString() + ran.Next(0, 9).ToString() + ran.Next(100, 999).ToString();
+            Random random = new Random();
+            return "MLH" + DateTime.Now.ToString("dd.mm.yyy") + new string(Enumerable.Repeat(Constant.AlphanumericCharacters, length).Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }
 }

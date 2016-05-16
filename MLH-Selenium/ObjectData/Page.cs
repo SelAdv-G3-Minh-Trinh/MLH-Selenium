@@ -1,4 +1,6 @@
-﻿namespace MLH_Selenium.ObjectData
+﻿using MLH_Selenium.Common;
+
+namespace MLH_Selenium.ObjectData
 {
     public class Page
     {
@@ -49,10 +51,17 @@
 
         public void InitPageInformation()
         {
-            this.PageName = "";
+            this.PageName = Utilities.GenerateRandomString(5);
             this.ParentPage = "Select parent";
             this.NumberOfColumns = 2;
-            this.AfterPage = "Overview";
+            if (this.parentPage != "Select parent")
+            {
+                this.AfterPage = "Select page";
+            }
+            else
+            {
+                this.AfterPage = "Overview";
+            }
             IsPublic = false;
         }
         #endregion
