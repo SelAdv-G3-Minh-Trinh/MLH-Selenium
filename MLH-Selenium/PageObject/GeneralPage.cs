@@ -95,7 +95,7 @@ namespace MLH_Selenium.PageObject
         public void deleteAPage(string linkPath)
         {
             goToPage(linkPath);
-            GlobalSetting_Lnk.MouseHover(driver);
+            GlobalSetting_Lnk.MouseHover(driver);     
             DeletePage_Lnk.Click();
             driver.SwitchToAlert().Accept();
         }
@@ -152,20 +152,16 @@ namespace MLH_Selenium.PageObject
                 return false;
         }
 
-        public string getNamePageNextTo(string afterpage,string pagename)
+        public string getNamePageNextTo(string afterpage)
         {
-            ReadOnlyCollection<IWebElement> pages = driver.FindElements(By.XPath(string.Format("//li[a[text()='{0}']]/following-sibling::li/a", afterpage)));
-            string page = "";
-            for (int i = 1; i <=pages.Count; i++)
-            {
-                if (pages[i].Text == pagename)
-                {
-                    page = pages[i].Text;
-                    break;
-                }
-                   
-            }
-            return page;
+            ReadOnlyCollection<IWebElement> pages = driver.FindElements(By.XPath(string.Format("//li[a[text()='{0}']]/following-sibling::li/a", afterpage)));            
+            return pages[0].Text;
+        }
+
+        public int getTotalColumns(string pageLink)
+        {
+            goToPage(pageLink);
+            return driver.FindElements(By.XPath("//div[@id='columns']/ul[@class='column ui-sortable']")).Count;
         }
         
         public bool isPageLinkDisplayed(string pageLink)

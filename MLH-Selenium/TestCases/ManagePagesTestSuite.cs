@@ -72,7 +72,7 @@ namespace MLH_Selenium.TestCases
             dashboard = pages.addNewpage(page);
 
             //6    VP "Test" page is displayed besides "Overview" page
-            string actual = dashboard.getNamePageNextTo(pagenext,page.PageName);
+            string actual = dashboard.getNamePageNextTo(pagenext);
             string expected = page.PageName;
             Assert.AreEqual(expected, actual);
 
@@ -124,7 +124,7 @@ namespace MLH_Selenium.TestCases
             dashboard = pages.addNewpage(second);
 
             //11.VP "Another Test" page is positioned besides the "Test" page
-            string actual = dashboard.getNamePageNextTo(first.PageName, second.PageName);
+            string actual = dashboard.getNamePageNextTo(first.PageName);
             string expected = second.PageName;
             Assert.AreEqual(expected, actual);
 
@@ -831,19 +831,48 @@ namespace MLH_Selenium.TestCases
             pages.gotoEditPage(page2.PageName);
             dashboardPage = pages.editPage(page2);
 
-            ////7. Click the first breadcrums
-            ////8. VP The first page is navigated
-            //dashboardPage.goToPage("Overview/" + page1.PageName);
-            //Assert.AreEqual(true, dashboardPage.isPageVisible(page1.PageName), string.Format("Error: page '{0}' does not exist", page1.PageName));
+            //10. VP Position of the second page follow Overview page      
+            string actual = dashboardPage.getNamePageNextTo("Overview");
+            Assert.AreEqual(page2.PageName, actual, "Error: Postion of the second page does not follow Overview page");
 
-            ////9. Click the second breadcrums
-            ////10. VP The second page is navigated
-            //dashboardPage.goToPage("Overview/" + page1.PageName + "/" + page2.PageName);
-            //Assert.AreEqual(true, dashboardPage.isPageVisible(page2.PageName), string.Format("Error: page '{0}' does not exist", page2.PageName));
+            //Post - Condition
+            dashboardPage.deleteAPage(page2.PageName);
+            dashboardPage.deleteAPage(page1.PageName);
+        }
 
-            ////Post - Condition
-            //dashboardPage.deleteAPage("Overview/" + page1.PageName + "/" + page2.PageName);
-            //dashboardPage.deleteAPage("Overview/" + page1.PageName);
+        [TestMethod]
+        public void DA_MP_TC026()
+        {
+            Console.WriteLine("DA_MP_TC026 - Verify that page column is correct when user edit \"Number of Columns\" field of a specific page");
+
+            //1. Navigate to Dashboard login page
+            //2. Login with valid account
+            LoginPage loginPage = new LoginPage();
+            loginPage.open();
+            DashboardPage dashboardPage = loginPage.LoginWithValidUser(Constant.mainRepository, Constant.adminUser, Constant.adminPassword);
+
+            //3. Go to Global Setting -> Add page            
+            //4. Enter info into all required fields on New Page dialog            
+            ManagePagesPage pages = dashboardPage.goToAddPage();
+            Page page1 = new Page();
+            page1.InitPageInformation();
+            page1.PageName = "Page1" + Utilities.GenerateRandomString(6);
+            page1.NumberOfColumns = 2;
+            dashboardPage = pages.addNewpage(page1);
+
+            //5. Go to Global Setting -> Edit link
+            //6. Edit Number of Columns for the above created page
+            //7. Click Ok button on Edit Page dialog
+            page1.NumberOfColumns = 3;
+            pages.gotoEditPage(page1.PageName);
+            dashboardPage = pages.editPage(page1);
+
+            //8. VP Observe the current page      
+            int actual = dashboardPage.getTotalColumns(page1.PageName);
+            Assert.AreEqual(3, actual, string.Format("Error: Page '{0}' has {1} columns", page1.PageName, actual));
+
+            //Post - Condition            
+            dashboardPage.deleteAPage(page1.PageName);
         }
     }
 }

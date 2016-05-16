@@ -72,6 +72,7 @@ namespace MLH_Selenium.PageObject
         public void submitPageInformation(Page page)
         {
             //Provide page's information
+            PageName_Txt.Clear();
             PageName_Txt.SendKeys(page.PageName);
             ParentPage_Cmb.SelectByText(page.ParentPage);
             Thread.Sleep(500);
