@@ -4,6 +4,7 @@ using System.Threading;
 using OpenQA.Selenium.Support.UI;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System;
 
 namespace MLH_Selenium.PageObject
 {
@@ -98,6 +99,7 @@ namespace MLH_Selenium.PageObject
             GlobalSetting_Lnk.MouseHover(driver);     
             DeletePage_Lnk.Click();
             driver.SwitchToAlert().Accept();
+            driver.Driver.SwitchTo().Window(driver.CurrentWindowHandle);
         }
 
         public string getDeletMessage(string pagename)
@@ -156,6 +158,26 @@ namespace MLH_Selenium.PageObject
         {
             ReadOnlyCollection<IWebElement> pages = driver.FindElements(By.XPath(string.Format("//li[a[text()='{0}']]/following-sibling::li/a", afterpage)));            
             return pages[0].Text;
+        }
+
+        public void deleteAllPages()
+        {
+            List<string> lstPageNames = new List<string>();
+            ReadOnlyCollection<IWebElement> pages = driver.FindElements(By.XPath("//li[a[text()='Overview']]/following-sibling::li/a"));
+            foreach (IWebElement page in pages)
+            {
+                if (page.Text != "test" && page.Text != "Execution Dashboard" && page.Text != "")
+                {
+                    lstPageNames.Add(page.Text);                  
+                }
+            }
+
+            foreach (string name in lstPageNames)
+            {
+                WebElement element = findElementByStringAndMethod(string.Format("//li/a[text()='{0}']", name));
+                deleteAPage(name);
+                driver.WaitForElementNotVisible(element, 5);                               
+            }
         }
 
         public int getTotalColumns(string pageLink)

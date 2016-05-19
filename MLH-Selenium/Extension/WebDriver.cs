@@ -122,6 +122,17 @@ namespace MLH_Selenium.Extension
             return Driver.FindElement(by);
         }
 
+        public void WaitForElementNotVisible(WebElement element, int seconds)
+        {
+            try
+            {
+                var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(seconds));
+                wait.Until(driver1 => !element.Displayed);
+            }
+            catch
+            {  }
+        }
+
         public IJavaScriptExecutor ParseToJavaScriptExecutor()
         {
             return (IJavaScriptExecutor)Driver;

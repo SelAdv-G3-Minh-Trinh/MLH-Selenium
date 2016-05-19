@@ -235,7 +235,7 @@ namespace MLH_Selenium.TestCases
             dashboard = loginpage.LoginWithValidUser(repo, user2, pass2);
 
             //14    VP children is invisibled
-            Assert.IsFalse(dashboard.isPageLinkDisplayed(second.PageName));
+            Assert.IsFalse(dashboard.isPageLinkDisplayed(second.PageName), "Error: Bug - child page is still displayed");
             //Post - Condition  Log in  as creator page account and delete newly added page and its parent page
             //      Close TA Dashboard Main Page
             dashboard.Logout();

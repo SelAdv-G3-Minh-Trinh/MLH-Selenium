@@ -27,7 +27,7 @@ namespace MLH_Selenium.TestCases
         [TestCleanup]
         public void AfterMethod()
         {
-            //page.Close();
+            page.Close();
         }
     }
 }
