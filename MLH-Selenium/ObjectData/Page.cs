@@ -51,7 +51,7 @@ namespace MLH_Selenium.ObjectData
 
         public void InitPageInformation()
         {
-            this.PageName = CommonMethod.GenerateRandomString(5);
+            this.PageName = Utilities.GenerateRandomString(5);
             this.ParentPage = "Select parent";
             this.NumberOfColumns = 2;
             if (this.parentPage != "Select parent")

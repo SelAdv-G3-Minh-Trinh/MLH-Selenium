@@ -67,7 +67,6 @@ namespace MLH_Selenium.PageObject
             Repository_Link.MouseHover(driver);
             findElementByStringAndMethod(repoName).Click();
             return new DashboardPage();
-
         }
 
         public string getRepositoryName()
@@ -79,20 +78,24 @@ namespace MLH_Selenium.PageObject
         public string GetAlertMessage()
         {
             string message = driver.SwitchToAlert().Text;
-            driver.SwitchToAlert().Accept();
-
+            driver.SwitchToAlert().Accept();        
             return message;
         }
 
-        public void goToPage(string pagename)
+        public void goToPage(string linkPath)
         {
-            driver.FindElement(By.XPath(string.Format("//a[text()='{0}']", pagename))).Click();
+            string[] links = linkPath.Split('/');
+            for (int i = 0; i < links.Length - 1; i++)
+            {
+                findElementByStringAndMethod(string.Format("//a[text()='{0}']", links[i])).MouseHover(driver);
+            }
+            findElementByStringAndMethod(string.Format("//a[text()='{0}']", links[links.Length - 1])).Click();
         }
 
-        public void deleteAPage(string pagename)
+        public void deleteAPage(string linkPath)
         {
-            goToPage(pagename);
-            GlobalSetting_Lnk.MouseHover(driver);
+            goToPage(linkPath);
+            GlobalSetting_Lnk.MouseHover(driver);     
             DeletePage_Lnk.Click();
             driver.SwitchToAlert().Accept();
         }
@@ -102,10 +105,8 @@ namespace MLH_Selenium.PageObject
             goToPage(pagename);
             GlobalSetting_Lnk.MouseHover(driver);
             DeletePage_Lnk.Click();
-
             string message = driver.SwitchToAlert().Text;
             driver.SwitchToAlert().Accept();
-
             return message;
         }
 
@@ -141,7 +142,6 @@ namespace MLH_Selenium.PageObject
                 return false;
             else
                 return true;
-
         }
 
         public bool checkDeleteLnk()
@@ -152,36 +152,36 @@ namespace MLH_Selenium.PageObject
                 return false;
         }
 
-        public string getNamePageNextTo(string afterpage,string pagename)
+        public string getNamePageNextTo(string afterpage)
         {
-            ReadOnlyCollection<IWebElement> pages = driver.FindElements(By.XPath(string.Format("//li[a[text()='{0}']]/following-sibling::li/a", afterpage)));
-            string page = "";
-            for (int i = 1; i <=pages.Count; i++)
-            {
-                if (pages[i].Text == pagename)
-                {
-                    page = pages[i].Text;
-                    break;
-                }
-                   
-            }
-            return page;
-   
+            ReadOnlyCollection<IWebElement> pages = driver.FindElements(By.XPath(string.Format("//li[a[text()='{0}']]/following-sibling::li/a", afterpage)));            
+            return pages[0].Text;
+        }
+
+        public int getTotalColumns(string pageLink)
+        {
+            goToPage(pageLink);
+            return driver.FindElements(By.XPath("//div[@id='columns']/ul[@class='column ui-sortable']")).Count;
         }
         
-        public bool isPageVisible(string pagename)
+        public bool isPageLinkDisplayed(string pageLink)
         {
-            string page = string.Format("//a[text()='{0}']", pagename);
+            string link = string.Format("//a[text()='{0}']", pageLink);
 
-            if (!driver.FindElement(By.XPath(page)).Displayed)
+            if (!driver.FindElement(By.XPath(link)).Displayed)
                 return false;
             else
                 return true;
         }
 
+        public bool isPageVisible(string pagename)
+        {
+            return driver.Title == "TestArchitect ™ - " + pagename ? true : false;
+        }
+
         public bool isPopUpDisplayed(string popupname)
         {
-            if (driver.FindElement(By.XPath(string.Format("//h2[text () = '{0}']", popupname))).Displayed)
+            if (driver.FindElement(By.XPath(string.Format("//h2[text() = '{0}']", popupname))).Displayed)
                 return true;
             else
                 return false;
