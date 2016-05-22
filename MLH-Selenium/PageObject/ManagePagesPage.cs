@@ -1,8 +1,6 @@
 ﻿using MLH_Selenium.Extension;
 using MLH_Selenium.ObjectData;
 using OpenQA.Selenium.Support.UI;
-using MLH_Selenium.Common;
-using System;
 using System.Threading;
 
 namespace MLH_Selenium.PageObject

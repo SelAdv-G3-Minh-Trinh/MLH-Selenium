@@ -17,6 +17,7 @@ namespace MLH_Selenium.Common
         public const string adminPassword = "";
         public const string mainRepository = "SampleRepository";
         public const string subRepository = "TestRepository";
+
         public enum method
         {
             xpath,

@@ -1,10 +1,8 @@
 ﻿using OpenQA.Selenium;
 using MLH_Selenium.Extension;
 using System.Threading;
-using OpenQA.Selenium.Support.UI;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System;
 
 namespace MLH_Selenium.PageObject
 {
@@ -49,6 +47,21 @@ namespace MLH_Selenium.PageObject
         public WebElement ActivePage_Lnk
         {
             get { return findElementByStringAndMethod("//a[@class = 'active']"); }
+        }
+
+        public WebElement AddPanel_Lnk
+        {
+            get { return findElementByStringAndMethod("//a[text() = 'Add New']"); }
+        }
+
+        public WebElement ChoosePanel_Btn
+        {
+            get { return findElementByStringAndMethod("//a[@id='btnChoosepanel']"); }
+        }
+
+        public WebElement CreatePanel_Btn
+        {
+            get { return findElementByStringAndMethod("//span[text()='Create new panel']"); }
         }
 
         #endregion
@@ -208,6 +221,30 @@ namespace MLH_Selenium.PageObject
             else
                 return false;
         }
+
+        public PanelPage gotoAddPanel()
+        {
+            AddPanel_Lnk.Click();
+            return new PanelPage();
+        }
+        
+        public bool isItemEnable()
+        {
+            if (driver.FindElement(By.XPath("//li[@class = 'mn-setting']")).Enabled)
+                return true;
+            else
+                return false;
+        }
+
+        public PanelPage goToAddPanelByChoosePanel()
+        {
+            ChoosePanel_Btn.Click();
+            CreatePanel_Btn.Click();
+
+            return new PanelPage();
+        }
+
+//        public void deletePanel(string panelname)
         #endregion
     }
 }
