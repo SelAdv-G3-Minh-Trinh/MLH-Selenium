@@ -350,8 +350,143 @@ namespace MLH_Selenium.TestCases
             panels = dashboard.goToAddPanelByChoosePanel();
 
             //10   Click 'Chart Type' drop - down menu
-            //11  VP 'Chart Type' are listed 5 options: 'Pie', 'Single Bar', 'Stacked Bar', 'Group Bar' and 'Line'
+            //11   VP 'Chart Type' are listed 5 options: 'Pie', 'Single Bar', 'Stacked Bar', 'Group Bar' and 'Line'
             Assert.IsTrue(panels.checkChartType(), "Chart Type is not 5 options");
+            panels.Close();
+        }
+
+        public void DA_PANEL_TC037()
+        {
+            string repo = "SampleRepository";
+            string user = "administrator";
+            string pass = "";
+
+            Console.WriteLine("DA_PANEL_TC037 - Verify that \"Category\", \"Series\" and \"Caption\" field are enabled and disabled correctly corresponding to each type of the \"Chart Type\"");
+
+            //1   Navigate to Dashboard login page
+            //2   Select a specific repository Dashboard_STT
+            //3   Enter valid Username and Password   hung.nguyen / (empty)
+            //4   Click 'Login' button
+            LoginPage loginpage = new LoginPage();
+            loginpage.open();
+
+            DashboardPage dashboard = new DashboardPage();
+            dashboard = loginpage.LoginWithValidUser(repo, user, pass);
+
+            //5   Click 'Add Page' link
+            //6   Enter Page Name main_hung
+            //7   Click 'OK' button
+            ManagePagesPage pages = new ManagePagesPage();
+            pages = dashboard.goToAddPage();
+
+            Page page = new Page();
+            page.InitPageInformation();
+
+            dashboard = pages.addNewpage(page);
+            //8    Click 'Choose Panels' button
+            //9    Click 'Create new panel' button
+            PanelPage panels = new PanelPage();
+            panels = dashboard.goToAddPanelByChoosePanel();
+
+            //10   Click 'Chart Type' drop - down menu
+            panels.ChartType_Cbb.Click();
+            //11   Select 'Pie' Chart Type
+            panels.selectTypeOfChartType("Pie");
+            //12   VP. Check that 'Category' and 'Caption' are disabled, 'Series' is enabled
+            Assert.IsTrue(panels.checkCategory());
+            Assert.IsTrue(panels.checkSeries());
+            Assert.IsTrue(panels.checkCaption());
+            //13   Click 'Chart Type' drop - down menu
+            panels.ChartType_Cbb.Click();
+            //14   Select 'Single Bar' Chart Type
+            panels.selectTypeOfChartType("Single Bar");
+            //15   VP. Check that 'Category' is disabled, 'Series' and 'Caption' are enabled
+            Assert.IsTrue(panels.checkCategory());
+            Assert.IsTrue(panels.checkSeries());
+            Assert.IsTrue(panels.checkCaption());
+            //16   Click 'Chart Type' drop - down menu
+            panels.ChartType_Cbb.Click();
+            //17   Select 'Stacked Bar' Chart Type
+            panels.selectTypeOfChartType("Stacked Bar");
+            //18   VP. Check that 'Category' ,'Series' and 'Caption' are enabled
+            Assert.IsTrue(panels.checkCategory());
+            Assert.IsTrue(panels.checkSeries());
+            Assert.IsTrue(panels.checkCaption());
+            //19   Click 'Chart Type' drop - down menu
+            panels.ChartType_Cbb.Click();
+            //20   Select 'Group Bar' Chart Type
+            panels.selectTypeOfChartType("Group Bar");
+            //21   VP. Check that 'Category' ,'Series' and 'Caption' are enabled
+            Assert.IsTrue(panels.checkCategory());
+            Assert.IsTrue(panels.checkSeries());
+            Assert.IsTrue(panels.checkCaption());
+            //22   Click 'Chart Type' drop - down menu
+            panels.ChartType_Cbb.Click();
+            //23   Select 'Line' Chart Type
+            panels.selectTypeOfChartType("Line");
+            //24   VP. Check that 'Category' ,'Series' and 'Caption' are enabled
+            Assert.IsTrue(panels.checkCategory());
+            Assert.IsTrue(panels.checkSeries());
+            Assert.IsTrue(panels.checkCaption());
+            panels.Close();
+        }
+
+        public void DA_PANEL_TC038()
+        {
+            string repo = "SampleRepository";
+            string user = "administrator";
+            string pass = "";
+
+            Console.WriteLine("DA_PANEL_TC038 - Verify that all settings within \"Add New Panel\" and \"Edit Panel\" form stay unchanged when user switches between \"2D\" and \"3D\" radio buttons");
+
+            //1 Navigate to Dashboard login page
+            //2 Select a specific repository Dashboard_STT
+            //3 Enter valid Username and Password   hung.nguyen / (empty)
+            //4 Click 'Login' button
+            LoginPage loginpage = new LoginPage();
+            loginpage.open();
+
+            DashboardPage dashboard = new DashboardPage();
+            dashboard = loginpage.LoginWithValidUser(repo, user, pass);
+
+            //5    Click 'Add Page' link
+            //6    Enter Page Name main_hung
+            //7    Click 'OK' button
+            ManagePagesPage pages = new ManagePagesPage();
+            pages = dashboard.goToAddPage();
+
+            Page page = new Page();
+            page.InitPageInformation();
+
+            dashboard = pages.addNewpage(page);
+            //8    Click 'Choose Panels' button
+            //9    Click 'Create new panel' button
+            PanelPage panels = new PanelPage();
+            panels = dashboard.goToAddPanelByChoosePanel();
+
+            //10   Click 'Chart Type' drop - down menu
+            panels.ChartType_Cbb.Click();
+            //11   Select a specific Chart Type
+            panels.selectTypeOfChartType("Pie");
+            //12   Select 'Data Profile' drop - down menu
+            panels.selectTypeOfDataProfile("Action Implementation By Status");
+            //13   Enter 'Display Name' and 'Chart Title'
+            
+            //14   Select 'Show Title' checkbox
+            //15   select 'Legends' radio button
+            //16   Select 'Style' radio button
+            //17   VP. Check that settings of 'Chart Type', 'Data Profile', 'Display Name', 'Chart Title', 'Show Title' and 'Legends' stay unchanged.
+            //18   Select 'Style' radio button
+            //19   VP. Check that settings of 'Chart Type', 'Data Profile', 'Display Name', 'Chart Title', 'Show Title' and 'Legends' stay unchanged.
+            //20   Click OK button
+            //21   Select a page in drop - down menu
+            //22   Enter path of Folder
+            //23   Click OK button
+            //24   Click 'Edit Panel' button of panel 'hung_panel'
+            //25   Select 'Style' radio button
+            //26   VP. Check that settings of 'Chart Type', 'Data Profile', 'Display Name', 'Chart Title', 'Show Title' and 'Legends' stay unchanged.
+            //27   Select 'Style' radio button
+            //28   VP. Check that settings of 'Chart Type', 'Data Profile', 'Display Name', 'Chart Title', 'Show Title' and 'Legends' stay unchanged.
             panels.Close();
         }
     }
