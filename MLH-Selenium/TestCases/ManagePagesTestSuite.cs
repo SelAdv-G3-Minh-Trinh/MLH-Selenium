@@ -623,7 +623,7 @@ namespace MLH_Selenium.TestCases
             string actualfirst = dashboard.getActivePageName();
             string expectedfirst = first.PageName;
             Assert.AreEqual(expectedfirst, actualfirst);
-            Assert.IsTrue(dashboard.isPageVisible(first.PageName));
+            Assert.IsTrue(dashboard.isPageVisible(first.PageName), string.Format("Error: Page {0} is visible", first.PageName));
 
             //12   Go to the second created page Page 2
             //13   Click Edit link
@@ -635,7 +635,7 @@ namespace MLH_Selenium.TestCases
             second.ParentPage = first.PageName;
             dashboard = pages.editPage(second);
 
-            Assert.IsTrue(dashboard.isPageVisible(second.PageName));
+            Assert.IsTrue(dashboard.isPageVisible(second.PageName), string.Format("Error: Page {0} is visible", second.PageName));
 
             //Post - Condition  Close TA Dashboard
             dashboard.deleteAPage(first.PageName + "/" + second.PageName);
