@@ -93,6 +93,7 @@ namespace MLH_Selenium.PageObject
         public DashboardPage editPage(Page page)
         {
             submitPageInformation(page);
+            Thread.Sleep(500);
             return new DashboardPage();
         }
 
