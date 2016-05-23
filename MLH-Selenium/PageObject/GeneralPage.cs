@@ -46,7 +46,7 @@ namespace MLH_Selenium.PageObject
 
         public WebElement ActivePage_Lnk
         {
-            get { return findElementByStringAndMethod("//a[@class = 'active']"); }
+            get { return findElementByStringAndMethod("//a[starts-with(@class,'active')]"); }
         }
 
         public WebElement AddPanel_Lnk
@@ -101,9 +101,9 @@ namespace MLH_Selenium.PageObject
             string[] links = linkPath.Split('/');
             for (int i = 0; i < links.Length - 1; i++)
             {
-                findElementByStringAndMethod(string.Format("//a[text()='{0}']", links[i])).MouseHover(driver);
+                findElementByStringAndMethod(string.Format("//a[text()='{0}']", links[i].Replace(" ", "\u00A0"))).MouseHover(driver);
             }
-            findElementByStringAndMethod(string.Format("//a[text()='{0}']", links[links.Length - 1])).Click();
+            findElementByStringAndMethod(string.Format("//a[text()='{0}']", links[links.Length - 1].Replace(" ", "\u00A0"))).Click();
         }
 
         public void deleteAPage(string linkPath)
@@ -112,7 +112,7 @@ namespace MLH_Selenium.PageObject
             GlobalSetting_Lnk.MouseHover(driver);     
             DeletePage_Lnk.Click();
             driver.SwitchToAlert().Accept();
-            driver.Driver.SwitchTo().Window(driver.CurrentWindowHandle);
+            Thread.Sleep(500);
         }
 
         public string getDeletMessage(string pagename)
@@ -122,6 +122,7 @@ namespace MLH_Selenium.PageObject
             DeletePage_Lnk.Click();
             string message = driver.SwitchToAlert().Text;
             driver.SwitchToAlert().Accept();
+            Thread.Sleep(500);
             return message;
         }
 
@@ -161,14 +162,22 @@ namespace MLH_Selenium.PageObject
 
         public bool checkDeleteLnk()
         {
-            if (DeletePage_Lnk.Displayed)
-                return true;
-            else
+            try
+            {
+                if (DeletePage_Lnk.Displayed)
+                    return true;
+                else
+                    return false;
+            }
+            catch (System.Exception)
+            {
                 return false;
+            }
         }
 
         public string getNamePageNextTo(string afterpage)
         {
+            afterpage = afterpage.Replace(" ", "\u00A0");            
             ReadOnlyCollection<IWebElement> pages = driver.FindElements(By.XPath(string.Format("//li[a[text()='{0}']]/following-sibling::li/a", afterpage)));            
             return pages[0].Text;
         }
@@ -179,17 +188,37 @@ namespace MLH_Selenium.PageObject
             ReadOnlyCollection<IWebElement> pages = driver.FindElements(By.XPath("//li[a[text()='Overview']]/following-sibling::li/a"));
             foreach (IWebElement page in pages)
             {
-                if (page.Text != "test" && page.Text != "Execution Dashboard" && page.Text != "")
+                string innerHTML = page.GetAttribute("innerHTML");
+                if (innerHTML != "Execution&nbsp;Dashboard" && innerHTML != "")
                 {
-                    lstPageNames.Add(page.Text);                  
+                    ReadOnlyCollection<IWebElement> childPages = driver.FindElements(By.XPath(string.Format("//a[.='{0}']/../ul/li/a", page.Text.Replace(" ", "\u00A0"))));
+                    if (childPages.Count > 0)
+                    {
+                        foreach(IWebElement childPage in childPages)
+                        {                            
+                            lstPageNames.Add(page.Text + "/" + childPage.GetAttribute("innerHTML").Replace("&nbsp;", "\u00A0"));
+                        }
+                    }
+                    lstPageNames.Add(page.Text);
                 }
             }
 
             foreach (string name in lstPageNames)
             {
-                WebElement element = findElementByStringAndMethod(string.Format("//li/a[text()='{0}']", name));
-                deleteAPage(name);
-                driver.WaitForElementNotVisible(element, 5);                               
+                if (name.Contains("/"))
+                {                    
+                    deleteAPage(name);                 
+                }
+            }
+
+            foreach (string name in lstPageNames)
+            {
+                if (!name.Contains("/"))
+                {
+                    WebElement element = findElementByStringAndMethod(string.Format("//li/a[text()='{0}']", name.Replace(" ", "\u00A0")));
+                    deleteAPage(name);
+                    driver.WaitForElementNotVisible(element, 5);
+                }
             }
         }
 
@@ -198,15 +227,22 @@ namespace MLH_Selenium.PageObject
             goToPage(pageLink);
             return driver.FindElements(By.XPath("//div[@id='columns']/ul[@class='column ui-sortable']")).Count;
         }
-        
+
         public bool isPageLinkDisplayed(string pageLink)
         {
             string link = string.Format("//a[text()='{0}']", pageLink);
 
-            if (!driver.FindElement(By.XPath(link)).Displayed)
+            try
+            {
+                if (!driver.FindElement(By.XPath(link)).Displayed)
+                    return false;
+                else
+                    return true;
+            }
+            catch (System.Exception)
+            {
                 return false;
-            else
-                return true;
+            }            
         }
 
         public bool isPageVisible(string pagename)

@@ -309,7 +309,7 @@ namespace MLH_Selenium.TestCases
 
             //18    Uncheck Public checkbox
             //19    VP Click OK button
-            first.IsPublic = false;
+            second.IsPublic = false;
             dashboard = pages.editPage(second);
 
             //20    Click Log out link
@@ -319,8 +319,8 @@ namespace MLH_Selenium.TestCases
 
             //22    VP  "Test" Page is visible and can be accessed
             //23    VP  "Another Test" page is invisible
-            Assert.IsTrue(dashboard.isPageLinkDisplayed(first.PageName));
-            Assert.IsFalse(dashboard.isPageLinkDisplayed(second.PageName));
+            Assert.IsTrue(dashboard.isPageLinkDisplayed(first.PageName), string.Format("Error: Page {0} is invisible", first.PageName));
+            Assert.IsFalse(dashboard.isPageLinkDisplayed(second.PageName), string.Format("Error: Bug - Page {0} is visible", second.PageName));
 
             //Post - Condition  Log in  as creator page account and delete newly added page
             //Close TA Dashboard Main Page
@@ -364,7 +364,8 @@ namespace MLH_Selenium.TestCases
             Page child = new Page();
             child.InitPageInformation();
 
-            child.ParentPage = parent.ParentPage;
+            child.ParentPage = parent.PageName;
+            child.AfterPage = "Select page";
 
             pages = dashboard.goToAddPage();
             dashboard = pages.addNewpage(child);
@@ -372,15 +373,15 @@ namespace MLH_Selenium.TestCases
             //5    Click on parent page
             //6    Click "Delete" link
             //7    VP confirm message "Are you sure you want to remove this page?" appears
-            //8    Click OK button
+            //8    Click OK button            
             string actualparent = dashboard.getDeletMessage(parent.PageName);
             string expectedparent = deletepage;
             Assert.AreEqual(expectedparent, actualparent);
 
             //9    VP warning message "Can not delete page 'Test' since it has children page(s)" appears
             //10   Click OK button
-            string actualpopup = dashboard.GetAlertMessage();
-            string expectedpopup = "Can not delete page " + parent.PageName + "since it has children page(s)";
+            string actualpopup = dashboard.GetAlertMessage().Trim();
+            string expectedpopup = "Cannot delete page '" + parent.PageName + "' since it has child page(s).";
             Assert.AreEqual(expectedpopup, actualpopup);
 
             //11   Click on children page
@@ -388,10 +389,10 @@ namespace MLH_Selenium.TestCases
             //13   VP confirm message "Are you sure you want to remove this page?" appears
             //14   Click OK button
             //15   VP children page is deleted
-            string actualchild = dashboard.getDeletMessage(child.PageName);
+            string actualchild = dashboard.getDeletMessage(parent.PageName + "/" + child.PageName);
             string expectedchild = deletepage;
             Assert.AreEqual(expectedchild, actualchild);
-            Assert.IsFalse(dashboard.isPageLinkDisplayed(child.PageName));
+            Assert.IsFalse(dashboard.isPageLinkDisplayed(child.PageName), string.Format("Error: Page {0} still exists", child.PageName));
 
             //16   Click on parent page
             //17   Click "Delete" link
@@ -402,12 +403,12 @@ namespace MLH_Selenium.TestCases
             string actual = dashboard.getDeletMessage(parent.PageName);
             string expected = deletepage;
             Assert.AreEqual(expected, actual);
-            Assert.IsFalse(dashboard.isPageLinkDisplayed(parent.PageName));
+            Assert.IsFalse(dashboard.isPageLinkDisplayed(parent.PageName), string.Format("Error: Page {0} still exists", parent.PageName));
 
             //21   Click on "Overview" page
             //22   VP "Delete" link disappears
             dashboard.goToPage(firstpage);
-            Assert.IsFalse(dashboard.checkDeleteLnk());
+            Assert.IsFalse(dashboard.checkDeleteLnk(), "Error: Delete link still exists");
 
             //Post - Condition  Close TA Dashboard Main Page
             dashboard.Close();
@@ -468,7 +469,7 @@ namespace MLH_Selenium.TestCases
             dashboard = pages.addNewpage(child2);
 
             //16  VP "Test Child 2" is added successfully
-            Assert.IsTrue(dashboard.isPageLinkDisplayed(child2.PageName));
+            Assert.IsTrue(dashboard.isPageLinkDisplayed(child2.PageName), string.Format("Error: Page {0} does not exist", child2.PageName));
 
             //Post - Condition  Log in  as creator page account and delete newly added page, its sibling page and parent page
             //    Close TA Dashboard Main Page
@@ -506,7 +507,7 @@ namespace MLH_Selenium.TestCases
             child.InitPageInformation();
 
             dashboard = pages.addNewpage(child);
-            Assert.IsTrue(dashboard.isPageLinkDisplayed(child.PageName));
+            Assert.IsTrue(dashboard.isPageLinkDisplayed(child.PageName), string.Format("Error: Page {0} does not exist", child.PageName));
 
             //Post - Condition  Close TA Dashboard
             dashboard.Close();
@@ -544,7 +545,9 @@ namespace MLH_Selenium.TestCases
             Page second = new Page();
             second.InitPageInformation();
             second.ParentPage = first.PageName;
+            second.AfterPage = "Select page";
 
+            pages = dashboard.goToAddPage();
             dashboard = pages.addNewpage(second);
 
             //7    Go to the first created page Page 1
@@ -553,15 +556,16 @@ namespace MLH_Selenium.TestCases
             //10   VP There is a message "Can't delete page "page 1" since it has children page"
             //11   Close confirmation dialog
             string actual = dashboard.getDeletMessage(first.PageName);
-            string expected = "Can't delete page" + first.PageName + "since it has children page";
-            Assert.AreEqual(expected, actual);
+            string actualpopup = dashboard.GetAlertMessage().Trim();
+            string expectedpopup = "Cannot delete page '" + first.PageName + "' since it has child page(s).";
+            Assert.AreEqual(expectedpopup, actualpopup);
 
             //12   Go to the second page
             //13   Click Delete link
             //14   Click Ok button on Confirmation Delete page
             //15  VP Page 2 is deleted successfully
-            dashboard.deleteAPage(second.PageName);
-            Assert.IsFalse(dashboard.isPageLinkDisplayed(second.PageName));
+            dashboard.deleteAPage(first.PageName + "/" + second.PageName);
+            Assert.IsFalse(dashboard.isPageLinkDisplayed(second.PageName), string.Format("Error: Page {0} still exists", second.PageName));
 
             //Post - Condition  Close TA Dashboard
             dashboard.deleteAPage(first.PageName);
@@ -601,7 +605,9 @@ namespace MLH_Selenium.TestCases
             Page second = new Page();
             second.InitPageInformation();
             second.ParentPage = first.PageName;
+            second.AfterPage = "Select page";
 
+            pages = dashboard.goToAddPage();
             dashboard = pages.addNewpage(second);
 
             //7    Go to the first created page Page 1
@@ -617,23 +623,22 @@ namespace MLH_Selenium.TestCases
             string actualfirst = dashboard.getActivePageName();
             string expectedfirst = first.PageName;
             Assert.AreEqual(expectedfirst, actualfirst);
+            Assert.IsTrue(dashboard.isPageVisible(first.PageName));
 
             //12   Go to the second created page Page 2
             //13   Click Edit link
             //14   Enter another name into Page Name field 
             //15   Click Ok button on Edit Page dialog
             //16  VP User is able to edit the name of sibbling page successfully
-            pages = dashboard.gotoEditPage(second.PageName);
+            pages = dashboard.gotoEditPage(first.PageName + "/" + second.PageName);
             second.PageName = Utilities.GenerateRandomString(5);
+            second.ParentPage = first.PageName;
+            dashboard = pages.editPage(second);
 
-            dashboard = pages.editPage(first);
-
-            string actualsecond = dashboard.getActivePageName();
-            string expectedsecond = second.PageName;
-            Assert.AreEqual(expectedsecond, actualsecond);
+            Assert.IsTrue(dashboard.isPageVisible(second.PageName));
 
             //Post - Condition  Close TA Dashboard
-            dashboard.deleteAPage(second.PageName);
+            dashboard.deleteAPage(first.PageName + "/" + second.PageName);
             dashboard.deleteAPage(first.PageName);
             dashboard.Close();
         }
