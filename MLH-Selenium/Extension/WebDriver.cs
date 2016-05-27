@@ -83,7 +83,7 @@ namespace MLH_Selenium.Extension
         }
 
         public IWebElement FindElement(By by)
-        {
+        {                        
             return Driver.FindElement(by);
         }
 
@@ -116,13 +116,27 @@ namespace MLH_Selenium.Extension
         {
             if (seconds > 0)
             {
-                var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(seconds));
-                return wait.Until(drv => drv.FindElement(by));
+                IWebElement element = Driver.FindElement(by);
+                //var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(seconds));
+                //return wait.Until(drv => drv.FindElement(by));
+
+                var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(3));
+                wait.Until(ExpectedConditions.ElementExists(by));
+
+                try
+                {
+                    wait = new WebDriverWait(Driver, TimeSpan.FromMilliseconds(0.1));
+                    bool t = wait.Until(ExpectedConditions.StalenessOf(Driver.FindElement(by)));
+                }
+                catch (Exception)
+                {
+
+                }
             }
             return Driver.FindElement(by);
         }
 
-        public void WaitForElementNotVisible(WebElement element, int seconds)
+        public void WaitForElementNotVisible(WebElement element, int seconds=3)
         {
             try
             {
@@ -131,6 +145,17 @@ namespace MLH_Selenium.Extension
             }
             catch
             {  }
+        }
+
+        public void WaitForElementToBeClickable(WebElement element, int seconds = 3)
+        {
+            try
+            {
+                var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(seconds));
+                wait.Until(ExpectedConditions.ElementToBeClickable(element));
+            }
+            catch
+            { }
         }
 
         public IJavaScriptExecutor ParseToJavaScriptExecutor()
