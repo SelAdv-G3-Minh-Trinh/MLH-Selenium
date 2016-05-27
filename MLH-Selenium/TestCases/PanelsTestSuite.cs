@@ -14,33 +14,17 @@ namespace MLH_Selenium.TestCases
         {
             Console.WriteLine("DA_PANEL_TC027 - Verify that when \"Choose panels\" form is expanded all pre-set panels are populated and sorted correctly ");
 
-            //1    navigate to dashboard login page
-            //2    login with valid account test / test
-            //3    go to global setting->add page
-            //4    enter page name to page name field.	page 1
-            //5    click ok button
-            //6    go to global setting->create panel
-            //7    VP verify that all pre - set panels are populated and sorted correctly
-            //            chart:
-            //              +action implementation by status
-            //              + test case execution failure trend
-            //              + test case execution results
-            //              +test case execution trend
-            //              +test module execution failure trend
-            //              +test module execution results
-            //              + test module execution trend
-            //              + test module implementation by priority
-            //              +test module implementation by status
-            //              +test module status per assigned users
-            //            indicator:
-            //              +test case execution
-            //              + test module execution
-            //              +test objective execution
-            //            reports
-            //              + test module execution results report
-            //            heat maps:
-            //              +test case execution history
-            //            +test module execution history
+            //1    Navigate to Dashboard login page
+            //2    Login with valid account test / test
+            //3    Go to Global Setting->Add page
+            //4    Enter page name to Page Name field.	Page 1
+            //5    Click OK button
+            //6    Go to Global Setting->Create Panel
+            //7    Enter Panel name into Display Name textbox
+            //8    Select any value in Series* dropdown list. Click Ok button		
+            //9    Click Ok button in Panel Configuration popup
+            //10   Click on Choose Panel menu icon next to Global Setting icon
+            //11   VP Verify that all pre - set panels are populated and sorted correctly       
             //post - condition  delete the created page
             //    close dashboard
         }
@@ -252,12 +236,12 @@ namespace MLH_Selenium.TestCases
             //2    Login with valid account test / test
             //3    Click on Administer/ Data Profiles link
             //4    Click on add new link
-            //5    Enter name to Name textbox  giang - data
+            //5    Enter name to Name textbox 
             //6    Click on Finish button
             //7    Click on Administer/ Panels link
             //8    Click on add new link
             //9    VP Verify that "giang - data" data profiles are populated correctly under the "Data Profile" dropped down menu.
-            //10   Enter display name to Display Name textbox  giang - panel
+            //10   Enter display name to Display Name textbox
             //11   Click Ok button to create a panel
             //12   Click on edit link
             //13   VP Verify that "giang - data" data profiles are populated correctly under the "Data Profile" dropped down menu.
@@ -309,12 +293,13 @@ namespace MLH_Selenium.TestCases
             panel.DisplayName = "Chart@";
             Assert.IsTrue(panels.addNewPanel(panel).isPageLinkDisplayed(panel.DisplayName), "Panel is not created");
 
-            //12   VP the new panel is created
+            //12    VP the new panel is created
             //Post - Condition  Delete the newly created panel
             //                  Close TA Dashboard
             dashboard.Close();
         }
 
+        /// <exclude />
         [TestMethod]
         public void DA_PANEL_TC036()
         {
@@ -350,9 +335,261 @@ namespace MLH_Selenium.TestCases
             panels = dashboard.goToAddPanelByChoosePanel();
 
             //10   Click 'Chart Type' drop - down menu
-            //11  VP 'Chart Type' are listed 5 options: 'Pie', 'Single Bar', 'Stacked Bar', 'Group Bar' and 'Line'
+            //11   VP 'Chart Type' are listed 5 options: 'Pie', 'Single Bar', 'Stacked Bar', 'Group Bar' and 'Line'
             Assert.IsTrue(panels.checkChartType(), "Chart Type is not 5 options");
             panels.Close();
+        }
+
+        public void DA_PANEL_TC040()
+        {
+            Console.WriteLine("DA_PANEL_TC040 - Verify that all \"Data Labels\" check boxes are enabled and disabled correctly corresponding to each type of \"Chart Type\"");
+
+            //1    Navigate to Dashboard login page
+            //2    Select a specific repository
+            //3    Enter valid Username and Password
+            //4    Click 'Login' button
+            //5    Click 'Add Page' button
+            //6    Enter Page Name
+            //7    Click 'OK' button
+            //8    Click 'Choose Panels' button below 'main_hung' button
+            //9    Click 'Create new panel' button
+            //10   Click 'Chart Type' drop - down menu
+            //11   Select 'Pie' Chart Type
+            //12   VP 'Categories' checkbox is disabled, 'Series' checkbox, 'Value' checkbox and 'Percentage' checkbox are enabled
+            //13   Click 'Chart Type' drop - down menu
+            //14   Select 'Single Bar' Chart Type
+            //15   VP 'Categories' checkbox is disabled, 'Series' checkbox, 'Value' checkbox and 'Percentage' checkbox are enabled
+            //16   Click 'Chart Type' drop - down menu
+            //17   Select 'Stacked Bar' Chart Type
+            //18   VP 'Categories' checkbox, 'Series' checkbox, 'Value' checkbox and 'Percentage' checkbox are enabled
+            //19   Click 'Chart Type' drop - down menu
+            //20   Select 'Group Bar' Chart Type
+            //21   VP Categories' checkbox, 'Series' checkbox, 'Value' checkbox and 'Percentage' checkbox are enabled
+            //22   Click 'Chart Type' drop - down menu
+            //23   Select 'Line' Chart Type
+            //24   VP 'Categories' checkbox, 'Series' checkbox, 'Value' checkbox and 'Percentage' checkbox are disabled
+
+        }
+
+        public void DA_PANEL_TC041()
+        {
+            Console.WriteLine("DA_PANEL_TC041 - Verify that all settings within \"Add New Panel\" and \"Edit Panel\" form stay unchanged when user switches between "Data Labels" check boxes buttons");
+
+            //1    Navigate to Dashboard login page
+            //2    Login with valid account
+            //3    Click Administer link
+            //4    Click Panel link
+            //5    Click Add New link
+            //6    Check Series checkbox for Data Labels
+            //7    VP  All settings are unchange in Add New Panel dialog
+            //8    Uncheck Series checkbox
+            //9    Check Value checkbox for Data Labels
+            //10   VP  All settings are unchange in Add New Panel dialog
+            //11   Uncheck Value checkbox
+            //12   Check Percentage checbox for Data Labels
+            //13   VP  All settings are unchange in Add New Panel dialog
+            //14   Uncheck Percentage checkbox
+            //15   Create a new panel
+            //16   Click Edit Panel link
+            //17   Check Series checkbox for Data Labels
+            //18   VP  All settings are unchange in Edit New Panel dialog
+            //19   Uncheck Series checkbox
+            //20   Check Value checkbox for Data Labels
+            //21   VP  All settings are unchange in Edit New Panel dialog
+            //22   Uncheck Value checkbox
+            //23   Check Percentage checbox for Data Labels
+            //24   VP  All settings are unchange in Edit New Panel dialog
+            //Post - Condition  Delete the newly create panel
+            //Close TA Dashboard
+        }
+
+        public void DA_PANEL_TC042()
+        {
+            Console.WriteLine("DA_PANEL_TC042 - Verify that all pages are listed correctly under the \"Select page * \" dropped down menu of \"Panel Configuration\" form/ control");
+
+            //1    Navigate to Dashboard login page
+            //2    Select a specific repository
+            //3    Enter valid Username and Password
+            //4    Click 'Login' button
+            //5    Click 'Add Page' button
+            //6    Enter Page Name
+            //7    Click 'OK' button
+            //8    Click 'Add Page' button
+            //9    Enter Page Name
+            //10   Click 'OK' button
+            //11   Click 'Add Page' button
+            //12   Enter Page Name
+            //13   Click 'OK' button
+            //14   Click 'Choose panels' button
+            //15   Click on any Chart panel instance
+            //16   Click 'Select Page*' drop - down menu
+            //17   VP 'Select Page*' drop - down menu contains 3 items: 'main_hung1', 'main_hung2' and 'main_hung3'
+
+        }
+
+        public void DA_PANEL_TC043()
+        {
+            Console.WriteLine("DA_PANEL_TC043 - Verify that only integer number inputs from 300-800 are valid for \"Height * \" field ");
+
+            //1    Navigate to Dashboard login page
+            //2    Select a specific repository
+            //3    Enter valid Username and Password
+            //4    Click 'Login' button
+            //5    Click 'Add Page' button
+            //6    Enter Page Name
+            //7    Click 'OK' button
+            //11   Click 'Choose panels' button
+            //12   Click on any Chart panel instance
+            //13   Enter integer number to 'Height *' field
+            //14   Click OK button
+            //15   VP Check that error message 'Panel height must be greater than or equal to 300 and lower than or equal to 800' display
+            //16   Click OK button
+            //17   Enter integer number to 'Height *' field
+            //18   Click OK button
+            //19   VP Check that error message 'Panel height must be greater than or equal to 300 and lower than or equal to 800' display
+            //20   Click OK button
+            //21   Enter integer number to 'Height *' field
+            //23   Click OK button
+            //24   VP Check that error message 'Panel height must be greater than or equal to 300 and lower than or equal to 800' display
+            //25   Click OK button
+            //26   Enter integer number to 'Height *' field
+            //27   Click OK button
+            //28   Check that error message 'Panel height must be an integer number' display
+            //29   Click OK button
+            //30   Enter integer number to 'Height *' field
+            //31   Click OK button
+            //32   VP Check that error message 'Panel height must be an integer number' display
+
+        }
+
+        public void DA_PANEL_TC044()
+        {
+            Console.WriteLine("DA_PANEL_TC044 - Verify that \"Height * \" field is not allowed to be empty");
+
+            //1    Navigate to Dashboard login page
+            //2    Select a specific repository
+            //3    Enter valid Username and Password
+            //4    Click 'Login' button
+            //5    Click 'Add Page' button
+            //6    Enter Page Name
+            //7    Click 'OK' button
+            //11   Click 'Choose panels' button
+            //12   Click on any Chart panel instance
+            //13   Leave 'Height *' field empty
+            //14   Click OK button
+            //15   VP Check that 'Panel height is required field' message display
+
+        }
+
+        public void DA_PANEL_TC045()
+        {
+            Console.WriteLine("DA_PANEL_TC045 - Verify that \"Folder\" field is not allowed to be empty");
+
+            //1    Navigate to Dashboard login page
+            //2    Login with valid account
+            //3    Create a new page
+            //4    Click Choose Panel button
+            //5    Click Create New Panel button
+            //6    Enter all required fields on Add New Panel page
+            //7    Click Ok button
+            //8    Leave empty on Folder field
+            //9    Click Ok button on Panel Configuration dialog
+            //10   VP Observe the current page
+            //Post - Condition  Delete the newly created panel, page
+            //Close TA Dashboard
+
+        }
+
+        public void DA_PANEL_TC046()
+        {
+            Console.WriteLine("DA_PANEL_TC046 - Verify that only valid folder path of corresponding item type ( e.g. Actions, Test Modules) are allowed to be entered into \"Folder\" field");
+
+            //1    Navigate to Dashboard login page
+            //2    Login with valid account
+            //3    Create a new page
+            //4    Click Choose Panel button
+            //5    Click Create New Panel button
+            //6    Enter all required fields on Add New Panel page
+            //7    Click Ok button
+            //8    Enter invalid folder path
+            //9    Click Ok button on Panel Configuration dialog
+            //10  VP Observe the current page
+            //11   Enter valid folder path
+            //12   Click Ok button on Panel Configuration dialog
+            //13   VP Observe the current page
+            //Post - Condition  Delete the newly created panel, page
+            //Close TA Dashboard
+
+        }
+
+        public void DA_PANEL_TC047()
+        {
+            Console.WriteLine("DA_PANEL_TC047 - Verify that user is able to navigate properly to folders with \"Select Folder\" form");
+
+            //1    Navigate to Dashboard login page
+            //2    Login with valid account
+            //3    Create a new page
+            //4    Click Choose Panel button
+            //5    Click Create New Panel button
+            //6    Enter all required fields on Add New Panel page
+            //7    Click Ok button
+            //8    Click Select Folder button on Panel Configuration dialog
+            //9    Choose folder name in Folder Form
+            //10   Click Ok button on Select Folder form
+            //11   VP User is able to select properly folder with Select Folder form
+            //Post - Condition  Close TA Dashboard
+
+        }
+
+        public void DA_PANEL_TC048()
+        {
+            Console.WriteLine("DA_PANEL_TC048 - Verify that population of corresponding item type ( e.g. Actions, Test Modules) folders is correct in \"Select Folder form");
+
+            //1    Navigate to Dashboard login page
+            //2    Login with valid account
+            //3    Create a new page
+            //4    Click Choose Panel button
+            //5    Click Create New Panel button
+            //6    Enter all required fields on Add New Panel page
+            //7    Click Ok button
+            //8    Click Select Folder button on Panel Configuration dialog
+            //11   VP Population of corresponding item type (e.g.Actions, Test Modules) folders is correct in "Select Folder form
+            //Post - Condition  Close TA Dashboard
+
+        }
+
+        public void DA_PANEL_TC049()
+        {
+            Console.WriteLine("DA_PANEL_TC049 - Verify that all folder paths of corresponding item type ( e.g. Actions, Test Modules) are correct in \"Select Folder\" form ");
+
+            //1    Navigate to Dashboard login page
+            //2    Login with valid account
+            //3    Create a new page
+            //4    Click Choose Panel button
+            //5    Click Create New Panel button
+            //6    Enter all required fields on Add New Panel page
+            //7    Click Ok button
+            //8    Click Select Folder button on Panel Configuration dialog
+            //9    Choose folder name in Folder Form
+            //10   Click Ok button on Select Folder form
+            //11   VP Observe the current page
+            //Post - Condition  Delete the newly created page and panel
+            //Close TA Dashboard
+        }
+
+        public void DA_PANEL_TC050()
+        {
+            Console.WriteLine("DA_PANEL_TC050 - Verify that user is able to successfully edit \"Display Name\" of any Panel providing that the name is not duplicated with existing Panels' name");
+
+            //1   Step Navigate to Dashboard login page
+            //2   Step Login with valid account
+            //3   Step Click Administer link
+            //4   Step Click Panel link
+            //5   Step Click Add New link
+            //6   Step Enter a valid name into Display Name field
+            //7   VP The new panel is created successfully
+            //Post - Condition  Delete the newly created panel
+            //Close TA Dashboard
         }
     }
 }
