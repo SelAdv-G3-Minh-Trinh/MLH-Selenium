@@ -103,6 +103,7 @@ namespace MLH_Selenium.PageObject
             {
                 findElementByStringAndMethod(string.Format("//a[text()='{0}']", links[i].Replace(" ", "\u00A0"))).MouseHover(driver);
             }
+            driver.WaitForElementToBeClickable(findElementByStringAndMethod(string.Format("//a[text()='{0}']", links[links.Length - 1].Replace(" ", "\u00A0"))));
             findElementByStringAndMethod(string.Format("//a[text()='{0}']", links[links.Length - 1].Replace(" ", "\u00A0"))).Click();
         }
 
