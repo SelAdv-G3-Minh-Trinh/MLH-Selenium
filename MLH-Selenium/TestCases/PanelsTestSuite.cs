@@ -635,6 +635,7 @@ namespace MLH_Selenium.TestCases
             Assert.AreEqual(expected, actual);
         }
 
+        [TestMethod]
         public void DA_PANEL_TC045()
         {
             string repo = "SampleRepository";
@@ -681,6 +682,7 @@ namespace MLH_Selenium.TestCases
             //Close TA Dashboard
         }
 
+        [TestMethod]
         public void DA_PANEL_TC046()
         {
             string repo = "SampleRepository";
@@ -709,17 +711,18 @@ namespace MLH_Selenium.TestCases
             //5    Click Create New Panel button
             //6    Enter all required fields on Add New Panel page
             //7    Click Ok button
+            //8    Leave empty on Folder field
+            //9    Click Ok button on Panel Configuration dialog
+            //10   VP There is message "Panel folder is incorrect"
             PanelPage panels = new PanelPage();
             panels = dashboard.goToAddPanelByChoosePanel();
 
             Panel panel = new Panel();
             panel.InitPanelInformation();
-            panels = panels.addNewPanelInfo(panel);
-            //8    Leave empty on Folder field
-            //9    Click Ok button on Panel Configuration dialog
-            //10   VP There is message "Panel folder is incorrect"
             panel.Folder = "";
 
+            panels = panels.addNewPanelInfo(panel);
+              
             string actual = panels.addNewPageConfig(panel).GetAlertMessage();
             string expected = "Panel folder is incorrect";
             Assert.AreEqual(expected, actual);
@@ -735,6 +738,7 @@ namespace MLH_Selenium.TestCases
 
         }
 
+        [TestMethod]
         public void DA_PANEL_TC047()
         {
             string repo = "SampleRepository";
@@ -772,12 +776,16 @@ namespace MLH_Selenium.TestCases
             //8    Click Select Folder button on Panel Configuration dialog
             //9    Choose folder name in Folder Form
             //10   Click Ok button on Select Folder form
-            panels.selectFolderName("/Car Rental");
+            string folder = "/Car Rental";
+            panels.selectFolder(folder);
+
             //11   VP User is able to select properly folder with Select Folder form
+            Assert.AreEqual(folder, panels.getFolderText());
             //Post - Condition  Close TA Dashboard
 
         }
 
+        [TestMethod]
         public void DA_PANEL_TC048()
         {
             string repo = "SampleRepository";
@@ -813,14 +821,15 @@ namespace MLH_Selenium.TestCases
             panel.InitPanelInformation();
             panels = panels.addNewPanelInfo(panel);
             //8    Click Select Folder button on Panel Configuration dialog
-            string folder = "/Car Rental";
-            panels.selectFolderName(folder);
+            string folder = "/Car Rental/Actions";
+            panels.selectFolder(folder);
 
             //11   VP Population of corresponding item type (e.g.Actions, Test Modules) folders is correct in "Select Folder form
             Assert.AreEqual(folder, panels.getFolderText());
             //Post - Condition  Close TA Dashboard
         }
 
+        [TestMethod]
         public void DA_PANEL_TC049()
         {
             string repo = "SampleRepository";
@@ -859,8 +868,8 @@ namespace MLH_Selenium.TestCases
             //9    Choose folder name in Folder Form
             //10   Click Ok button on Select Folder form
             //11   VP Folder path is displayed correctly after selecting folder in Select Folder form
-            string folder = "/Car Rental";
-            panels.selectFolderName(folder);
+            string folder = "/Car Rental/Actions";
+            panels.selectFolder(folder);
 
             Assert.AreEqual(folder, panels.getFolderText());
             //Post - Condition  Delete the newly created page and panel

@@ -5,7 +5,7 @@ using System.Threading;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using OpenQA.Selenium;
-using MLH_Selenium.Common;
+using System.Timers;
 
 namespace MLH_Selenium.PageObject
 {
@@ -72,14 +72,14 @@ namespace MLH_Selenium.PageObject
             get { return findElementByStringAndMethod("//input[@id='txtFolder']"); }
         }
 
-        public WebElement Folder_img
-        {
-            get { return findElementByStringAndMethod("//img[@class='panel_setting_treefolder'"); }
-        }
-
         public WebElement OkSelectFolder_btn
         {
             get { return findElementByStringAndMethod("//input[@id='btnFolderSelectionOK']"); }
+        }
+
+        public WebElement Folder_img
+        {
+            get { return findElementByStringAndMethod("//img[@src='images/folderopen.gif']"); }
         }
 
         #endregion
@@ -106,15 +106,15 @@ namespace MLH_Selenium.PageObject
             if (panel.TypeOfPanel == "Chart")
             {
                 Thread.Sleep(500);
-                Series_Cb.SelectByText(panel.Series);
+                Series_Cb.SelectByValue(panel.Series.ToLower());
             }
         }
 
         public void submitPanelConfig(Panel panel)
         {
+            Folder_txt.SendKeys(panel.Folder);
             SelectPage_Cb.SelectByText(panel.SelectPage);
             Height_txt.SendKeys(panel.Height);
-            Folder_txt.SendKeys(panel.Folder);
         }
 
         public PanelPage addNewPanelInfo(Panel panel)
@@ -128,8 +128,8 @@ namespace MLH_Selenium.PageObject
         public PanelPage addNewPageConfig(Panel panel)
         {
             submitPanelConfig(panel);
-            OK_Btn.Click();
-
+            OkSelectFolder_btn.Click();
+  
             return this;
         }
 
@@ -223,7 +223,7 @@ namespace MLH_Selenium.PageObject
             return result;
         }
 
-        public void selectFolderName(string name)
+        public void enterFolderName(string name)
         {
             Folder_img.Click();
             findElementByStringAndMethod(string.Format("//table//input[@value='{0}'")).Click();
@@ -232,7 +232,33 @@ namespace MLH_Selenium.PageObject
 
         public string getFolderText()
         {
-            return Folder_txt.Text;
+            return Folder_txt.GetAttribute("value");
+        }
+
+        public void selectFolder(string path)
+        {
+            Folder_img.Click();
+
+            string[] folderstrings = path.Split('/');
+
+            if (folderstrings.Length > 2)
+            {
+                string folder = "";
+                for (int i = 1; i < folderstrings.Length; i++)
+                {
+                    folder = folder + "/" + folderstrings[i];
+                    findElementByStringAndMethod(string.Format("//input[@value='{0}']/preceding-sibling::a[@onclick='Dashboard.doToggle(this)']", folder)).Click();
+                }
+                findElementByStringAndMethod(string.Format("//input[@value='{0}']/preceding-sibling::a[@onclick='Dashboard.nodeSelected(this);']", path)).Click();
+
+            }
+            else if (folderstrings.Length == 2)
+            {
+                string folder = "/" + folderstrings[1];
+                findElementByStringAndMethod(string.Format("//input[@value='{0}']/preceding-sibling::a[@onclick='Dashboard.nodeSelected(this);']", folder)).Click();
+            }
+
+            OkSelectFolder_btn.Click();
         }
 
         #endregion

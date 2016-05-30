@@ -8,7 +8,7 @@ namespace MLH_Selenium.Common
     public class Constant
     {
         public static Hashtable driverTable = new Hashtable();
-        public const string url = @"http://groupba.dyndns.org:54000/TADashboard/login.jsp";
+        public const string url = @"http://192.168.1.105:54000/TADashboard/login.jsp";
         public const int implicitlyTimeSeconds = 5;
         public const bool debug = false;
         public const string AlphanumericCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
