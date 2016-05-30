@@ -227,7 +227,6 @@ namespace MLH_Selenium.TestCases
             dashboard.Close();
         }
 
-
         public void DA_PANEL_TC033()
         {
             Console.WriteLine("DA_PANEL_TC033 - Verify that \"Data Profile\" listing of \"Add New Panel\" and \"Edit Panel\" control/form are in alphabetical order");
@@ -363,19 +362,19 @@ namespace MLH_Selenium.TestCases
 
             Console.WriteLine("DA_PANEL_TC037 - Verify that \"Category\", \"Series\" and \"Caption\" field are enabled and disabled correctly corresponding to each type of the \"Chart Type\"");
 
-            //1   Navigate to Dashboard login page
-            //2   Select a specific repository Dashboard_STT
-            //3   Enter valid Username and Password   hung.nguyen / (empty)
-            //4   Click 'Login' button
+            //1     Navigate to Dashboard login page
+            //2     Select a specific repository Dashboard_STT
+            //3     Enter valid Username and Password   hung.nguyen / (empty)
+            //4     Click 'Login' button
             LoginPage loginpage = new LoginPage();
             loginpage.open();
 
             DashboardPage dashboard = new DashboardPage();
             dashboard = loginpage.LoginWithValidUser(repo, user, pass);
 
-            //5   Click 'Add Page' link
-            //6   Enter Page Name main_hung
-            //7   Click 'OK' button
+            //5     Click 'Add Page' link
+            //6     Enter Page Name main_hung
+            //7     Click 'OK' button
             ManagePagesPage pages = new ManagePagesPage();
             pages = dashboard.goToAddPage();
 
@@ -383,47 +382,42 @@ namespace MLH_Selenium.TestCases
             page.InitPageInformation();
 
             dashboard = pages.addNewpage(page);
-            //8    Click 'Choose Panels' button
-            //9    Click 'Create new panel' button
+            //8     Click 'Choose Panels' button
+            //9     Click 'Create new panel' button
             PanelPage panels = new PanelPage();
             panels = dashboard.goToAddPanelByChoosePanel();
 
-            //10   Click 'Chart Type' drop - down menu
-            panels.ChartType_Cbb.Click();
-            //11   Select 'Pie' Chart Type
-            panels.selectTypeOfChartType("Pie");
-            //12   VP. Check that 'Category' and 'Caption' are disabled, 'Series' is enabled
+            //10    Click 'Chart Type' drop - down menu
+            //11    Select 'Pie' Chart Type
+            panels.ChartType_Cb.SelectByText("Pie");
+            //12    VP. Check that 'Category' and 'Caption' are disabled, 'Series' is enabled
             Assert.IsTrue(panels.checkCategory());
             Assert.IsTrue(panels.checkSeries());
             Assert.IsTrue(panels.checkCaption());
-            //13   Click 'Chart Type' drop - down menu
-            panels.ChartType_Cbb.Click();
+            //13   Click 'Chart Type' drop - down menu            
             //14   Select 'Single Bar' Chart Type
-            panels.selectTypeOfChartType("Single Bar");
+            panels.ChartType_Cb.SelectByText("Single Bar");
             //15   VP. Check that 'Category' is disabled, 'Series' and 'Caption' are enabled
             Assert.IsTrue(panels.checkCategory());
             Assert.IsTrue(panels.checkSeries());
             Assert.IsTrue(panels.checkCaption());
             //16   Click 'Chart Type' drop - down menu
-            panels.ChartType_Cbb.Click();
             //17   Select 'Stacked Bar' Chart Type
-            panels.selectTypeOfChartType("Stacked Bar");
+            panels.ChartType_Cb.SelectByText("Stacked Bar");
             //18   VP. Check that 'Category' ,'Series' and 'Caption' are enabled
             Assert.IsTrue(panels.checkCategory());
             Assert.IsTrue(panels.checkSeries());
             Assert.IsTrue(panels.checkCaption());
             //19   Click 'Chart Type' drop - down menu
-            panels.ChartType_Cbb.Click();
             //20   Select 'Group Bar' Chart Type
-            panels.selectTypeOfChartType("Group Bar");
+            panels.ChartType_Cb.SelectByText("Group Bar");
             //21   VP. Check that 'Category' ,'Series' and 'Caption' are enabled
             Assert.IsTrue(panels.checkCategory());
             Assert.IsTrue(panels.checkSeries());
             Assert.IsTrue(panels.checkCaption());
             //22   Click 'Chart Type' drop - down menu
-            panels.ChartType_Cbb.Click();
             //23   Select 'Line' Chart Type
-            panels.selectTypeOfChartType("Line");
+            panels.ChartType_Cb.SelectByText("Line");
             //24   VP. Check that 'Category' ,'Series' and 'Caption' are enabled
             Assert.IsTrue(panels.checkCategory());
             Assert.IsTrue(panels.checkSeries());
@@ -438,6 +432,122 @@ namespace MLH_Selenium.TestCases
             string pass = "";
 
             Console.WriteLine("DA_PANEL_TC038 - Verify that all settings within \"Add New Panel\" and \"Edit Panel\" form stay unchanged when user switches between \"2D\" and \"3D\" radio buttons");
+
+            //1     Navigate to Dashboard login page
+            //2     Select a specific repository Dashboard_STT
+            //3     Enter valid Username and Password   hung.nguyen / (empty)
+            //4     Click 'Login' button
+            LoginPage loginpage = new LoginPage();
+            loginpage.open();
+
+            DashboardPage dashboard = new DashboardPage();
+            dashboard = loginpage.LoginWithValidUser(repo, user, pass);
+
+            //5     Click 'Add Page' link
+            //6     Enter Page Name main_hung
+            //7     Click 'OK' button
+            ManagePagesPage pages = new ManagePagesPage();
+            pages = dashboard.goToAddPage();
+
+            Page page = new Page();
+            page.InitPageInformation();
+
+            dashboard = pages.addNewpage(page);
+            //8     Click 'Choose Panels' button
+            //9     Click 'Create new panel' button
+            PanelPage panels = new PanelPage();
+            panels = dashboard.goToAddPanelByChoosePanel();
+            //10    Click 'Chart Type' drop - down menu
+            //11    Select a specific Chart Type
+            panels.ChartType_Cb.SelectByText("Stacked Bar");
+            //12    Select 'Data Profile' drop - down menu
+            panels.DataProfile_Cb.SelectByText("Test Case Execution");
+            //13    Enter 'Display Name' and 'Chart Title'          
+            panels.PanelName_Txt.SendKeys("");
+            panels.ChartTitle_Txt.SendKeys("");
+            //14    Select 'Show Title' checkbox
+            panels.ShowTitle_chk.Check();
+            //15    select 'Legends' radio button
+            panels.selectLegends("Top");
+            //16    Select 'Style' radio button
+            panels.selectStyle("3D");
+            //17    VP. Check that settings of 'Chart Type', 'Data Profile', 'Display Name', 'Chart Title', 'Show Title' and 'Legends' stay unchanged.            
+            
+            //18    Select 'Style' radio button
+            panels.selectStyle("2D");
+            //19    VP. Check that settings of 'Chart Type', 'Data Profile', 'Display Name', 'Chart Title', 'Show Title' and 'Legends' stay unchanged.          
+            
+            //20    Click OK button
+            panels.OK_Btn.Click();
+            //21    Select a page in drop - down menu
+            //22    Enter path of Folder
+            panels.panelConfiguration("Execution Dashboard", "", "/Car Rental/Tests");
+            //23    Click OK button
+            panels.ConfigurationOK_Btn.Click();
+            //24    Click 'Edit Panel' button of panel 'hung_panel'
+            
+            //25    Select 'Style' radio button
+            panels.selectStyle("3D");
+            //26    VP. Check that settings of 'Chart Type', 'Data Profile', 'Display Name', 'Chart Title', 'Show Title' and 'Legends' stay unchanged.            
+            
+            //27    Select 'Style' radio button
+            panels.selectStyle("2D");
+            //28    VP. Check that settings of 'Chart Type', 'Data Profile', 'Display Name', 'Chart Title', 'Show Title' and 'Legends' stay unchanged.           
+            
+        }
+
+        public void DA_PANEL_TC039()
+        {
+            string repo = "SampleRepository";
+            string user = "administrator";
+            string pass = "";
+
+            Console.WriteLine("DA_PANEL_TC039 - Verify that all settings within \"Add New Panel\" and \"Edit Panel\" form stay unchanged when user switches between \"Legends\" radio buttons");
+
+            //1     Navigate to Dashboard login page
+            //2     Login with valid account
+            LoginPage loginpage = new LoginPage();
+            loginpage.open();
+
+            DashboardPage dashboard = new DashboardPage();
+            dashboard = loginpage.LoginWithValidUser(repo, user, pass);
+            //3     Click Administer link
+            //4     Click Panel link
+            //5     Click Add New link
+            ManagePagesPage pages = new ManagePagesPage();
+            pages = dashboard.goToAddPage();
+            //6     Click None radio button for Legend
+            
+            //7     Observe the current page
+            //8     Click Top radio button for Legend
+            //9     Observe the current page
+            //10    Click Right radio button for Legend
+            //11    Observe the current page
+            //12    Click Bottom radio button for Legend
+            //13    Observe the current page
+            //14    Click Left radio button for Legend
+            //15    Observe the current page
+            //16    Create a new panel
+            //17    Click Edit Panel link
+            //18    Click None radio button for Legend
+            //19    Observe the current page
+            //20    Click Top radio button for Legend
+            //21    Observe the current page
+            //22    Click Right radio button for Legend
+            //23    Observe the current page
+            //24    Click Bottom radio button for Legend
+            //25    Observe the current page
+            //26    Click Left radio button for Legend
+            //27    Observe the current pages
+        }
+
+        public void DA_PANEL_TC040()
+        {
+            string repo = "SampleRepository";
+            string user = "administrator";
+            string pass = "";
+
+            Console.WriteLine("DA_PANEL_TC040 - Verify that all settings within \"Add New Panel\" and \"Edit Panel\" form stay unchanged when user switches between \"2D\" and \"3D\" radio buttons");
 
             //1 Navigate to Dashboard login page
             //2 Select a specific repository Dashboard_STT
@@ -465,13 +575,12 @@ namespace MLH_Selenium.TestCases
             panels = dashboard.goToAddPanelByChoosePanel();
 
             //10   Click 'Chart Type' drop - down menu
-            panels.ChartType_Cbb.Click();
             //11   Select a specific Chart Type
-            panels.selectTypeOfChartType("Pie");
+            panels.ChartType_Cb.SelectByText("Pie");
             //12   Select 'Data Profile' drop - down menu
-            panels.selectTypeOfDataProfile("Action Implementation By Status");
+            panels.DataProfile_Cb.SelectByText("Action Implementation By Status");
             //13   Enter 'Display Name' and 'Chart Title'
-            
+
             //14   Select 'Show Title' checkbox
             //15   select 'Legends' radio button
             //16   Select 'Style' radio button
@@ -487,7 +596,269 @@ namespace MLH_Selenium.TestCases
             //26   VP. Check that settings of 'Chart Type', 'Data Profile', 'Display Name', 'Chart Title', 'Show Title' and 'Legends' stay unchanged.
             //27   Select 'Style' radio button
             //28   VP. Check that settings of 'Chart Type', 'Data Profile', 'Display Name', 'Chart Title', 'Show Title' and 'Legends' stay unchanged.
-            panels.Close();
+        }
+
+        public void DA_PANEL_TC050()
+        {
+            string repo = "SampleRepository";
+            string user = "administrator";
+            string pass = "";
+
+            Console.WriteLine("DA_PANEL_TC050 - Verify that user is able to successfully edit \"Display Name\" of any Panel providing that the name is not duplicated with existing Panels' name");
+            //1     Navigate to Dashboard login page
+            //2     Login with valid account
+            //3     Click Administer link
+            //4     Click Panel link
+            //5     Click Add New link
+            //6     Enter a valid name into Display Name field
+            //7     VP. Observe the current page
+
+        }
+
+        public void DA_PANEL_TC051()
+        {
+            string repo = "SampleRepository";
+            string user = "administrator";
+            string pass = "";
+
+            Console.WriteLine("DA_PANEL_TC051 - Verify that user is unable to change \"Display Name\" of any Panel if there is special character except '@' inputted");
+            //1     Navigate to Dashboard login page
+            //2     Login with valid account
+            //3     Click Administer link
+            //4     Click Panel link
+            //5     Click Add New link
+            //6     Create a new panel
+            //7     Click Edit link
+            //8     Edit panel name with special characters
+            //9     Click Ok button
+            //10    VP. Observe the current page
+            //11    Close warning message box
+            //12    Click Edit link
+            //13    Edit panel name with special character is @
+            //14    Click Ok button
+            //15    VP. Observe the current page
+        }
+
+        public void DA_PANEL_TC052()
+        {
+            string repo = "SampleRepository";
+            string user = "administrator";
+            string pass = "";
+
+            Console.WriteLine("DA_PANEL_TC052 - Verify that user is unable to edit  \"Height * \" field to anything apart from integer number with in 300-800 range");
+            //1     Navigate to Dashboard login page
+            //2     Login with valid account
+            //3     Create a new page
+            //4     Click Choose Panel button
+            //5     Click Create New Panel button
+            //6     Enter all required fields on Add New Panel page
+            //7     Click Ok button
+            //8     Enter invalid height into Height field
+            //9     Click Ok button
+            //10    VP. Observe the current page
+            //11    Close Warning Message box
+            //12    Enter valid height into Height field
+            //13    Click Ok button
+            //14    VP.Observe the current page
+        }
+
+        public void DA_PANEL_TC053()
+        {
+            string repo = "SampleRepository";
+            string user = "administrator";
+            string pass = "";
+
+            Console.WriteLine("DA_PANEL_TC053 - Verify that newly created panel are populated and sorted correctly in Panel lists under \"Choose panels\" form");
+            //Navigate to Dashboard login page
+            //Select a specific repository
+            //Enter valid Username and Password
+            //Click 'Login' button
+            //Click 'Add Page' button
+            //Enter Page Name
+            //Click 'OK' button
+            //Click 'Choose Panels' button below 'main_hung' button
+            //Click 'Create new panel' button
+            //Enter a name to Display Name
+            //Click OK button
+            //Click Cancel button
+            //Click 'Create new panel' button
+            //Enter a name to Display Name
+            //Click OK button
+            //Click Cancel button
+            //Click 'Create new panel' button
+            //Select 'Type' radio button
+            //Enter a name to Display Name
+            //Click OK button
+            //Click Cancel button
+            //Click 'Create new panel' button
+            //Select 'Type' radio button
+            //Enter a name to Display Name
+            //Click OK button
+            //Click Cancel button
+            //Click main_hung button
+            //Click 'Choose Panels' button below 'main_hung' button
+            //Check that 'hung_chart_a' panel and 'hung_chart_b' panel are existed in Chart section of 'Choose panels' form
+            //Check that 'hung_report' panel is existed in Report section of 'Choose panels' form
+            //Check that 'hung_indicator' panel is existed in Indicator section of 'Choose panels' form
+            //Check that 'hung_chart_a' panel is placed before 'hung_chart_b' panel
+        }
+
+        public void DA_PANEL_TC054()
+        {
+            string repo = "SampleRepository";
+            string user = "administrator";
+            string pass = "";
+
+            Console.WriteLine("DA_PANEL_TC054 - Verify that user is able to successfully edit \"Folder\" field with valid path");
+            //Navigate to Dashboard login page
+            //Login with valid account
+            //Create a new page
+            //Create a new panel
+            //Click Choose Panel button
+            //Click on the newly created panel link
+            //Edit valid folder path
+            //Click Ok button
+            //Observe the current page
+        }
+
+        public void DA_PANEL_TC055()
+        {
+            string repo = "SampleRepository";
+            string user = "administrator";
+            string pass = "";
+
+            Console.WriteLine("DA_PANEL_TC055 - Verify that user is unable to edit \"Folder\" field with invalid path");
+            //Navigate to Dashboard login page
+            //Login with valid account
+            //Create a new page
+            //Create a new panel
+            //Click Choose Panel button
+            //Click on the newly created panel link
+            //Edit invalid folder path
+            //Click Ok button
+            //Observe the current page
+
+        }
+
+        public void DA_PANEL_TC056()
+        {
+            string repo = "SampleRepository";
+            string user = "administrator";
+            string pass = "";
+
+            Console.WriteLine("DA_PANEL_TC056 - Verify that user is unable to edit \"Folder\" field with empty value");
+            //Navigate to Dashboard login page
+            //Login with valid account
+            //Click Administer link
+            //Click Panel link
+            //Click Add New link
+            //Create a new panel
+            //Click Edit link
+            //Change Chart Type for panel
+            //Click Ok button
+            //Observe the current page
+        }
+
+        public void DA_PANEL_TC057()
+        {
+            string repo = "SampleRepository";
+            string user = "administrator";
+            string pass = "";
+
+            Console.WriteLine("DA_PANEL_TC057 - Verify that user is able to successfully edit \"Chart Type\"");
+            //Navigate to Dashboard login page
+            //Login with valid account
+            //Click Administer link
+            //Click Panel link
+            //Click Add New link
+            //Create a new panel
+            //Click Edit link
+            //Change Chart Type for panel
+            //Click Ok button
+            //Observe the current page
+
+        }
+
+        public void DA_PANEL_TC058()
+        {
+            string repo = "SampleRepository";
+            string user = "administrator";
+            string pass = "";
+
+            Console.WriteLine("DA_PANEL_TC058 - Verify that \"Category\", \"Series\" and \"Caption\" field are enabled and disabled correctly corresponding to each type of the \"Chart Type\" in \"Edit Panel\" form");
+            //Navigate to Dashboard login page
+            //Login with valid account
+            //Click Administer link
+            //Click Panel link
+            //Click Add New link
+            //Create a new panel
+            //Click Edit link
+            //Change Chart Type for panel
+            //Observe the current page
+            //Change Chart Type for panel
+            //Observe the current page
+            //Change Chart Type for panel
+            //Observe the current page
+            //Change Chart Type for panel
+            //Observe the current page
+            //Change Chart Type for panel
+            //Observe the current page
+        }
+
+        public void DA_PANEL_TC059()
+        {
+            string repo = "SampleRepository";
+            string user = "administrator";
+            string pass = "";
+
+            Console.WriteLine("DA_PANEL_TC059 - Verify that all settings within \"Add New Panel\" and \"Edit Panel\" form stay unchanged when user switches between \"2D\" and \"3D\" radio buttons in \"Edit Panel\" form");
+            //Navigate to Dashboard login page
+            //Login with valid account
+            //Click Administer link
+            //Click Panel link
+            //Click Add New link
+            //Switch between "2D" and "3D"
+            //Observe the current page
+            //Create a new panel
+            //Click Edit link
+            //Switch between "2D" and "3D"
+            //Observe the current page
+        }
+
+        public void DA_PANEL_TC060()
+        {
+            string repo = "SampleRepository";
+            string user = "administrator";
+            string pass = "";
+
+            Console.WriteLine("DA_PANEL_TC060 - Verify that all settings within \"Add New Panel\" and \"Edit Panel\" form stay unchanged when user switches between \"Legends\" radio buttons in \"Edit Panel\" form");
+            //Navigate to Dashboard login page
+            //Login with valid account
+            //Click Administer link
+            //Click Panel link
+            //Click Add New link
+            //Click None radio button for Legends
+            //Observe the current page
+            //Click Top radio button for Legends
+            //Observe the current page
+            //Click Right radio button for Legends
+            //Observe the current page
+            //Click Bottom radio button for Legends
+            //Observe the current page
+            //Click Left radio button for Legends
+            //Observe the current page
+            //Create a new panel
+            //Click Edit link
+            //Click None radio button for Legends
+            //Observe the current page
+            //Click Top radio button for Legends
+            //Observe the current page
+            //Click Right radio button for Legends
+            //Observe the current page
+            //Click Bottom radio button for Legends
+            //Observe the current page
+            //Click Left radio button for Legends
+            //Observe the current page
         }
     }
 }

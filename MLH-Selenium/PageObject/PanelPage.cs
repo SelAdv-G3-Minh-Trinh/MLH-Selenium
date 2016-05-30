@@ -17,6 +17,16 @@ namespace MLH_Selenium.PageObject
             get { return findElementByStringAndMethod("//input[@name='txtDisplayName']"); }
         }
 
+        public WebElement ChartTitle_Txt
+        {
+            get { return findElementByStringAndMethod(".//*[@id='txtChartTitle']"); }
+        }
+
+        public WebElement ShowTitle_chk
+        {
+            get { return findElementByStringAndMethod(".//*[@id='chkShowTitle']"); }
+        }
+
         public SelectElement Series_Cb
         {
             get { return new SelectElement(findElementByStringAndMethod("//select[@name='cbbSeriesField']")); }
@@ -25,6 +35,11 @@ namespace MLH_Selenium.PageObject
         public WebElement OK_Btn
         {
             get { return findElementByStringAndMethod("//input[@id='OK']"); }
+        }
+
+        public WebElement ConfigurationOK_Btn
+        {
+            get { return findElementByStringAndMethod(".//*[@id='OK']"); }
         }
 
         public SelectElement DataProfile_Cb
@@ -37,6 +52,25 @@ namespace MLH_Selenium.PageObject
             get { return new SelectElement(findElementByStringAndMethod("//select[@name='cbbChartType']")); }
         }
 
+        public SelectElement Category_Cb
+        {
+            get { return new SelectElement(findElementByStringAndMethod(".//*[@id='cbbCategoryField']")); }
+        }
+        
+        public SelectElement SelectPage_Cb
+        {
+            get { return new SelectElement(findElementByStringAndMethod(".//*[@id='cbbPages']")); }
+        }
+
+        public WebElement Height_Txt
+        {
+            get { return findElementByStringAndMethod(".//*[@id='txtHeight']"); }
+        }
+
+        public WebElement Folder_Txt
+        {
+            get { return findElementByStringAndMethod(".//*[@id='txtFolder']"); }
+        }
         #endregion
 
         #region Actions
@@ -53,66 +87,39 @@ namespace MLH_Selenium.PageObject
                 findElementByStringAndMethod("//input[@id='radPanelType3").Click();
         }
 
-        public void selectTypeOfChartType(string charttype)
+        public void selectStyle(string style)
         {
-            if (charttype == "Pie")
-                findElementByStringAndMethod(".//*[@id='cbbChartType' and @title='Pie']").Click();
-            else if (charttype == "Single Bar")
-                findElementByStringAndMethod(".//*[@id='cbbChartType' and @title='Single Bar']").Click();
-            else if (charttype == "Stacked Bar")
-                findElementByStringAndMethod(".//*[@id='cbbChartType' and @title='Stacked Bar']").Click();
-            else if (charttype == "Group Bar")
-                findElementByStringAndMethod(".//*[@id='cbbChartType' and @title='Group Bar']").Click();
-            else if (charttype == "Line")
-                findElementByStringAndMethod(".//*[@id='cbbChartType' and @title='Line']").Click();
+            if (style == "2D")
+            {
+                findElementByStringAndMethod(".//*[@id='rdoChartStyle2D']").Click();
+            }
+            else
+            {
+                findElementByStringAndMethod(".//*[@id='rdoChartStyle3D']").Click();
+            }
         }
-
-        public void selectTypeOfDataProfile(string dataprofile)
+        public void selectLegends(string legends)
         {
-            if (dataprofile == "Action Implementation By")
-                findElementByStringAndMethod(".//*[@id='cbbProfile' and @title='Action Implementation By Status']").Click();
-            else if (dataprofile == "Data23May16230004398")
-                findElementByStringAndMethod(".//*[@id='cbbProfile' and @title='Data23May16230004398']").Click();
-            else if (dataprofile == "Data23May16230327894")
-                findElementByStringAndMethod(".//*[@id='cbbProfile' and @title='Data23May16230327894']").Click();
-            else if (dataprofile == "Functional Tests")
-                findElementByStringAndMethod(".//*[@id='cbbProfile' and @title='Functional Tests']").Click();
-            else if (dataprofile == "Test Case Execution")
-                findElementByStringAndMethod(".//*[@id='cbbProfile' and @title='Test Case Execution']").Click();
-            else if (dataprofile == "Test Case Execution Failure Trend")
-                findElementByStringAndMethod(".//*[@id='cbbProfile' and @title='Test Case Execution Failure Trend']").Click();
-            else if (dataprofile == "Test Case Execution History")
-                findElementByStringAndMethod(".//*[@id='cbbProfile' and @title='Test Case Execution History']").Click();
-            else if (dataprofile == "Test Case Execution Results")
-                findElementByStringAndMethod(".//*[@id='cbbProfile' and @title='Test Case Execution Results']").Click();
-            else if (dataprofile == "Test Case Execution Trend")
-                findElementByStringAndMethod(".//*[@id='cbbProfile' and @title='Test Case Execution Trend']").Click();
-            else if (dataprofile == "Test Module Execution")
-                findElementByStringAndMethod(".//*[@id='cbbProfile' and @title='Test Module Execution']").Click();
-            else if (dataprofile == "Test Module Execution Failure Trend")
-                findElementByStringAndMethod(".//*[@id='cbbProfile' and @title='Test Module Execution Failure Trend']").Click();
-            else if (dataprofile == "Test Module Execution Failure Trend by Build")
-                findElementByStringAndMethod(".//*[@id='cbbProfile' and @title='Test Module Execution Failure Trend by Build']").Click();
-            else if (dataprofile == "Test Module Execution History")
-                findElementByStringAndMethod(".//*[@id='cbbProfile' and @title='Test Module Execution History']").Click();
-            else if (dataprofile == "Test Module Execution Results")
-                findElementByStringAndMethod(".//*[@id='cbbProfile' and @title='Test Module Execution Results']").Click();
-            else if (dataprofile == "Test Module Execution Results Report")
-                findElementByStringAndMethod(".//*[@id='cbbProfile' and @title='Test Module Execution Results Report']").Click();
-            else if (dataprofile == "Test Module Execution Trend")
-                findElementByStringAndMethod(".//*[@id='cbbProfile' and @title='Test Module Execution Trend']").Click();
-            else if (dataprofile == "Test Module Execution Trend by Build")
-                findElementByStringAndMethod(".//*[@id='cbbProfile' and @title='Test Module Execution Trend by Build']").Click();
-            else if (dataprofile == "Test Module Execution Trend by Build")
-                findElementByStringAndMethod(".//*[@id='cbbProfile' and @title='Test Module Execution Trend by Build']").Click();
-            else if (dataprofile == "Test Module Implementation By Priority")
-                findElementByStringAndMethod(".//*[@id='cbbProfile' and @title='Test Module Implementation By Priority']").Click();
-            else if (dataprofile == "Test Module Implementation By Status")
-                findElementByStringAndMethod(".//*[@id='cbbProfile' and @title='Test Module Implementation By Status']").Click();
-            else if (dataprofile == "Test Module Status per Assigned Users")
-                findElementByStringAndMethod(".//*[@id='cbbProfile' and @title='Test Module Status per Assigned Users']").Click();
-            else if (dataprofile == "Test Objective Execution")
-                findElementByStringAndMethod(".//*[@id='cbbProfile' and @title='Test Objective Execution']").Click();
+            if (legends=="None")
+            {
+                findElementByStringAndMethod(".//*[@id='radPlacementNone']").Click();
+            }
+            else if(legends == "Top")
+            {
+                findElementByStringAndMethod(".//*[@id='radPlacementTop']").Click();
+            }
+            else if (legends == "Right")
+            {
+                findElementByStringAndMethod(".//*[@id='radPlacementRight']").Click();
+            }
+            else if (legends == "Bottom")
+            {
+                findElementByStringAndMethod(".//*[@id='radPlacementBottom']").Click();
+            }
+            else
+            {
+                findElementByStringAndMethod(".//*[@id='radPlacementLeft']").Click();
+            }
         }
 
         public void submitpanelInformation(Panel panel)
@@ -125,6 +132,88 @@ namespace MLH_Selenium.PageObject
                 Thread.Sleep(500);
                 Series_Cb.SelectByText(panel.Series);
             }
+        }
+
+        public void createPanel(string type, string dataprofile, string displayname, string Charttitle, bool showtitle, string charttype, string style, string category, string series, string legends)
+        {
+            if (type == "")
+            {
+                selectTypeOfPanel("Chart");
+            }
+            else
+            {
+                selectTypeOfPanel(type);
+            }
+
+            if (dataprofile == "")
+            {
+                DataProfile_Cb.SelectByText("Action Implementation By Status");
+            }
+            else
+            {
+                DataProfile_Cb.SelectByText(dataprofile);
+            }
+
+            PanelName_Txt.SendKeys(displayname);
+
+            ChartTitle_Txt.SendKeys(Charttitle);
+
+            if (showtitle == true)
+            {
+                ShowTitle_chk.Check();
+            }
+            else
+            {
+                ShowTitle_chk.UnCheck();
+            }
+
+            if (charttype == "")
+            {
+                ChartType_Cb.SelectByText("Pie");
+            }
+            else
+            {
+                ChartType_Cb.SelectByText(charttype);
+            }
+
+            if (style=="")
+            {
+                selectStyle("2D");
+            }
+            else
+            {
+                selectStyle(style);
+            }
+
+            if (category!="")
+            {
+                Category_Cb.SelectByText(category);
+            }
+
+            if (series!="")
+            {
+                Series_Cb.SelectByText(series);
+            }
+
+            if (legends == "")
+            {
+                selectLegends("bottom");
+            }
+            else
+            {
+                selectLegends(legends);
+            }
+        }
+
+        public void panelConfiguration(string selectpage, string height, string folder)
+        {
+            SelectPage_Cb.SelectByText(selectpage);
+            if (height == "")
+            {
+                Height_Txt.SendKeys(400.ToString());
+            }
+            Height_Txt.SendKeys(height.ToString());
+            Folder_Txt.SendKeys(folder);
         }
 
         public DashboardPage addNewPanel(Panel panel)
@@ -170,6 +259,15 @@ namespace MLH_Selenium.PageObject
             return true;
         }
 
+        public void checkCreatePanelSettings(string charttype, string dataprofile, string displayname, string charttitle, bool showtitle, string legends)
+        {
+            //ChartType_Cb.SelectByText(charttype);
+            //DataProfile_Cb.SelectByText(dataprofile);
+            //PanelName_Txt.Text(displayname);
+            //ChartTitle_Txt.Text(charttitle);
+            //ShowTitle_chk.Check = true;
+        }
+
         public bool checkCaption()
         {
             WebElement caption = findElementByStringAndMethod(".//*[@id='txtCategoryXAxis' and @class='panelDisabledTextbox']");
@@ -189,11 +287,7 @@ namespace MLH_Selenium.PageObject
             }
             return false;
         }
-
-        public WebElement ChartType_Cbb
-        {
-            get { return findElementByStringAndMethod(".//*[@id='cbbChartType']"); }
-        }
+        
         #endregion
     }
 }
