@@ -74,7 +74,7 @@ namespace MLH_Selenium.PageObject
 
         public WebElement Folder_img
         {
-            get { return findElementByStringAndMethod("//img[@class='panel_setting_treefolder'"]); }
+            get { return findElementByStringAndMethod("//img[@class='panel_setting_treefolder'"); }
         }
 
         public WebElement OkSelectFolder_btn
