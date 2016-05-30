@@ -670,10 +670,13 @@ namespace MLH_Selenium.TestCases
             dashboard = pages.addNewpage(parent);
 
             //4    Add a sibling page of new page
+            dashboard.goToAddPage();
+
             Page child = new Page();
             child.InitPageInformation();
             child.ParentPage = parent.PageName;
-
+            child.AfterPage = "Select page";
+            
             dashboard = pages.addNewpage(child);
 
             //6    Go to Global Setting->Add page
@@ -682,18 +685,22 @@ namespace MLH_Selenium.TestCases
             //9    Select a parent page
             //10    Click OK button
             //11    VP warning message "Test child already exist    Please enter a diffrerent name" appears
+            dashboard.goToAddPage();
+
             Page child2 = new Page();
             child2.InitPageInformation();
 
             child2.PageName = child.PageName;
             child2.ParentPage = parent.PageName;
+            child2.AfterPage = "Select page";
 
             string actual = pages.addNewpage(child2).GetAlertMessage();
+            pages.Cancel_Btn.Click();
             string expected = child2.PageName + "already exist. Please enter a diffrerent name";
 
             //Post - Condition  Log in  as creator page account and delete newly added page and its parent page
             //      Close TA Dashboard Main Page
-            dashboard.deleteAPage(child.PageName);
+            dashboard.deleteAPage(parent.PageName + "/" + child.PageName);
             dashboard.deleteAPage(parent.PageName);
             dashboard.Close();
 
@@ -728,9 +735,12 @@ namespace MLH_Selenium.TestCases
 
             //5    Go to Global Setting->Add page
             //6    Enter info into all required fields on New Page dialog  
+            dashboard.goToAddPage();
+
             Page child = new Page();
             child.InitPageInformation();
             child.ParentPage = parent.PageName;
+            child.AfterPage = "Select page";
 
             dashboard = pages.addNewpage(child);
 
@@ -738,20 +748,18 @@ namespace MLH_Selenium.TestCases
             //8    Click Edit link
             //9    Enter another name into Page Name field Page name: Page 3
             //10    Click Ok button on Edit Page dialog
-            //11     VP User is able to edit the parent page of the sibbling page successfully
-            dashboard.goToPage(parent.PageName);
+            //11     VP User is able to edit the parent page of the sibbling page successfully            
+            dashboard.gotoEditPage(parent.PageName);
 
             parent.PageName = Utilities.GenerateRandomString(5);
-
             string actual = pages.editPage(parent).getActivePageName();
             string expected = parent.PageName;
             Assert.AreEqual(expected, actual);
 
             //Post - Condition     Close TA Dashboard
-            dashboard.deleteAPage(child.PageName);
+            dashboard.deleteAPage(parent.PageName + "/" + child.PageName);
             dashboard.deleteAPage(parent.PageName);
             dashboard.Close();
-
         }
 
         [TestMethod]

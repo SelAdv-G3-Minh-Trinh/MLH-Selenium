@@ -76,7 +76,8 @@ namespace MLH_Selenium.PageObject
             AfterPage_Cmb.SelectByText(page.AfterPage);
             if (page.IsPublic == true)
                 Public_Chk.Check();
-            OK_Btn.Click();  
+            OK_Btn.Click();
+            Thread.Sleep(500);
         }
 
         public DashboardPage addNewpage(Page page)
