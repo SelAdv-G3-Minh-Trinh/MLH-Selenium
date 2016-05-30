@@ -8,6 +8,9 @@ namespace MLH_Selenium.ObjectData
         private string typeOfPanel;
         private string displayName;
         private string series;
+        private string selectPage;
+        private string height;
+        private string folder;
         #endregion
 
         #region Properties
@@ -28,6 +31,24 @@ namespace MLH_Selenium.ObjectData
             get { return series; }
             set { series = value; }
         }
+
+        public string SelectPage
+        {
+            get { return selectPage; }
+            set { selectPage = value; }
+        }
+
+        public string Height
+        {
+            get { return height; }
+            set { height = value; }
+        }
+
+        public string Folder
+        {
+            get { return folder; }
+            set { folder = value; }
+        }
         #endregion
 
         #region Constructors
@@ -39,6 +60,9 @@ namespace MLH_Selenium.ObjectData
             this.typeOfPanel = "Chart";
             this.displayName = Utilities.GenerateRandomString(5);
             this.series = "Name";
+            this.selectPage = "Overview";
+            this.height = "400";
+            this.folder = "/Car Rental/Actions";
         }
         #endregion
     }

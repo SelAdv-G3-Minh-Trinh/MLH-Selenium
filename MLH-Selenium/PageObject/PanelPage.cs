@@ -17,16 +17,6 @@ namespace MLH_Selenium.PageObject
             get { return findElementByStringAndMethod("//input[@name='txtDisplayName']"); }
         }
 
-        public WebElement ChartTitle_Txt
-        {
-            get { return findElementByStringAndMethod(".//*[@id='txtChartTitle']"); }
-        }
-
-        public WebElement ShowTitle_chk
-        {
-            get { return findElementByStringAndMethod(".//*[@id='chkShowTitle']"); }
-        }
-
         public SelectElement Series_Cb
         {
             get { return new SelectElement(findElementByStringAndMethod("//select[@name='cbbSeriesField']")); }
@@ -35,11 +25,6 @@ namespace MLH_Selenium.PageObject
         public WebElement OK_Btn
         {
             get { return findElementByStringAndMethod("//input[@id='OK']"); }
-        }
-
-        public WebElement ConfigurationOK_Btn
-        {
-            get { return findElementByStringAndMethod(".//*[@id='OK']"); }
         }
 
         public SelectElement DataProfile_Cb
@@ -52,25 +37,51 @@ namespace MLH_Selenium.PageObject
             get { return new SelectElement(findElementByStringAndMethod("//select[@name='cbbChartType']")); }
         }
 
-        public SelectElement Category_Cb
+        public WebElement DataLabelsSeries_Chk
         {
-            get { return new SelectElement(findElementByStringAndMethod(".//*[@id='cbbCategoryField']")); }
+            get { return findElementByStringAndMethod("//input[@name='chkSeriesName']"); }
         }
-        
+
+        public WebElement DataLabelsCategories_Chk
+        {
+            get { return findElementByStringAndMethod("//input[@name='chkCategoriesName']"); }
+        }
+
+        public WebElement DataLabelsValue_Chk
+        {
+            get { return findElementByStringAndMethod("//input[@name='chkValue']"); }
+        }
+
+        public WebElement DataLabelsPercentage_Chk
+        {
+            get { return findElementByStringAndMethod("//input[@name='chkPercentage']"); }
+        }
+
         public SelectElement SelectPage_Cb
         {
-            get { return new SelectElement(findElementByStringAndMethod(".//*[@id='cbbPages']")); }
+            get { return new SelectElement(findElementByStringAndMethod("//select[@name='cbbPages']")); }
         }
 
-        public WebElement Height_Txt
+        public WebElement Height_txt
         {
-            get { return findElementByStringAndMethod(".//*[@id='txtHeight']"); }
+            get { return findElementByStringAndMethod("//input[@id='txtHeight']"); }
         }
 
-        public WebElement Folder_Txt
+        public WebElement Folder_txt
         {
-            get { return findElementByStringAndMethod(".//*[@id='txtFolder']"); }
+            get { return findElementByStringAndMethod("//input[@id='txtFolder']"); }
         }
+
+        public WebElement Folder_img
+        {
+            get { return findElementByStringAndMethod("//img[@class='panel_setting_treefolder'"); }
+        }
+
+        public WebElement OkSelectFolder_btn
+        {
+            get { return findElementByStringAndMethod("//input[@id='btnFolderSelectionOK']"); }
+        }
+
         #endregion
 
         #region Actions
@@ -87,41 +98,6 @@ namespace MLH_Selenium.PageObject
                 findElementByStringAndMethod("//input[@id='radPanelType3").Click();
         }
 
-        public void selectStyle(string style)
-        {
-            if (style == "2D")
-            {
-                findElementByStringAndMethod(".//*[@id='rdoChartStyle2D']").Click();
-            }
-            else
-            {
-                findElementByStringAndMethod(".//*[@id='rdoChartStyle3D']").Click();
-            }
-        }
-        public void selectLegends(string legends)
-        {
-            if (legends=="None")
-            {
-                findElementByStringAndMethod(".//*[@id='radPlacementNone']").Click();
-            }
-            else if(legends == "Top")
-            {
-                findElementByStringAndMethod(".//*[@id='radPlacementTop']").Click();
-            }
-            else if (legends == "Right")
-            {
-                findElementByStringAndMethod(".//*[@id='radPlacementRight']").Click();
-            }
-            else if (legends == "Bottom")
-            {
-                findElementByStringAndMethod(".//*[@id='radPlacementBottom']").Click();
-            }
-            else
-            {
-                findElementByStringAndMethod(".//*[@id='radPlacementLeft']").Click();
-            }
-        }
-
         public void submitpanelInformation(Panel panel)
         {
             selectTypeOfPanel(panel.TypeOfPanel);
@@ -134,103 +110,36 @@ namespace MLH_Selenium.PageObject
             }
         }
 
-        public void createPanel(string type, string dataprofile, string displayname, string Charttitle, bool showtitle, string charttype, string style, string category, string series, string legends)
+        public void submitPanelConfig(Panel panel)
         {
-            if (type == "")
-            {
-                selectTypeOfPanel("Chart");
-            }
-            else
-            {
-                selectTypeOfPanel(type);
-            }
-
-            if (dataprofile == "")
-            {
-                DataProfile_Cb.SelectByText("Action Implementation By Status");
-            }
-            else
-            {
-                DataProfile_Cb.SelectByText(dataprofile);
-            }
-
-            PanelName_Txt.SendKeys(displayname);
-
-            ChartTitle_Txt.SendKeys(Charttitle);
-
-            if (showtitle == true)
-            {
-                ShowTitle_chk.Check();
-            }
-            else
-            {
-                ShowTitle_chk.UnCheck();
-            }
-
-            if (charttype == "")
-            {
-                ChartType_Cb.SelectByText("Pie");
-            }
-            else
-            {
-                ChartType_Cb.SelectByText(charttype);
-            }
-
-            if (style=="")
-            {
-                selectStyle("2D");
-            }
-            else
-            {
-                selectStyle(style);
-            }
-
-            if (category!="")
-            {
-                Category_Cb.SelectByText(category);
-            }
-
-            if (series!="")
-            {
-                Series_Cb.SelectByText(series);
-            }
-
-            if (legends == "")
-            {
-                selectLegends("bottom");
-            }
-            else
-            {
-                selectLegends(legends);
-            }
+            SelectPage_Cb.SelectByText(panel.SelectPage);
+            Height_txt.SendKeys(panel.Height);
+            Folder_txt.SendKeys(panel.Folder);
         }
 
-        public void panelConfiguration(string selectpage, string height, string folder)
-        {
-            SelectPage_Cb.SelectByText(selectpage);
-            if (height == "")
-            {
-                Height_Txt.SendKeys(400.ToString());
-            }
-            Height_Txt.SendKeys(height.ToString());
-            Folder_Txt.SendKeys(folder);
-        }
-
-        public DashboardPage addNewPanel(Panel panel)
+        public PanelPage addNewPanelInfo(Panel panel)
         {
             submitpanelInformation(panel);
             OK_Btn.Click();
 
-            return new DashboardPage();
+            return this;
         }
 
-        public bool checkChartType ()
+        public PanelPage addNewPageConfig(Panel panel)
+        {
+            submitPanelConfig(panel);
+            OK_Btn.Click();
+
+            return this;
+        }
+
+        public bool checkChartType()
         {
             List<string> charttypes = new List<string> { "Pie", "Single Bar", "Stacked Bar", "Group Bar", "Line" };
 
             ReadOnlyCollection<IWebElement> types = driver.FindElements(By.XPath("//select[@name='cbbChartType']/option"));
 
-            int count = 0; 
+            int count = 0;
             foreach (IWebElement type in types)
             {
                 foreach (string chartype in charttypes)
@@ -240,7 +149,7 @@ namespace MLH_Selenium.PageObject
                         break;
                     else
                         count++;
-                }   
+                }
             }
 
             if (count >= 5)
@@ -249,45 +158,83 @@ namespace MLH_Selenium.PageObject
                 return false;
         }
 
-        public bool checkCategory()
+        public bool isDataLabelsSeriesCheckboxEnable()
         {
-            WebElement category = findElementByStringAndMethod(".//*[@id='cbbCategoryField' and @class='panelDisabledCombo']");
-            if (category.Displayed==true)
-            {
-                return false;
-            }
-            return true;
+            bool result = true;
+            if (DataLabelsSeries_Chk.Enabled == true)
+                result = true;
+            else if (DataLabelsSeries_Chk.Enabled == false)
+                result = false;
+            return result;
         }
 
-        public void checkCreatePanelSettings(string charttype, string dataprofile, string displayname, string charttitle, bool showtitle, string legends)
+        public bool isDataLabelsCategoriesCheckboxEnable()
         {
-            //ChartType_Cb.SelectByText(charttype);
-            //DataProfile_Cb.SelectByText(dataprofile);
-            //PanelName_Txt.Text(displayname);
-            //ChartTitle_Txt.Text(charttitle);
-            //ShowTitle_chk.Check = true;
+            bool result = true;
+            if (DataLabelsCategories_Chk.Enabled == true)
+                result = true;
+            else if (DataLabelsCategories_Chk.Enabled == false)
+                result = false;
+            return result;
         }
 
-        public bool checkCaption()
+        public bool isDataLabelsValuesCheckboxEnable()
         {
-            WebElement caption = findElementByStringAndMethod(".//*[@id='txtCategoryXAxis' and @class='panelDisabledTextbox']");
-            if (caption.Displayed == true)
-            {
-                return false;
-            }
-            return true;
+            bool result = true;
+            if (DataLabelsValue_Chk.Enabled == true)
+                result = true;
+            else if (DataLabelsValue_Chk.Enabled == false)
+                result = false;
+            return result;
         }
 
-        public bool checkSeries()
+        public bool isDataLabelsPercentageCheckboxEnable()
         {
-            WebElement series = findElementByStringAndMethod(".//*[@id='cbbSeriesField' and @ class='panelEnabledCombo']");
-            if (series.Displayed == true)
-            {
-                return true;
-            }
-            return false;
+            bool result = true;
+            if (DataLabelsPercentage_Chk.Enabled == true)
+                result = true;
+            else if (DataLabelsPercentage_Chk.Enabled == false)
+                result = false;
+            return result;
         }
-        
+
+        public void selectChartType(string name)
+        {
+            Thread.Sleep(500);
+            ChartType_Cb.SelectByText(name);
+        }
+
+        public bool isItemBelongsToSelectPage(string item)
+        {
+            ReadOnlyCollection<IWebElement> pages = driver.FindElements(By.XPath("//select[@name='cbbPages']/option"));
+
+            bool result = true;
+            int count = 0;
+            foreach (IWebElement page in pages)
+            {
+                if (page.Text == item)
+                {
+                    result = true;
+                    break;
+                }
+                else
+                    count++;
+            }
+            return result;
+        }
+
+        public void selectFolderName(string name)
+        {
+            Folder_img.Click();
+            findElementByStringAndMethod(string.Format("//table//input[@value='{0}'")).Click();
+            OkSelectFolder_btn.Click();
+        }
+
+        public string getFolderText()
+        {
+            return Folder_txt.Text;
+        }
+
         #endregion
     }
 }

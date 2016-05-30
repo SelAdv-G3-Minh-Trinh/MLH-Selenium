@@ -69,31 +69,26 @@ namespace MLH_Selenium.PageObject
 
         public void submitPageInformation(Page page)
         {
-            //Provide page's information
             PageName_Txt.Clear();
             PageName_Txt.SendKeys(page.PageName);
             ParentPage_Cmb.SelectByText(page.ParentPage);
-            Thread.Sleep(500);
             NumberPage_Cmb.SelectByText(page.NumberOfColumns.ToString());
             AfterPage_Cmb.SelectByText(page.AfterPage);
             if (page.IsPublic == true)
                 Public_Chk.Check();
-            OK_Btn.Click();  
+            OK_Btn.Click();
+            Thread.Sleep(500);
         }
 
         public DashboardPage addNewpage(Page page)
         {
-            //Provide page's information
             submitPageInformation(page);
-            Thread.Sleep(500);
-            //return Dashboard page
             return new DashboardPage(); 
         }
 
         public DashboardPage editPage(Page page)
         {
             submitPageInformation(page);
-            Thread.Sleep(500);
             return new DashboardPage();
         }
 
