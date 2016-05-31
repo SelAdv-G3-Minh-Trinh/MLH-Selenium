@@ -27,6 +27,16 @@ namespace MLH_Selenium.PageObject
             get { return findElementByStringAndMethod("//input[@id='OK']"); }
         }
 
+        public WebElement PanelConfigurationCancel_Btn
+        {
+            get { return findElementByStringAndMethod(".//*[@id='Cancel']"); }
+        }
+
+        public WebElement Edit_lnk
+        {
+            get { return findElementByStringAndMethod(".//*[@id='chkDelPanel']"); }
+        }
+
         public SelectElement DataProfile_Cb
         {
             get { return new SelectElement(findElementByStringAndMethod("//select[@name='cbbProfile']")); }
@@ -35,6 +45,11 @@ namespace MLH_Selenium.PageObject
         public SelectElement ChartType_Cb
         {
             get { return new SelectElement(findElementByStringAndMethod("//select[@name='cbbChartType']")); }
+        }
+
+        public SelectElement Category_Cb
+        {
+            get { return new SelectElement(findElementByStringAndMethod(".//*[@id='cbbCategoryField']")); }
         }
 
         public WebElement DataLabelsSeries_Chk
@@ -259,6 +274,29 @@ namespace MLH_Selenium.PageObject
             }
 
             OkSelectFolder_btn.Click();
+        }
+
+        public void CreatePanel(string displayname, string series)
+        {
+            PanelName_Txt.SendKeys(displayname);
+            Series_Cb.SelectByText(series);
+            OK_Btn.Click();
+        }
+
+        public PanelPage EditPanel(string displayname)
+        {
+            Edit_lnk.Click();
+            PanelName_Txt.Clear();
+            PanelName_Txt.SendKeys(displayname);
+            OK_Btn.Click();
+            return this;
+        }
+
+        public string GetDisplayName(string displayname)
+        {
+            string xpathUsername = "//a[@href='javascript:Dashboard.configPanel('b4lac0wg1iyr');' and text() = '{0}']";
+            string panelname = string.Format(xpathUsername, displayname);
+            return driver.FindElement(By.XPath(panelname)).Text;
         }
 
         #endregion

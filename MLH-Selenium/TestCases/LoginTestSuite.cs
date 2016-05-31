@@ -134,7 +134,7 @@ namespace MLH_Selenium.TestCases
             string user = "test";
             string pass = "ADMIN";
 
-            Console.WriteLine(@"DA_LOGIN_TC006 - Verify that 'Password' input is case sensitive");
+            Console.WriteLine("DA_LOGIN_TC006 - Verify that \"Password\" input is case sensitive");
 
             //1. Navigate to Dashboard login page
             LoginPage loginPage = new LoginPage();
@@ -155,7 +155,7 @@ namespace MLH_Selenium.TestCases
             string user = "ADMINISTRATOR";
             string pass = "";
 
-            Console.WriteLine(@"DA_LOGIN_TC007 - Verify that 'Username' is not case sensitive");
+            Console.WriteLine("DA_LOGIN_TC007 - Verify that \"Username\" is not case sensitive");
 
             //1. Navigate to Dashboard login page
             LoginPage loginPage = new LoginPage();
