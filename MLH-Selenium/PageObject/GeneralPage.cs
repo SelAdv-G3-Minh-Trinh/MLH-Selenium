@@ -281,7 +281,25 @@ namespace MLH_Selenium.PageObject
             return new PanelPage();
         }
 
-//        public void deletePanel(string panelname)
+        public PanelPage goToPanelConfigPage(string name)
+        {
+            ChoosePanel_Btn.Click();
+
+            findElementByStringAndMethod(string.Format("//a[text()='{0}']", name)).Click();
+            return new PanelPage();
+        }
+
+        public bool isPanelCreated(string name)
+        {
+            bool result = true;
+            if (findElementByStringAndMethod(string.Format("//div[@title='{}']", name)).Enabled == true)
+                result = true;
+            else
+                result = false;
+            return result;
+        }
+
+
         #endregion
     }
 }

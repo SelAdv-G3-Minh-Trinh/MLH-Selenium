@@ -74,13 +74,16 @@
     <Compile Include="Extension\WebDriver.cs" />
     <Compile Include="Extension\WebElement.cs" />
     <Compile Include="Common\Constant.cs" />
+    <Compile Include="ObjectData\DataProfile.cs" />
     <Compile Include="ObjectData\Page.cs" />
     <Compile Include="ObjectData\Panel.cs" />
     <Compile Include="PageObject\ManagePagesPage.cs" />
     <Compile Include="PageObject\DashboardPage.cs" />
     <Compile Include="PageObject\GeneralPage.cs" />
     <Compile Include="PageObject\LoginPage.cs" />
+    <Compile Include="PageObject\ManageProfilePage.cs" />
     <Compile Include="PageObject\PageBase.cs" />
+    <Compile Include="PageObject\PanelConfigurationPage.cs" />
     <Compile Include="PageObject\PanelPage.cs" />
     <Compile Include="Properties\Resources.Designer.cs" />
     <Compile Include="TestCases\LoginTestSuite.cs" />
