@@ -211,7 +211,6 @@ namespace MLH_Selenium.TestCases
             dashboard.Close();
         }
 
-
         public void DA_PANEL_TC033()
         {
             Console.WriteLine("DA_PANEL_TC033 - Verify that \"Data Profile\" listing of \"Add New Panel\" and \"Edit Panel\" control/form are in alphabetical order");
@@ -377,7 +376,7 @@ namespace MLH_Selenium.TestCases
             //12   VP 'Categories' checkbox is disabled, 'Series' checkbox, 'Value' checkbox and 'Percentage' checkbox are enabled
             panels.selectChartType("Pie");
 
-            Assert.IsFalse(panels.isDataLabelsCategoriesCheckboxEnable(),"Categories checkbox is enable");
+            Assert.IsFalse(panels.isDataLabelsCategoriesCheckboxEnable(), "Categories checkbox is enable");
             Assert.IsTrue(panels.isDataLabelsSeriesCheckboxEnable(), "Series checkbox is disable");
             Assert.IsTrue(panels.isDataLabelsValuesCheckboxEnable(), "Values checkbox is disable");
             Assert.IsTrue(panels.isDataLabelsPercentageCheckboxEnable(), "Percentage checkbox is disable");
@@ -793,7 +792,7 @@ namespace MLH_Selenium.TestCases
             string pass = "";
 
             Console.WriteLine("DA_PANEL_TC048 - Verify that population of corresponding item type ( e.g. Actions, Test Modules) folders is correct in \"Select Folder form");
-          
+
             //1    Navigate to Dashboard login page
             //2    Login with valid account
             LoginPage loginpage = new LoginPage();
@@ -878,17 +877,361 @@ namespace MLH_Selenium.TestCases
 
         public void DA_PANEL_TC050()
         {
+            string repo = "SampleRepository";
+            string user = "administrator";
+            string pass = "";
             Console.WriteLine("DA_PANEL_TC050 - Verify that user is able to successfully edit \"Display Name\" of any Panel providing that the name is not duplicated with existing Panels' name");
 
-            //1   Step Navigate to Dashboard login page
-            //2   Step Login with valid account
-            //3   Step Click Administer link
-            //4   Step Click Panel link
-            //5   Step Click Add New link
+            //1     Navigate to Dashboard login page
+            //2     Login with valid account
+            LoginPage loginpage = new LoginPage();
+            loginpage.open();
+
+            DashboardPage dashboard = new DashboardPage();
+            dashboard = loginpage.LoginWithValidUser(repo, user, pass);
+            //3     Click Administer link
+            //4     Click Panel link
+            //5     Click Add New link
+            dashboard.GotoAddPanels();
             //6   Step Enter a valid name into Display Name field
             //7   VP The new panel is created successfully
             //Post - Condition  Delete the newly created panel
             //Close TA Dashboard
+        }
+        [TestMethod]
+        public void DA_PANEl_TC51()
+        {
+            string repo = "SampleRepository";
+            string user = "administrator";
+            string pass = "";
+
+            Console.WriteLine("DA_PANEL_TC051 - Verify that user is unable to change \"Display Name\" of any Panel if there is special character except '@' inputted");
+            //1     Navigate to Dashboard login page
+            //2     Login with valid account
+            LoginPage loginpage = new LoginPage();
+            loginpage.open();
+
+            DashboardPage dashboard = new DashboardPage();
+            dashboard = loginpage.LoginWithValidUser(repo, user, pass);
+            //3     Click Administer link
+            //4     Click Panel link
+            //5     Click Add New link
+            dashboard.GotoAddPanels();
+            //6     Create a new panel
+            PanelPage panelpage = new PanelPage();
+            panelpage.CreatePanel("Logigear", "Name");
+            //7     Click Edit link
+            //8     Edit panel name with special characters
+            //9     Click Ok button
+
+            //10    VP. Observe the current page
+            string actual = panelpage.EditPanel("test#$").GetAlertMessage();
+            string expected = "Invalid display name. The name can't contain high ASCII characters or any of following characters: /:*?<>|\"#{[]{};";
+            Assert.AreEqual(expected, actual);
+            //11    Close warning message box
+
+            //12    Click Edit link
+            //13    Edit panel name with special character is @
+            //14    Click Ok button
+            panelpage.EditPanel("test@");
+            //15    VP. Observe the current page
+
+            actual = panelpage.EditPanel("test#$").GetDisplayName("test@");
+            expected = "test@";
+            Assert.AreEqual(expected, actual);
+
+        }
+        [TestMethod]
+        public void DA_PANEl_TC52()
+        {
+            string repo = "SampleRepository";
+            string user = "administrator";
+            string pass = "";
+
+            Console.WriteLine("DA_PANEL_TC052 - Verify that user is unable to edit  \"Height * \" field to anything apart from integer number with in 300-800 range");
+            //1     Navigate to Dashboard login page
+            //2     Login with valid account
+            LoginPage loginpage = new LoginPage();
+            loginpage.open();
+
+            DashboardPage dashboard = new DashboardPage();
+            dashboard = loginpage.LoginWithValidUser(repo, user, pass);
+
+            //3      Create a new page
+            //4      Click Choose Panel button
+            //5      Click Create New Panel button
+            //6      Enter all required fields on Add New Panel page
+            //7      Click Ok button
+            ManagePagesPage pages = new ManagePagesPage();
+            pages = dashboard.goToAddPage();
+
+            Page page = new Page();
+            page.InitPageInformation();
+
+            dashboard = pages.addNewpage(page);
+            //????????????????????????????????
+            //8      Enter invalid height into Height field
+            //9      Click Ok button
+            //10     Observe the current page
+            //11     Close Warning Message box
+            //12     Enter valid height into Height field
+            //13     Click Ok button
+            //14     Observe the current page
+        }
+        [TestMethod]
+        public void DA_PANEl_TC53()
+        {
+            string repo = "SampleRepository";
+            string user = "administrator";
+            string pass = "";
+
+            Console.WriteLine("DA_PANEL_TC053 - Verify that newly created panel are populated and sorted correctly in Panel lists under \"Choose panels\" form");
+            //1     Navigate to Dashboard login page
+            //2     Select a specific repository
+            //3     Enter valid Username and Password
+            //4     Click 'Login' button
+            LoginPage loginpage = new LoginPage();
+            loginpage.open();
+
+            DashboardPage dashboard = new DashboardPage();
+            dashboard = loginpage.LoginWithValidUser(repo, user, pass);
+            //5     Click 'Add Page' button
+            //6     Enter Page Name
+            //7     Click 'OK' button
+            ManagePagesPage pages = new ManagePagesPage();
+            pages = dashboard.goToAddPage();
+
+            Page page = new Page();
+            page.InitPageInformation();
+
+            dashboard = pages.addNewpage(page);
+            //8     Click 'Choose Panels' button below 'main_hung' button
+            //9     Click 'Create new panel' button
+            //10    Enter a name to Display Name
+            //11    Click OK button
+            PanelPage panels = new PanelPage();
+            panels = dashboard.goToAddPanelByChoosePanel();
+
+            Panel panel = new Panel();
+            panel.InitPanelInformation();
+            panels = panels.addNewPanelInfo(panel);
+            //12    Click Cancel button
+            panels.PanelConfigurationCancel_Btn.Click();
+            //13    Click 'Create new panel' button
+            //14    Enter a name to Display Name
+            //15    Click OK button
+            panels.CreatePanel_Btn.Click();
+            panel.InitPanelInformation();
+            panels = panels.addNewPanelInfo(panel);
+            //16    Click Cancel button
+            panels.PanelConfigurationCancel_Btn.Click();
+            //17    Click 'Create new panel' button
+            //18    Select 'Type' radio button
+            //19    Enter a name to Display Name
+            //20    Click OK button
+            //21    Click Cancel button
+            //22    Click 'Create new panel' button
+            //23    Select 'Type' radio button
+            //24    Enter a name to Display Name
+            //25    Click OK button
+            //26    Click Cancel button
+            //27    Click main_hung button
+            //28    Click 'Choose Panels' button below 'main_hung' button
+            //29    Check that 'hung_chart_a' panel and 'hung_chart_b' panel are existed in Chart section of 'Choose panels' form
+            //30    Check that 'hung_report' panel is existed in Report section of 'Choose panels' form
+            //31    Check that 'hung_indicator' panel is existed in Indicator section of 'Choose panels' form
+            //32    Check that 'hung_chart_a' panel is placed before 'hung_chart_b' panel
+        }
+
+        [TestMethod]
+        public void DA_PANEl_TC54()
+        {
+            string repo = "SampleRepository";
+            string user = "administrator";
+            string pass = "";
+
+            Console.WriteLine("DA_PANEL_TC054 - Verify that user is able to successfully edit \"Folder\" field with valid path");
+            //1     Navigate to Dashboard login page
+            //2     Login with valid account
+            LoginPage loginpage = new LoginPage();
+            loginpage.open();
+
+            DashboardPage dashboard = new DashboardPage();
+            dashboard = loginpage.LoginWithValidUser(repo, user, pass);
+            //3     Create a new page
+            //4     Create a new panel
+            //5     Click Choose Panel button
+            //6     Click on the newly created panel link
+            //7     Edit valid folder path
+            //8     Click Ok button
+            //9     Observe the current page
+        }
+        [TestMethod]
+        public void DA_PANEl_TC55()
+        {
+            string repo = "SampleRepository";
+            string user = "administrator";
+            string pass = "";
+
+            Console.WriteLine("DA_PANEL_TC055 - Verify that user is unable to edit \"Folder\" field with invalid path");
+            //1     Navigate to Dashboard login page
+            //2     Login with valid account
+            LoginPage loginpage = new LoginPage();
+            loginpage.open();
+
+            DashboardPage dashboard = new DashboardPage();
+            dashboard = loginpage.LoginWithValidUser(repo, user, pass);
+            //3     Create a new page
+            //4     Create a new panel
+            //5     Click Choose Panel button
+            //6     Click on the newly created panel link
+            //7     Edit valid folder path
+            //8     Click Ok button
+            //9     Observe the current page
+        }
+        [TestMethod]
+        public void DA_PANEl_TC56()
+        {
+            string repo = "SampleRepository";
+            string user = "administrator";
+            string pass = "";
+
+            Console.WriteLine("DA_PANEL_TC056 - Verify that user is unable to edit \"Folder\" field with empty value");
+            //1     Navigate to Dashboard login page
+            //2     Login with valid account
+            LoginPage loginpage = new LoginPage();
+            loginpage.open();
+
+            DashboardPage dashboard = new DashboardPage();
+            dashboard = loginpage.LoginWithValidUser(repo, user, pass);
+            //3     Create a new page
+            //4     Create a new panel
+            //5     Click Choose Panel button
+            //6     Click on the newly created panel link
+            //7     Edit valid folder path
+            //8     Click Ok button
+            //9     Observe the current page
+        }
+        [TestMethod]
+        public void DA_PANEl_TC57()
+        {
+            string repo = "SampleRepository";
+            string user = "administrator";
+            string pass = "";
+
+            Console.WriteLine("DA_PANEL_TC057 - Verify that user is able to successfully edit \"Chart Type\"");
+            //1     Navigate to Dashboard login page
+            //2     Login with valid account
+            LoginPage loginpage = new LoginPage();
+            loginpage.open();
+
+            DashboardPage dashboard = new DashboardPage();
+            dashboard = loginpage.LoginWithValidUser(repo, user, pass);
+            //3     Click Administer link
+            //4     Click Panel link
+            //5     Click Add New link
+            //6     Create a new panel
+            //7     Click Edit link
+            //8     Change Chart Type for panel
+            //9     Click Ok button
+            //10    Observe the current page
+        }
+        [TestMethod]
+        public void DA_PANEl_TC58()
+        {
+            string repo = "SampleRepository";
+            string user = "administrator";
+            string pass = "";
+
+            Console.WriteLine("DA_PANEL_TC058 - Verify that \"Category\", \"Series\" and \"Caption\" field are enabled and disabled correctly corresponding to each type of the \"Chart Type\" in \"Edit Panel\" form");
+            //1     Navigate to Dashboard login page
+            //2     Login with valid account
+            LoginPage loginpage = new LoginPage();
+            loginpage.open();
+
+            DashboardPage dashboard = new DashboardPage();
+            dashboard = loginpage.LoginWithValidUser(repo, user, pass);
+            //3     Click Administer link
+            //4     Click Panel link
+            //5     Click Add New link
+            //6     Create a new panel
+            //7     Click Edit link
+            //8     Change Chart Type for panel
+            //9     Observe the current page
+            //10    Change Chart Type for panel
+            //11    Observe the current page
+            //12    Change Chart Type for panel
+            //13    Observe the current page
+            //14    Change Chart Type for panel
+            //15    Observe the current page
+            //16    Change Chart Type for panel
+            //17    Observe the current page
+        }
+        [TestMethod]
+        public void DA_PANEl_TC59()
+        {
+            string repo = "SampleRepository";
+            string user = "administrator";
+            string pass = "";
+
+            Console.WriteLine("DA_PANEL_TC059 - Verify that all settings within \"Add New Panel\" and \"Edit Panel\" form stay unchanged when user switches between \"2D\" and \"3D\" radio buttons in \"Edit Panel\" form");
+            //1     Navigate to Dashboard login page
+            //2     Login with valid account
+            LoginPage loginpage = new LoginPage();
+            loginpage.open();
+
+            DashboardPage dashboard = new DashboardPage();
+            dashboard = loginpage.LoginWithValidUser(repo, user, pass);
+            //3     Click Administer link
+            //4     Click Panel link
+            //5     Click Add New link
+            //6     Switch between "2D" and "3D"
+            //7     Observe the current page
+            //8     Create a new panel
+            //9     Click Edit link
+            //10    Switch between "2D" and "3D"
+            //11    Observe the current page
+        }
+        [TestMethod]
+        public void DA_PANEl_TC60()
+        {
+            string repo = "SampleRepository";
+            string user = "administrator";
+            string pass = "";
+
+            Console.WriteLine("DA_PANEL_TC60 - Verify that all settings within \"Add New Panel\" and \"Edit Panel\" form stay unchanged when user switches between \"Legends\" radio buttons in \"Edit Panel\" form");
+            //1     Navigate to Dashboard login page
+            //2     Login with valid account
+            LoginPage loginpage = new LoginPage();
+            loginpage.open();
+
+            DashboardPage dashboard = new DashboardPage();
+            dashboard = loginpage.LoginWithValidUser(repo, user, pass);
+            //3     Click Administer link
+            //4     Click Panel link
+            //5     Click Add New link
+            //6     Click None radio button for Legends
+            //7     Observe the current page
+            //8     Click Top radio button for Legends
+            //9     Observe the current page
+            //10    Click Right radio button for Legends
+            //11    Observe the current page
+            //12    Click Bottom radio button for Legends
+            //13    Observe the current page
+            //14    Click Left radio button for Legends
+            //15    Observe the current page
+            //16    Create a new panel
+            //17    Click Edit link
+            //18    Click None radio button for Legends
+            //19    Observe the current page
+            //20    Click Top radio button for Legends
+            //21    Observe the current page
+            //22    Click Right radio button for Legends
+            //23    Observe the current page
+            //24    Click Bottom radio button for Legends
+            //25    Observe the current page
+            //26    Click Left radio button for Legends
+            //27    Observe the current page
         }
     }
 }
