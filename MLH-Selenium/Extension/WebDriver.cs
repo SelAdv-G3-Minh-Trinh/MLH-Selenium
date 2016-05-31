@@ -2,6 +2,8 @@
 using System;
 using System.Collections.ObjectModel;
 using OpenQA.Selenium.Support.UI;
+using System.Diagnostics;
+using System.Threading;
 
 namespace MLH_Selenium.Extension
 {
@@ -72,6 +74,8 @@ namespace MLH_Selenium.Extension
             }
         }
 
+        public object StopWatch { get; private set; }
+
         public void Close()
         {
             Driver.Close();
@@ -83,12 +87,38 @@ namespace MLH_Selenium.Extension
         }
 
         public IWebElement FindElement(By by)
-        {                        
+        {
             return Driver.FindElement(by);
         }
 
         public ReadOnlyCollection<IWebElement> FindElements(By by)
         {
+            return Driver.FindElements(by);
+        }
+
+        public ReadOnlyCollection<IWebElement> FindElements(By by, int timeout)
+        {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            if (timeout >= 0)
+            {
+                try
+                {
+                    WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(timeout));
+                    wait.Until(ExpectedConditions.ElementIsVisible(by));
+                }
+                catch (StaleElementReferenceException)
+                {
+                    Thread.Sleep(100);
+                    FindElements(by, timeout - stopwatch.Elapsed.Seconds);
+                }
+                catch (NullReferenceException)
+                {
+                    Thread.Sleep(100);
+                    FindElements(by, timeout - stopwatch.Elapsed.Seconds);
+                }              
+            }
+            stopwatch.Stop();
             return Driver.FindElements(by);
         }
 
@@ -112,27 +142,31 @@ namespace MLH_Selenium.Extension
             return Driver.SwitchTo();
         }
 
-        public IWebElement FindElement(By by, int seconds)
+        public IWebElement FindElement(By by, int timeout)
         {
-            if (seconds > 0)
+            IWebElement element = null;
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            if (timeout >= 0)
             {
-                IWebElement element = Driver.FindElement(by);
-                //var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(seconds));
-                //return wait.Until(drv => drv.FindElement(by));
-
-                var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(3));
-                wait.Until(ExpectedConditions.ElementExists(by));
-
                 try
                 {
-                    wait = new WebDriverWait(Driver, TimeSpan.FromMilliseconds(0.1));
-                    bool t = wait.Until(ExpectedConditions.StalenessOf(Driver.FindElement(by)));
+                    WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(timeout));
+                    wait.Until(ExpectedConditions.ElementIsVisible(by));
+                    element = Driver.FindElement(by);
                 }
-                catch (Exception)
+                catch (StaleElementReferenceException)
                 {
-
+                    Thread.Sleep(100);
+                    FindElement(by, timeout - stopwatch.Elapsed.Seconds);
                 }
+                catch (NullReferenceException)
+                {
+                    Thread.Sleep(100);
+                    FindElement(by, timeout - stopwatch.Elapsed.Seconds);
+                }               
             }
+            stopwatch.Stop();
             return Driver.FindElement(by);
         }
 

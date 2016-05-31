@@ -3,6 +3,7 @@ using MLH_Selenium.Extension;
 using System.Threading;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using MLH_Selenium.Common;
 
 namespace MLH_Selenium.PageObject
 {
@@ -179,14 +180,14 @@ namespace MLH_Selenium.PageObject
         public string getNamePageNextTo(string afterpage)
         {
             afterpage = afterpage.Replace(" ", "\u00A0");            
-            ReadOnlyCollection<IWebElement> pages = driver.FindElements(By.XPath(string.Format("//li[a[text()='{0}']]/following-sibling::li/a", afterpage)));            
+            ReadOnlyCollection<IWebElement> pages = driver.FindElements(By.XPath(string.Format("//li[a[text()='{0}']]/following-sibling::li/a", afterpage)), Constant.timeout);            
             return pages[0].Text;
         }
 
         public void deleteAllPages()
         {
             List<string> lstPageNames = new List<string>();
-            ReadOnlyCollection<IWebElement> pages = driver.FindElements(By.XPath("//li[a[text()='Overview']]/following-sibling::li/a"));
+            ReadOnlyCollection<IWebElement> pages = driver.FindElements(By.XPath("//li[a[text()='Overview']]/following-sibling::li/a"), Constant.timeout);
             foreach (IWebElement page in pages)
             {
                 string innerHTML = page.GetAttribute("innerHTML");
@@ -264,10 +265,10 @@ namespace MLH_Selenium.PageObject
             AddPanel_Lnk.Click();
             return new PanelPage();
         }
-        
-        public bool isItemEnable()
+
+        public bool isItemsDisable()
         {
-            if (driver.FindElement(By.XPath("//li[@class = 'mn-setting']")).Enabled)
+            if (findElementByStringAndMethod("//div[@class = 'ui-dialog-overlay custom-overlay']").Displayed)
                 return true;
             else
                 return false;

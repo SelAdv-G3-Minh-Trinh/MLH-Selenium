@@ -57,7 +57,7 @@ namespace MLH_Selenium.TestCases
             dashboard.goToPage("Administer/Panels");
             panel = dashboard.gotoAddPanel();
 
-            Assert.IsFalse(panel.isItemEnable(), "All control/form are not disabled or locked");
+            Assert.IsTrue(panel.isItemsDisable(), "All control/form are not disabled or locked");
 
             //Post - Condition  Close TA Dashboard
             panel.Close();
@@ -126,13 +126,13 @@ namespace MLH_Selenium.TestCases
             //6    Enter value into Display Name field with special characters except "@"  Display Name: Logigear#$%	
             //7    Click Ok button
             //8    VP Message "Invalid display name. The name can't contain high ASCII characters or any of following characters: /:*?<>|"#{[]{};" is displayed
-            //9    Close Warning Message box
-            PanelPage panels = new PanelPage();
+            //9    Close Warning Message box           
             dashboard.goToPage("Administer/Panels");
-            panels = dashboard.gotoAddPanel();
+            PanelPage panels = dashboard.gotoAddPanel();
 
             Panel panel = new Panel();
-            panel.DisplayName = "Logigear#$%";
+            panel.InitPanelInformation();
+            panel.DisplayName = "Logigear#$%";            
 
             string actual = panels.addNewPanelInfo(panel).GetAlertMessage();
             string expected = "Invalid display name. The name cannot contain high ASCII characters or any of the following characters: /:*?<>|\"#[]{}=%;";
@@ -186,12 +186,12 @@ namespace MLH_Selenium.TestCases
             //3    Click on Administer/ Panels link
             //4    Click on Add new link
             //5    Enter display name to "Display name" field.Duplicated panel
-            //6    Click on OK button
-            PanelPage panels = new PanelPage();
+            //6    Click on OK button            
             dashboard.goToPage("Administer/Panels");
-            panels = dashboard.gotoAddPanel();
+            PanelPage panels = dashboard.gotoAddPanel();
 
             Panel panel = new Panel();
+            panel.InitPanelInformation();
             panel.DisplayName = "Duplicated panel";
 
             panels.addNewPanelInfo(panel);
