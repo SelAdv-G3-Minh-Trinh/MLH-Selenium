@@ -211,7 +211,6 @@ namespace MLH_Selenium.TestCases
             dashboard.Close();
         }
 
-
         public void DA_PANEL_TC033()
         {
             Console.WriteLine("DA_PANEL_TC033 - Verify that \"Data Profile\" listing of \"Add New Panel\" and \"Edit Panel\" control/form are in alphabetical order");
@@ -869,19 +868,28 @@ namespace MLH_Selenium.TestCases
 
         public void DA_PANEL_TC050()
         {
+            string repo = "SampleRepository";
+            string user = "administrator";
+            string pass = "";
             Console.WriteLine("DA_PANEL_TC050 - Verify that user is able to successfully edit \"Display Name\" of any Panel providing that the name is not duplicated with existing Panels' name");
 
-            //1   Step Navigate to Dashboard login page
-            //2   Step Login with valid account
-            //3   Step Click Administer link
-            //4   Step Click Panel link
-            //5   Step Click Add New link
+            //1     Navigate to Dashboard login page
+            //2     Login with valid account
+            LoginPage loginpage = new LoginPage();
+            loginpage.open();
+
+            DashboardPage dashboard = new DashboardPage();
+            dashboard = loginpage.LoginWithValidUser(repo, user, pass);
+            //3     Click Administer link
+            //4     Click Panel link
+            //5     Click Add New link
+            dashboard.GotoAddPanels();
             //6   Step Enter a valid name into Display Name field
             //7   VP The new panel is created successfully
             //Post - Condition  Delete the newly created panel
             //Close TA Dashboard
         }
-
+        [TestMethod]
         public void DA_PANEl_TC51()
         {
             string repo = "SampleRepository";
@@ -899,18 +907,32 @@ namespace MLH_Selenium.TestCases
             //3     Click Administer link
             //4     Click Panel link
             //5     Click Add New link
+            dashboard.GotoAddPanels();
             //6     Create a new panel
+            PanelPage panelpage = new PanelPage();
+            panelpage.CreatePanel("Logigear", "Name");
             //7     Click Edit link
             //8     Edit panel name with special characters
             //9     Click Ok button
-            //10    Observe the current page
+
+            //10    VP. Observe the current page
+            string actual = panelpage.EditPanel("test#$").GetAlertMessage();
+            string expected = "Invalid display name. The name can't contain high ASCII characters or any of following characters: /:*?<>|\"#{[]{};";
+            Assert.AreEqual(expected, actual);
             //11    Close warning message box
+
             //12    Click Edit link
             //13    Edit panel name with special character is @
             //14    Click Ok button
-            //15    Observe the current page
-        }
+            panelpage.EditPanel("test@");
+            //15    VP. Observe the current page
 
+            actual = panelpage.EditPanel("test#$").GetDisplayName("test@");
+            expected = "test@";
+            Assert.AreEqual(expected, actual);
+
+        }
+        [TestMethod]
         public void DA_PANEl_TC52()
         {
             string repo = "SampleRepository";
@@ -931,6 +953,14 @@ namespace MLH_Selenium.TestCases
             //5      Click Create New Panel button
             //6      Enter all required fields on Add New Panel page
             //7      Click Ok button
+            ManagePagesPage pages = new ManagePagesPage();
+            pages = dashboard.goToAddPage();
+
+            Page page = new Page();
+            page.InitPageInformation();
+
+            dashboard = pages.addNewpage(page);
+            //????????????????????????????????
             //8      Enter invalid height into Height field
             //9      Click Ok button
             //10     Observe the current page
@@ -939,14 +969,23 @@ namespace MLH_Selenium.TestCases
             //13     Click Ok button
             //14     Observe the current page
         }
-
+        [TestMethod]
         public void DA_PANEl_TC53()
         {
+            string repo = "SampleRepository";
+            string user = "administrator";
+            string pass = "";
+
             Console.WriteLine("DA_PANEL_TC053 - Verify that newly created panel are populated and sorted correctly in Panel lists under \"Choose panels\" form");
             //1      Navigate to Dashboard login page
             //2      Select a specific repository
             //3      Enter valid Username and Password
             //4      Click 'Login' button
+            LoginPage loginpage = new LoginPage();
+            loginpage.open();
+
+            DashboardPage dashboard = new DashboardPage();
+            dashboard = loginpage.LoginWithValidUser(repo, user, pass);
             //5      Click 'Add Page' button
             //6      Enter Page Name
             //7      Click 'OK' button
@@ -976,7 +1015,7 @@ namespace MLH_Selenium.TestCases
             //31     Check that 'hung_indicator' panel is existed in Indicator section of 'Choose panels' form
             //32     Check that 'hung_chart_a' panel is placed before 'hung_chart_b' panel
         }
-
+        [TestMethod]
         public void DA_PANEl_TC54()
         {
             string repo = "SampleRepository";
@@ -999,7 +1038,7 @@ namespace MLH_Selenium.TestCases
             //8     Click Ok button
             //9     Observe the current page
         }
-
+        [TestMethod]
         public void DA_PANEl_TC55()
         {
             string repo = "SampleRepository";
@@ -1022,7 +1061,7 @@ namespace MLH_Selenium.TestCases
             //8     Click Ok button
             //9     Observe the current page
         }
-
+        [TestMethod]
         public void DA_PANEl_TC56()
         {
             string repo = "SampleRepository";
@@ -1045,7 +1084,7 @@ namespace MLH_Selenium.TestCases
             //8     Click Ok button
             //9     Observe the current page
         }
-
+        [TestMethod]
         public void DA_PANEl_TC57()
         {
             string repo = "SampleRepository";
@@ -1069,7 +1108,7 @@ namespace MLH_Selenium.TestCases
             //9     Click Ok button
             //10    Observe the current page
         }
-
+        [TestMethod]
         public void DA_PANEl_TC58()
         {
             string repo = "SampleRepository";
@@ -1100,7 +1139,7 @@ namespace MLH_Selenium.TestCases
             //16    Change Chart Type for panel
             //17    Observe the current page
         }
-
+        [TestMethod]
         public void DA_PANEl_TC59()
         {
             string repo = "SampleRepository";
@@ -1125,7 +1164,7 @@ namespace MLH_Selenium.TestCases
             //10    Switch between "2D" and "3D"
             //11    Observe the current page
         }
-
+        [TestMethod]
         public void DA_PANEl_TC60()
         {
             string repo = "SampleRepository";

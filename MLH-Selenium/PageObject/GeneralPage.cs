@@ -29,6 +29,16 @@ namespace MLH_Selenium.PageObject
             get { return findElementByStringAndMethod("//li[@class = 'mn-setting']"); }
         }
 
+        public WebElement Administer_Lnk
+        {
+            get { return findElementByStringAndMethod(".//a[.='Administer']"); }
+        }
+
+        public WebElement Addnewpanels_Lnk
+        {
+            get { return findElementByStringAndMethod(".//a[.='Add New']"); }
+        }
+
         public WebElement AddPage_Lnk
         {
             get { return findElementByStringAndMethod("//a[@class='add' and text()='Add Page']"); }
@@ -42,6 +52,11 @@ namespace MLH_Selenium.PageObject
         public WebElement EditPage_Lnk
         {
             get { return findElementByStringAndMethod("//a[@class='edit' and text()='Edit']"); }
+        }
+
+        public WebElement Panels_Lnk
+        {
+            get { return findElementByStringAndMethod(".//a[.='Panels']"); }
         }
 
         public WebElement ActivePage_Lnk
@@ -80,6 +95,14 @@ namespace MLH_Selenium.PageObject
             string repoName = string.Format("//a[text()='{0}']", repositoryName);
             Repository_Link.MouseHover(driver);
             findElementByStringAndMethod(repoName).Click();
+            return new DashboardPage();
+        }
+
+        public DashboardPage GotoAddPanels()
+        {            
+            Administer_Lnk.MouseHover(driver);
+            Panels_Lnk.Click();
+            Addnewpanels_Lnk.Click();
             return new DashboardPage();
         }
 
