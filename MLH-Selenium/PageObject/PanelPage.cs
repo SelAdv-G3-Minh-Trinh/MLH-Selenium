@@ -27,6 +27,11 @@ namespace MLH_Selenium.PageObject
             get { return findElementByStringAndMethod("//input[@id='OK']"); }
         }
 
+        public WebElement PanelConfigurationCancel_Btn
+        {
+            get { return findElementByStringAndMethod(".//*[@id='Cancel']"); }
+        }
+
         public WebElement Edit_lnk
         {
             get { return findElementByStringAndMethod(".//*[@id='chkDelPanel']"); }

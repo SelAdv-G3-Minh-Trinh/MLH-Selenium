@@ -977,44 +977,63 @@ namespace MLH_Selenium.TestCases
             string pass = "";
 
             Console.WriteLine("DA_PANEL_TC053 - Verify that newly created panel are populated and sorted correctly in Panel lists under \"Choose panels\" form");
-            //1      Navigate to Dashboard login page
-            //2      Select a specific repository
-            //3      Enter valid Username and Password
-            //4      Click 'Login' button
+            //1     Navigate to Dashboard login page
+            //2     Select a specific repository
+            //3     Enter valid Username and Password
+            //4     Click 'Login' button
             LoginPage loginpage = new LoginPage();
             loginpage.open();
 
             DashboardPage dashboard = new DashboardPage();
             dashboard = loginpage.LoginWithValidUser(repo, user, pass);
-            //5      Click 'Add Page' button
-            //6      Enter Page Name
-            //7      Click 'OK' button
-            //8      Click 'Choose Panels' button below 'main_hung' button
-            //9      Click 'Create new panel' button
-            //10     Enter a name to Display Name
-            //11     Click OK button
-            //12     Click Cancel button
-            //13     Click 'Create new panel' button
-            //14     Enter a name to Display Name
-            //15     Click OK button
-            //16     Click Cancel button
-            //17     Click 'Create new panel' button
-            //18     Select 'Type' radio button
-            //19     Enter a name to Display Name
-            //20     Click OK button
-            //21     Click Cancel button
-            //22     Click 'Create new panel' button
-            //23     Select 'Type' radio button
-            //24     Enter a name to Display Name
-            //25     Click OK button
-            //26     Click Cancel button
-            //27     Click main_hung button
-            //28     Click 'Choose Panels' button below 'main_hung' button
-            //29     Check that 'hung_chart_a' panel and 'hung_chart_b' panel are existed in Chart section of 'Choose panels' form
-            //30     Check that 'hung_report' panel is existed in Report section of 'Choose panels' form
-            //31     Check that 'hung_indicator' panel is existed in Indicator section of 'Choose panels' form
-            //32     Check that 'hung_chart_a' panel is placed before 'hung_chart_b' panel
+            //5     Click 'Add Page' button
+            //6     Enter Page Name
+            //7     Click 'OK' button
+            ManagePagesPage pages = new ManagePagesPage();
+            pages = dashboard.goToAddPage();
+
+            Page page = new Page();
+            page.InitPageInformation();
+
+            dashboard = pages.addNewpage(page);
+            //8     Click 'Choose Panels' button below 'main_hung' button
+            //9     Click 'Create new panel' button
+            //10    Enter a name to Display Name
+            //11    Click OK button
+            PanelPage panels = new PanelPage();
+            panels = dashboard.goToAddPanelByChoosePanel();
+
+            Panel panel = new Panel();
+            panel.InitPanelInformation();
+            panels = panels.addNewPanelInfo(panel);
+            //12    Click Cancel button
+            panels.PanelConfigurationCancel_Btn.Click();
+            //13    Click 'Create new panel' button
+            //14    Enter a name to Display Name
+            //15    Click OK button
+            panels.CreatePanel_Btn.Click();
+            panel.InitPanelInformation();
+            panels = panels.addNewPanelInfo(panel);
+            //16    Click Cancel button
+            panels.PanelConfigurationCancel_Btn.Click();
+            //17    Click 'Create new panel' button
+            //18    Select 'Type' radio button
+            //19    Enter a name to Display Name
+            //20    Click OK button
+            //21    Click Cancel button
+            //22    Click 'Create new panel' button
+            //23    Select 'Type' radio button
+            //24    Enter a name to Display Name
+            //25    Click OK button
+            //26    Click Cancel button
+            //27    Click main_hung button
+            //28    Click 'Choose Panels' button below 'main_hung' button
+            //29    Check that 'hung_chart_a' panel and 'hung_chart_b' panel are existed in Chart section of 'Choose panels' form
+            //30    Check that 'hung_report' panel is existed in Report section of 'Choose panels' form
+            //31    Check that 'hung_indicator' panel is existed in Indicator section of 'Choose panels' form
+            //32    Check that 'hung_chart_a' panel is placed before 'hung_chart_b' panel
         }
+
         [TestMethod]
         public void DA_PANEl_TC54()
         {
