@@ -154,20 +154,20 @@ namespace MLH_Selenium.PageObject
 
             ReadOnlyCollection<IWebElement> types = driver.FindElements(By.XPath("//select[@name='cbbChartType']/option"));
 
-            int count = 0;
+            int count = 1;
             foreach (IWebElement type in types)
             {
                 foreach (string chartype in charttypes)
                 {
-                    count = 1;
-                    if (type.Text != chartype)
-                        break;
-                    else
+                    if (type.Text == chartype)
+                    {
                         count++;
+                        break;
+                    }
                 }
             }
 
-            if (count >= 5)
+            if (count == charttypes.Count)
                 return true;
             else
                 return false;

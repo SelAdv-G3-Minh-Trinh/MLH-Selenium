@@ -143,7 +143,7 @@ namespace MLH_Selenium.TestCases
             //11   Enter value into Display Name field with special character is @	Display Name: Logigear@	
             //12   VP new panel is created
             panel.DisplayName = "Logigear@";
-            Assert.IsTrue(panels.addNewPanelInfo(panel).isPageLinkDisplayed(panel.DisplayName), "Panel is not created");
+            Assert.IsTrue(panels.addNewPanelInfo(panel).isPageLinkDisplayed(panel.DisplayName), "Bug: Panel " + panel.DisplayName + " is not created");
 
             //Post - Condition  Close TA Dashboard
             dashboard.Close();
@@ -192,7 +192,6 @@ namespace MLH_Selenium.TestCases
 
             Panel panel = new Panel();
             panel.InitPanelInformation();
-            panel.DisplayName = "Duplicated panel";
 
             panels.addNewPanelInfo(panel);
 
@@ -200,10 +199,9 @@ namespace MLH_Selenium.TestCases
             //8    Enter display name same with previous display name to "display name" field.Duplicated panel
             //9    Click on OK button
             //10   VP Warning message: "Dupicated panel already exists. Please enter a different name" show up
-            panels.goToAddPage();
-
+            panels.gotoAddPanel();
             string actual = panels.addNewPanelInfo(panel).GetAlertMessage();
-            string expected = "Dupicated panel already exists. Please enter a different name";
+            string expected = panel.DisplayName + " already exists. Please enter a different name.";
 
             Assert.AreEqual(expected, actual);
             //Post - Condition  Delete "Duplicated panel" panel
@@ -278,6 +276,7 @@ namespace MLH_Selenium.TestCases
             panels = dashboard.gotoAddPanel();
 
             Panel panel = new Panel();
+            panel.InitPanelInformation();
             panel.TypeOfPanel = "Chart";
             panel.DisplayName = "Chart#$%";
 
