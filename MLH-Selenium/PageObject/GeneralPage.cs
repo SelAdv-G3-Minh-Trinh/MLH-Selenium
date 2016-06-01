@@ -210,6 +210,16 @@ namespace MLH_Selenium.PageObject
         public void deleteAllPages()
         {
             List<string> lstPageNames = new List<string>();
+
+            ReadOnlyCollection<IWebElement> childOverview = driver.FindElements(By.XPath(string.Format("//a[.='{0}']/../ul/li/a", "Overview")));
+            if (childOverview.Count > 0)
+            {
+                foreach (IWebElement childPage in childOverview)
+                {
+                    lstPageNames.Add("Overview/" + childPage.GetAttribute("innerHTML").Replace("&nbsp;", "\u00A0"));
+                }
+            }
+            
             ReadOnlyCollection<IWebElement> pages = driver.FindElements(By.XPath("//li[a[text()='Overview']]/following-sibling::li/a"), Constant.timeout);
             foreach (IWebElement page in pages)
             {
