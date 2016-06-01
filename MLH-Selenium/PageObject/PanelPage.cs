@@ -17,6 +17,11 @@ namespace MLH_Selenium.PageObject
             get { return findElementByStringAndMethod("//input[@name='txtDisplayName']"); }
         }
 
+        public WebElement Delete_Lnk
+        {
+            get { return findElementByStringAndMethod("//div[@class='panel_tag2']//a[.='Delete']"); }
+        }
+
         public SelectElement Series_Cb
         {
             get { return new SelectElement(findElementByStringAndMethod("//select[@name='cbbSeriesField']")); }
@@ -154,7 +159,7 @@ namespace MLH_Selenium.PageObject
 
             ReadOnlyCollection<IWebElement> types = driver.FindElements(By.XPath("//select[@name='cbbChartType']/option"));
 
-            int count = 1;
+            int count = 0;
             foreach (IWebElement type in types)
             {
                 foreach (string chartype in charttypes)
@@ -281,6 +286,15 @@ namespace MLH_Selenium.PageObject
             PanelName_Txt.SendKeys(displayname);
             Series_Cb.SelectByText(series);
             OK_Btn.Click();
+        }
+
+        public PanelPage DeletePanel(string displayName)
+        {
+            WebElement element = findElementByStringAndMethod(string.Format("//a[.='{0}']/../preceding-sibling::td/input", displayName));
+            element.Check();
+            Delete_Lnk.Click();
+            driver.SwitchToAlert().Accept();
+            return this;
         }
 
         public PanelPage EditPanel(string displayname)

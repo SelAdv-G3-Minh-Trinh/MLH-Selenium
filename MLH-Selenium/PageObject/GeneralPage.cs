@@ -116,7 +116,7 @@ namespace MLH_Selenium.PageObject
         public string GetAlertMessage()
         {
             string message = driver.SwitchToAlert().Text;
-            driver.SwitchToAlert().Accept();        
+            driver.SwitchToAlert().Accept();            
             return message;
         }
 
@@ -265,19 +265,18 @@ namespace MLH_Selenium.PageObject
 
         public bool isPageLinkDisplayed(string pageLink)
         {
-            string link = string.Format("//a[text()='{0}']", pageLink);
+            string link = string.Format("//a[text()='{0}']", pageLink.Replace(" ", "\u00A0"));
 
-            try
-            {
-                if (!driver.FindElement(By.XPath(link)).Displayed)
-                    return false;
-                else
-                    return true;
-            }
-            catch (System.Exception)
-            {
+            WebElement element = findElementByStringAndMethod(link);
+
+            if (element == null)
                 return false;
-            }            
+            else {
+                if (element.Displayed)
+                    return true;
+                else
+                    return false;
+            }
         }
 
         public bool isPageVisible(string pagename)

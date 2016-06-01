@@ -142,10 +142,11 @@ namespace MLH_Selenium.TestCases
             //10   Click Add New link
             //11   Enter value into Display Name field with special character is @	Display Name: Logigear@	
             //12   VP new panel is created
-            panel.DisplayName = "Logigear@";
-            Assert.IsTrue(panels.addNewPanelInfo(panel).isPageLinkDisplayed(panel.DisplayName), "Bug: Panel " + panel.DisplayName + " is not created");
+            panel.DisplayName = Utilities.GenerateRandomString(5) + "@";
+            Assert.IsTrue(panels.addNewPanelInfo(panel).isPageLinkDisplayed(panel.DisplayName), "Error: Panel " + panel.DisplayName + " is not created");
 
             //Post - Condition  Close TA Dashboard
+            panels.DeletePanel(panel.DisplayName);
             dashboard.Close();
         }
 
@@ -192,20 +193,21 @@ namespace MLH_Selenium.TestCases
 
             Panel panel = new Panel();
             panel.InitPanelInformation();
-
-            panels.addNewPanelInfo(panel);
+            panels = panels.addNewPanelInfo(panel);
 
             //7    Click on Add new link again.
             //8    Enter display name same with previous display name to "display name" field.Duplicated panel
             //9    Click on OK button
             //10   VP Warning message: "Dupicated panel already exists. Please enter a different name" show up
             panels.gotoAddPanel();
+
             string actual = panels.addNewPanelInfo(panel).GetAlertMessage();
             string expected = panel.DisplayName + " already exists. Please enter a different name.";
-
-            Assert.AreEqual(expected, actual);
+            panels.PanelConfigurationCancel_Btn.Click();
+            Assert.AreEqual(expected, actual);            
             //Post - Condition  Delete "Duplicated panel" panel
-            //                  Close Dashboard
+            //Close Dashboard    
+            panels.DeletePanel(panel.DisplayName);
             dashboard.Close();
         }
 
@@ -288,12 +290,13 @@ namespace MLH_Selenium.TestCases
             //10   Click Add New link
             //11   Enter value into Display Name field Display Name: Logigear@	
             //     Enter value into Chart Title field with special character is @	Char Title: Chart@	
-            panel.DisplayName = "Chart@";
+            panel.DisplayName = Utilities.GenerateRandomString(5) + "@";
             Assert.IsTrue(panels.addNewPanelInfo(panel).isPageLinkDisplayed(panel.DisplayName), "Panel is not created");
 
             //12    VP the new panel is created
             //Post - Condition  Delete the newly created panel
             //                  Close TA Dashboard
+            panels.DeletePanel(panel.DisplayName);
             dashboard.Close();
         }
 

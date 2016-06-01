@@ -28,18 +28,25 @@ namespace MLH_Selenium.PageObject
             IWebElement element = null;
             WebElement elementOutput = null;
 
-            if (m == Constant.method.xpath)
-                element = driver.FindElement(By.XPath(input), 30);
-            else if (m == Constant.method.id)
-                element = driver.FindElement(By.Id(input), 30);
-            else if (m == Constant.method.name)
-                element = driver.FindElement(By.Name(input), 30);
-
-            elementOutput = new WebElement(element);
-            if (Constant.debug && elementOutput != null)
+            try
             {
-                elementOutput.HighlightElement(driver);
-                Thread.Sleep(500);
+                if (m == Constant.method.xpath)
+                    element = driver.FindElement(By.XPath(input), Constant.timeout);
+                else if (m == Constant.method.id)
+                    element = driver.FindElement(By.Id(input), Constant.timeout);
+                else if (m == Constant.method.name)
+                    element = driver.FindElement(By.Name(input), Constant.timeout);
+
+                elementOutput = new WebElement(element);
+                if (Constant.debug && elementOutput != null)
+                {
+                    elementOutput.HighlightElement(driver);
+                    Thread.Sleep(500);
+                }
+            }
+            catch (Exception)
+            {
+                return null;
             }
 
             return elementOutput;
