@@ -12,6 +12,9 @@ namespace MLH_Selenium.Common
         public const int timeout = 5;
         public const bool debug = false;
         public const string AlphanumericCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        public const string nonBreakingSpace = "\u00A0";
+
+
 
         public const string adminUser = "administrator";
         public const string adminPassword = "";

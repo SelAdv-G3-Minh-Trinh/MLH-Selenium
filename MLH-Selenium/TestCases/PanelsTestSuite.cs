@@ -413,11 +413,11 @@ namespace MLH_Selenium.TestCases
             //23   Select 'Line' Chart Type
             //24   VP 'Categories' checkbox, 'Series' checkbox, 'Value' checkbox and 'Percentage' checkbox are disabled
             panels.selectChartType("Line");
-
+            
             Assert.IsFalse(panels.isDataLabelsCategoriesCheckboxEnable(), "Categories checkbox is enable");
             Assert.IsFalse(panels.isDataLabelsSeriesCheckboxEnable(), "Series checkbox is enable");
-            Assert.IsFalse(panels.isDataLabelsValuesCheckboxEnable(), "Values checkbox is enable");
-            //    Assert.IsFalse(panels.isDataLabelsPercentageCheckboxEnable(), "Percentage checkbox is enable");
+            Assert.IsFalse(panels.isDataLabelsValuesCheckboxEnable(), "Bug - Values checkbox is enable");
+            Assert.IsFalse(panels.isDataLabelsPercentageCheckboxEnable(), "Percentage checkbox is enable");
         }
 
         public void DA_PANEL_TC041()
@@ -470,40 +470,38 @@ namespace MLH_Selenium.TestCases
 
             DashboardPage dashboard = new DashboardPage();
             dashboard = loginpage.LoginWithValidUser(repo, user, pass);
+
             //5    Click 'Add Page' button
             //6    Enter Page Name
             //7    Click 'OK' button
             ManagePagesPage pages = new ManagePagesPage();
             pages = dashboard.goToAddPage();
-
             Page page1 = new Page();
             page1.InitPageInformation();
-
             dashboard = pages.addNewpage(page1);
+
             //8    Click 'Add Page' button
             //9    Enter Page Name
             //10   Click 'OK' button
             pages = dashboard.goToAddPage();
-
             Page page2 = new Page();
-            page1.InitPageInformation();
-
+            page2.InitPageInformation();
             dashboard = pages.addNewpage(page2);
+
             //11   Click 'Add Page' button
             //12   Enter Page Name
             //13   Click 'OK' button
-            pages = dashboard.goToAddPage();
-
+            pages = dashboard.goToAddPage();       
             Page page3 = new Page();
-            page1.InitPageInformation();
-
+            page3.InitPageInformation();
             dashboard = pages.addNewpage(page3);
+
             //14   Click 'Choose panels' button
             //15   Click on any Chart panel instance
             //16   Click 'Select Page*' drop - down menu
             //17   VP 'Select Page*' drop - down menu contains 3 items: 'main_hung1', 'main_hung2' and 'main_hung3'
             PanelPage panels = new PanelPage();
-            panels.goToPanelConfigPage("Test&nbsp;Case&nbsp;Execution&nbsp;Failure&nbsp;Trend");
+            panels.goToPanelConfigPage("Test Case Execution Failure Trend");
 
             Assert.IsTrue(panels.isItemBelongsToSelectPage(page1.PageName), "Item does not display in drop down list");
             Assert.IsTrue(panels.isItemBelongsToSelectPage(page2.PageName), "Item does not display in drop down list");
@@ -545,7 +543,7 @@ namespace MLH_Selenium.TestCases
             //15   VP Check that error message 'Panel height must be greater than or equal to 300 and lower than or equal to 800' display
             //16   Click OK button
             PanelPage panels = new PanelPage();
-            panels = dashboard.goToPanelConfigPage("Test&nbsp;Case&nbsp;Execution&nbsp;Failure&nbsp;Trend");
+            panels = dashboard.goToPanelConfigPage("Test Case Execution Failure Trend");
 
             Panel panel = new Panel();
             panel.InitPanelInformation();

@@ -216,7 +216,7 @@ namespace MLH_Selenium.PageObject
             {
                 foreach (IWebElement childPage in childOverview)
                 {
-                    lstPageNames.Add("Overview/" + childPage.GetAttribute("innerHTML").Replace("&nbsp;", "\u00A0"));
+                    lstPageNames.Add("Overview/" + childPage.GetAttribute("innerHTML").Replace("&nbsp;", Constant.nonBreakingSpace));
                 }
             }
             
@@ -226,12 +226,12 @@ namespace MLH_Selenium.PageObject
                 string innerHTML = page.GetAttribute("innerHTML");
                 if (innerHTML != "Execution&nbsp;Dashboard" && innerHTML != "")
                 {
-                    ReadOnlyCollection<IWebElement> childPages = driver.FindElements(By.XPath(string.Format("//a[.='{0}']/../ul/li/a", page.Text.Replace(" ", "\u00A0"))));
+                    ReadOnlyCollection<IWebElement> childPages = driver.FindElements(By.XPath(string.Format("//a[.='{0}']/../ul/li/a", page.Text.Replace(" ", Constant.nonBreakingSpace))));
                     if (childPages.Count > 0)
                     {
                         foreach(IWebElement childPage in childPages)
                         {                            
-                            lstPageNames.Add(page.Text + "/" + childPage.GetAttribute("innerHTML").Replace("&nbsp;", "\u00A0"));
+                            lstPageNames.Add(page.Text + "/" + childPage.GetAttribute("innerHTML").Replace("&nbsp;", Constant.nonBreakingSpace));
                         }
                     }
                     lstPageNames.Add(page.Text);
@@ -250,7 +250,7 @@ namespace MLH_Selenium.PageObject
             {
                 if (!name.Contains("/"))
                 {
-                    WebElement element = findElementByStringAndMethod(string.Format("//li/a[text()='{0}']", name.Replace(" ", "\u00A0")));
+                    WebElement element = findElementByStringAndMethod(string.Format("//li/a[text()='{0}']", name.Replace(" ", Constant.nonBreakingSpace)));
                     deleteAPage(name);
                     driver.WaitForElementNotVisible(element, 5);
                 }
@@ -265,7 +265,7 @@ namespace MLH_Selenium.PageObject
 
         public bool isPageLinkDisplayed(string pageLink)
         {
-            string link = string.Format("//a[text()='{0}']", pageLink.Replace(" ", "\u00A0"));
+            string link = string.Format("//a[text()='{0}']", pageLink.Replace(" ", Constant.nonBreakingSpace));
 
             WebElement element = findElementByStringAndMethod(link);
 
@@ -318,7 +318,7 @@ namespace MLH_Selenium.PageObject
         {
             ChoosePanel_Btn.Click();
 
-            findElementByStringAndMethod(string.Format("//a[text()='{0}']", name)).Click();
+            findElementByStringAndMethod(string.Format("//a[text()='{0}']", name.Replace(" ", Constant.nonBreakingSpace))).Click();
             return new PanelPage();
         }
 

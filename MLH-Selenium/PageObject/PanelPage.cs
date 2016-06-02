@@ -157,7 +157,7 @@ namespace MLH_Selenium.PageObject
         {
             List<string> charttypes = new List<string> { "Pie", "Single Bar", "Stacked Bar", "Group Bar", "Line" };
 
-            ReadOnlyCollection<IWebElement> types = driver.FindElements(By.XPath("//select[@name='cbbChartType']/option"));
+            ReadOnlyCollection<IWebElement> types = driver.FindElements(By.XPath("//select[@name='cbbChartType']/option"), 5);
 
             int count = 0;
             foreach (IWebElement type in types)
