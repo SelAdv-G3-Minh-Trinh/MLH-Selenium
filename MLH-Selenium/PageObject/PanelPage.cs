@@ -29,7 +29,12 @@ namespace MLH_Selenium.PageObject
 
         public WebElement OK_Btn
         {
-            get { return findElementByStringAndMethod("//input[@id='OK']"); }
+            get { return findElementByStringAndMethod("//input[@id='OK']"); }            
+        }
+
+        public WebElement OKPanelConfiguration_Btn
+        {            
+            get { return findElementByStringAndMethod("//div[@id='div_panelConfigurationDlg']/div/input[@id='OK']"); }
         }
 
         public WebElement PanelConfigurationCancel_Btn
@@ -148,7 +153,7 @@ namespace MLH_Selenium.PageObject
         public PanelPage addNewPageConfig(Panel panel)
         {
             submitPanelConfig(panel);
-            OkSelectFolder_btn.Click();
+            OKPanelConfiguration_Btn.Click();
   
             return this;
         }

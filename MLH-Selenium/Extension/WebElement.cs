@@ -114,6 +114,7 @@ namespace MLH_Selenium.Extension
 
         public void SendKeys(string text)
         {
+            Element.Clear();
             Element.SendKeys(text);
         }
 

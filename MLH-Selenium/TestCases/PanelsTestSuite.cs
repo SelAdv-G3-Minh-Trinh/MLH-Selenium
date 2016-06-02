@@ -550,7 +550,7 @@ namespace MLH_Selenium.TestCases
             panel.Height = "299";
 
             string actual1 = panels.addNewPageConfig(panel).GetAlertMessage();
-            string expected1 = "Panel height must be greater than or equal to 300 and lower than or equal to 800";
+            string expected1 = "Panel height must be greater than or equal to 300 and less than or equal to 800.";            
             Assert.AreEqual(expected1, actual1);
             //17   Enter integer number to 'Height *' field
             //18   Click OK button
@@ -559,7 +559,7 @@ namespace MLH_Selenium.TestCases
             panel.Height = "801";
 
             string actual2 = panels.addNewPageConfig(panel).GetAlertMessage();
-            string expected2 = "Panel height must be greater than or equal to 300 and lower than or equal to 800";
+            string expected2 = "Panel height must be greater than or equal to 300 and less than or equal to 800.";
             Assert.AreEqual(expected2, actual2);
             //21   Enter integer number to 'Height *' field
             //23   Click OK button
@@ -568,7 +568,7 @@ namespace MLH_Selenium.TestCases
             panel.Height = "-2";
 
             string actual3 = panels.addNewPageConfig(panel).GetAlertMessage();
-            string expected3 = "Panel height must be greater than or equal to 300 and lower than or equal to 800";
+            string expected3 = "Panel height must be greater than or equal to 300 and less than or equal to 800.";
             Assert.AreEqual(expected3, actual3);
             //26   Enter integer number to 'Height *' field
             //27   Click OK button
@@ -577,7 +577,7 @@ namespace MLH_Selenium.TestCases
             panel.Height = "3.1";
 
             string actual4 = panels.addNewPageConfig(panel).GetAlertMessage();
-            string expected4 = "Panel height must be greater than or equal to 300 and lower than or equal to 800";
+            string expected4 = "Panel height must be greater than or equal to 300 and less than or equal to 800.";
             Assert.AreEqual(expected4, actual4);
             //30   Enter integer number to 'Height *' field
             //31   Click OK button
@@ -585,7 +585,7 @@ namespace MLH_Selenium.TestCases
             panel.Height = "abc";
 
             string actual = panels.addNewPageConfig(panel).GetAlertMessage();
-            string expected = "Panel height must be greater than or equal to 300 and lower than or equal to 800";
+            string expected = "Panel height must be an integer number";
             Assert.AreEqual(expected, actual);
         }
 
@@ -623,14 +623,14 @@ namespace MLH_Selenium.TestCases
             //14   Click OK button
             //15   VP Check that 'Panel height is required field' message display
             PanelPage panels = new PanelPage();
-            panels = dashboard.goToPanelConfigPage("Test&nbsp;Case&nbsp;Execution&nbsp;Failure&nbsp;Trend");
+            panels = dashboard.goToPanelConfigPage("Test Case Execution Failure Trend");
 
             Panel panel = new Panel();
             panel.InitPanelInformation();
             panel.Height = "";
 
             string actual = panels.addNewPageConfig(panel).GetAlertMessage();
-            string expected = "Panel height is required fieldPanel height is required field";
+            string expected = "Panel height is a required field.";
             Assert.AreEqual(expected, actual);
         }
 
