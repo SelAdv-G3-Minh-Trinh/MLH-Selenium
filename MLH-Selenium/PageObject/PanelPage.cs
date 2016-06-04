@@ -17,6 +17,11 @@ namespace MLH_Selenium.PageObject
             get { return findElementByStringAndMethod("//input[@name='txtDisplayName']"); }
         }
 
+        public WebElement Delete_Lnk
+        {
+            get { return findElementByStringAndMethod("//div[@class='panel_tag2']//a[.='Delete']"); }
+        }
+
         public SelectElement Series_Cb
         {
             get { return new SelectElement(findElementByStringAndMethod("//select[@name='cbbSeriesField']")); }
@@ -24,7 +29,22 @@ namespace MLH_Selenium.PageObject
 
         public WebElement OK_Btn
         {
-            get { return findElementByStringAndMethod("//input[@id='OK']"); }
+            get { return findElementByStringAndMethod("//input[@id='OK']"); }            
+        }
+
+        public WebElement OKPanelConfiguration_Btn
+        {            
+            get { return findElementByStringAndMethod("//div[@id='div_panelConfigurationDlg']/div/input[@id='OK']"); }
+        }
+
+        public WebElement PanelConfigurationCancel_Btn
+        {
+            get { return findElementByStringAndMethod(".//*[@id='Cancel']"); }
+        }
+
+        public WebElement Edit_lnk
+        {
+            get { return findElementByStringAndMethod(".//*[@id='chkDelPanel']"); }
         }
 
         public SelectElement DataProfile_Cb
@@ -35,6 +55,11 @@ namespace MLH_Selenium.PageObject
         public SelectElement ChartType_Cb
         {
             get { return new SelectElement(findElementByStringAndMethod("//select[@name='cbbChartType']")); }
+        }
+
+        public SelectElement Category_Cb
+        {
+            get { return new SelectElement(findElementByStringAndMethod(".//*[@id='cbbCategoryField']")); }
         }
 
         public WebElement DataLabelsSeries_Chk
@@ -128,7 +153,7 @@ namespace MLH_Selenium.PageObject
         public PanelPage addNewPageConfig(Panel panel)
         {
             submitPanelConfig(panel);
-            OkSelectFolder_btn.Click();
+            OKPanelConfiguration_Btn.Click();
   
             return this;
         }
@@ -137,22 +162,22 @@ namespace MLH_Selenium.PageObject
         {
             List<string> charttypes = new List<string> { "Pie", "Single Bar", "Stacked Bar", "Group Bar", "Line" };
 
-            ReadOnlyCollection<IWebElement> types = driver.FindElements(By.XPath("//select[@name='cbbChartType']/option"));
+            ReadOnlyCollection<IWebElement> types = driver.FindElements(By.XPath("//select[@name='cbbChartType']/option"), 5);
 
             int count = 0;
             foreach (IWebElement type in types)
             {
                 foreach (string chartype in charttypes)
                 {
-                    count = 1;
-                    if (type.Text != chartype)
-                        break;
-                    else
+                    if (type.Text == chartype)
+                    {
                         count++;
+                        break;
+                    }
                 }
             }
 
-            if (count >= 5)
+            if (count == charttypes.Count)
                 return true;
             else
                 return false;
@@ -259,6 +284,38 @@ namespace MLH_Selenium.PageObject
             }
 
             OkSelectFolder_btn.Click();
+        }
+
+        public void CreatePanel(string displayname, string series)
+        {
+            PanelName_Txt.SendKeys(displayname);
+            Series_Cb.SelectByText(series);
+            OK_Btn.Click();
+        }
+
+        public PanelPage DeletePanel(string displayName)
+        {
+            WebElement element = findElementByStringAndMethod(string.Format("//a[.='{0}']/../preceding-sibling::td/input", displayName));
+            element.Check();
+            Delete_Lnk.Click();
+            driver.SwitchToAlert().Accept();
+            return this;
+        }
+
+        public PanelPage EditPanel(string displayname)
+        {
+            Edit_lnk.Click();
+            PanelName_Txt.Clear();
+            PanelName_Txt.SendKeys(displayname);
+            OK_Btn.Click();
+            return this;
+        }
+
+        public string GetDisplayName(string displayname)
+        {
+            string xpathUsername = "//a[@href='javascript:Dashboard.configPanel('b4lac0wg1iyr');' and text() = '{0}']";
+            string panelname = string.Format(xpathUsername, displayname);
+            return driver.FindElement(By.XPath(panelname)).Text;
         }
 
         #endregion

@@ -16,7 +16,7 @@ namespace MLH_Selenium.PageObject
         {
             string xpathLoginUser = "//a[@href='#Welcome' and text() = '{0}']";
             string loginuser = string.Format(xpathLoginUser, username);
-            return driver.FindElement(By.XPath(loginuser)).Text;
+            return findElementByStringAndMethod(loginuser).Text;
         }
         #endregion
     }
