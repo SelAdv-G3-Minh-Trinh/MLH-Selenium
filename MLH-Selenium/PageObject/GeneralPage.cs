@@ -65,7 +65,7 @@ namespace MLH_Selenium.PageObject
             get { return findElementByStringAndMethod("//a[starts-with(@class,'active')]"); }
         }
 
-        public WebElement AddPanel_Lnk
+        public WebElement AddNew_Lnk
         {
             get { return findElementByStringAndMethod("//a[text() = 'Add New']"); }
         }
@@ -294,8 +294,14 @@ namespace MLH_Selenium.PageObject
 
         public PanelPage gotoAddPanel()
         {
-            AddPanel_Lnk.Click();
+            AddNew_Lnk.Click();
             return new PanelPage();
+        }
+
+        public ManageProfilePage gotoAddProfile()
+        {
+            AddNew_Lnk.Click();
+            return new ManageProfilePage();
         }
 
         public bool isItemsDisable()
@@ -332,7 +338,81 @@ namespace MLH_Selenium.PageObject
             return result;
         }
 
+        public bool isItemBelongsToDropdownlist(string item, ReadOnlyCollection<IWebElement> listitems)
+        {
+            bool result = true;
+            foreach (IWebElement oneitem in listitems)
+            {
+                if (oneitem.Text == item)
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        }
 
+        public bool alphabetOrderChecking(ReadOnlyCollection<IWebElement> items, IComparer<IWebElement> comparer = null)
+        {
+            if (comparer == null)
+            {
+                comparer = Comparer<IWebElement>.Default;
+            }
+            if (items.Count > 1)
+            {
+                for (int i = 1; i < items.Count; i++)
+                {
+                    if (comparer.Compare(items[i - 1], items[i]) > 0)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        public bool checkDataProfileOrder()
+        {
+            ReadOnlyCollection<IWebElement> listProfile = driver.FindElements(By.XPath("//select[@id='cbbProfile']/option"));
+            return alphabetOrderChecking(listProfile);
+        }
+
+        public bool checkChoosePanelOrder(string typeChart)
+        {
+            ReadOnlyCollection<IWebElement> rows = driver.FindElements(By.XPath(string.Format("//div[text()='{0}']/../table[@width='100%']//tr//td", typeChart)));
+            return alphabetOrderChecking(rows);
+        }
+
+        public bool checkDataProfileGridOrder()
+        {
+            ReadOnlyCollection<IWebElement> profiles = driver.FindElements(By.XPath(string.Format("//table[@class='GridView']//tr/td[count(//table[@class='GridView']//th[.='Data Profile']/preceding::th) + 1]")));
+            return alphabetOrderChecking(profiles);
+        }
+
+        public PanelPage gotoChoosePanel()
+        {
+            ChoosePanel_Btn.Click();
+            return new PanelPage();
+        }
+
+        public PanelPage gotoEditPanelbyClickingEditIcon(string panelName)
+        {
+            findElementByStringAndMethod(string.Format("//div[@title='{0}']/../following-sibling::div//ul//li[@title='Edit Panel']", panelName)).Click();
+            return new PanelPage();
+        }
+
+        public void removePanelChart(string panelName)
+        {
+            findElementByStringAndMethod(string.Format("//div[@title='{0}']/../following-sibling::div//ul//li[1]//div[@class='hm']", panelName)).Click();
+            findElementByStringAndMethod(string.Format("//div[@title='{0}']/../following-sibling::div//ul//li[1]//div[@class='cc']//span[@title='Remove panel']", panelName)).Click();
+        }
+
+        public PanelPage gotoPanelConfigPageByName(string name)
+        {
+            gotoChoosePanel();
+            findElementByStringAndMethod(string.Format("//table[@width='100%']//tr//td//a[contains(@title,'{0}')]", name)).Click();
+            return new PanelPage();
+        }
         #endregion
     }
 }
