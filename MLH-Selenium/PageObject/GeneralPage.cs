@@ -127,8 +127,15 @@ namespace MLH_Selenium.PageObject
             {
                 findElementByStringAndMethod(string.Format("//a[text()='{0}']", links[i].Replace(" ", "\u00A0"))).MouseHover(driver);
             }
-            driver.WaitForElementToBeClickable(findElementByStringAndMethod(string.Format("//a[text()='{0}']", links[links.Length - 1].Replace(" ", "\u00A0"))));
-            findElementByStringAndMethod(string.Format("//a[text()='{0}']", links[links.Length - 1].Replace(" ", "\u00A0"))).Click();
+            if (linkPath.Contains("Administer/"))
+            {
+                driver.WaitForElementToBeClickable(findElementByStringAndMethod(string.Format("//a[text()='{0}']", links[links.Length - 1])));
+                findElementByStringAndMethod(string.Format("//a[text()='{0}']", links[links.Length - 1])).Click();
+            }
+            else {
+                driver.WaitForElementToBeClickable(findElementByStringAndMethod(string.Format("//a[text()='{0}']", links[links.Length - 1].Replace(" ", "\u00A0"))));
+                findElementByStringAndMethod(string.Format("//a[text()='{0}']", links[links.Length - 1].Replace(" ", "\u00A0"))).Click();
+            }            
         }
 
         public void deleteAPage(string linkPath)
@@ -352,23 +359,21 @@ namespace MLH_Selenium.PageObject
             return result;
         }
 
-        public bool alphabetOrderChecking(ReadOnlyCollection<IWebElement> items, IComparer<IWebElement> comparer = null)
+        public bool alphabetOrderChecking(ReadOnlyCollection<IWebElement> items)
         {
-            if (comparer == null)
-            {
-                comparer = Comparer<IWebElement>.Default;
-            }
+            bool t = true;
             if (items.Count > 1)
             {
-                for (int i = 1; i < items.Count; i++)
+                for (int i = 0; i < items.Count - 1; i++)
                 {
-                    if (comparer.Compare(items[i - 1], items[i]) > 0)
+                    if (string.Compare(items[i].Text, items[i + 1].Text) > 0)
                     {
-                        return false;
+                        t = false;
+                        break;
                     }
                 }
             }
-            return true;
+            return t;
         }
 
         public bool checkDataProfileOrder()
@@ -379,7 +384,7 @@ namespace MLH_Selenium.PageObject
 
         public bool checkChoosePanelOrder(string typeChart)
         {
-            ReadOnlyCollection<IWebElement> rows = driver.FindElements(By.XPath(string.Format("//div[text()='{0}']/../table[@width='100%']//tr//td", typeChart)));
+            ReadOnlyCollection<IWebElement> rows = driver.FindElements(By.XPath(string.Format("//div[text()='{0}']/../table[@width='100%']/tbody/tr/td//li", typeChart)));
             return alphabetOrderChecking(rows);
         }
 
@@ -391,6 +396,7 @@ namespace MLH_Selenium.PageObject
 
         public PanelPage gotoChoosePanel()
         {
+            Thread.Sleep(500);
             ChoosePanel_Btn.Click();
             return new PanelPage();
         }

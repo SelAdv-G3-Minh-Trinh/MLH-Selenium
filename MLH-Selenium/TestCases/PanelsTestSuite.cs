@@ -49,13 +49,13 @@ namespace MLH_Selenium.TestCases
 
             panels = panels.addNewPanelInfo(panel).addNewPageConfig(panel);
             //10   Click on Choose Panel menu icon next to Global Setting icon
-            //11   VP Verify that all pre - set panels are populated and sorted correctly  
+            //11   VP Verify that all pre - set panels are populated and sorted correctly              
             panels.gotoChoosePanel();
 
-            Assert.IsTrue(panels.checkChoosePanelOrder("Charts"));
-            Assert.IsTrue(panels.checkChoosePanelOrder("Indicators"));
-            Assert.IsTrue(panels.checkChoosePanelOrder("Reports"));
-            Assert.IsTrue(panels.checkChoosePanelOrder("Heat Maps"));                             
+            Assert.IsTrue(panels.checkChoosePanelOrder("Charts"), "Error: All Charts are not sorted");
+            Assert.IsTrue(panels.checkChoosePanelOrder("Indicators"), "Error: All Indicators are not sorted");
+            Assert.IsTrue(panels.checkChoosePanelOrder("Reports"), "Error: All Reports are not sorted");
+            Assert.IsTrue(panels.checkChoosePanelOrder("Heat Maps"), "Error: All Heat Maps are not sorted");                             
             //post - condition  delete the created page
             //    close dashboard
         }
@@ -205,15 +205,15 @@ namespace MLH_Selenium.TestCases
 
             Assert.IsTrue(panels.checkSettingFormLocation("Chart Settings"), "Setting does not display");
             //6    Select Indicator type
-            //7    VP indicator panel setting form is displayed "Indicator setting" under Display Name field
-            panels.selectChartType("Indicator");
-
+            //7    VP indicator panel setting form is displayed "Indicator setting" under Display Name field            
+            panels.selectTypeOfPanel("Indicator");
             Assert.IsTrue(panels.checkSettingFormLocation("Indicator Settings"), "Setting does not display");
+
             //8    Select Report type
             //9    VP Report panel setting form is displayed "View mode" under Display Name.
-            panels.selectChartType("Report");
+            panels.selectTypeOfPanel("Report");
+            Assert.IsFalse(panels.checkSettingFormLocation("View Mode"), "Setting displays");
 
-            Assert.IsTrue(panels.checkSettingFormLocation("View Mode"), "Setting does not display");
             //Post - Condition  Delete all panels created
             //                  Delete the created page
         }
@@ -312,10 +312,11 @@ namespace MLH_Selenium.TestCases
 
             DashboardPage dashboard = new DashboardPage();
             dashboard = loginpage.LoginWithValidUser(repo, user, pass);
+
             //3    Click on Administer/ Data Profiles link
             //4    Click on add new link
             ManageProfilePage profile = new ManageProfilePage();
-            dashboard.goToPage("Administer/Data Profiles");
+            dashboard.goToPage("Administer/Data Profiles");            
             profile = dashboard.gotoAddProfile();
 
             //5    Enter name to Name textbox 
@@ -324,19 +325,23 @@ namespace MLH_Selenium.TestCases
             data.InitPanelInformation();
 
             profile = profile.addNewProfilewithNameOnly(data);
+
             //7    Click on Administer/ Panels link
             //8    Click on add new link
             //9    VP Verify that "giang - data" data profiles are populated correctly under the "Data Profile" dropped down menu.
             PanelPage panels = new PanelPage();
+            profile.goToPage("Administer/Panels");
             panels = profile.gotoAddPanel();
 
             Assert.IsTrue(panels.checkDataProfileBelongProfileDropDown(data.Name), "Newly-added profile does not display");
+
             //10   Enter display name to Display Name textbox
             //11   Click Ok button to create a panel
             Panel panel = new Panel();
             panel.InitPanelInformation();
 
             panels = panels.addNewPanelInfo(panel);
+
             //12   Click on edit link
             //13   VP Verify that "giang - data" data profiles are populated correctly under the "Data Profile" dropped down menu.
             panels = panels.gotoEditPanel(panel.DisplayName);
