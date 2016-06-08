@@ -325,7 +325,7 @@ namespace MLH_Selenium.PageObject
         public bool isPanelCreated(string name)
         {
             bool result = true;
-            if (findElementByStringAndMethod(string.Format("//div[@title='{}']", name)).Enabled == true)
+            if (findElementByStringAndMethod(string.Format("//div[@title='{0}']", name)).Enabled == true)
                 result = true;
             else
                 result = false;
