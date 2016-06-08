@@ -26,6 +26,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>true</RunCodeAnalysis>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -77,15 +78,16 @@
     <Compile Include="ObjectData\DataProfile.cs" />
     <Compile Include="ObjectData\Page.cs" />
     <Compile Include="ObjectData\Panel.cs" />
+    <Compile Include="ObjectData\PanelSetting.cs" />
     <Compile Include="PageObject\ManagePagesPage.cs" />
     <Compile Include="PageObject\DashboardPage.cs" />
     <Compile Include="PageObject\GeneralPage.cs" />
     <Compile Include="PageObject\LoginPage.cs" />
     <Compile Include="PageObject\ManageProfilePage.cs" />
     <Compile Include="PageObject\PageBase.cs" />
-    <Compile Include="PageObject\PanelConfigurationPage.cs" />
     <Compile Include="PageObject\PanelPage.cs" />
     <Compile Include="Properties\Resources.Designer.cs" />
+    <Compile Include="TestCases\DataProfilesTestSuite.cs" />
     <Compile Include="TestCases\LoginTestSuite.cs" />
     <Compile Include="TestCases\ManagePagesTestSuite.cs" />
     <Compile Include="TestCases\PanelsTestSuite.cs" />
