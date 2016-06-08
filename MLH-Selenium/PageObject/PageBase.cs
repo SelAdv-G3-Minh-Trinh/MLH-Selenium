@@ -21,6 +21,7 @@ namespace MLH_Selenium.PageObject
         {
             IWebDriver IDriver = new FirefoxDriver();
             driver = new WebDriver(IDriver);
+            driver.Manage().Window.Maximize();
         }
 
         public WebElement findElementByStringAndMethod(string input, Constant.method m = Constant.method.xpath)
@@ -54,6 +55,7 @@ namespace MLH_Selenium.PageObject
 
         public void Close()
         {
+            Constant.driverTable.Remove(Thread.CurrentThread.ManagedThreadId);
             driver.Quit();
         }
     }

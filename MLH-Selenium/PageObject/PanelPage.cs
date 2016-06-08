@@ -360,7 +360,6 @@ namespace MLH_Selenium.PageObject
 
         public PanelPage EditPanel(string displayname)
         {
-            Edit_lnk.Click();
             PanelName_Txt.Clear();
             PanelName_Txt.SendKeys(displayname);
             OK_Btn.Click();

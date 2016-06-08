@@ -1069,7 +1069,7 @@ namespace MLH_Selenium.TestCases
             Assert.IsTrue(panels.isPanelCreated(panel.DisplayName), "Panel does not create.");
 
             panels = panels.gotoEditPanel(panel.DisplayName);
-            string displayname = "edit name";
+            string displayname = "edit" + panel.DisplayName;
             string actual = panels.EditPanel(displayname).GetDisplayName(displayname);
             Assert.AreEqual(displayname, actual, "Display Name does not update.");
             //Post - Condition  Delete the newly created panel

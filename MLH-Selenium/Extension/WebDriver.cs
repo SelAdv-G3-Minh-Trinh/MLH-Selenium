@@ -147,7 +147,6 @@ namespace MLH_Selenium.Extension
             IWebElement element = null;
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            stopwatch.Reset();
             if (timeout >= 0)
             {
                 try

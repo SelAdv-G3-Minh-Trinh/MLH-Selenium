@@ -32,7 +32,7 @@ namespace MLH_Selenium.TestCases
             dashboard = loginpage.LoginWithValidUser(repo, user, pass);
             //5    Click Administer->Data Profiles
             //6    VP Check Pre - set Data Profile are populated correctly in profiles page
-            dashboard.goToPage("Administer/Data Profile");
+            dashboard.goToPage("Administer/Data Profiles");
             ManageProfilePage profile = dashboard.gotoAddProfile();
 
             Assert.IsTrue(profile.checkPresetProfilePopulate(), "Pre set does not display in data profile.");
@@ -60,7 +60,7 @@ namespace MLH_Selenium.TestCases
             dashboard = loginpage.LoginWithValidUser(repo, user, pass);
             //5    Click Administer->Data Profiles
             //6    VP Check there is no 'Delele' or 'Edit' link appears in Action section of Pre-set Data Profiles
-            dashboard.goToPage("Administer/Data Profile");
+            dashboard.goToPage("Administer/Data Profiles");
             ManageProfilePage profile = dashboard.gotoAddProfile();
             //7    Click on Pre-set Data Profile name
             //8    VP Check there is no link on Pre - set Data Profile name
@@ -92,7 +92,7 @@ namespace MLH_Selenium.TestCases
             dashboard = loginpage.LoginWithValidUser(repo, user, pass);
             //5    Click Administer->Data Profiles
             //6    VP Check Data Profiles are listed alphabetically
-            dashboard.goToPage("Administer/Data Profile");
+            dashboard.goToPage("Administer/Data Profiles");
             ManageProfilePage profile = dashboard.gotoAddProfile();
 
             Assert.IsTrue(profile.checkDataProfileGridOrder(), "data profile id not sorted by alphabet.");
@@ -118,7 +118,7 @@ namespace MLH_Selenium.TestCases
             dashboard = loginpage.LoginWithValidUser(repo, user, pass);
             //5    Click Administer->Data Profiles
             //6    Create a new Data Profile
-            dashboard.goToPage("Administer/Data Profile");
+            dashboard.goToPage("Administer/Data Profiles");
             ManageProfilePage profile = dashboard.gotoAddProfile();
 
             DataProfile data = new DataProfile();
@@ -147,7 +147,7 @@ namespace MLH_Selenium.TestCases
             dashboard = loginpage.LoginWithValidUser(repo, user, pass);
             //2    Navigate to Data Profiles page
             //3    Click on "Add New"
-            dashboard.goToPage("Administer/Data Profile");
+            dashboard.goToPage("Administer/Data Profiles");
             ManageProfilePage profile = dashboard.gotoAddProfile();
 
             DataProfile data = new DataProfile();
@@ -181,7 +181,7 @@ namespace MLH_Selenium.TestCases
             //2    Navigate to Data Profiles page
             //3    Click on "Add New"
             //4    Input special character
-            dashboard.goToPage("Administer/Data Profile");
+            dashboard.goToPage("Administer/Data Profiles");
             ManageProfilePage profile = dashboard.gotoAddProfile();
 
             DataProfile data = new DataProfile();
@@ -211,7 +211,7 @@ namespace MLH_Selenium.TestCases
             //2    Navigate to Data Profiles page
             //3    Click on "Add New"
             //4    Input charater 'A' into "Name *" field
-            dashboard.goToPage("Administer/Data Profile");
+            dashboard.goToPage("Administer/Data Profiles");
             ManageProfilePage profile = dashboard.gotoAddProfile();
 
             DataProfile data = new DataProfile();
@@ -246,7 +246,7 @@ namespace MLH_Selenium.TestCases
             //5    Click Administer->Data Profiles
             //6    Click 'Add New' link
             //7    VP  "Check all data profile types are listed under ""Item Type"" dropped down menu in create profile page"
-            dashboard.goToPage("Administer/Data Profile");
+            dashboard.goToPage("Administer/Data Profiles");
             ManageProfilePage profile = dashboard.gotoAddProfile();
 
             Assert.IsTrue(profile.checkItemTypeList(), "Item does not display in list");
@@ -273,7 +273,7 @@ namespace MLH_Selenium.TestCases
             //3    Click on "Add New"
             //4    Click on "Item Type" dropped down menu
             //5    VP Check "Item Type" items are listed in priority order
-            dashboard.goToPage("Administer/Data Profile");
+            dashboard.goToPage("Administer/Data Profiles");
             ManageProfilePage profile = dashboard.gotoAddProfile();
 
             Assert.IsTrue(profile.checkItemTypeListbyPrio(), "Item type does not list by prioritize");
@@ -301,7 +301,7 @@ namespace MLH_Selenium.TestCases
             dashboard = loginpage.LoginWithValidUser(repo, user, pass);
             //5    Click Administer->Data Profiles
             //6    Click Add new link
-            dashboard.goToPage("Administer/Data Profile");
+            dashboard.goToPage("Administer/Data Profiles");
             ManageProfilePage profile = dashboard.gotoAddProfile();
 
             //7    Select 'Test Modules' in 'Item Type' drop down list
@@ -357,7 +357,7 @@ namespace MLH_Selenium.TestCases
             //4    Input to "Name *" field
             //5    Click "Item Type" and choose an item
             //6    Click "Finish" button
-            dashboard.goToPage("Administer/Data Profile");
+            dashboard.goToPage("Administer/Data Profiles");
             ManageProfilePage profile = dashboard.gotoAddProfile();
 
             DataProfile data = new DataProfile();
@@ -412,7 +412,7 @@ namespace MLH_Selenium.TestCases
             //6    Click Add new link
             //7    Create new data profile
             //8    Back to Data Profiles page
-            dashboard.goToPage("Administer/Data Profile");
+            dashboard.goToPage("Administer/Data Profiles");
             ManageProfilePage profile = dashboard.gotoAddProfile();
 
             DataProfile data = new DataProfile();
@@ -466,7 +466,7 @@ namespace MLH_Selenium.TestCases
             //3    Click on "Administer" llink
             //4    Click on "Data Profiles" link
             //5    Click "Add New" link
-            dashboard.goToPage("Administer/Data Profile");
+            dashboard.goToPage("Administer/Data Profiles");
             ManageProfilePage profile = dashboard.gotoAddProfile();
 
             DataProfile data = new DataProfile();
@@ -498,7 +498,7 @@ namespace MLH_Selenium.TestCases
             dashboard = loginpage.LoginWithValidUser(repo, user, pass);
             //2    Navigate to Data Profiles page
             //3    Click on Data Profile "A"
-            dashboard.goToPage("Administer/Data Profile");
+            dashboard.goToPage("Administer/Data Profiles");
             ManageProfilePage profile = dashboard.gotoAddProfile();
 
             DataProfile data = new DataProfile();
@@ -529,7 +529,7 @@ namespace MLH_Selenium.TestCases
             //3    Click on "Administer" llink
             //4    Click on "Data Profiles" link
             //5    Click "Add New" link
-            dashboard.goToPage("Administer/Data Profile");
+            dashboard.goToPage("Administer/Data Profiles");
             ManageProfilePage profile = dashboard.gotoAddProfile();
 
             DataProfile data = new DataProfile();
@@ -568,7 +568,7 @@ namespace MLH_Selenium.TestCases
             //2    Navigate to Data Profiles page
             //3    Input to "Name *" field
             //4    Click "Item Type" dropped down menu and choose Test Modules
-            dashboard.goToPage("Administer/Data Profile");
+            dashboard.goToPage("Administer/Data Profiles");
             ManageProfilePage profile = dashboard.gotoAddProfile();
 
             DataProfile data = new DataProfile();
