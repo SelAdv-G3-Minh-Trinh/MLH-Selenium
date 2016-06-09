@@ -889,6 +889,7 @@ namespace MLH_Selenium.TestCases
             //Post - Condition  Delete the newly created panel
             //Close TA Dashboard
         }
+
         [TestMethod]
         public void DA_PANEl_TC51()
         {
@@ -932,6 +933,7 @@ namespace MLH_Selenium.TestCases
             Assert.AreEqual(expected, actual);
 
         }
+
         [TestMethod]
         public void DA_PANEl_TC52()
         {
@@ -969,6 +971,7 @@ namespace MLH_Selenium.TestCases
             //13     Click Ok button
             //14     Observe the current page
         }
+
         [TestMethod]
         public void DA_PANEl_TC53()
         {
@@ -1057,6 +1060,7 @@ namespace MLH_Selenium.TestCases
             //8     Click Ok button
             //9     Observe the current page
         }
+
         [TestMethod]
         public void DA_PANEl_TC55()
         {
@@ -1080,6 +1084,7 @@ namespace MLH_Selenium.TestCases
             //8     Click Ok button
             //9     Observe the current page
         }
+
         [TestMethod]
         public void DA_PANEl_TC56()
         {
@@ -1103,6 +1108,7 @@ namespace MLH_Selenium.TestCases
             //8     Click Ok button
             //9     Observe the current page
         }
+
         [TestMethod]
         public void DA_PANEl_TC57()
         {
@@ -1127,6 +1133,7 @@ namespace MLH_Selenium.TestCases
             //9     Click Ok button
             //10    Observe the current page
         }
+
         [TestMethod]
         public void DA_PANEl_TC58()
         {
@@ -1158,6 +1165,7 @@ namespace MLH_Selenium.TestCases
             //16    Change Chart Type for panel
             //17    Observe the current page
         }
+
         [TestMethod]
         public void DA_PANEl_TC59()
         {
@@ -1183,6 +1191,7 @@ namespace MLH_Selenium.TestCases
             //10    Switch between "2D" and "3D"
             //11    Observe the current page
         }
+
         [TestMethod]
         public void DA_PANEl_TC60()
         {
