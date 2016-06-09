@@ -51,7 +51,7 @@ namespace MLH_Selenium.ObjectData
         public void InitPanelInformation()
         {
             this.name = Utilities.GenerateRandomString(5);
-            this.type = "test modules";
+            this.type = "Test Modules";
             this.relatedData = "None";
         }
         #endregion

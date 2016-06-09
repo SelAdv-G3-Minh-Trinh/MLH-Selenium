@@ -185,7 +185,7 @@ namespace MLH_Selenium.TestCases
         }
 
         [TestMethod]
-        public void DA_MP_TC015()
+        public void DA_MP_TC015_Bug()
         {
             string repo = "SampleRepository";
             string user = "administrator";
@@ -247,7 +247,7 @@ namespace MLH_Selenium.TestCases
         }
 
         [TestMethod]
-        public void DA_MP_TC016()
+        public void DA_MP_TC016_Bug()
         {
             string repo = "SampleRepository";
             string user = "administrator";

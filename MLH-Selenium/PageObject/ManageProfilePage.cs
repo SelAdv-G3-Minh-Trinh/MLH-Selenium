@@ -3,6 +3,7 @@ using MLH_Selenium.Extension;
 using System.Collections.ObjectModel;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using MLH_Selenium.Common;
 
 namespace MLH_Selenium.PageObject
 {
@@ -60,9 +61,8 @@ namespace MLH_Selenium.PageObject
 
         public void submitDataProfileWithMoreInfo(DataProfile data)
         {
-            DataProfileName_txt.Clear();
             DataProfileName_txt.SendKeys(data.Name);
-            ItemType_ddl.SelectByValue(data.Type);
+            ItemType_ddl.SelectByText(data.Type.ToLower());
             RelatedData_ddl.SelectByText(data.RelatedData);
         }
 
@@ -110,23 +110,26 @@ namespace MLH_Selenium.PageObject
             return result;
         }
 
-        public bool checkLinkExist(string profile)
+        public bool checkProfileHasLinkExist(string profile)
         {
-            if (findElementByStringAndMethod(string.Format("//table[@class='GridView']//tr/td[count(//table[@class='GridView']//th[.='Data Profile']/preceding::th + 1) and text()='{0}']/input", profile)).GetAttribute("href") != null)
+            WebElement element = findElementByStringAndMethod(string.Format("//table[@class='GridView']/tbody/tr/td[.='{0}']", profile.Replace(" ", Constant.nonBreakingSpace)));
+            if (element.GetAttribute("innerHTML").Contains("<a"))
                 return true;
             return false;
         }
 
-        public bool checkCheckboxExist(string profile)
+        public bool checkProfileHasCheckboxExist(string profile)
         {
-            if (findElementByStringAndMethod(string.Format("//table[@class='GridView']//tr/td[count(//table[@class='GridView']//th[.='Data Profile']/preceding::th) and text()='{0}']/input[@name='chkDel']", profile)) != null)
+            WebElement element = findElementByStringAndMethod(string.Format("//table[@class='GridView']/tbody/tr/td[.='{0}']/../td[1]", profile.Replace(" ", Constant.nonBreakingSpace)));
+            if (element.GetAttribute("innerHTML").Contains("<input"))
                 return true;
             return false;
         }
 
-        public bool checkEditLinkExist(string profile)
+        public bool checkProfileHasEditLinkExist(string profile)
         {
-            if (findElementByStringAndMethod(string.Format("//table[@class='GridView']//tr/td[count(//table[@class='GridView']//th[.='Data Profile']/preceding::th + 6) and text()='{0}']/a[text()='Edit']", profile)) != null)
+            WebElement element = findElementByStringAndMethod(string.Format("//table[@class='GridView']/tbody/tr/td[.='{0}']/../td[count(//table[@class='GridView']//th[.='Action']/preceding::th)+1]", profile.Replace(" ", Constant.nonBreakingSpace)));
+            if (element.GetAttribute("innerHTML").Contains("Edit"))
                 return true;
             return false;
         }
@@ -135,7 +138,7 @@ namespace MLH_Selenium.PageObject
         {
             foreach (string profile in Common.Constant.profiles)
             {
-                if (checkLinkExist(profile) == false)
+                if (checkProfileHasLinkExist(profile) == false)
                 {
                     return false;
                 }
@@ -147,7 +150,7 @@ namespace MLH_Selenium.PageObject
         {
             foreach (string profile in Common.Constant.profiles)
             {
-                if (checkCheckboxExist(profile) == false)
+                if (checkProfileHasCheckboxExist(profile) == false)
                 {
                     return false;
                 }
@@ -192,38 +195,23 @@ namespace MLH_Selenium.PageObject
 
         public bool checkCheckboxinField()
         {
-            bool result = true;
-            int j = int.Parse(findElementByStringAndMethod("//table[@id='profilesettings']//tr").Size.ToString());
-            for (int i = 3; i < j - 2; i++)
+            string[] displayFields = { "Name", "Description", "Source", "Assigned user", "Status", "Last updated by", "Created by", "Check out by", "Location", "Recent result", "Version", "Priority", "Last update date", "Creation date", "Notes", "URL" };
+            foreach (string displayField in displayFields)
             {
-                string xpath = string.Format("//table[@id='profilesettings']//tr[{0}]/td", i);
-                int k = int.Parse(findElementByStringAndMethod(xpath).Size.ToString());
-                for (int l = 1; l <= k; l++)
-                {
-                    if (findElementByStringAndMethod(string.Format(xpath + "/td[{1}]", l)).GetAttribute("name") == null)
-                    {
-                        result = false;
-                        break;
-                    }
-                }
+                WebElement element = findElementByStringAndMethod(string.Format("//table[@id='profilesettings']/tbody/tr/td/label[.=' {0}']",displayField));
+                if (!element.GetAttribute("innerHTML").Contains("<input") || !element.GetAttribute("innerHTML").Contains("type=\"checkbox\""))
+                    return false;
             }
-            return result;
+            return true;
         }
 
         public bool checkCheckboxinDisplayFieldisChecked()
         {
-            int j = int.Parse(findElementByStringAndMethod("//table[@id='profilesettings']//tr").Size.ToString());
-            for (int i = 3; i < j - 2; i++)
+            var collection = driver.FindElements(By.XPath("//table[@id='profilesettings']//input[@class='box']"));
+            foreach(IWebElement elemement in collection)
             {
-                string xpath = string.Format("//table[@id='profilesettings']//tr[{0}]/td", i);
-                int k = int.Parse(findElementByStringAndMethod(xpath).Size.ToString());
-                for (int l = 1; l <= k; l++)
-                {
-                    if (!findElementByStringAndMethod(string.Format(xpath + "/td[{1}]/name[text()='chkDisplayField']", l)).Selected)
-                    {
-                        return false;
-                    }
-                }
+                if (!elemement.Selected)
+                    return false;
             }
             return true;
         }

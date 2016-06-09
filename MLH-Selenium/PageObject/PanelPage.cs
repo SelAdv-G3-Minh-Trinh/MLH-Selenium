@@ -17,27 +17,27 @@ namespace MLH_Selenium.PageObject
 
         public WebElement Delete_Lnk
         {
-            get { return findElementByStringAndMethod("//div[@class='panel_tag2']//a[.='Delete']"); }
+            get { return findElementByStringAndMethod("//div[@class='panel_tag2']/a[.='Delete']"); }
         }
 
         public WebElement OK_Btn
         {
-            get { return findElementByStringAndMethod("//div[@id='div_panelConfigurationDlg']//div[@class='div_button']//input[@id='OK']"); }
+            get { return findElementByStringAndMethod("//input[@id='OK']"); }
         }
 
         public WebElement Cancel_Btn
         {
-            get { return findElementByStringAndMethod("//div[@id='div_panelConfigurationDlg']//div[@class='div_button']//input[@id='Cancel']"); }
+            get { return findElementByStringAndMethod("//div[@id='div_panelConfigurationDlg']/div[@class='div_button']/input[@id='Cancel']"); }
         }
 
         public WebElement OKPanelConfiguration_Btn
         {
-            get { return findElementByStringAndMethod("//div[@id='div_panelPopup']//div[@class='div_button']//input[@id='OK']"); }
+            get { return findElementByStringAndMethod("//div[@id='div_panelConfigurationDlg']/div[@class='div_button']/input[@id='OK']"); }
         }
 
         public WebElement PanelConfigurationCancel_Btn
         {
-            get { return findElementByStringAndMethod("//div[@id='div_panelPopup']//div[@class='div_button']//input[@id='Cancel']"); }
+            get { return findElementByStringAndMethod("//div[@id='div_panelPopup']/div[@class='div_button']/input[@id='Cancel']"); }
         }
 
         public WebElement Edit_lnk
@@ -57,7 +57,7 @@ namespace MLH_Selenium.PageObject
 
         public SelectElement Category_Cb
         {
-            get { return new SelectElement(findElementByStringAndMethod(".//*[@id='cbbCategoryField']")); }
+            get { return new SelectElement(findElementByStringAndMethod("//*[@id='cbbCategoryField']")); }
         }
 
         public SelectElement Series_Cb
@@ -360,7 +360,6 @@ namespace MLH_Selenium.PageObject
 
         public PanelPage EditPanel(string displayname)
         {
-            Edit_lnk.Click();
             PanelName_Txt.Clear();
             PanelName_Txt.SendKeys(displayname);
             OK_Btn.Click();
@@ -470,7 +469,8 @@ namespace MLH_Selenium.PageObject
         public bool checkSettingFormLocation (string settingName)
         {
             bool result = false;
-            if (PanelName_Txt.Location.Y < findElementByStringAndMethod(string.Format("//fieldset[@id='fdSettings']//legend[text()='{0}']", settingName)).Location.Y)
+            if(findElementByStringAndMethod(string.Format("//fieldset[@id='fdSettings']//legend[text()='{0}']", settingName))!=null)
+                if (PanelName_Txt.Location.Y < findElementByStringAndMethod(string.Format("//fieldset[@id='fdSettings']//legend[text()='{0}']", settingName)).Location.Y)
                 result = true;
             return result;
         }
