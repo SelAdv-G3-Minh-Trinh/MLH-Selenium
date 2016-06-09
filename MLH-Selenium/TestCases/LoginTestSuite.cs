@@ -7,6 +7,11 @@ namespace MLH_Selenium.TestCases
     [TestClass]
     public class LoginTestSuite : TestBase
     {
+        /// <summary>
+        /// DA_LOGIN_TC001 - Verify that user can login specific repository successfully via Dashboard login page with correct credentials
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/7/2016</createdDate>
         [TestMethod]
         public void DA_LOGIN_TC001()
         {
@@ -31,6 +36,11 @@ namespace MLH_Selenium.TestCases
             Assert.AreEqual(expected, actual);
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC002 - Verify that user fails to login specific repository successfully via Dashboard login page with incorrect credentials
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/7/2016</createdDate>
         [TestMethod]
         public void DA_LOGIN_TC002()
         {
@@ -52,6 +62,11 @@ namespace MLH_Selenium.TestCases
             Assert.AreEqual(expected, actual);
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC003 - Verify that user fails to log in specific repository successfully via Dashboard login page with correct username and incorrect password
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/7/2016</createdDate>
         [TestMethod]
         public void DA_LOGIN_TC003()
         {
@@ -73,6 +88,11 @@ namespace MLH_Selenium.TestCases
             Assert.AreEqual(expected, actual);
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC004 - Verify that user is able to log in different repositories successfully after logging out current repository
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/7/2016</createdDate>
         [TestMethod]
         public void DA_LOGIN_TC004()
         {
@@ -101,6 +121,11 @@ namespace MLH_Selenium.TestCases
             Assert.AreEqual(expected, actual);           
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC005 - Verify that there is no Login dialog when switching between 2 repositories with the same account
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/7/2016</createdDate>
         [TestMethod]
         public void DA_LOGIN_TC005()
         {
@@ -127,6 +152,11 @@ namespace MLH_Selenium.TestCases
             Assert.AreEqual(expected, actual);
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC006 - Verify that "Password" input is case sensitive
+        /// </summary>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>5/7/2016</createdDate>
         [TestMethod]
         public void DA_LOGIN_TC006()
         {
@@ -148,6 +178,11 @@ namespace MLH_Selenium.TestCases
             Assert.AreEqual(expected, actual);
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC007 - Verify that "Username" is not case sensitive
+        /// </summary>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>5/7/2016</createdDate>
         [TestMethod]
         public void DA_LOGIN_TC007()
         {
@@ -172,6 +207,11 @@ namespace MLH_Selenium.TestCases
             Assert.AreEqual(expected, actual);           
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC008 - Verify that password with special characters is working correctly
+        /// </summary>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>5/7/2016</createdDate>
         [TestMethod]
         public void DA_LOGIN_TC008()
         {
@@ -196,6 +236,11 @@ namespace MLH_Selenium.TestCases
             Assert.AreEqual(expected, actual);
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC009 - Verify that username with special characters is working correctly
+        /// </summary>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>5/7/2016</createdDate>
         [TestMethod]
         public void DA_LOGIN_TC009()
         {
@@ -220,6 +265,11 @@ namespace MLH_Selenium.TestCases
             Assert.AreEqual(expected, actual);            
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC010 - Verify that the page works correctly for the case when no input entered to Password and Username field
+        /// </summary>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>5/7/2016</createdDate>
         [TestMethod]
         public void DA_LOGIN_TC010()
         {

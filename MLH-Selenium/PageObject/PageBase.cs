@@ -11,12 +11,22 @@ namespace MLH_Selenium.PageObject
     {
         public WebDriver driver;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PageBase"/> class.
+        /// </summary>
+        /// <author>Minh Trinh</author>
+        /// <createdDate>5/5/2016</createdDate>
         public PageBase()
         {
             if(driver==null)
                 driver = (WebDriver)Constant.driverTable[Thread.CurrentThread.ManagedThreadId];
         }
 
+        /// <summary>
+        /// Opens the fire fox browser.
+        /// </summary>
+        /// <author>Minh Trinh</author>
+        /// <createdDate>5/5/2016</createdDate>
         public void openFireFoxBrowser()
         {
             IWebDriver IDriver = new FirefoxDriver();
@@ -24,6 +34,14 @@ namespace MLH_Selenium.PageObject
             driver.Manage().Window.Maximize();
         }
 
+        /// <summary>
+        /// Finds the element by string and method.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <param name="m">The m.</param>
+        /// <returns>webelement</returns>
+        /// <author>Minh Trinh</author>
+        /// <createdDate>5/5/2016</createdDate>
         public WebElement findElementByStringAndMethod(string input, Constant.method m = Constant.method.xpath)
         {
             IWebElement element = null;
@@ -53,6 +71,11 @@ namespace MLH_Selenium.PageObject
             return elementOutput;
         }
 
+        /// <summary>
+        /// Closes this instance.
+        /// </summary>
+        /// <author>Minh Trinh</author>
+        /// <createdDate>5/5/2016</createdDate>
         public void Close()
         {
             Constant.driverTable.Remove(Thread.CurrentThread.ManagedThreadId);

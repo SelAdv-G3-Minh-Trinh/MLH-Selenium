@@ -10,6 +10,11 @@ namespace MLH_Selenium.TestCases
     [TestClass]
     public class PanelsTestSuite : TestBase
     {
+        /// <summary>
+        /// DA_LOGIN_TC027 - Verify that when "Choose panels" form is expanded all pre-set panels are populated and sorted correctly 
+        /// </summary>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>5/23/2016</createdDate>
         [TestMethod]
         public void DA_PANEL_TC027()
         {
@@ -60,6 +65,11 @@ namespace MLH_Selenium.TestCases
             //    close dashboard
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC028 - Verify that when "Add New Panel" form is on focused all other control/form is disabled or locked.
+        /// </summary>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>5/23/2016</createdDate>
         [TestMethod]
         public void DA_PANEL_TC028()
         {
@@ -94,6 +104,11 @@ namespace MLH_Selenium.TestCases
             panel.Close();
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC029 - Verify that user is unable to create new panel when (*) required field is not filled
+        /// </summary>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>5/23/2016</createdDate>
         [TestMethod]
         public void DA_PANEL_TC029()
         {
@@ -134,6 +149,11 @@ namespace MLH_Selenium.TestCases
             dashboard.Close();
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC030 - Verify that user is unable to create new panel when (*) required field is not filled
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/21/2016</createdDate>
         [TestMethod]
         public void DA_PANEL_TC030()
         {
@@ -181,6 +201,11 @@ namespace MLH_Selenium.TestCases
             dashboard.Close();
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC031 - Verify that correct panel setting form is displayed with corresponding panel type selected
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/21/2016</createdDate>
         [TestMethod]
         public void DA_PANEL_TC031()
         {
@@ -218,6 +243,11 @@ namespace MLH_Selenium.TestCases
             //                  Delete the created page
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC032 - Verify that user is not allowed to create panel with duplicated "Display Name"  
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/21/2016</createdDate>
         [TestMethod]
         public void DA_PANEL_TC032()
         {
@@ -262,6 +292,11 @@ namespace MLH_Selenium.TestCases
             dashboard.Close();
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC033 - Verify that "Data Profile" listing of "Add New Panel" and "Edit Panel" control/form are in alphabetical order  
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/22/2016</createdDate>
         [TestMethod]
         public void DA_PANEL_TC033()
         {
@@ -296,6 +331,11 @@ namespace MLH_Selenium.TestCases
             //Post - Condition  Delete "giang - panel" panel
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC034 - Verify that newly created data profiles are populated correctly under the "Data Profile" dropped down menu in  "Add New Panel" and "Edit Panel" control/form 
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/22/2016</createdDate>
         [TestMethod]
         public void DA_PANEL_TC034()
         {
@@ -351,6 +391,11 @@ namespace MLH_Selenium.TestCases
             //                  Delete "giang - panel" panel
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC035 - Verify that no special character except '@' character is allowed to be inputted into "Chart Title" field
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/22/2016</createdDate>
         [TestMethod]
         public void DA_PANEL_TC035()
         {
@@ -403,6 +448,11 @@ namespace MLH_Selenium.TestCases
             dashboard.Close();
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC036 - Verify that all chart types ( Pie, Single Bar, Stacked Bar, Group Bar, Line ) are listed correctly under "Chart Type" dropped down menu.
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/22/2016</createdDate>
         [TestMethod]
         public void DA_PANEL_TC036()
         {
@@ -443,6 +493,11 @@ namespace MLH_Selenium.TestCases
             panels.Close();
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC040 - Verify that all "Data Labels" check boxes are enabled and disabled correctly corresponding to each type of "Chart Type"
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/28/2016</createdDate>
         [TestMethod]
         public void DA_PANEL_TC040_Bug()
         {
@@ -522,6 +577,11 @@ namespace MLH_Selenium.TestCases
             Assert.IsFalse(panels.isDataLabelsPercentageCheckboxEnable(), "Percentage checkbox is enable");
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC041 - Verify that all settings within "Add New Panel" and "Edit Panel" form stay unchanged when user switches between "Data Labels" check boxes buttons
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/28/2016</createdDate>
         [TestMethod]
         public void DA_PANEL_TC041()
         {
@@ -615,6 +675,11 @@ namespace MLH_Selenium.TestCases
             //Close TA Dashboard
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC042 - Verify that all pages are listed correctly under the "Select page *" dropped down menu of "Panel Configuration" form/ control
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/28/2016</createdDate>
         [TestMethod]
         public void DA_PANEL_TC042()
         {
@@ -671,6 +736,11 @@ namespace MLH_Selenium.TestCases
             Assert.IsTrue(panels.checkPageBelongsToSelectPage(page3.PageName), "Item does not display in drop down list");
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC043 - Verify that only integer number inputs from 300-800 are valid for "Height *" field 
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/28/2016</createdDate>
         [TestMethod]
         public void DA_PANEL_TC043()
         {
@@ -752,6 +822,11 @@ namespace MLH_Selenium.TestCases
             Assert.AreEqual(expected, actual);
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC044 - Verify that "Height *" field is not allowed to be empty
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/28/2016</createdDate>
         [TestMethod]
         public void DA_PANEL_TC044()
         {
@@ -797,6 +872,11 @@ namespace MLH_Selenium.TestCases
             Assert.AreEqual(expected, actual);
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC045 - Verify that "Folder" field is not allowed to be empty
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/29/2016</createdDate>
         [TestMethod]
         public void DA_PANEL_TC045()
         {
@@ -844,6 +924,11 @@ namespace MLH_Selenium.TestCases
             //Close TA Dashboard
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC046 - Verify that only valid folder path of corresponding item type ( e.g. Actions, Test Modules) are allowed to be entered into "Folder" field
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/29/2016</createdDate>
         [TestMethod]
         public void DA_PANEL_TC046()
         {
@@ -900,6 +985,11 @@ namespace MLH_Selenium.TestCases
 
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC047 - Verify that user is able to navigate properly to folders with "Select Folder" form
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/29/2016</createdDate>
         [TestMethod]
         public void DA_PANEL_TC047()
         {
@@ -947,6 +1037,11 @@ namespace MLH_Selenium.TestCases
 
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC048 - Verify that population of corresponding item type ( e.g. Actions, Test Modules) folders is correct in "Select Folder form
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/29/2016</createdDate>
         [TestMethod]
         public void DA_PANEL_TC048()
         {
@@ -991,6 +1086,11 @@ namespace MLH_Selenium.TestCases
             //Post - Condition  Close TA Dashboard
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC049 - Verify that all folder paths of corresponding item type ( e.g. Actions, Test Modules) are correct in "Select Folder" form 
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/29/2016</createdDate>
         [TestMethod]
         public void DA_PANEL_TC049()
         {
@@ -1038,6 +1138,11 @@ namespace MLH_Selenium.TestCases
             //Close TA Dashboard
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC050 - Verify that user is able to successfully edit "Display Name" of any Panel providing that the name is not duplicated with existing Panels' name 
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/29/2016</createdDate>
         [TestMethod]
         public void DA_PANEL_TC050()
         {
@@ -1075,6 +1180,12 @@ namespace MLH_Selenium.TestCases
             //Post - Condition  Delete the newly created panel
             //Close TA Dashboard
         }
+
+        /// <summary>
+        /// DA_LOGIN_TC051 - Verify that user is unable to change "Display Name" of any Panel if there is special character except '@' inputted
+        /// </summary>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>5/30/2016</createdDate>
         [TestMethod]
         public void DA_PANEl_TC51()
         {
@@ -1118,6 +1229,12 @@ namespace MLH_Selenium.TestCases
             Assert.AreEqual(expected, actual);
 
         }
+
+        /// <summary>
+        /// DA_LOGIN_TC052 - Verify that user is unable to edit  "Height *" field to anything apart from integer number with in 300-800 range
+        /// </summary>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>5/30/2016</createdDate>
         [TestMethod]
         public void DA_PANEl_TC52()
         {
@@ -1155,6 +1272,12 @@ namespace MLH_Selenium.TestCases
             //13     Click Ok button
             //14     Observe the current page
         }
+
+        /// <summary>
+        /// DA_LOGIN_TC053 - Verify that newly created panel are populated and sorted correctly in Panel lists under "Choose panels" form
+        /// </summary>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>6/01/2016</createdDate>
         [TestMethod]
         public void DA_PANEl_TC53()
         {
@@ -1220,6 +1343,11 @@ namespace MLH_Selenium.TestCases
             //32    Check that 'hung_chart_a' panel is placed before 'hung_chart_b' panel
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC054 - Verify that user is able to successfully edit "Folder" field with valid path
+        /// </summary>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>6/01/2016</createdDate>
         [TestMethod]
         public void DA_PANEl_TC54()
         {
@@ -1243,6 +1371,12 @@ namespace MLH_Selenium.TestCases
             //8     Click Ok button
             //9     Observe the current page
         }
+
+        /// <summary>
+        /// DA_LOGIN_TC055 - Verify that user is unable to edit "Folder" field with invalid path
+        /// </summary>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>6/02/2016</createdDate>
         [TestMethod]
         public void DA_PANEl_TC55()
         {
@@ -1266,6 +1400,12 @@ namespace MLH_Selenium.TestCases
             //8     Click Ok button
             //9     Observe the current page
         }
+
+        /// <summary>
+        /// DA_LOGIN_TC056 - Verify that user is unable to edit "Folder" field with empty value
+        /// </summary>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>6/02/2016</createdDate>
         [TestMethod]
         public void DA_PANEl_TC56()
         {
@@ -1289,6 +1429,12 @@ namespace MLH_Selenium.TestCases
             //8     Click Ok button
             //9     Observe the current page
         }
+
+        /// <summary>
+        /// DA_LOGIN_TC057 - Verify that user is able to successfully edit "Chart Type"
+        /// </summary>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>6/03/2016</createdDate>
         [TestMethod]
         public void DA_PANEl_TC57()
         {
@@ -1313,6 +1459,12 @@ namespace MLH_Selenium.TestCases
             //9     Click Ok button
             //10    Observe the current page
         }
+
+        /// <summary>
+        /// DA_LOGIN_TC058 - Verify that "Category", "Series" and "Caption" field are enabled and disabled correctly corresponding to each type of the "Chart Type" in "Edit Panel" form
+        /// </summary>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>6/03/2016</createdDate>
         [TestMethod]
         public void DA_PANEl_TC58()
         {
@@ -1344,6 +1496,12 @@ namespace MLH_Selenium.TestCases
             //16    Change Chart Type for panel
             //17    Observe the current page
         }
+
+        /// <summary>
+        /// DA_LOGIN_TC059 - Verify that all settings within "Add New Panel" and "Edit Panel" form stay unchanged when user switches between "2D" and "3D" radio buttons in "Edit Panel" form
+        /// </summary>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>6/04/2016</createdDate>
         [TestMethod]
         public void DA_PANEl_TC59()
         {
@@ -1369,6 +1527,12 @@ namespace MLH_Selenium.TestCases
             //10    Switch between "2D" and "3D"
             //11    Observe the current page
         }
+
+        /// <summary>
+        /// DA_LOGIN_TC060 - Verify that all settings within "Add New Panel" and "Edit Panel" form stay unchanged when user switches between "Legends" radio buttons in "Edit Panel" form
+        /// </summary>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>6/04/2016</createdDate>
         [TestMethod]
         public void DA_PANEl_TC60()
         {
@@ -1411,6 +1575,10 @@ namespace MLH_Selenium.TestCases
             //27    Observe the current page
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC061 - Verify that all settings within "Add New Panel" and "Edit Panel" form stay unchanged when user switches between "Legends" radio buttons in "Edit Panel" form
+        /// </summary>
+        /// <comments>Test case is out of date</comments>
         public void DA_PANEL_TC061()
         {
             Console.WriteLine("DA_PANEL_TC61 - Verify that correct values are populated for corresponding parameters under \"Categories\" and \"Series\" field ( e.g. Priority: High, Status : Completed)");
@@ -1447,6 +1615,11 @@ namespace MLH_Selenium.TestCases
 
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC062 - Verify that all changes made to or with the values populated for corresponding parameters under "Categories" and "Series" field in Edit Panel are recorded correctly
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>6/4/2016</createdDate>
         [TestMethod]
         public void DA_PANEL_TC062()
         {
@@ -1498,6 +1671,11 @@ namespace MLH_Selenium.TestCases
             panels.Close();
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC063 - Verify that for "Action Implementation By Status" panel instance, when user changes from "Pie" chart to any other chart type then change back the "Edit Panel" form should be as original
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>6/4/2016</createdDate>
         [TestMethod]
         public void DA_PANEL_TC063()
         {
@@ -1597,6 +1775,11 @@ namespace MLH_Selenium.TestCases
             dashboard.Close();
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC064 - Verify that "Check All/Uncheck All" links are working correctly.
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>6/4/2016</createdDate>
         [TestMethod]
         public void DA_PANEL_TC064()
         {

@@ -15,6 +15,11 @@ namespace MLH_Selenium.TestCases
     {
         PageBase page;
 
+        /// <summary>
+        /// Befores the method.
+        /// </summary>
+        /// <author>Minh Trinh</author>
+        /// <createdDate>5/5/2016</createdDate>
         [TestInitialize]
         public void BeforeMethod()
         {
@@ -22,8 +27,13 @@ namespace MLH_Selenium.TestCases
             page.openFireFoxBrowser();
             int currentThread = Thread.CurrentThread.ManagedThreadId;
             Constant.driverTable.Add(currentThread, page.driver);
-        }       
+        }
 
+        /// <summary>
+        /// After the method.
+        /// </summary>
+        /// <author>Minh Trinh</author>
+        /// <createdDate>5/11/2016</createdDate>
         [TestCleanup]
         public void AfterMethod()
         {            

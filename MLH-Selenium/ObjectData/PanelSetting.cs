@@ -20,6 +20,14 @@
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Gets or sets the chart title.
+        /// </summary>
+        /// <value>
+        /// The chart title.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/21/2016</createdDate>
         public string ChartTitle
         {
             get
@@ -33,6 +41,14 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the show title.
+        /// </summary>
+        /// <value>
+        /// The show title.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/21/2016</createdDate>
         public string ShowTitle
         {
             get
@@ -46,6 +62,14 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the type of the chart.
+        /// </summary>
+        /// <value>
+        /// The type of the chart.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/21/2016</createdDate>
         public string ChartType
         {
             get
@@ -59,6 +83,14 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the style2 d.
+        /// </summary>
+        /// <value>
+        /// The style2 d.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/21/2016</createdDate>
         public string Style2D
         {
             get
@@ -72,6 +104,14 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the style3 d.
+        /// </summary>
+        /// <value>
+        /// The style3 d.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/21/2016</createdDate>
         public string Style3D
         {
             get
@@ -85,6 +125,14 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the cattegory.
+        /// </summary>
+        /// <value>
+        /// The cattegory.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/21/2016</createdDate>
         public string Cattegory
         {
             get
@@ -98,6 +146,14 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the series.
+        /// </summary>
+        /// <value>
+        /// The series.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/21/2016</createdDate>
         public string Series
         {
             get
@@ -111,6 +167,14 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the legend none.
+        /// </summary>
+        /// <value>
+        /// The legend none.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/21/2016</createdDate>
         public string LegendNone
         {
             get
@@ -124,6 +188,14 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the legend top.
+        /// </summary>
+        /// <value>
+        /// The legend top.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/21/2016</createdDate>
         public string LegendTop
         {
             get
@@ -137,6 +209,14 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the legend right.
+        /// </summary>
+        /// <value>
+        /// The legend right.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/21/2016</createdDate>
         public string LegendRight
         {
             get
@@ -150,6 +230,14 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the legend bottom.
+        /// </summary>
+        /// <value>
+        /// The legend bottom.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/21/2016</createdDate>
         public string LegendBottom
         {
             get
@@ -163,6 +251,14 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the legend left.
+        /// </summary>
+        /// <value>
+        /// The legend left.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/21/2016</createdDate>
         public string LegendLeft
         {
             get
@@ -176,6 +272,14 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the caption x.
+        /// </summary>
+        /// <value>
+        /// The caption x.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/21/2016</createdDate>
         public string CaptionX
         {
             get
@@ -189,6 +293,14 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the caption y.
+        /// </summary>
+        /// <value>
+        /// The caption y.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/21/2016</createdDate>
         public string CaptionY
         {
             get
@@ -206,6 +318,11 @@
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PanelSetting"/> class.
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/21/2016</createdDate>
         public PanelSetting() { }
         #endregion
     }

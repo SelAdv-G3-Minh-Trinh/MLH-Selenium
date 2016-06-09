@@ -10,6 +10,11 @@ namespace MLH_Selenium.TestCases
     [TestClass]
     public class ManagePagesTestSuite : TestBase
     {
+        /// <summary>
+        /// DA_LOGIN_TC011 - Verify that user is unable open more than 1 "New Page" dialog
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         [TestMethod]
         public void DA_MP_TC011()
         {
@@ -42,6 +47,11 @@ namespace MLH_Selenium.TestCases
 
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC012 - Verify that user is able to add additional pages besides "Overview" page successfully
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         [TestMethod]
         public void DA_MP_TC012()
         {
@@ -82,6 +92,11 @@ namespace MLH_Selenium.TestCases
             dashboard.Close();
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC013 - Verify that the newly added main parent page is positioned at the location specified as set with "Displayed After" field of "New Page" form on the main page bar/"Parent Page" dropped down menu
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         [TestMethod]
         public void DA_MP_TC013()
         {
@@ -136,6 +151,11 @@ namespace MLH_Selenium.TestCases
 
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC014 - Verify that "Public" pages can be visible and accessed by all users of working repository
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         [TestMethod]
         public void DA_MP_TC014()
         {
@@ -184,6 +204,11 @@ namespace MLH_Selenium.TestCases
             dashboard.Close();
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC015 - Verify that non "Public" pages can only be accessed and visible to their creators with condition that all parent pages above it are "Public"
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/15/2016</createdDate>
         [TestMethod]
         public void DA_MP_TC015_Bug()
         {
@@ -246,6 +271,11 @@ namespace MLH_Selenium.TestCases
 
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC016 - Verify that user is able to edit the "Public" setting of any page successfully
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/15/2016</createdDate>
         [TestMethod]
         public void DA_MP_TC016_Bug()
         {
@@ -332,6 +362,11 @@ namespace MLH_Selenium.TestCases
 
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC017 - Verify that user can remove any main parent page except "Overview" page successfully and the order of pages stays persistent as long as there is not children page under it
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/15/2016</createdDate>
         [TestMethod]
         public void DA_MP_TC017()
         {
@@ -414,6 +449,11 @@ namespace MLH_Selenium.TestCases
             dashboard.Close();
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC018 - Verify that user is able to add additional sibbling pages to the parent page successfully
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/15/2016</createdDate>
         [TestMethod]
         public void DA_MP_TC018()
         {
@@ -480,6 +520,11 @@ namespace MLH_Selenium.TestCases
 
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC019 - Verify that user is able to add additional sibbling page levels to the parent page successfully.
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/15/2016</createdDate>
         [TestMethod]
         public void DA_MP_TC019()
         {
@@ -513,6 +558,11 @@ namespace MLH_Selenium.TestCases
             dashboard.Close();
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC020 - Verify that user is able to delete sibbling page as long as that page has not children page under it
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/15/2016</createdDate>
         [TestMethod]
         public void DA_MP_TC020()
         {
@@ -573,6 +623,11 @@ namespace MLH_Selenium.TestCases
 
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC021 - Verify that user is able to edit the name of the page (Parent/Sibbling) successfully
+        /// </summary>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>5/15/2016</createdDate>
         [TestMethod]
         public void DA_MP_TC021()
         {
@@ -643,6 +698,11 @@ namespace MLH_Selenium.TestCases
             dashboard.Close();
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC022 - Verify that user is unable to duplicate the name of sibbling page under the same parent page
+        /// </summary>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>5/15/2016</createdDate>
         [TestMethod]
         public void DA_MP_TC022()
         {
@@ -706,6 +766,11 @@ namespace MLH_Selenium.TestCases
 
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC023 - Verify that user is able to edit the parent page of the sibbling page successfully
+        /// </summary>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>5/15/2016</createdDate>
         [TestMethod]
         public void DA_MP_TC023()
         {
@@ -762,6 +827,11 @@ namespace MLH_Selenium.TestCases
             dashboard.Close();
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC024 - Verify that "Bread Crums" navigation is correct
+        /// </summary>
+        /// <author>Minh Trinh</author>
+        /// <createdDate>5/16/2016</createdDate>
         [TestMethod]
         public void DA_MP_TC024()
         {
@@ -810,6 +880,11 @@ namespace MLH_Selenium.TestCases
             dashboardPage.deleteAPage("Overview/" + page1.PageName);
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC025 - Verify that page listing is correct when user edit "Display After"  field of a specific page
+        /// </summary>
+        /// <author>Minh Trinh</author>
+        /// <createdDate>5/16/2016</createdDate>
         [TestMethod]
         public void DA_MP_TC025()
         {
@@ -853,6 +928,11 @@ namespace MLH_Selenium.TestCases
             dashboardPage.deleteAPage(page1.PageName);
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC026 - Verify that page column is correct when user edit "Number of Columns" field of a specific page
+        /// </summary>
+        /// <author>Minh Trinh</author>
+        /// <createdDate>5/16/2016</createdDate>
         [TestMethod]
         public void DA_MP_TC026()
         {

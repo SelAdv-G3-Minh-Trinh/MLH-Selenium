@@ -12,6 +12,11 @@ namespace MLH_Selenium.TestCases
     [TestClass]
     public class DataProfilesTestSuite : TestBase
     {
+        /// <summary>
+        /// DA_LOGIN_TC065 - Verify that all Pre-set Data Profiles are populated correctly
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>6/5/2016</createdDate>
         [TestMethod]
         public void DA_DP_TC065()
         {
@@ -40,6 +45,11 @@ namespace MLH_Selenium.TestCases
             profile.Close();
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC066 - Verify that all Pre-set Data Profiles are populated correctly
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>6/5/2016</createdDate>
         [TestMethod]
         public void DA_DP_TC066()
         {
@@ -73,6 +83,11 @@ namespace MLH_Selenium.TestCases
             profile.Close();
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC067 - Verify that Data Profiles are listed alphabetically
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>6/5/2016</createdDate>
         [TestMethod]
         public void DA_DP_TC067()
         {
@@ -99,6 +114,11 @@ namespace MLH_Selenium.TestCases
             Assert.IsTrue(profile.checkDataProfileGridOrder(), "data profile id not sorted by alphabet.");
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC068 - Verify that Check Boxes are only present for non-preset Data Profiles.
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>6/6/2016</createdDate>
         [TestMethod]
         public void DA_DP_TC068()
         {
@@ -131,6 +151,11 @@ namespace MLH_Selenium.TestCases
             Assert.IsTrue(profile.checkProfileHasCheckboxExist(data.Name), "Error: Check box does not exist.");
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC069 - Verify that user is unable to proceed to next step or finish creating data profile if  "Name *" field is left empty
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>6/7/2016</createdDate>
         [TestMethod]
         public void DA_DP_TC069()
         {
@@ -164,6 +189,11 @@ namespace MLH_Selenium.TestCases
             profile.Close();
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC070 - Verify that special characters ' /:*?<>|"#[ ]{}=%; 'is not allowed for input to "Name *" field
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>6/8/2016</createdDate>
         [TestMethod]
         public void DA_DP_TC070()
         {
@@ -194,6 +224,11 @@ namespace MLH_Selenium.TestCases
             profile.Close();
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC071 - Verify that Data Profile names are not case sensitive
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>6/8/2016</createdDate>
         [TestMethod]
         public void DA_DP_TC071()
         {
@@ -226,6 +261,11 @@ namespace MLH_Selenium.TestCases
             profile.Close();
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC072 - Verify that all data profile types are listed under "Item Type" dropped down menu
+        /// </summary>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>6/5/2016</createdDate>
         [TestMethod]
         public void DA_DP_TC072()
         {
@@ -255,6 +295,11 @@ namespace MLH_Selenium.TestCases
             profile.Close();
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC073 - Verify that all data profile types are listed in priority order under "Item Type" dropped down menu
+        /// </summary>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>6/5/2016</createdDate>
         [TestMethod]
         public void DA_DP_TC073()
         {
@@ -282,6 +327,11 @@ namespace MLH_Selenium.TestCases
             profile.Close();
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC074 - Verify that appropriate "Related Data" items are listed correctly corresponding to the "Item Type" items.
+        /// </summary>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>6/6/2016</createdDate>
         [TestMethod]
         public void DA_DP_TC074()
         {
@@ -338,6 +388,11 @@ namespace MLH_Selenium.TestCases
             Assert.IsTrue(profile.checkRelatedDatePopulated("test cases results"), "Related data is wrong");
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC075 - Verify that default settings are applied correctly for newly created data profiles if user only set up "General Settings" page and finishes.
+        /// </summary>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>6/6/2016</createdDate>
         [TestMethod]
         public void DA_DP_TC075()
         {
@@ -390,6 +445,11 @@ namespace MLH_Selenium.TestCases
             profile.Close();
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC076 - Verify that for newly created data profile, user is able to navigate through other setting pages on the left navigation panel.
+        /// </summary>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>6/7/2016</createdDate>
         [TestMethod]
         public void DA_DP_TC076()
         {
@@ -448,6 +508,11 @@ namespace MLH_Selenium.TestCases
             Assert.IsTrue(profile.checkProfileSettingPageDisplay("Statistic Sub-Fields"), "Profile setting page does not display.");
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC077 - Verify that all fields are displayed correctly
+        /// </summary>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>6/7/2016</createdDate>
         [TestMethod]
         public void DA_DP_TC077()
         {
@@ -482,6 +547,11 @@ namespace MLH_Selenium.TestCases
             profile.Close();
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC078 - Verify that all fields are pre-fixed with check boxes
+        /// </summary>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>6/8/2016</createdDate>
         [TestMethod]
         public void DA_DP_TC078()
         {
@@ -511,6 +581,11 @@ namespace MLH_Selenium.TestCases
             profile.Close();
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC079 - Verify that Check All / Uncheck All Links are working correctly
+        /// </summary>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>6/8/2016</createdDate>
         [TestMethod]
         public void DA_DP_TC079()
         {
@@ -551,6 +626,11 @@ namespace MLH_Selenium.TestCases
             profile.Close();
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC080 - Verify that all fields are listed in the "Field" dropped down menu
+        /// </summary>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>6/8/2016</createdDate>
         [TestMethod]
         public void DA_DP_TC080()
         {

@@ -11,11 +11,25 @@ namespace MLH_Selenium.Extension
     {
         private IWebDriver driver;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WebDriver"/> class.
+        /// </summary>
+        /// <param name="driver">The driver.</param>
+        /// <author>Minh Trinh</author>
+        /// <createdDate>5/9/2016</createdDate>
         public WebDriver(IWebDriver driver)
         {
             Driver = driver;
         }
 
+        /// <summary>
+        /// Gets the current window handle.
+        /// </summary>
+        /// <value>
+        /// The current window handle.
+        /// </value>
+        /// <author>Minh Trinh</author>
+        /// <createdDate>5/9/2016</createdDate>
         public string CurrentWindowHandle
         {
             get
@@ -24,6 +38,14 @@ namespace MLH_Selenium.Extension
             }
         }
 
+        /// <summary>
+        /// Gets the page source.
+        /// </summary>
+        /// <value>
+        /// The page source.
+        /// </value>
+        /// <author>Minh Trinh</author>
+        /// <createdDate>5/9/2016</createdDate>
         public string PageSource
         {
             get
@@ -32,6 +54,14 @@ namespace MLH_Selenium.Extension
             }
         }
 
+        /// <summary>
+        /// Gets the title.
+        /// </summary>
+        /// <value>
+        /// The title.
+        /// </value>
+        /// <author>Minh Trinh</author>
+        /// <createdDate>5/9/2016</createdDate>
         public string Title
         {
             get
@@ -40,6 +70,14 @@ namespace MLH_Selenium.Extension
             }
         }
 
+        /// <summary>
+        /// Gets or sets the URL.
+        /// </summary>
+        /// <value>
+        /// The URL.
+        /// </value>
+        /// <author>Minh Trinh</author>
+        /// <createdDate>5/9/2016</createdDate>
         public string Url
         {
             get
@@ -53,6 +91,14 @@ namespace MLH_Selenium.Extension
             }
         }
 
+        /// <summary>
+        /// Gets the window handles.
+        /// </summary>
+        /// <value>
+        /// The window handles.
+        /// </value>
+        /// <author>Minh Trinh</author>
+        /// <createdDate>5/9/2016</createdDate>
         public ReadOnlyCollection<string> WindowHandles
         {
             get
@@ -61,6 +107,14 @@ namespace MLH_Selenium.Extension
             }
         }
 
+        /// <summary>
+        /// Gets or sets the driver.
+        /// </summary>
+        /// <value>
+        /// The driver.
+        /// </value>
+        /// <author>Minh Trinh</author>
+        /// <createdDate>5/9/2016</createdDate>
         public IWebDriver Driver
         {
             get
@@ -74,28 +128,68 @@ namespace MLH_Selenium.Extension
             }
         }
 
+        /// <summary>
+        /// Gets the stop watch.
+        /// </summary>
+        /// <value>
+        /// The stop watch.
+        /// </value>
+        /// <author>Minh Trinh</author>
+        /// <createdDate>5/9/2016</createdDate>
         public object StopWatch { get; private set; }
 
+        /// <summary>
+        /// Closes this instance.
+        /// </summary>
+        /// <author>Minh Trinh</author>
+        /// <createdDate>5/9/2016</createdDate>
         public void Close()
         {
             Driver.Close();
         }
 
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        /// <author>Minh Trinh</author>
+        /// <createdDate>5/9/2016</createdDate>
         public void Dispose()
         {
             Driver.Dispose();
         }
 
+        /// <summary>
+        /// Finds the element.
+        /// </summary>
+        /// <param name="by">The by.</param>
+        /// <returns>element which is found</returns>
+        /// <author>Minh Trinh</author>
+        /// <createdDate>5/9/2016</createdDate>
         public IWebElement FindElement(By by)
         {
             return Driver.FindElement(by);
         }
 
+        /// <summary>
+        /// Finds the elements.
+        /// </summary>
+        /// <param name="by">The by.</param>
+        /// <returns>element which are found<</returns>
+        /// <author>Minh Trinh</author>
+        /// <createdDate>5/9/2016</createdDate>
         public ReadOnlyCollection<IWebElement> FindElements(By by)
         {
             return Driver.FindElements(by);
         }
 
+        /// <summary>
+        /// Finds the elements.
+        /// </summary>
+        /// <param name="by">The by.</param>
+        /// <param name="timeout">The timeout.</param>
+        /// <returns>elements which are found wihthin timeout</returns>
+        /// <author>Minh Trinh</author>
+        /// <createdDate>5/9/2016</createdDate>
         public ReadOnlyCollection<IWebElement> FindElements(By by, int timeout)
         {
             Stopwatch stopwatch = new Stopwatch();
@@ -122,26 +216,57 @@ namespace MLH_Selenium.Extension
             return Driver.FindElements(by);
         }
 
+        /// <summary>
+        /// Manages this instance.
+        /// </summary>
+        /// <returns>IOptions</returns>
+        /// <author>Minh Trinh</author>
+        /// <createdDate>5/9/2016</createdDate>
         public IOptions Manage()
         {
             return Driver.Manage();
         }
 
+        /// <summary>
+        /// Navigates this instance.
+        /// </summary>
+        /// <returns>INavigation</returns>
+        /// <author>Minh Trinh</author>
+        /// <createdDate>5/9/2016</createdDate>
         public INavigation Navigate()
         {
             return Driver.Navigate();
         }
 
+        /// <summary>
+        /// Quits this instance.
+        /// </summary>
+        /// <author>Minh Trinh</author>
+        /// <createdDate>5/9/2016</createdDate>
         public void Quit()
         {
             Driver.Quit();
         }
 
+        /// <summary>
+        /// Switches to.
+        /// </summary>
+        /// <returns>ITargetLocator</returns>
+        /// <author>Minh Trinh</author>
+        /// <createdDate>5/9/2016</createdDate>
         public ITargetLocator SwitchTo()
         {
             return Driver.SwitchTo();
         }
 
+        /// <summary>
+        /// Finds the element.
+        /// </summary>
+        /// <param name="by">The by.</param>
+        /// <param name="timeout">The timeout.</param>
+        /// <returns>elements which are found wihthin timeout</returns>
+        /// <author>Minh Trinh</author>
+        /// <createdDate>5/9/2016</createdDate>
         public IWebElement FindElement(By by, int timeout)
         {
             IWebElement element = null;
@@ -170,6 +295,13 @@ namespace MLH_Selenium.Extension
             return Driver.FindElement(by);
         }
 
+        /// <summary>
+        /// Waits for element not visible.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        /// <param name="seconds">The seconds.</param>
+        /// <author>Minh Trinh</author>
+        /// <createdDate>5/9/2016</createdDate>
         public void WaitForElementNotVisible(WebElement element, int seconds=3)
         {
             try
@@ -181,6 +313,13 @@ namespace MLH_Selenium.Extension
             {  }
         }
 
+        /// <summary>
+        /// Waits for element to be clickable.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        /// <param name="seconds">The seconds.</param>
+        /// <author>Minh Trinh</author>
+        /// <createdDate>5/9/2016</createdDate>
         public void WaitForElementToBeClickable(WebElement element, int seconds = 3)
         {
             try
@@ -192,11 +331,23 @@ namespace MLH_Selenium.Extension
             { }
         }
 
+        /// <summary>
+        /// Parses to java script executor.
+        /// </summary>
+        /// <returns>IJavaScriptExecutor</returns>
+        /// <author>Minh Trinh</author>
+        /// <createdDate>5/9/2016</createdDate>
         public IJavaScriptExecutor ParseToJavaScriptExecutor()
         {
             return (IJavaScriptExecutor)Driver;
         }
 
+        /// <summary>
+        /// Switches to alert.
+        /// </summary>
+        /// <returns>IAlert</returns>
+        /// <author>Minh Trinh</author>
+        /// <createdDate>5/9/2016</createdDate>
         public IAlert SwitchToAlert()
         {
             return Driver.SwitchTo().Alert();

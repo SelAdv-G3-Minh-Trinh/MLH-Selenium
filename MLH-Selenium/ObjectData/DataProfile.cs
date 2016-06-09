@@ -11,12 +11,28 @@ namespace MLH_Selenium.ObjectData
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
+        /// <value>
+        /// The name.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/22/2016</createdDate>
         public string Name
         {
             get { return name; }
             set { name = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the type.
+        /// </summary>
+        /// <value>
+        /// The type.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/22/2016</createdDate>
         public string Type
         {
             get
@@ -30,6 +46,14 @@ namespace MLH_Selenium.ObjectData
             }
         }
 
+        /// <summary>
+        /// Gets or sets the related data.
+        /// </summary>
+        /// <value>
+        /// The related data.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/22/2016</createdDate>
         public string RelatedData
         {
             get
@@ -46,8 +70,18 @@ namespace MLH_Selenium.ObjectData
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DataProfile"/> class.
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/22/2016</createdDate>
         public DataProfile() { }
 
+        /// <summary>
+        /// Initializes the panel information.
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/22/2016</createdDate>
         public void InitPanelInformation()
         {
             this.name = Utilities.GenerateRandomString(5);
