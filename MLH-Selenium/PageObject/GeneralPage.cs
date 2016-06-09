@@ -138,6 +138,12 @@ namespace MLH_Selenium.PageObject
             }            
         }
 
+        public ManageProfilePage goToDataProfiles()
+        {
+            goToPage("Administer/Data Profiles");
+            return new ManageProfilePage();
+        }
+
         public void deleteAPage(string linkPath)
         {
             goToPage(linkPath);

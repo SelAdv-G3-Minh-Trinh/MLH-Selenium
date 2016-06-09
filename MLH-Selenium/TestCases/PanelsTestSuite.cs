@@ -444,7 +444,7 @@ namespace MLH_Selenium.TestCases
         }
 
         [TestMethod]
-        public void DA_PANEL_TC040()
+        public void DA_PANEL_TC040_Bug()
         {
             string repo = "SampleRepository";
             string user = "administrator";

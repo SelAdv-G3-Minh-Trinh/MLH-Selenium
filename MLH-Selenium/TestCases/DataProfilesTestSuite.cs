@@ -58,15 +58,16 @@ namespace MLH_Selenium.TestCases
 
             DashboardPage dashboard = new DashboardPage();
             dashboard = loginpage.LoginWithValidUser(repo, user, pass);
+
             //5    Click Administer->Data Profiles
             //6    VP Check there is no 'Delele' or 'Edit' link appears in Action section of Pre-set Data Profiles
-            dashboard.goToPage("Administer/Data Profiles");
-            ManageProfilePage profile = dashboard.gotoAddProfile();
+            ManageProfilePage profile = dashboard.goToDataProfiles();            
+
             //7    Click on Pre-set Data Profile name
             //8    VP Check there is no link on Pre - set Data Profile name
             //9    VP Check there is no checkbox appears in the left of Pre-set Data Profiles
-            Assert.IsFalse(profile.checkLinkExistInPresetProfile(), "Pre set profile still has link");
-            Assert.IsFalse(profile.checkCheckboxInPresetProfile(), "Pre set profile still has checkbox");
+            Assert.IsFalse(profile.checkLinkExistInPresetProfile(), "Error: Pre set profile still has link");
+            Assert.IsFalse(profile.checkCheckboxInPresetProfile(), "Error: Pre set profile still has checkbox");
 
             //Post - Condition  Close Dashboard
             profile.Close();
@@ -127,7 +128,7 @@ namespace MLH_Selenium.TestCases
             profile = profile.addNewProfilewithNameOnly(data);
             //7    Back to Data Profiles page
             //8    VP Check Check Boxes are only present for non - preset Data Profiles.
-            Assert.IsTrue(profile.checkCheckboxExist(data.Name), "Check box does not exist.");
+            Assert.IsTrue(profile.checkProfileHasCheckboxExist(data.Name), "Error: Check box does not exist.");
         }
 
         [TestMethod]
@@ -181,7 +182,7 @@ namespace MLH_Selenium.TestCases
             //2    Navigate to Data Profiles page
             //3    Click on "Add New"
             //4    Input special character
-            dashboard.goToPage("Administer/Data Profiles");
+            dashboard.goToPage("Administer/Data Profiles");            
             ManageProfilePage profile = dashboard.gotoAddProfile();
 
             DataProfile data = new DataProfile();
@@ -216,7 +217,7 @@ namespace MLH_Selenium.TestCases
 
             DataProfile data = new DataProfile();
             data.InitPanelInformation();
-            data.Name = "A";
+            data.Name = "Test Case Execution";
             //5    Click "Next" button
             //6    VP Check dialog message "Data Profile name already exists"
             Assert.AreEqual("Data profile name already exists.",profile.addNewProfilewithMoreInformation(data).GetAlertMessage());
