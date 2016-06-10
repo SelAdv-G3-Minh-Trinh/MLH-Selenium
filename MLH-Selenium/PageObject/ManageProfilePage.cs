@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using MLH_Selenium.Common;
+using System.Threading;
 
 namespace MLH_Selenium.PageObject
 {
@@ -229,22 +230,22 @@ namespace MLH_Selenium.PageObject
         public bool checkRelatedDatePopulated(string type)
         {
             ReadOnlyCollection<IWebElement> relatedData = driver.FindElements(By.XPath("//select[@id='cbbSubReport']/option"));
-            int numberOfRows = Common.Constant.listRelatedData.Rank;
+            int numberOfRows = Constant.listRelatedData.Rank;
             bool result = false;
 
-            ItemType_ddl.SelectByValue(type);
+            ItemType_ddl.SelectByText(type.ToLower());
 
             for (int i = 0; i <= numberOfRows; i++)
             {
-                if (type == Common.Constant.listRelatedData[i, 0])
+                if (type.ToLower() == Constant.listRelatedData[i, 0].ToLower())
                 {
-                    int numberofColumns = Common.Constant.listRelatedData.GetLength(i);
+                    int numberofColumns =Constant.listRelatedData.GetLength(i);
 
                     foreach (IWebElement data in relatedData)
                     {
                         for (int j = 0; j <= numberofColumns; j++)
                         {
-                            if (data.Text == Common.Constant.listRelatedData[i, j])
+                            if (data.Text == Constant.listRelatedData[i, j])
                             {
                                 result = true;
                                 break;
@@ -287,6 +288,7 @@ namespace MLH_Selenium.PageObject
 
         public void navigateToProfileSettingPage(string name)
         {
+            Thread.Sleep(200);
             findElementByStringAndMethod(string.Format("//td[@class='body_content_table_td']//li[text()='{0}']", name)).Click();
         }
 

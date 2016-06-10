@@ -542,7 +542,7 @@ namespace MLH_Selenium.TestCases
             //8    Select specific Item Type
             //9    Click on "Next" button
             //10   VP Check all fields are displayed correctly
-            Assert.AreEqual(data.Name, profile.addNewProfilewithMoreInformation(data).getProfileNameAtDisplayField(), "Wrong display name");
+            Assert.AreEqual("Data Profile : " + data.Name, profile.addNewProfilewithMoreInformation(data).getProfileNameAtDisplayField(), "Wrong display name");
             //Post - Condition  Close TA Dashboard Page
             profile.Close();
         }
