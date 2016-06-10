@@ -769,7 +769,7 @@ namespace MLH_Selenium.PageObject
         /// <modifyBy>Minh Trinh</modifyBy>
         /// <modifyDate></modifyDate>
         public PanelPage gotoEditPanelbyClickingEditIcon(string panelName)
-        {
+        {            
             findElementByStringAndMethod(string.Format("//div[@title='{0}']/../following-sibling::div//ul//li[@title='Edit Panel']", panelName)).Click();
             return new PanelPage();
         }
@@ -800,7 +800,7 @@ namespace MLH_Selenium.PageObject
         public PanelPage gotoPanelConfigPageByName(string name)
         {
             gotoChoosePanel();
-            findElementByStringAndMethod(string.Format("//table[@width='100%']//tr//td//a[contains(@title,'{0}')]", name)).Click();
+            findElementByStringAndMethod(string.Format("//table[@width='100%']//tr//td//a[contains(@title,'{0}')]", name.Replace(" ", Common.Constant.nonBreakingSpace))).Click();
             return new PanelPage();
         }
         #endregion

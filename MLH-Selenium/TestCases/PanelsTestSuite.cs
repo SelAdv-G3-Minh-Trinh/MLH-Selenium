@@ -284,7 +284,7 @@ namespace MLH_Selenium.TestCases
 
             string actual = panels.addNewPanelInfo(panel).GetAlertMessage();
             string expected = panel.DisplayName + " already exists. Please enter a different name.";
-            panels.PanelConfigurationCancel_Btn.Click();
+            panels.Cancel_Btn.Click();
             Assert.AreEqual(expected, actual);
             //Post - Condition  Delete "Duplicated panel" panel
             //Close Dashboard    
@@ -966,6 +966,7 @@ namespace MLH_Selenium.TestCases
 
             Panel panel = new Panel();
             panel.InitPanelInformation();
+            panel.SelectPage = page.PageName;
             panel.Folder = "";
 
             panels = panels.addNewPanelInfo(panel);
@@ -982,7 +983,7 @@ namespace MLH_Selenium.TestCases
             Assert.IsTrue(panels.addNewPageConfig(panel).isPanelCreated(panel.DisplayName));
             //Post - Condition  Delete the newly created panel, page
             //Close TA Dashboard
-
+            dashboard.deleteAPage(page.PageName);
         }
 
         /// <summary>

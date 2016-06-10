@@ -22,22 +22,22 @@ namespace MLH_Selenium.PageObject
 
         public WebElement OK_Btn
         {
-            get { return findElementByStringAndMethod("//input[@id='OK']"); }
+            get { return findElementByStringAndMethod("//div[@id='div_panelPopup']//div[@class='div_button']/input[@id='OK']"); }
         }
 
         public WebElement Cancel_Btn
         {
-            get { return findElementByStringAndMethod("//div[@id='div_panelConfigurationDlg']/div[@class='div_button']/input[@id='Cancel']"); }
+            get { return findElementByStringAndMethod("//div[@id='div_panelPopup']//div[@class='div_button']/input[@id='Cancel']"); }
         }
 
         public WebElement OKPanelConfiguration_Btn
         {
-            get { return findElementByStringAndMethod("//div[@id='div_panelConfigurationDlg']/div[@class='div_button']/input[@id='OK']"); }
+            get { return findElementByStringAndMethod("//div[@id='div_panelConfigurationDlg']//div[@class='div_button']/input[@id='OK']"); }
         }
 
         public WebElement PanelConfigurationCancel_Btn
         {
-            get { return findElementByStringAndMethod("//div[@id='div_panelPopup']/div[@class='div_button']/input[@id='Cancel']"); }
+            get { return findElementByStringAndMethod("//div[@id='div_panelConfigurationDlg']//div[@class='div_button']/input[@id='Cancel']"); }
         }
 
         public WebElement Edit_lnk
@@ -477,7 +477,7 @@ namespace MLH_Selenium.PageObject
 
         public bool isPanelCreated(string panelName)
         {
-            return findElementByStringAndMethod(string.Format("//a[.='{0}']", panelName)).Displayed;
+            return findElementByStringAndMethod(string.Format("//div[@class='al_lft' and .='{0}']", panelName)).Displayed;
         }
 
         public bool checkPageBelongsToSelectPage(string item)
@@ -506,6 +506,7 @@ namespace MLH_Selenium.PageObject
                     Folder_txt.SendKeys(newvalue.Folder);
                 OKPanelConfiguration_Btn.Click();
             }
+            Thread.Sleep(3000);            
             return new DashboardPage();
         }
 
