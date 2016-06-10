@@ -28,6 +28,7 @@ namespace MLH_Selenium.PageObject
         {
             get
             {
+                Thread.Sleep(100);
                 return new SelectElement(findElementByStringAndMethod("//select[@id='columnnumber']"));
             }
         }
@@ -71,12 +72,13 @@ namespace MLH_Selenium.PageObject
         {
             PageName_Txt.Clear();
             PageName_Txt.SendKeys(page.PageName);
-            ParentPage_Cmb.SelectByText(page.ParentPage);
+            ParentPage_Cmb.SelectByText(page.ParentPage);            
             NumberPage_Cmb.SelectByText(page.NumberOfColumns.ToString());
             AfterPage_Cmb.SelectByText(page.AfterPage);
             if (page.IsPublic == true)
                 Public_Chk.Check();
-            OK_Btn.Click();  
+            OK_Btn.Click();
+            Thread.Sleep(500);
         }
 
         public DashboardPage addNewpage(Page page)

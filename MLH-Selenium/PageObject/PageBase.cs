@@ -11,31 +11,50 @@ namespace MLH_Selenium.PageObject
     {
         public WebDriver driver;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PageBase"/> class.
+        /// </summary>
+        /// <author>Minh Trinh</author>
+        /// <createdDate>5/5/2016</createdDate>
         public PageBase()
         {
             if(driver==null)
                 driver = (WebDriver)Constant.driverTable[Thread.CurrentThread.ManagedThreadId];
         }
 
+        /// <summary>
+        /// Opens the fire fox browser.
+        /// </summary>
+        /// <author>Minh Trinh</author>
+        /// <createdDate>5/5/2016</createdDate>
         public void openFireFoxBrowser()
         {
             IWebDriver IDriver = new FirefoxDriver();
             driver = new WebDriver(IDriver);
-            driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(Constant.implicitlyTimeSeconds));
+            driver.Manage().Window.Maximize();
         }
 
+        /// <summary>
+        /// Finds the element by string and method.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <param name="m">The m.</param>
+        /// <returns>webelement</returns>
+        /// <author>Minh Trinh</author>
+        /// <createdDate>5/5/2016</createdDate>
         public WebElement findElementByStringAndMethod(string input, Constant.method m = Constant.method.xpath)
         {
             IWebElement element = null;
             WebElement elementOutput = null;
+
             try
             {
                 if (m == Constant.method.xpath)
-                    element = driver.FindElement(By.XPath(input), 3);
+                    element = driver.FindElement(By.XPath(input), Constant.timeout);
                 else if (m == Constant.method.id)
-                    element = driver.FindElement(By.Id(input), 3);
+                    element = driver.FindElement(By.Id(input), Constant.timeout);
                 else if (m == Constant.method.name)
-                    element = driver.FindElement(By.Name(input), 3);
+                    element = driver.FindElement(By.Name(input), Constant.timeout);
 
                 elementOutput = new WebElement(element);
                 if (Constant.debug && elementOutput != null)
@@ -46,13 +65,20 @@ namespace MLH_Selenium.PageObject
             }
             catch (Exception)
             {
-                throw;
+                return null;
             }
+
             return elementOutput;
         }
 
+        /// <summary>
+        /// Closes this instance.
+        /// </summary>
+        /// <author>Minh Trinh</author>
+        /// <createdDate>5/5/2016</createdDate>
         public void Close()
         {
+            Constant.driverTable.Remove(Thread.CurrentThread.ManagedThreadId);
             driver.Quit();
         }
     }
