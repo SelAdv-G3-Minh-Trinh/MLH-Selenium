@@ -950,23 +950,29 @@ namespace MLH_Selenium.TestCases
             DashboardPage dashboard = new DashboardPage();
             dashboard = loginpage.LoginWithValidUser(repo, user, pass);
 
-            //3      Create a new page
+            //3      Create a new page            
+            ManagePagesPage pages = new ManagePagesPage();
+            pages = dashboard.goToAddPage();
+
             //4      Click Choose Panel button
             //5      Click Create New Panel button
             //6      Enter all required fields on Add New Panel page
             //7      Click Ok button
-            ManagePagesPage pages = new ManagePagesPage();
-            pages = dashboard.goToAddPage();
-
-            Page page = new Page();
-            page.InitPageInformation();
-
-            dashboard = pages.addNewpage(page);
-            //????????????????????????????????
             //8      Enter invalid height into Height field
             //9      Click Ok button
+            PanelPage panels = new PanelPage();
+            panels = dashboard.goToAddPanelByChoosePanel();
+
+            Panel panel = new Panel();
+            panel.AddPanel("Chart", "Name", "200", "/Car Rental/Actions");
+            panels = panels.addNewPanelInfo(panel).addNewPageConfig(panel);
+
             //10     Observe the current page
+            //string actual = panel.AddPanel("Chart", "Name", "200", "/Car Rental/Actions").GetAlertMessage();
+            //string expected = "Panel Height must be greater than or equal to 300 and lower than or equal to 800";
+            //Assert.AreEqual(expected, actual);
             //11     Close Warning Message box
+
             //12     Enter valid height into Height field
             //13     Click Ok button
             //14     Observe the current page

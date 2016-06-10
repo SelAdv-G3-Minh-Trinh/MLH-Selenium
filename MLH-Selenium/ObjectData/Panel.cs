@@ -64,6 +64,16 @@ namespace MLH_Selenium.ObjectData
             this.height = "400";
             this.folder = "/Car Rental/Actions";
         }
+
+        public void AddPanel(string type, string series, string height, string folder)
+        {
+            this.typeOfPanel = type;
+            this.displayName = Utilities.GenerateRandomString(5);
+            this.series = series;
+            this.selectPage = "Overview";
+            this.height = height;
+            this.folder = folder;
+        }
         #endregion
     }
 }
