@@ -211,10 +211,10 @@ namespace MLH_Selenium.PageObject
             var collection = driver.FindElements(By.XPath("//table[@id='profilesettings']//input[@class='box']"));
             foreach(IWebElement elemement in collection)
             {
-                if (!elemement.Selected)
-                    return false;
+                if (elemement.Selected)
+                    return true;
             }
-            return true;
+            return false;
         }
 
         public void clickCheckAll()
@@ -258,11 +258,9 @@ namespace MLH_Selenium.PageObject
         }
         public bool checkItemTypesPopulated(string type)
         {
-            ReadOnlyCollection<IWebElement> itemTypes = driver.FindElements(By.XPath("//select[@id='cbbEntityType']/option"));
+            ReadOnlyCollection<IWebElement> itemTypes = driver.FindElements(By.XPath("//select[@id='cbbFields']/option"));
             int numberOfRows = Common.Constant.listRelatedFields.Rank;
             bool result = false;
-
-            SortField_ddl.SelectByText(type);
 
             for (int i = 0; i <= numberOfRows; i++)
             {
@@ -286,10 +284,16 @@ namespace MLH_Selenium.PageObject
             return result;
         }
 
-        public void navigateToProfileSettingPage(string name)
+        public bool navigateToProfileSettingPage(string name)
         {
-            Thread.Sleep(200);
-            findElementByStringAndMethod(string.Format("//td[@class='body_content_table_td']//li[text()='{0}']", name)).Click();
+            WebElement element = findElementByStringAndMethod(string.Format("//td[@class='body_content_table_td']//li[text()='{0}']", name));
+            if (element.GetAttribute("onclick") != null)
+            {
+                element.Click();
+                return true;
+            }
+
+            return false;
         }
 
         public void selectItemType(string type)
@@ -299,19 +303,23 @@ namespace MLH_Selenium.PageObject
 
         public bool checkProfileSettingPageDisplay(string name)
         {
-            navigateToProfileSettingPage(name);
-            return findElementByStringAndMethod(string.Format("//td[@class='general_vertical_top']//td[text()='{0}']", name)).Displayed;
+            bool isExist = navigateToProfileSettingPage(name);
+            if (isExist == true)
+            {
+                return findElementByStringAndMethod(string.Format("//td[@class='general_vertical_top']//td[text()='{0}']", name)).Displayed;
+            }
+            return false;
         }
 
         public ManageProfilePage gotoProfileSettingPageByName(string name)
         {
-            findElementByStringAndMethod(string.Format("//table[@class='GridView']//tr//td[text()='{0}']", name)).Click();
+            findElementByStringAndMethod(string.Format("//table[@class='GridView']//tr/td[2]/a[text()='{0}']", name)).Click();
             return this;
         }
 
         public bool checkDataAtGeneralSettingPage(DataProfile data)
         {
-            if (data.Name != DataProfileName_txt.Text || data.Type != ItemType_ddl.SelectedOption.Text || data.RelatedData != RelatedData_ddl.SelectedOption.Text)
+            if (data.Name != DataProfileName_txt.GetAttribute("value") || data.Type != ItemType_ddl.SelectedOption.Text || data.RelatedData != RelatedData_ddl.SelectedOption.Text)
                 return false;
             return true;
         }
@@ -323,7 +331,7 @@ namespace MLH_Selenium.PageObject
 
         public bool checkSortFiedlPageIsEmpty()
         {
-            int row = int.Parse(findElementByStringAndMethod("//table[@id='profilesettings']//tr").Size.ToString());
+            int row = driver.FindElements(By.XPath("//table[@id='profilesettings']//tr")).Count;
             if (row > 4)
                 return false;
             return true;
@@ -332,7 +340,6 @@ namespace MLH_Selenium.PageObject
         public bool checkFilterFieldIsEmpty()
         {
             int items = driver.FindElements(By.XPath("//select[@id='listCondition']/option")).Count;
-
             if (items > 0)
                 return false;
             return true;

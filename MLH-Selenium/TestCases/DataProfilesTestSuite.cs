@@ -6,9 +6,6 @@ using MLH_Selenium.Common;
 
 namespace MLH_Selenium.TestCases
 {
-    /// <summary>
-    /// Summary description for DataProfilesTestSuite
-    /// </summary>
     [TestClass]
     public class DataProfilesTestSuite : TestBase
     {
@@ -481,31 +478,38 @@ namespace MLH_Selenium.TestCases
 
             profile = profile.addNewProfilewithNameOnly(data);
             //9    Click on the data profile 'thinh-test'
-            profile.gotoProfileSettingPageByName(data.Name);
             //10   Click on 'Display Fields' in the left navigation panel
             //11   VP Check Display Fields page appears
-            Assert.IsTrue(profile.checkProfileSettingPageDisplay("Display Fields"), "Profile setting page does not display.");
+            profile.gotoProfileSettingPageByName(data.Name);
+            Assert.IsTrue(profile.checkProfileSettingPageDisplay("Display Fields"), "Display Fields page does not display.");
+
             //12   Click on 'Sort Fields' in the left navigation panel
             //13   VP Check Sort Fields page appears
-            Assert.IsTrue(profile.checkProfileSettingPageDisplay("Sort Fields"), "Profile setting page does not display.");
+            Assert.IsTrue(profile.checkProfileSettingPageDisplay("Sort Fields"), "Sort Fields page does not display.");
+
             //14   Click on 'Filter Fields' in the left navigation panel
             //15   VP Check Filter Fields page appears
-            Assert.IsTrue(profile.checkProfileSettingPageDisplay("Filter Fields"), "Profile setting page does not display.");
+            Assert.IsTrue(profile.checkProfileSettingPageDisplay("Filter Fields"), "Filter Fields page does not display.");
+         
             //16   Click on 'Statistic Fields' in the left navigation panel
             //17   VP Check Statistic Fields page appears
-            Assert.IsTrue(profile.checkProfileSettingPageDisplay("Statistic Fields"), "Profile setting page does not display.");
+            Assert.IsTrue(profile.checkProfileSettingPageDisplay("Statistic Fields"), "Statistic Fields page does not display.");
+
             //18   Click on 'Display Sub-Fields' in the left navigation panel
             //19   VP Check Display Sub-Fields page appears
-            Assert.IsTrue(profile.checkProfileSettingPageDisplay("Display Sub-Fields"), "Profile setting page does not display.");
+            Assert.IsFalse(profile.checkProfileSettingPageDisplay("Display Sub-Fields"), "Error - Display Sub-Fields page does not display.");
+
             //20   Click on 'Sort Sub-Fields' in the left navigation panel
             //21   VP Check Sort Sub-Fields page appears
-            Assert.IsTrue(profile.checkProfileSettingPageDisplay("Sort Sub-Fields"), "Profile setting page does not display.");
+            Assert.IsFalse(profile.checkProfileSettingPageDisplay("Sort Sub-Fields"), "Error - Sort Sub-Fields page does not display.");
+          
             //22   Click on 'Filter Sub-Fields' in the left navigation panel
             //23   VP Check Filter Sub-Fields page appears
-            Assert.IsTrue(profile.checkProfileSettingPageDisplay("Filter Sub-Fields"), "Profile setting page does not display.");
+            Assert.IsFalse(profile.checkProfileSettingPageDisplay("Filter Sub-Fields"), "Error - Filter Sub-Fields page does not display.");
+         
             //24   Click on 'Statistic Sub-Fields' in the left navigation panel
             //25   VP Check Statistic Sub-Fields page appears
-            Assert.IsTrue(profile.checkProfileSettingPageDisplay("Statistic Sub-Fields"), "Profile setting page does not display.");
+            Assert.IsFalse(profile.checkProfileSettingPageDisplay("Statistic Sub-Fields"), "Error - Statistic Sub-Fields page does not display.");
         }
 
         /// <summary>

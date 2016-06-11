@@ -85,7 +85,7 @@
     <Compile Include="PageObject\LoginPage.cs" />
     <Compile Include="PageObject\ManageProfilePage.cs" />
     <Compile Include="PageObject\PageBase.cs" />
-    <Compile Include="PageObject\PanelPage.cs" />
+    <Compile Include="PageObject\ManagePanelPage.cs" />
     <Compile Include="Properties\Resources.Designer.cs" />
     <Compile Include="TestCases\DataProfilesTestSuite.cs" />
     <Compile Include="TestCases\LoginTestSuite.cs" />
@@ -108,7 +108,9 @@
     <Content Include="DLL\WebDriver.dll" />
     <Content Include="DLL\WebDriver.Support.dll" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="bin\Debug\MLH-Selenium.dll.lastcodeanalysissucceeded" />
     <None Include="Document\Dashboard_Testcases.xls" />

@@ -7,7 +7,7 @@ using OpenQA.Selenium;
 
 namespace MLH_Selenium.PageObject
 {
-    public class PanelPage : GeneralPage
+    public class ManagePanelPage : GeneralPage
     {
         #region Elements
         public WebElement PanelName_Txt
@@ -210,7 +210,7 @@ namespace MLH_Selenium.PageObject
             Height_txt.SendKeys(panel.Height);
         }
 
-        public PanelPage addNewPanelInfo(Panel panel)
+        public ManagePanelPage addNewPanelInfo(Panel panel)
         {
             submitpanelInformation(panel);
             OK_Btn.Click();
@@ -218,7 +218,7 @@ namespace MLH_Selenium.PageObject
             return this;
         }
 
-        public PanelPage addNewPageConfig(Panel panel)
+        public ManagePanelPage addNewPageConfig(Panel panel)
         {
             submitPanelConfig(panel);
             OKPanelConfiguration_Btn.Click();
@@ -226,7 +226,7 @@ namespace MLH_Selenium.PageObject
             return this;
         }
 
-        public PanelPage addNewPageWithoutConfig(Panel panel)
+        public ManagePanelPage addNewPageWithoutConfig(Panel panel)
         {
             submitpanelInformation(panel);
             OK_Btn.Click();
@@ -349,7 +349,7 @@ namespace MLH_Selenium.PageObject
             OK_Btn.Click();
         }
 
-        public PanelPage DeletePanel(string displayName)
+        public ManagePanelPage DeletePanel(string displayName)
         {
             WebElement element = findElementByStringAndMethod(string.Format("//a[.='{0}']/../preceding-sibling::td/input", displayName));
             element.Check();
@@ -358,7 +358,7 @@ namespace MLH_Selenium.PageObject
             return this;
         }
 
-        public PanelPage EditPanel(string displayname)
+        public ManagePanelPage EditPanel(string displayname)
         {
             PanelName_Txt.Clear();
             PanelName_Txt.SendKeys(displayname);
@@ -460,7 +460,7 @@ namespace MLH_Selenium.PageObject
             DataLabelsValue_Chk.Click();
         }
 
-        public PanelPage gotoEditPanel(string panelName)
+        public ManagePanelPage gotoEditPanel(string panelName)
         {
             findElementByStringAndMethod(string.Format("//a[.='{0}']/../following-sibling::td/a[text()='Edit']", panelName)).Click();
             return this;
@@ -550,7 +550,7 @@ namespace MLH_Selenium.PageObject
                 if (old.CaptionX != newvalue.CaptionX)
                     CaptionX_txt.SendKeys(newvalue.CaptionX);
                 if (old.CaptionY != newvalue.CaptionY)
-                    CaptionX_txt.SendKeys(newvalue.CaptionY);
+                    CaptionY_txt.SendKeys(newvalue.CaptionY);
                 OK_Btn.Click();
             }
             return new DashboardPage();
