@@ -12,9 +12,34 @@ namespace MLH_Selenium.PageObject
     public class PanelPage : GeneralPage
     {
         #region Elements
+        public WebElement Edit_lnk
+        {
+            get { return findElementByStringAndMethod(".//*[@id='chkDelPanel']"); }
+        }
+
+        public WebElement CategoryCaption_txt
+        {
+            get { return findElementByStringAndMethod(".//*[@id='txtCategoryXAxis']"); }
+        }
+
+        public WebElement SeriesCaption_txt
+        {
+            get { return findElementByStringAndMethod(".//*[@id='txtValueYAxis']"); }
+        }
+
+        public WebElement Cancel_Btn
+        {
+            get { return findElementByStringAndMethod("//div[@id='div_panelPopup']//div[@class='div_button']/input[@id='Cancel']"); }
+        }
+
         public WebElement PanelName_Txt
         {
             get { return findElementByStringAndMethod("//input[@name='txtDisplayName']"); }
+        }
+
+        public WebElement ShowTitle_chk
+        {
+            get { return findElementByStringAndMethod(".//*[@id='chkShowTitle']"); }
         }
 
         public SelectElement Series_Cb
@@ -27,12 +52,17 @@ namespace MLH_Selenium.PageObject
             get { return findElementByStringAndMethod("//input[@id='OK']"); }
         }
 
+        public WebElement ConfigurationOK_Btn
+        {
+            get { return findElementByStringAndMethod(".//*[@id='OK']"); }
+        }
+
         public WebElement PanelConfigurationCancel_Btn
         {
             get { return findElementByStringAndMethod(".//*[@id='Cancel']"); }
         }
 
-        public WebElement Edit_lnk
+        public WebElement Edit_lnkcate
         {
             get { return findElementByStringAndMethod(".//*[@id='chkDelPanel']"); }
         }
@@ -46,7 +76,7 @@ namespace MLH_Selenium.PageObject
         {
             get { return new SelectElement(findElementByStringAndMethod("//select[@name='cbbChartType']")); }
         }
-
+     
         public SelectElement Category_Cb
         {
             get { return new SelectElement(findElementByStringAndMethod(".//*[@id='cbbCategoryField']")); }
@@ -87,6 +117,11 @@ namespace MLH_Selenium.PageObject
             get { return findElementByStringAndMethod("//input[@id='txtFolder']"); }
         }
 
+        public WebElement ChartTitle_txt
+        {
+            get { return findElementByStringAndMethod(".//*[@id='txtChartTitle']"); }
+        }
+
         public WebElement Folder_img
         {
             get { return findElementByStringAndMethod("//img[@class='panel_setting_treefolder'"); }
@@ -111,6 +146,62 @@ namespace MLH_Selenium.PageObject
                 findElementByStringAndMethod("//input[@id='radPanelType2']").Click();
             else if (paneltype == "Heat Map")
                 findElementByStringAndMethod("//input[@id='radPanelType3").Click();
+        }
+
+        public void selectLegends(string legends)
+        {
+            if (legends== "None")
+            {
+                findElementByStringAndMethod(".//*[@id='radPlacementNone']").Click();
+            }
+            else if (legends == "Top")
+            {
+                findElementByStringAndMethod(".//*[@id='radPlacementTop']").Click();
+            }
+            else if (legends == "Right")
+            {
+                findElementByStringAndMethod(".//*[@id='radPlacementRight']").Click();
+            }
+            else if (legends == "Bottom")
+            {
+                findElementByStringAndMethod(".//*[@id='radPlacementBottom']").Click();
+            }
+            else
+            {
+                findElementByStringAndMethod(".//*[@id='radPlacementLeft']").Click();
+            }
+        }
+
+        public void selectDataLabels(string datalabels)
+        {
+            if (datalabels == "Series")
+            {
+                findElementByStringAndMethod(".//*[@id='chkSeriesName']").Check();
+            }
+            else if (datalabels == "Categories")
+            {
+                findElementByStringAndMethod(".//*[@id='chkCategoriesName']").Check();
+            }
+            else if (datalabels == "Value")
+            {
+                findElementByStringAndMethod(".//*[@id='chkValue']").Check();
+            }
+            else
+            {
+                findElementByStringAndMethod(".//*[@id='chkPercentage']").Check();
+            }
+        }
+
+        public void selectStyle(string stype)
+        {
+            if (stype=="2D")
+            {
+                findElementByStringAndMethod(".//*[@id='rdoChartStyle2D']").Click();
+            }
+            else
+            {
+                findElementByStringAndMethod(".//*[@id='rdoChartStyle3D']").Click();
+            }
         }
 
         public void submitpanelInformation(Panel panel)
@@ -193,6 +284,26 @@ namespace MLH_Selenium.PageObject
             return result;
         }
 
+        public bool isCategoryCaptionTextboxEnable()
+        {
+            bool result = true;
+            if (CategoryCaption_txt.Enabled == true)
+                result = true;
+            else if (CategoryCaption_txt.Enabled == false)
+                result = false;
+            return result;
+        }
+
+        public bool isSeriesCaptionTextboxEnable()
+        {
+            bool result = true;
+            if (SeriesCaption_txt.Enabled == true)
+                result = true;
+            else if (SeriesCaption_txt.Enabled == false)
+                result = false;
+            return result;
+        }
+
         public bool isDataLabelsValuesCheckboxEnable()
         {
             bool result = true;
@@ -217,6 +328,19 @@ namespace MLH_Selenium.PageObject
         {
             Thread.Sleep(500);
             ChartType_Cb.SelectByText(name);
+        }
+
+        public void selectShowTitle(bool showtitle)
+        {
+            if (showtitle==true)
+            {
+                ShowTitle_chk.Check();
+            }
+
+            else
+            {
+                ShowTitle_chk.UnCheck();
+            }
         }
 
         public bool isItemBelongsToSelectPage(string item)
@@ -257,13 +381,52 @@ namespace MLH_Selenium.PageObject
             OK_Btn.Click();
         }
 
-        public PanelPage EditPanel(string displayname)
+        public void CloseWarningDialog()
+        {
+            driver.FindElement(By.Id("")).SendKeys(Keys.Escape);
+        }
+
+
+        public PanelPage EditPanel(string type, string series)
         {
             Edit_lnk.Click();
-            PanelName_Txt.Clear();
-            PanelName_Txt.SendKeys(displayname);
+            selectTypeOfPanel(type);
+            PanelName_Txt.SendKeys(Utilities.GenerateRandomString(5));
+            Series_Cb.SelectByText(series);
             OK_Btn.Click();
             return this;
+        }
+
+        public PanelPage AddPanel(string type, string dataprofile, string charttitle, bool showtitle, string charttype, string style, string categorycaption ,string series, string seriescaption, string legends, string datalabels)
+        {            
+            selectTypeOfPanel(type);
+            DataProfile_Cb.SelectByText(dataprofile);
+            PanelName_Txt.SendKeys(Utilities.GenerateRandomString(5));
+            ChartTitle_txt.SendKeys(charttitle);
+            selectShowTitle(showtitle);
+            ChartType_Cb.SelectByText(charttype);
+            selectStyle(style);
+            CategoryCaption_txt.SendKeys(categorycaption);
+            Series_Cb.SelectByText(series);
+            SeriesCaption_txt.SendKeys(seriescaption);
+            selectLegends(legends);
+            selectDataLabels(datalabels);
+            OK_Btn.Click();
+            return this;
+        }
+
+        public PanelPage AddPanelConfiguration(string height, string folder)
+        {
+            Height_txt.SendKeys(height);
+            Folder_txt.SendKeys(folder);
+            ConfigurationOK_Btn.Click();
+            return this;
+        }
+
+        public DashboardPage ClosePanelConfiguration()
+        {
+            Cancel_Btn.Click();
+            return new DashboardPage();
         }
 
         public string GetDisplayName(string displayname)

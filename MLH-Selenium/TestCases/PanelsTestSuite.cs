@@ -340,6 +340,226 @@ namespace MLH_Selenium.TestCases
         }
 
         [TestMethod]
+        public void DA_PANEL_TC037()
+        {
+            string repo = "SampleRepository";
+            string user = "administrator";
+            string pass = "";
+
+            Console.WriteLine("DA_PANEL_TC037 - Verify that \"Category\", \"Series\" and \"Caption\" field are enabled and disabled correctly corresponding to each type of the \"Chart Type\"");
+            //1     Navigate to Dashboard login page
+            //2     Select a specific repository
+            //3     Enter valid Username and Password
+            //4     Click 'Login' button
+            LoginPage loginpage = new LoginPage();
+            loginpage.open();
+            DashboardPage dashboard = new DashboardPage();
+            dashboard = loginpage.LoginWithValidUser(repo, user, pass);
+            //5     Click 'Add Page' button
+            //6     Enter Page Name
+            //7     Click 'OK' button
+            ManagePagesPage pages = new ManagePagesPage();
+            pages = dashboard.goToAddPage();
+            Page page = new Page();
+            page.InitPageInformation();
+            dashboard = pages.addNewpage(page);
+            //8     Click 'Choose Panels' button below 'main_hung' button
+            //9     Click 'Create new panel' button
+            PanelPage panels = new PanelPage();
+            panels = dashboard.goToAddPanelByChoosePanel();
+            //10    Click 'Chart Type' drop - down menu
+            //11    Select 'Pie' Chart Type
+            panels.ChartType_Cb.SelectByText("Pie");
+            //12    VP. Check that 'Category' and 'Caption' are disabled, 'Series' is enabled
+            Assert.IsFalse(panels.isDataLabelsCategoriesCheckboxEnable(), "Categories checkbox is enable");
+            Assert.IsTrue(panels.isDataLabelsSeriesCheckboxEnable(), "Series checkbox is disable");
+
+            //13    Click 'Chart Type' drop - down menu
+            //14    Select 'Single Bar' Chart Type
+            panels.ChartType_Cb.SelectByText("Single Bar");
+            //15    Check that 'Category' is disabled, 'Series' and 'Caption' are enabled
+            Assert.IsFalse(panels.isDataLabelsCategoriesCheckboxEnable(), "Categories checkbox is enable");
+            Assert.IsTrue(panels.isDataLabelsSeriesCheckboxEnable(), "Series checkbox is disable");
+            Assert.IsTrue(panels.isSeriesCaptionTextboxEnable(), "Category Caption checkbox is enable");
+
+            //16    Click 'Chart Type' drop - down menu
+            //17    Select 'Stacked Bar' Chart Type
+            panels.ChartType_Cb.SelectByText("Stacked Bar");
+            //18    Check that 'Category' ,'Series' and 'Caption' are enabled
+            Assert.IsFalse(panels.isDataLabelsCategoriesCheckboxEnable(), "Categories checkbox is enable");
+            Assert.IsTrue(panels.isDataLabelsSeriesCheckboxEnable(), "Series checkbox is enable");
+            Assert.IsTrue(panels.isSeriesCaptionTextboxEnable(), "Category Caption checkbox is enable");
+
+            //19    Click 'Chart Type' drop - down menu
+            //20    Select 'Group Bar' Chart Type
+            panels.ChartType_Cb.SelectByText("Group Bar");
+            //21    Check that 'Category' ,'Series' and 'Caption' are enabled
+            Assert.IsFalse(panels.isDataLabelsCategoriesCheckboxEnable(), "Categories checkbox is enable");
+            Assert.IsTrue(panels.isDataLabelsSeriesCheckboxEnable(), "Series checkbox is enable");
+            Assert.IsTrue(panels.isSeriesCaptionTextboxEnable(), "Category Caption checkbox is enable");
+            //22    Click 'Chart Type' drop - down menu
+            //23    Select 'Line' Chart Type
+            panels.ChartType_Cb.SelectByText("Line");
+            //24    Check that 'Category' ,'Series' and 'Caption' are enabled
+            Assert.IsFalse(panels.isDataLabelsCategoriesCheckboxEnable(), "Categories checkbox is enable");
+            Assert.IsTrue(panels.isDataLabelsSeriesCheckboxEnable(), "Series checkbox is enable");
+            Assert.IsTrue(panels.isSeriesCaptionTextboxEnable(), "Category Caption checkbox is enable");
+        }
+
+        [TestMethod]
+        public void DA_PANEL_TC038()
+        {
+            string repo = "SampleRepository";
+            string user = "administrator";
+            string pass = "";
+
+            Console.WriteLine("DA_PANEL_TC038 - Verify that all settings within \"Add New Panel\" and \"Edit Panel\" form stay unchanged when user switches between \"2D\" and \"3D\" radio buttons");
+            //1     Navigate to Dashboard login page
+            //2     Select a specific repository
+            //3     Enter valid Username and Password
+            //4     Click 'Login' button
+            LoginPage loginpage = new LoginPage();
+            loginpage.open();
+            DashboardPage dashboard = new DashboardPage();
+            dashboard = loginpage.LoginWithValidUser(repo, user, pass);
+            //5     Click 'Add Page' button
+            //6     Enter Page Name
+            //7     Click 'OK' button
+            ManagePagesPage pages = new ManagePagesPage();
+            pages = dashboard.goToAddPage();
+            Page page = new Page();
+            page.InitPageInformation();
+            dashboard = pages.addNewpage(page);
+            //8     Click 'Choose Panels' button below 'main_hung' button
+            //9     Click 'Create new panel' button
+            PanelPage panels = new PanelPage();
+            panels = dashboard.goToAddPanelByChoosePanel();
+            //10    Click 'Chart Type' drop - down menu
+            //11    Select a specific Chart Type
+            //12    Select 'Data Profile' drop - down menu
+            //13    Enter 'Display Name' and 'Chart Title'
+            //14    Select 'Show Title' checkbox
+            //15    Select 'Legends' radio button
+            //16    Select 'Style' radio button
+            panels.AddPanel("Chart", "Test Case Execution", "My Title", true, "Stacked Bar", "3D", "", "Name", "", "Top", "Series");
+            //17    Check that settings of 'Chart Type', 'Data Profile', 'Display Name', 'Chart Title', 'Show Title' and 'Legends' stay unchanged.
+            string charttype =panels.ChartType_Cb.SelectedOption.ToString();
+            Assert.Equals("Chart", charttype);
+
+            string dataprofile = panels.DataProfile_Cb.SelectedOption.ToString();
+            Assert.Equals("Test Case Execution", dataprofile);
+
+            string charttitle = panels.ChartTitle_txt.Text.ToString();
+            Assert.Equals("My Title", charttitle);
+
+            bool showtitle = panels.ShowTitle_chk.Selected;
+            Assert.Equals(true, showtitle);
+
+            //18    Select 'Style' radio button
+            panels.AddPanel("Chart", "Test Case Execution", "", true, "Stacked Bar", "2D", "", "Name", "", "Top", "Series");
+            //19    Check that settings of 'Chart Type', 'Data Profile', 'Display Name', 'Chart Title', 'Show Title' and 'Legends' stay unchanged.
+            charttype = panels.ChartType_Cb.SelectedOption.ToString();
+            Assert.Equals("Chart", charttype);
+
+            dataprofile = panels.DataProfile_Cb.SelectedOption.ToString();
+            Assert.Equals("Test Case Execution", dataprofile);
+
+            charttitle = panels.ChartTitle_txt.Text.ToString();
+            Assert.Equals("My Title", charttitle);
+
+            showtitle = panels.ShowTitle_chk.Selected;
+            Assert.Equals(true, showtitle);
+            //20    Click OK button
+            panels.OK_Btn.Click();
+            //21    Select a page in drop - down menu
+            //22    Enter path of Folder
+            //23    Click OK button
+            panels.AddPanelConfiguration("400", "/Dashboard");
+            //24    Click 'Edit Panel' button of panel 'hung_panel'
+            panels.Edit_lnk.Click();
+            //25    Select 'Style' radio button
+            panels.selectStyle("3D");
+            //26    Check that settings of 'Chart Type', 'Data Profile', 'Display Name', 'Chart Title', 'Show Title' and 'Legends' stay unchanged.
+            charttype = panels.ChartType_Cb.SelectedOption.ToString();
+            Assert.Equals("Chart", charttype);
+
+            dataprofile = panels.DataProfile_Cb.SelectedOption.ToString();
+            Assert.Equals("Test Case Execution", dataprofile);
+
+            charttitle = panels.ChartTitle_txt.Text.ToString();
+            Assert.Equals("My Title", charttitle);
+
+            showtitle = panels.ShowTitle_chk.Selected;
+            Assert.Equals(true, showtitle);
+            //27    Select 'Style' radio button
+            panels.selectStyle("2D");
+            //28    Check that settings of 'Chart Type', 'Data Profile', 'Display Name', 'Chart Title', 'Show Title' and 'Legends' stay unchanged.
+            charttype = panels.ChartType_Cb.SelectedOption.ToString();
+            Assert.Equals("Chart", charttype);
+
+            dataprofile = panels.DataProfile_Cb.SelectedOption.ToString();
+            Assert.Equals("Test Case Execution", dataprofile);
+
+            charttitle = panels.ChartTitle_txt.Text.ToString();
+            Assert.Equals("My Title", charttitle);
+
+            showtitle = panels.ShowTitle_chk.Selected;
+            Assert.Equals(true, showtitle);
+        }
+
+        [TestMethod]
+        public void DA_PANEL_TC039()
+        {
+            string repo = "SampleRepository";
+            string user = "administrator";
+            string pass = "";
+
+            Console.WriteLine("DA_PANEL_TC039 - Verify that all settings within \"Add New Panel\" and \"Edit Panel\" form stay unchanged when user switches between \"Legends\" radio buttons");
+            //1     Navigate to Dashboard login page
+            //2     Login with valid account
+            LoginPage loginpage = new LoginPage();
+            loginpage.open();
+            DashboardPage dashboard = new DashboardPage();
+            dashboard = loginpage.LoginWithValidUser(repo, user, pass);
+            //3     Click Administer link
+            //4     Click Panel link
+            //5     Click Add New link
+            dashboard.goToPage("Administer/Panels");
+            PanelPage panels = dashboard.gotoAddPanel();
+
+            Panel panel = new Panel();
+            panel.InitPanelInformation();
+            panels = panels.addNewPanelInfo(panel);
+            //6     Click None radio button for Legend
+            panels.AddPanel("Chart", "Action Implementation By Status", "", false, "Pie", "2D", "", "Name", "", "None", "Series");
+            //7     Observe the current page
+            //8     Click Top radio button for Legend
+            panels.AddPanel("Chart", "Action Implementation By Status", "", false, "Pie", "2D", "", "Name", "", "Top", "Series");
+            //9     Observe the current page
+            //10    Click Right radio button for Legend
+            panels.AddPanel("Chart", "Action Implementation By Status", "", false, "Pie", "2D", "", "Name", "", "Right", "Series");
+            //11    Observe the current page
+            //12    Click Bottom radio button for Legend
+            panels.AddPanel("Chart", "Action Implementation By Status", "", false, "Pie", "2D", "", "Name", "", "Bottom", "Series");
+            //13    Observe the current page
+            //14    Click Left radio button for Legend
+            panels.AddPanel("Chart", "Action Implementation By Status", "", false, "Pie", "2D", "", "Name", "", "Left", "Series");
+            //15    Observe the current page
+            //16    Create a new panel
+            //17    Click Edit Panel link
+            //18    Click None radio button for Legend
+            //19    Observe the current page
+            //20    Click Top radio button for Legend
+            //21    Observe the current page
+            //22    Click Right radio button for Legend
+            //23    Observe the current page
+            //24    Click Bottom radio button for Legend
+            //25    Observe the current page
+            //26    Click Left radio button for Legend
+            //27    Observe the current page
+        }
+
+        [TestMethod]
         public void DA_PANEL_TC040()
         {
             string repo = "SampleRepository";
@@ -915,23 +1135,21 @@ namespace MLH_Selenium.TestCases
             //7     Click Edit link
             //8     Edit panel name with special characters
             //9     Click Ok button
-
             //10    VP. Observe the current page
-            string actual = panelpage.EditPanel("test#$").GetAlertMessage();
+            string actual = panelpage.EditPanel("test#$","Name").GetAlertMessage();
             string expected = "Invalid display name. The name can't contain high ASCII characters or any of following characters: /:*?<>|\"#{[]{};";
             Assert.AreEqual(expected, actual);
             //11    Close warning message box
-
+            panelpage.CloseWarningDialog();
             //12    Click Edit link
             //13    Edit panel name with special character is @
             //14    Click Ok button
-            panelpage.EditPanel("test@");
+            panelpage.EditPanel("test@", "Name");
             //15    VP. Observe the current page
 
-            actual = panelpage.EditPanel("test#$").GetDisplayName("test@");
+            actual = panelpage.EditPanel("test#$", "Name").GetDisplayName("test@");
             expected = "test@";
             Assert.AreEqual(expected, actual);
-
         }
 
         [TestMethod]
@@ -958,24 +1176,23 @@ namespace MLH_Selenium.TestCases
             //5      Click Create New Panel button
             //6      Enter all required fields on Add New Panel page
             //7      Click Ok button
-            //8      Enter invalid height into Height field
-            //9      Click Ok button
             PanelPage panels = new PanelPage();
             panels = dashboard.goToAddPanelByChoosePanel();
-
-            Panel panel = new Panel();
-            panel.AddPanel("Chart", "Name", "200", "/Car Rental/Actions");
-            panels = panels.addNewPanelInfo(panel).addNewPageConfig(panel);
-
+            panels.AddPanel("Chart", "Action Implementation By Status", "", false, "Pie", "2D", "", "Name", "", "Bottom", "Series");
+            //8      Enter invalid height into Height field
+            //9      Click Ok button
+            panels.AddPanelConfiguration("200", "/Car Rental/Actions");
             //10     Observe the current page
-            //string actual = panel.AddPanel("Chart", "Name", "200", "/Car Rental/Actions").GetAlertMessage();
-            //string expected = "Panel Height must be greater than or equal to 300 and lower than or equal to 800";
-            //Assert.AreEqual(expected, actual);
+            string actual = panels.AddPanel("Chart", "Action Implementation By Status", "", false, "Pie", "2D", "", "Name", "", "Bottom", "Series").GetAlertMessage();
+            string expected = "Panel Height must be greater than or equal to 300 and lower than or equal to 800";
+            Assert.AreEqual(expected, actual);
             //11     Close Warning Message box
-
+            dashboard = panels.ClosePanelConfiguration();
             //12     Enter valid height into Height field
             //13     Click Ok button
+            panels.AddPanelConfiguration("400", "/Car Rental/Actions");
             //14     Observe the current page
+
         }
 
         [TestMethod]
