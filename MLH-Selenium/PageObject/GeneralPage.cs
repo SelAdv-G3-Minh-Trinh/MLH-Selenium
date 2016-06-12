@@ -303,6 +303,12 @@ namespace MLH_Selenium.PageObject
             return new ManageProfilePage();
         }
 
+        /// <summary>
+        /// Goes to manage panel.
+        /// </summary>
+        /// <returns>Manage Panel Page displays</returns>
+        /// <author>Linh Dang</author>
+        /// <createdDate>6/12/2016</createdDate>
         public ManagePanelPage goToManagePanel()
         {
             goToPage("Administer/Panels");
@@ -809,8 +815,6 @@ namespace MLH_Selenium.PageObject
             findElementByStringAndMethod(string.Format("//table[@width='100%']//tr//td//a[contains(@title,'{0}')]", name.Replace(" ", Common.Constant.nonBreakingSpace))).Click();
             return new ManagePanelPage();
         }
-
-
         #endregion
     }
 }

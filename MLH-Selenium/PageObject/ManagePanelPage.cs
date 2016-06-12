@@ -10,166 +10,430 @@ namespace MLH_Selenium.PageObject
     public class ManagePanelPage : GeneralPage
     {
         #region Elements
+        /// <summary>
+        /// Gets the panel name_ text.
+        /// </summary>
+        /// <value>
+        /// The panel name_ text.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public WebElement PanelName_Txt
         {
             get { return findElementByStringAndMethod("//input[@name='txtDisplayName']"); }
         }
 
+        /// <summary>
+        /// Gets the delete_ LNK.
+        /// </summary>
+        /// <value>
+        /// The delete_ LNK.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public WebElement Delete_Lnk
         {
             get { return findElementByStringAndMethod("//div[@class='panel_tag2']/a[.='Delete']"); }
         }
 
+        /// <summary>
+        /// Gets the o k_ BTN.
+        /// </summary>
+        /// <value>
+        /// The o k_ BTN.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public WebElement OK_Btn
         {
             get { return findElementByStringAndMethod("//div[@id='div_panelPopup']//div[@class='div_button']/input[@id='OK']"); }
         }
 
+        /// <summary>
+        /// Gets the cancel_ BTN.
+        /// </summary>
+        /// <value>
+        /// The cancel_ BTN.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public WebElement Cancel_Btn
         {
             get { return findElementByStringAndMethod("//div[@id='div_panelPopup']//div[@class='div_button']/input[@id='Cancel']"); }
         }
 
+        /// <summary>
+        /// Gets the ok panel configuration_ BTN.
+        /// </summary>
+        /// <value>
+        /// The ok panel configuration_ BTN.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public WebElement OKPanelConfiguration_Btn
         {
             get { return findElementByStringAndMethod("//div[@id='div_panelConfigurationDlg']//div[@class='div_button']/input[@id='OK']"); }
         }
 
+        /// <summary>
+        /// Gets the panel configuration cancel_ BTN.
+        /// </summary>
+        /// <value>
+        /// The panel configuration cancel_ BTN.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public WebElement PanelConfigurationCancel_Btn
         {
             get { return findElementByStringAndMethod("//div[@id='div_panelConfigurationDlg']//div[@class='div_button']/input[@id='Cancel']"); }
         }
 
+        /// <summary>
+        /// Gets the edit_lnk.
+        /// </summary>
+        /// <value>
+        /// The edit_lnk.
+        /// </value>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>5/14/2016</createdDate>
         public WebElement Edit_lnk
         {
             get { return findElementByStringAndMethod(".//*[@id='chkDelPanel']"); }
         }
 
+        /// <summary>
+        /// Gets the data profile_ cb.
+        /// </summary>
+        /// <value>
+        /// The data profile_ cb.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public SelectElement DataProfile_Cb
         {
             get { return new SelectElement(findElementByStringAndMethod("//select[@name='cbbProfile']")); }
         }
 
+        /// <summary>
+        /// Gets the chart type_ cb.
+        /// </summary>
+        /// <value>
+        /// The chart type_ cb.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public SelectElement ChartType_Cb
         {
             get { return new SelectElement(findElementByStringAndMethod("//select[@name='cbbChartType']")); }
         }
 
+        /// <summary>
+        /// Gets the category_ cb.
+        /// </summary>
+        /// <value>
+        /// The category_ cb.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public SelectElement Category_Cb
         {
             get { return new SelectElement(findElementByStringAndMethod("//*[@id='cbbCategoryField']")); }
         }
 
+        /// <summary>
+        /// Gets the series_ cb.
+        /// </summary>
+        /// <value>
+        /// The series_ cb.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public SelectElement Series_Cb
         {
             get { return new SelectElement(findElementByStringAndMethod("//select[@name='cbbSeriesField']")); }
         }
 
+        /// <summary>
+        /// Gets the data labels series_ CHK.
+        /// </summary>
+        /// <value>
+        /// The data labels series_ CHK.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public WebElement DataLabelsSeries_Chk
         {
             get { return findElementByStringAndMethod("//input[@name='chkSeriesName']"); }
         }
 
+        /// <summary>
+        /// Gets the data labels categories_ CHK.
+        /// </summary>
+        /// <value>
+        /// The data labels categories_ CHK.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public WebElement DataLabelsCategories_Chk
         {
             get { return findElementByStringAndMethod("//input[@name='chkCategoriesName']"); }
         }
 
+        /// <summary>
+        /// Gets the data labels value_ CHK.
+        /// </summary>
+        /// <value>
+        /// The data labels value_ CHK.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public WebElement DataLabelsValue_Chk
         {
             get { return findElementByStringAndMethod("//input[@name='chkValue']"); }
         }
 
+        /// <summary>
+        /// Gets the data labels percentage_ CHK.
+        /// </summary>
+        /// <value>
+        /// The data labels percentage_ CHK.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public WebElement DataLabelsPercentage_Chk
         {
             get { return findElementByStringAndMethod("//input[@name='chkPercentage']"); }
         }
 
+        /// <summary>
+        /// Gets the chart title_txt.
+        /// </summary>
+        /// <value>
+        /// The chart title_txt.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public WebElement ChartTitle_txt
         {
             get { return findElementByStringAndMethod("//input[@id='txtChartTitle']"); }
         }
 
+        /// <summary>
+        /// Gets the show title_ CHK.
+        /// </summary>
+        /// <value>
+        /// The show title_ CHK.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public WebElement ShowTitle_Chk
         {
             get { return findElementByStringAndMethod("//input[@id='chkShowTitle']"); }
         }
 
+        /// <summary>
+        /// Gets the style2 d_ RAD.
+        /// </summary>
+        /// <value>
+        /// The style2 d_ RAD.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public WebElement Style2D_Rad
         {
             get { return findElementByStringAndMethod("//input[@id='rdoChartStyle2D']"); }
         }
 
+        /// <summary>
+        /// Gets the style3 d_ RAD.
+        /// </summary>
+        /// <value>
+        /// The style3 d_ RAD.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public WebElement Style3D_Rad
         {
             get { return findElementByStringAndMethod("//input[@id='rdoChartStyle3D']"); }
         }
 
+        /// <summary>
+        /// Gets the legend none_ RAD.
+        /// </summary>
+        /// <value>
+        /// The legend none_ RAD.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public WebElement LegendNone_Rad
         {
             get { return findElementByStringAndMethod("//input[@id='radPlacementNone']"); }
         }
 
+        /// <summary>
+        /// Gets the legend top_ RAD.
+        /// </summary>
+        /// <value>
+        /// The legend top_ RAD.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public WebElement LegendTop_Rad
         {
             get { return findElementByStringAndMethod("//input[@id='radPlacementTop']"); }
         }
 
+        /// <summary>
+        /// Gets the legend right_ RAD.
+        /// </summary>
+        /// <value>
+        /// The legend right_ RAD.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public WebElement LegendRight_Rad
         {
             get { return findElementByStringAndMethod("//input[@id='radPlacementRight']"); }
         }
 
+        /// <summary>
+        /// Gets the legend left_ RAD.
+        /// </summary>
+        /// <value>
+        /// The legend left_ RAD.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public WebElement LegendLeft_Rad
         {
             get { return findElementByStringAndMethod("//input[@id='radPlacementLeft']"); }
         }
 
+        /// <summary>
+        /// Gets the legend bottom_ RAD.
+        /// </summary>
+        /// <value>
+        /// The legend bottom_ RAD.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public WebElement LegendBottom_Rad
         {
             get { return findElementByStringAndMethod("//input[@id='radPlacementBottom']"); }
         }
 
+        /// <summary>
+        /// Gets the select page_ cb.
+        /// </summary>
+        /// <value>
+        /// The select page_ cb.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public SelectElement SelectPage_Cb
         {
             get { return new SelectElement(findElementByStringAndMethod("//select[@name='cbbPages']")); }
         }
 
+        /// <summary>
+        /// Gets the height_txt.
+        /// </summary>
+        /// <value>
+        /// The height_txt.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public WebElement Height_txt
         {
             get { return findElementByStringAndMethod("//input[@id='txtHeight']"); }
         }
 
+        /// <summary>
+        /// Gets the folder_txt.
+        /// </summary>
+        /// <value>
+        /// The folder_txt.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public WebElement Folder_txt
         {
             get { return findElementByStringAndMethod("//input[@id='txtFolder']"); }
         }
 
+        /// <summary>
+        /// Gets the ok select folder_btn.
+        /// </summary>
+        /// <value>
+        /// The ok select folder_btn.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public WebElement OkSelectFolder_btn
         {
             get { return findElementByStringAndMethod("//input[@id='btnFolderSelectionOK']"); }
         }
 
+        /// <summary>
+        /// Gets the folder_img.
+        /// </summary>
+        /// <value>
+        /// The folder_img.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public WebElement Folder_img
         {
             get { return findElementByStringAndMethod("//img[@src='images/folderopen.gif']"); }
         }
 
+        /// <summary>
+        /// Gets the caption X_TXT.
+        /// </summary>
+        /// <value>
+        /// The caption X_TXT.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public WebElement CaptionX_txt
         {
             get { return findElementByStringAndMethod("//input[@id='txtCategoryXAxis']"); }
         }
 
+        /// <summary>
+        /// Gets the caption y_txt.
+        /// </summary>
+        /// <value>
+        /// The caption y_txt.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public WebElement CaptionY_txt
         {
             get { return findElementByStringAndMethod("//input[@id='txtValueYAxis']"); }
         }
 
+        /// <summary>
+        /// Gets the check all_lnk.
+        /// </summary>
+        /// <value>
+        /// The check all_lnk.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public WebElement CheckAll_lnk
         {
             get { return findElementByStringAndMethod("//a[text()='Check All']"); }
         }
 
+        /// <summary>
+        /// Gets the uncheck all_lnk.
+        /// </summary>
+        /// <value>
+        /// The uncheck all_lnk.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public WebElement UncheckAll_lnk
         {
             get { return findElementByStringAndMethod("//a[text()='UnCheck All']"); }
@@ -179,6 +443,12 @@ namespace MLH_Selenium.PageObject
 
         #region Actions
 
+        /// <summary>
+        /// Selects the type of panel.
+        /// </summary>
+        /// <param name="paneltype">The paneltype.</param>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public void selectTypeOfPanel(string paneltype)
         {
             if (paneltype == "Chart")
@@ -191,6 +461,12 @@ namespace MLH_Selenium.PageObject
                 findElementByStringAndMethod("//input[@id='radPanelType3").Click();
         }
 
+        /// <summary>
+        /// Submitpanels the information.
+        /// </summary>
+        /// <param name="panel">The panel.</param>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public void submitpanelInformation(Panel panel)
         {
             selectTypeOfPanel(panel.TypeOfPanel);
@@ -203,6 +479,12 @@ namespace MLH_Selenium.PageObject
             }
         }
 
+        /// <summary>
+        /// Submits the panel configuration.
+        /// </summary>
+        /// <param name="panel">The panel.</param>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public void submitPanelConfig(Panel panel)
         {
             Folder_txt.SendKeys(panel.Folder);
@@ -210,6 +492,13 @@ namespace MLH_Selenium.PageObject
             Height_txt.SendKeys(panel.Height);
         }
 
+        /// <summary>
+        /// Adds the new panel information.
+        /// </summary>
+        /// <param name="panel">The panel.</param>
+        /// <returns>Manage Panel Page displays</returns>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public ManagePanelPage addNewPanelInfo(Panel panel)
         {
             submitpanelInformation(panel);
@@ -218,6 +507,13 @@ namespace MLH_Selenium.PageObject
             return this;
         }
 
+        /// <summary>
+        /// Adds the new page configuration.
+        /// </summary>
+        /// <param name="panel">The panel.</param>
+        /// <returns>Mange Panel Page displays</returns>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public ManagePanelPage addNewPageConfig(Panel panel)
         {
             submitPanelConfig(panel);
@@ -226,6 +522,13 @@ namespace MLH_Selenium.PageObject
             return this;
         }
 
+        /// <summary>
+        /// Adds the new page without configuration.
+        /// </summary>
+        /// <param name="panel">The panel.</param>
+        /// <returns>Manage Panel page displays</returns>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public ManagePanelPage addNewPageWithoutConfig(Panel panel)
         {
             submitpanelInformation(panel);
@@ -234,15 +537,21 @@ namespace MLH_Selenium.PageObject
 
             return this;
         }
+
+        /// <summary>
+        /// Checks the type of the chart.
+        /// </summary>
+        /// <returns>true if chart displays in drop-down list, false if not</returns>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public bool checkChartType()
         {
             ReadOnlyCollection<IWebElement> types = driver.FindElements(By.XPath("//select[@name='cbbChartType']/option"), 5);
-            string[] chartTypes = Common.Constant.chartTypes;
 
             int count = 0;
             foreach (IWebElement type in types)
             {
-                foreach (string chartype in chartTypes)
+                foreach (string chartype in Common.Constant.chartTypes)
                 {
                     if (type.Text == chartype)
                     {
@@ -252,12 +561,18 @@ namespace MLH_Selenium.PageObject
                 }
             }
 
-            if (count == chartTypes.Length)
+            if (count == Common.Constant.chartTypes.Length)
                 return true;
             else
                 return false;
         }
 
+        /// <summary>
+        /// Determines whether [is data labels series checkbox enable].
+        /// </summary>
+        /// <returns>if Series drop down list is enable, false if not</returns>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public bool isDataLabelsSeriesCheckboxEnable()
         {
             bool result = true;
@@ -268,6 +583,12 @@ namespace MLH_Selenium.PageObject
             return result;
         }
 
+        /// <summary>
+        /// Determines whether [is data labels categories checkbox enable].
+        /// </summary>
+        /// <returns>true if categories drop down list is enable, false if not</returns>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public bool isDataLabelsCategoriesCheckboxEnable()
         {
             bool result = true;
@@ -278,6 +599,12 @@ namespace MLH_Selenium.PageObject
             return result;
         }
 
+        /// <summary>
+        /// Determines whether [is data labels values checkbox enable].
+        /// </summary>
+        /// <returns>true if enable, false if not</returns>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public bool isDataLabelsValuesCheckboxEnable()
         {
             bool result = true;
@@ -288,6 +615,12 @@ namespace MLH_Selenium.PageObject
             return result;
         }
 
+        /// <summary>
+        /// Determines whether [is data labels percentage checkbox enable].
+        /// </summary>
+        /// <returns>true if enable, false if not</returns>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/14/2016</createdDate>
         public bool isDataLabelsPercentageCheckboxEnable()
         {
             bool result = true;
@@ -298,24 +631,35 @@ namespace MLH_Selenium.PageObject
             return result;
         }
 
+        /// <summary>
+        /// Selects the type of the chart.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/21/2016</createdDate>
         public void selectChartType(string name)
         {
             Thread.Sleep(500);
             ChartType_Cb.SelectByText(name);
         }
 
-        public void enterFolderName(string name)
-        {
-            Folder_img.Click();
-            findElementByStringAndMethod(string.Format("//table//input[@value='{0}'")).Click();
-            OkSelectFolder_btn.Click();
-        }
-
+        /// <summary>
+        /// Gets the folder text.
+        /// </summary>
+        /// <returns>text of folder</returns>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/21/2016</createdDate>
         public string getFolderText()
         {
             return Folder_txt.GetAttribute("value");
         }
 
+        /// <summary>
+        /// Selects the folder.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/21/2016</createdDate>
         public void selectFolder(string path)
         {
             Folder_img.Click();
@@ -342,6 +686,13 @@ namespace MLH_Selenium.PageObject
             OkSelectFolder_btn.Click();
         }
 
+        /// <summary>
+        /// Creates the panel.
+        /// </summary>
+        /// <param name="displayname">The displayname.</param>
+        /// <param name="series">The series.</param>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/21/2016</createdDate>
         public void CreatePanel(string displayname, string series)
         {
             PanelName_Txt.SendKeys(displayname);
@@ -349,6 +700,13 @@ namespace MLH_Selenium.PageObject
             OK_Btn.Click();
         }
 
+        /// <summary>
+        /// Deletes the panel.
+        /// </summary>
+        /// <param name="displayName">The display name.</param>
+        /// <returns>Manage Panel Page displays</returns>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/21/2016</createdDate>
         public ManagePanelPage DeletePanel(string displayName)
         {
             WebElement element = findElementByStringAndMethod(string.Format("//a[.='{0}']/../preceding-sibling::td/input", displayName));
@@ -358,6 +716,13 @@ namespace MLH_Selenium.PageObject
             return this;
         }
 
+        /// <summary>
+        /// Edits the panel.
+        /// </summary>
+        /// <param name="displayname">The displayname.</param>
+        /// <returns>Manage Panel Page displays</returns>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/21/2016</createdDate>
         public ManagePanelPage EditPanel(string displayname)
         {
             PanelName_Txt.Clear();
@@ -366,6 +731,13 @@ namespace MLH_Selenium.PageObject
             return this;
         }
 
+        /// <summary>
+        /// Gets the display name.
+        /// </summary>
+        /// <param name="displayname">The displayname.</param>
+        /// <returns>name of panel</returns>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/21/2016</createdDate>
         public string GetDisplayName(string displayname)
         {
             string xpathUsername = "//a[@href='javascript:Dashboard.configPanel('b4lac0wg1iyr');' and text() = '{0}']";
@@ -373,6 +745,13 @@ namespace MLH_Selenium.PageObject
             return driver.FindElement(By.XPath(panelname)).Text;
         }
 
+        /// <summary>
+        /// Gets the setting value.
+        /// </summary>
+        /// <param name="panelSetting">The panel setting.</param>
+        /// <returns>panel setting panel displays</returns>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/21/2016</createdDate>
         public PanelSetting getSettingValue(PanelSetting panelSetting)
         {
             panelSetting.ChartTitle = ChartTitle_txt.GetAttribute("value");
@@ -390,6 +769,14 @@ namespace MLH_Selenium.PageObject
             return panelSetting;
         }
 
+        /// <summary>
+        /// Checks the setting value.
+        /// </summary>
+        /// <param name="expected">The expected.</param>
+        /// <param name="actual">The actual.</param>
+        /// <returns>true if corrected, false if not</returns>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/21/2016</createdDate>
         public bool checkSettingValue(PanelSetting expected, PanelSetting actual)
         {
             bool result = true;
@@ -445,27 +832,56 @@ namespace MLH_Selenium.PageObject
             return result;
         }
 
+        /// <summary>
+        /// Selecteds the series checkbox.
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/21/2016</createdDate>
         public void selectedSeriesCheckbox()
         {
             DataLabelsSeries_Chk.Click();
         }
 
+        /// <summary>
+        /// Selecteds the percentage checkbox.
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/21/2016</createdDate>
         public void selectedPercentageCheckbox()
         {
             DataLabelsPercentage_Chk.Click();
         }
 
+        /// <summary>
+        /// Selecteds the value checkbox.
+        /// </summary>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/21/2016</createdDate>
         public void selectedValueCheckbox()
         {
             DataLabelsValue_Chk.Click();
         }
 
+        /// <summary>
+        /// go to the edit panel.
+        /// </summary>
+        /// <param name="panelName">Name of the panel.</param>
+        /// <returns>manage panel page displays</returns>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/21/2016</createdDate>
         public ManagePanelPage gotoEditPanel(string panelName)
         {
             findElementByStringAndMethod(string.Format("//a[.='{0}']/../following-sibling::td/a[text()='Edit']", panelName)).Click();
             return this;
         }
 
+        /// <summary>
+        /// Checks the setting form location.
+        /// </summary>
+        /// <param name="settingName">Name of the setting.</param>
+        /// <returns>true if settting form displays, false if not </returns>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/21/2016</createdDate>
         public bool checkSettingFormLocation (string settingName)
         {
             bool result = false;
@@ -475,23 +891,52 @@ namespace MLH_Selenium.PageObject
             return result;
         }
 
+        /// <summary>
+        /// Determines whether [is panel created] [the specified panel name].
+        /// </summary>
+        /// <param name="panelName">Name of the panel.</param>
+        /// <returns>true if panel displays, false if not</returns>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/28/2016</createdDate>
         public bool isPanelCreated(string panelName)
         {
             return findElementByStringAndMethod(string.Format("//div[@class='al_lft' and .='{0}']", panelName)).Displayed;
         }
 
+        /// <summary>
+        /// Checks the page belongs to select page.
+        /// </summary>
+        /// <param name="item">The item.</param>
+        /// <returns>true if item displays, false if not</returns>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/28/2016</createdDate>
         public bool checkPageBelongsToSelectPage(string item)
         {
             ReadOnlyCollection<IWebElement> pages = driver.FindElements(By.XPath("//select[@name='cbbPages']/option"));
             return isItemBelongsToDropdownlist(item, pages);
         }
 
+        /// <summary>
+        /// Checks the data profile belong profile drop down.
+        /// </summary>
+        /// <param name="item">The item.</param>
+        /// <returns>true if data displays, false if not</returns>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/28/2016</createdDate>
         public bool checkDataProfileBelongProfileDropDown(string item)
         {
             ReadOnlyCollection<IWebElement> profiles = driver.FindElements(By.XPath("//select[@name='cbbProfile']/option"));
             return isItemBelongsToDropdownlist(item, profiles);
         }
 
+        /// <summary>
+        /// Edits the panel configuration.
+        /// </summary>
+        /// <param name="old">The old.</param>
+        /// <param name="newvalue">The newvalue.</param>
+        /// <returns>Dashboard page displays</returns>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/29/2016</createdDate>
         public DashboardPage editPanelConfiguration(Panel old, Panel newvalue)
         {
             if (old.SelectPage == newvalue.SelectPage && old.Height == newvalue.Height && old.Folder == newvalue.Folder)
@@ -510,6 +955,13 @@ namespace MLH_Selenium.PageObject
             return new DashboardPage();
         }
 
+        /// <summary>
+        /// Gets the panel configuration value.
+        /// </summary>
+        /// <param name="panel">The panel.</param>
+        /// <returns>panel returns</returns>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/29/2016</createdDate>
         public Panel getPanelConfigValue(Panel panel)
         {
             panel.SelectPage = SelectPage_Cb.SelectedOption.Text;
@@ -519,6 +971,14 @@ namespace MLH_Selenium.PageObject
             return panel;
         }
 
+        /// <summary>
+        /// Edits the panel setting value.
+        /// </summary>
+        /// <param name="old">The old.</param>
+        /// <param name="newvalue">The newvalue.</param>
+        /// <returns>Dashboard page displays</returns>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/29/2016</createdDate>
         public DashboardPage editPanelSettingValue (PanelSetting old, PanelSetting newvalue)
         {
             if (old.ChartTitle == newvalue.ChartTitle && old.ShowTitle == newvalue.ShowTitle && old.ChartType == newvalue.ChartType && old.Cattegory == newvalue.Cattegory
@@ -556,18 +1016,38 @@ namespace MLH_Selenium.PageObject
             return new DashboardPage();
         }
 
+        /// <summary>
+        /// Closes the panel settingpage.
+        /// </summary>
+        /// <returns>Dashboard page displays</returns>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/28/2016</createdDate>
         public DashboardPage closePanelSettingpage()
         {
             OK_Btn.Click();
             return new DashboardPage();
         }
 
+        /// <summary>
+        /// Closes the panel configurepage.
+        /// </summary>
+        /// <returns>Dashboard page displays</returns>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/28/2016</createdDate>
         public DashboardPage closePanelConfigurepage()
         {
             OKPanelConfiguration_Btn.Click();
             return new DashboardPage();
         }
 
+        /// <summary>
+        /// Checks the statusof all checkbox.
+        /// </summary>
+        /// <returns>true if all check box is checked, false if not</returns>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/28/2016</createdDate>
+        /// <modifyBy>Minh Trinh</modifyBy>
+        /// <modifyDate>5/29/2016</modifyDate>
         public bool checkStatusofAllCheckbox()
         {
             var collection = driver.FindElements(By.XPath("//table[@class='GridView']//tr/td[count(//table[@class='GridView']//th[text()='Panel Name'])]/input[@name='chkDelPanel']"));
@@ -579,18 +1059,36 @@ namespace MLH_Selenium.PageObject
             return false;
         }
 
+        /// <summary>
+        /// Checks all checkboxes are checked.
+        /// </summary>
+        /// <returns>true if checked, false if not</returns>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/29/2016</createdDate>
         public bool checkAllCheckboxesAreChecked()
         {
             CheckAll_lnk.Click();
             return checkStatusofAllCheckbox();
         }
 
+        /// <summary>
+        /// Checks all checkboxes are un checked.
+        /// </summary>
+        /// <returns>true if checked, false if not</returns>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/29/2016</createdDate>
         public bool checkAllCheckboxesAreUnChecked()
         {
             UncheckAll_lnk.Click();
             return checkStatusofAllCheckbox();
         }
 
+        /// <summary>
+        /// Clicks the create new panel.
+        /// </summary>
+        /// <returns>manage panel page displays</returns>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/29/2016</createdDate>
         public ManagePanelPage clickCreateNewPanel()
         {
             CreatePanel_Btn.Click();
