@@ -1666,7 +1666,6 @@ namespace MLH_Selenium.TestCases
             PanelSetting edit = new PanelSetting();
             edit = panels.getSettingValue(edit);
 
-            Console.WriteLine("wait");
             Assert.AreEqual(newvalue.CaptionX, edit.CaptionX, "value is not saved.");
             Assert.AreEqual(newvalue.CaptionY, edit.CaptionY, "value is not saved.");
             //Post - Condition  Close TA Dashboard
@@ -1706,6 +1705,9 @@ namespace MLH_Selenium.TestCases
             //11   VP Check original "Pie" - Edit Panel form is displayed
             //12   Close "Edit Panel" form
             ManagePanelPage panels = dashboard.gotoPanelConfigPageByName(panelname);
+            dashboard = panels.closePanelConfigurepage();
+            panels = dashboard.gotoEditPanelbyClickingEditIcon(panelname);
+
             PanelSetting old = new PanelSetting();
             old = panels.getSettingValue(old);
 
@@ -1725,6 +1727,9 @@ namespace MLH_Selenium.TestCases
             //18   VP Check original "Pie" - Edit Panel form is displayed
             //19   Close "Edit Panel" form
             ManagePanelPage panels1 = dashboard.gotoPanelConfigPageByName(panelname);
+            dashboard = panels1.closePanelConfigurepage();
+            panels1 = dashboard.gotoEditPanelbyClickingEditIcon(panelname);
+
             PanelSetting old1 = new PanelSetting();
             old1 = panels.getSettingValue(old1);
 
@@ -1744,6 +1749,9 @@ namespace MLH_Selenium.TestCases
             //25   VP Check original "Pie" - Edit Panel form is displayed
             //26   Close "Edit Panel" form
             ManagePanelPage panels2 = dashboard.gotoPanelConfigPageByName(panelname);
+            dashboard = panels2.closePanelConfigurepage();
+            panels2 = dashboard.gotoEditPanelbyClickingEditIcon(panelname);
+
             PanelSetting old2 = new PanelSetting();
             old2 = panels.getSettingValue(old2);
 
@@ -1762,6 +1770,9 @@ namespace MLH_Selenium.TestCases
             //31   Select Pie
             //32   VP Check original "Pie" - Edit Panel form is displayed
             ManagePanelPage panels3 = dashboard.gotoPanelConfigPageByName(panelname);
+            dashboard = panels3.closePanelConfigurepage();
+            panels3 = dashboard.gotoEditPanelbyClickingEditIcon(panelname);
+
             PanelSetting old3 = new PanelSetting();
             old3 = panels.getSettingValue(old3);
 
@@ -1827,16 +1838,16 @@ namespace MLH_Selenium.TestCases
             ManagePanelPage panels2 = new ManagePanelPage();
             Panel panel2 = new Panel();
             panel2.InitPanelInformation();
-            panels2 = dashboard.goToAddPanelByChoosePanel().addNewPageWithoutConfig(panel2);
+            panels2 = panels1.clickCreateNewPanel().addNewPageWithoutConfig(panel2);
             //20   Click 'Administer' link
             //21   Click 'Panels' link
-            panels2.goToPage("Administer/Panels");
+            panels2 = panels2.goToManagePanel();
             //22   Click 'Check All' link
             //23   VP Check that 'hung_a' checkbox and 'hung_b' checkbox are checked
             Assert.IsTrue(panels2.checkAllCheckboxesAreChecked(), "checkbox is not checked.");
             //24   Click 'Uncheck All' link
             //25   VP Check that 'hung_a' checkbox and 'hung_b' checkbox are unchecked
-            Assert.IsTrue(panels2.checkAllCheckboxesAreUnChecked(), "checkbox is checked.");
+            Assert.IsFalse(panels2.checkAllCheckboxesAreUnChecked(), "checkbox is checked.");
         }
     }
 }

@@ -196,10 +196,10 @@ namespace MLH_Selenium.PageObject
 
         public bool checkCheckboxinField()
         {
-            string[] displayFields = { "Name", "Description", "Source", "Assigned user", "Status", "Last updated by", "Created by", "Check out by", "Location", "Recent result", "Version", "Priority", "Last update date", "Creation date", "Notes", "URL" };
-            foreach (string displayField in displayFields)
+            ReadOnlyCollection<IWebElement> elements = driver.FindElements(By.XPath("//table[@id='profilesettings']/tbody/tr/td"));
+
+            foreach (WebElement element in elements)
             {
-                WebElement element = findElementByStringAndMethod(string.Format("//table[@id='profilesettings']/tbody/tr/td/label[.=' {0}']",displayField));
                 if (!element.GetAttribute("innerHTML").Contains("<input") || !element.GetAttribute("innerHTML").Contains("type=\"checkbox\""))
                     return false;
             }
@@ -209,7 +209,7 @@ namespace MLH_Selenium.PageObject
         public bool checkCheckboxinDisplayFieldisChecked()
         {
             var collection = driver.FindElements(By.XPath("//table[@id='profilesettings']//input[@class='box']"));
-            foreach(IWebElement elemement in collection)
+            foreach (IWebElement elemement in collection)
             {
                 if (elemement.Selected)
                     return true;
@@ -227,61 +227,75 @@ namespace MLH_Selenium.PageObject
             Uncheckall_lnk.Click();
         }
 
+        public int getIndexOfItemInList (IWebElement data, ReadOnlyCollection<IWebElement> list)
+        {
+            int index = 0;
+
+            foreach (IWebElement item in list)
+            {
+                if (item.Text == data.Text)
+                {
+                    index = list.IndexOf(data) + 1;
+                    break;
+                }
+            }
+            return index;
+        }
+
+        public int getRowIndexofIteminList(string item, string list)
+        {
+            int index = 0;
+            if (list == "Related Data")
+            {
+                for (int i = 0; i <= Constant.listRelatedData.GetLength(0); i++)
+                {
+                    if (item == Constant.listRelatedData[i, 0])
+                    {
+                        index = i;
+                        break;
+                    }
+                }
+            }
+            else if (list == "Related Type")
+            {
+                for (int i = 0; i <= Constant.listRelatedFields.GetLength(0); i++)
+                {
+                    if (item == Constant.listRelatedFields[i, 0])
+                    {
+                        index = i;
+                        break;
+                    }
+                }
+            }
+            return index;
+        }
+
         public bool checkRelatedDatePopulated(string type)
         {
-            ReadOnlyCollection<IWebElement> relatedData = driver.FindElements(By.XPath("//select[@id='cbbSubReport']/option"));
-            int numberOfRows = Constant.listRelatedData.Rank;
-            bool result = false;
-
             ItemType_ddl.SelectByText(type.ToLower());
 
-            for (int i = 0; i <= numberOfRows; i++)
+            ReadOnlyCollection<IWebElement> relatedData = driver.FindElements(By.XPath("//select[@id='cbbSubReport']/option"));
+            int indexrow = getRowIndexofIteminList(type, "Related Data");
+            foreach (IWebElement data in relatedData)
             {
-                if (type.ToLower() == Constant.listRelatedData[i, 0].ToLower())
-                {
-                    int numberofColumns =Constant.listRelatedData.GetLength(i);
-
-                    foreach (IWebElement data in relatedData)
-                    {
-                        for (int j = 0; j <= numberofColumns; j++)
-                        {
-                            if (data.Text == Constant.listRelatedData[i, j])
-                            {
-                                result = true;
-                                break;
-                            }
-                        }
-                    }
-                }
+                int indexcol = getIndexOfItemInList(data, relatedData);
+                if (data.Text.ToLower() != Constant.listRelatedData[indexrow, indexcol].ToLower())
+                    return false;
             }
-            return result;
+            return true; ;
         }
+
         public bool checkItemTypesPopulated(string type)
         {
-            ReadOnlyCollection<IWebElement> itemTypes = driver.FindElements(By.XPath("//select[@id='cbbFields']/option"));
-            int numberOfRows = Common.Constant.listRelatedFields.Rank;
-            bool result = false;
-
-            for (int i = 0; i <= numberOfRows; i++)
+            ReadOnlyCollection<IWebElement> relatedType = driver.FindElements(By.XPath("//select[@id='cbbFields']/option"));
+            int indexrow = getRowIndexofIteminList(type, "Related Type");
+            foreach (IWebElement elem in relatedType)
             {
-                if (type == Common.Constant.listRelatedFields[i, 0])
-                {
-                    int numberofColumns = Common.Constant.listRelatedFields.GetLength(i);
-
-                    foreach (IWebElement data in itemTypes)
-                    {
-                        for (int j = 0; j <= numberofColumns; j++)
-                        {
-                            if (data.Text == Common.Constant.listRelatedFields[i, j])
-                            {
-                                result = true;
-                                break;
-                            }
-                        }
-                    }
-                }
+                int indexcol = getIndexOfItemInList(elem, relatedType);
+                if (elem.Text.ToLower() != Constant.listRelatedFields[indexrow, indexcol].ToLower())
+                    return false;
             }
-            return result;
+            return true; ;
         }
 
         public bool navigateToProfileSettingPage(string name)
@@ -298,7 +312,16 @@ namespace MLH_Selenium.PageObject
 
         public void selectItemType(string type)
         {
-            ItemType_ddl.SelectByValue(type);
+            string result = type.TrimEnd('s').ToLower();
+            if (result == "interface entitie")
+            {
+                result = "interface entity";
+            }
+            if (result == "test result")
+            {
+                result = "result";
+            }
+            ItemType_ddl.SelectByValue(result);
         }
 
         public bool checkProfileSettingPageDisplay(string name)
@@ -331,22 +354,20 @@ namespace MLH_Selenium.PageObject
 
         public bool checkSortFiedlPageIsEmpty()
         {
+            Thread.Sleep(200);
             int row = driver.FindElements(By.XPath("//table[@id='profilesettings']//tr")).Count;
             if (row > 4)
-                return false;
-            return true;
+                return true;
+            return false;
         }
 
         public bool checkFilterFieldIsEmpty()
         {
-            int items = driver.FindElements(By.XPath("//select[@id='listCondition']/option")).Count;
-            if (items > 0)
-                return false;
-            return true;
-
+            WebElement element = findElementByStringAndMethod("//select[@id='listCondition']");
+            if (element.GetAttribute("innerHTML").Contains("<option"))
+                return true;
+            return false;
         }
-
         #endregion
-
     }
-    }
+}

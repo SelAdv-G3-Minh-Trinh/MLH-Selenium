@@ -354,35 +354,35 @@ namespace MLH_Selenium.TestCases
 
             //7    Select 'Test Modules' in 'Item Type' drop down list
             //8    VP Check 'Related Data' items listed correctly
-            Assert.IsTrue(profile.checkRelatedDatePopulated("test modules"), "Related data is wrong");
+            Assert.IsTrue(profile.checkRelatedDatePopulated("Test Modules"), "Related data is wrong");
 
             //9    Select 'Test Cases' in 'Item Type' drop down list
             //10   VP Check 'Related Data' items listed correctly
-            Assert.IsTrue(profile.checkRelatedDatePopulated("test cases"), "Related data is wrong");
+            Assert.IsTrue(profile.checkRelatedDatePopulated("Test Cases"), "Related data is wrong");
 
             //11   Select 'Test Objectives' in 'Item Type' drop down list
             //12   VP Check 'Related Data' items listed correctly
-            Assert.IsTrue(profile.checkRelatedDatePopulated("test objectives"), "Related data is wrong");
+            Assert.IsTrue(profile.checkRelatedDatePopulated("Test Objectives"), "Related data is wrong");
 
             //13   Select 'Data Sets' in 'Item Type' drop down list
             //14   VP Check 'Related Data' items listed correctly
-            Assert.IsTrue(profile.checkRelatedDatePopulated("data sets"), "Related data is wrong");
+            Assert.IsTrue(profile.checkRelatedDatePopulated("Data Sets"), "Related data is wrong");
 
             //15   Select 'Actions' in 'Item Type' drop down list
             //16   VP Check 'Related Data' items listed correctly
-            Assert.IsTrue(profile.checkRelatedDatePopulated("actions"), "Related data is wrong");
+            Assert.IsTrue(profile.checkRelatedDatePopulated("Actions"), "Related data is wrong");
 
             //17   Select 'Interface Entities' in 'Item Type' drop down list
             //18   VP Check 'Related Data' items listed correctly
-            Assert.IsTrue(profile.checkRelatedDatePopulated("interface entities"), "Related data is wrong");
+            Assert.IsTrue(profile.checkRelatedDatePopulated("Interface Entities"), "Related data is wrong");
 
             //19   Select 'Test Results' in 'Item Type' drop down list
             //20   VP Check 'Related Data' items listed correctly
-            Assert.IsTrue(profile.checkRelatedDatePopulated("test results"), "Related data is wrong");
+            Assert.IsTrue(profile.checkRelatedDatePopulated("Test Results"), "Related data is wrong");
 
             //21   Select 'Test Case Results' in 'Item Type' drop down list
             //22   VP Check 'Related Data' items listed correctly0
-            Assert.IsTrue(profile.checkRelatedDatePopulated("test cases results"), "Related data is wrong");
+            Assert.IsTrue(profile.checkRelatedDatePopulated("Test Cases Results"), "Related data is wrong");
         }
 
         /// <summary>
@@ -425,19 +425,19 @@ namespace MLH_Selenium.TestCases
             //9    Click Next Button
             //10   VP Check the setting of Display Fields Page - All check boxes are un - checked
             profile.clickNextButton();
-            Assert.IsFalse(profile.checkCheckboxinDisplayFieldisChecked(), "checkbox is checked.");
+            Assert.IsFalse(profile.checkCheckboxinDisplayFieldisChecked(), "Display checkbox is checked.");
             //11   Click Next Button
             //12   VP Check the setting of Sort Fields Page - Empty Sort Criteria list
             profile.clickNextButton();
-            Assert.IsTrue(profile.checkSortFiedlPageIsEmpty(), "List is not empty");
+            Assert.IsFalse(profile.checkSortFiedlPageIsEmpty(), "Sort List is not empty");
             //13   Click Next Button
             //14   VP Check the setting of Filter Fields Page -Empty Filter list
             profile.clickNextButton();
-            Assert.IsTrue(profile.checkFilterFieldIsEmpty(), "List is not empty");
+            Assert.IsFalse(profile.checkFilterFieldIsEmpty(), "Filter List is not empty");
             //15   Click Next Button
             //16   VP Check the setting of Statistic Page - All check boxes are un-checked
             profile.clickNextButton();
-            Assert.IsTrue(profile.checkCheckboxinField(), "checkbox is checked.");
+            Assert.IsFalse(profile.checkCheckboxinDisplayFieldisChecked(), "Statistic checkbox is checked.");
             //Post - Condition  Close TA Dashboard
             profile.Close();
         }
@@ -658,7 +658,7 @@ namespace MLH_Selenium.TestCases
 
             DataProfile data = new DataProfile();
             data.InitPanelInformation();
-            data.Type = "test modules";
+            data.Type = "Test Modules";
 
             profile = profile.addNewProfilewithMoreInformation(data);
             //5    Navigate to Sort Fields page
@@ -670,8 +670,8 @@ namespace MLH_Selenium.TestCases
             //8    Click "Item Type" dropped down menu and choose Test Cases
             //9    Navigate to Sort Fields page
             //10   VP Check all fields of selected "Item Type" item are listed under the "Field" dropped down menu
-            string type1 = "test cases";
-            profile.navigateToProfileSettingPage("General Setting");
+            string type1 = "Test Cases";
+            profile.navigateToProfileSettingPage("General Settings");
             profile.selectItemType(type1);
             profile.navigateToProfileSettingPage("Sort Fields");
             Assert.IsTrue(profile.checkItemTypesPopulated(type1), "List is wrong");
@@ -680,8 +680,8 @@ namespace MLH_Selenium.TestCases
             //12   Click "Item Type" dropped down menu and choose Test Objectives
             //13   Navigate to Sort Fields page
             //14   VP Check all fields of selected "Item Type" item are listed under the "Field" dropped down menu
-            string type2 = "test objective";
-            profile.navigateToProfileSettingPage("General Setting");
+            string type2 = "Test Objectives";
+            profile.navigateToProfileSettingPage("General Settings");
             profile.selectItemType(type2);
             profile.navigateToProfileSettingPage("Sort Fields");
             Assert.IsTrue(profile.checkItemTypesPopulated(type2), "List is wrong");
@@ -690,8 +690,8 @@ namespace MLH_Selenium.TestCases
             //16   Click "Item Type" dropped down menu and choose Data Sets
             //17   Navigate to Sort Fields page
             //18   VP Check all fields of selected "Item Type" item are listed under the "Field" dropped down menu
-            string type3 = "data sets";
-            profile.navigateToProfileSettingPage("General Setting");
+            string type3 = "Data Sets";
+            profile.navigateToProfileSettingPage("General Settings");
             profile.selectItemType(type3);
             profile.navigateToProfileSettingPage("Sort Fields");
             Assert.IsTrue(profile.checkItemTypesPopulated(type3), "List is wrong");
@@ -700,8 +700,8 @@ namespace MLH_Selenium.TestCases
             //20   Click "Item Type" dropped down menu and choose Actions
             //21   Navigate to Sort Fields page
             //22   VP Check all fields of selected "Item Type" item are listed under the "Field" dropped down menu
-            string type4 = "actions";
-            profile.navigateToProfileSettingPage("General Setting");
+            string type4 = "Actions";
+            profile.navigateToProfileSettingPage("General Settings");
             profile.selectItemType(type4);
             profile.navigateToProfileSettingPage("Sort Fields");
             Assert.IsTrue(profile.checkItemTypesPopulated(type4), "List is wrong");
@@ -710,8 +710,8 @@ namespace MLH_Selenium.TestCases
             //24   Click "Item Type" dropped down menu and choose Interface Entities
             //25   Navigate to Sort Fields page
             //26   VP Check all fields of selected "Item Type" item are listed under the "Field" dropped down menu
-            string type5 = "interface entities";
-            profile.navigateToProfileSettingPage("General Setting");
+            string type5 = "Interface Entities";
+            profile.navigateToProfileSettingPage("General Settings");
             profile.selectItemType(type5);
             profile.navigateToProfileSettingPage("Sort Fields");
             Assert.IsTrue(profile.checkItemTypesPopulated(type5), "List is wrong");
@@ -720,8 +720,8 @@ namespace MLH_Selenium.TestCases
             //28   Click "Item Type" dropped down menu and choose Test Results
             //29   Navigate to Sort Fields page
             //30   VP Check all fields of selected "Item Type" item are listed under the "Field" dropped down menu
-            string type6 = "test results";
-            profile.navigateToProfileSettingPage("General Setting");
+            string type6 = "Test Results";
+            profile.navigateToProfileSettingPage("General Settings");
             profile.selectItemType(type6);
             profile.navigateToProfileSettingPage("Sort Fields");
             Assert.IsTrue(profile.checkItemTypesPopulated(type6), "List is wrong");
@@ -730,8 +730,8 @@ namespace MLH_Selenium.TestCases
             //32   Click "Item Type" dropped down menu and choose Test Case Results
             //33   Navigate to Sort Fields page
             //34   VP Check all fields of selected "Item Type" item are listed under the "Field" dropped down menu
-            string type7 = "test case results";
-            profile.navigateToProfileSettingPage("General Setting");
+            string type7 = "Test Case Results";
+            profile.navigateToProfileSettingPage("General Settings");
             profile.selectItemType(type7);
             profile.navigateToProfileSettingPage("Sort Fields");
             Assert.IsTrue(profile.checkItemTypesPopulated(type7), "List is wrong");

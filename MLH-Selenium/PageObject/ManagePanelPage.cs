@@ -375,7 +375,7 @@ namespace MLH_Selenium.PageObject
 
         public PanelSetting getSettingValue(PanelSetting panelSetting)
         {
-            panelSetting.ChartTitle = ChartTitle_txt.Text;
+            panelSetting.ChartTitle = ChartTitle_txt.GetAttribute("value");
             panelSetting.ShowTitle = ShowTitle_Chk.Selected.ToString();
             panelSetting.ChartType = ChartType_Cb.SelectedOption.Text;
             panelSetting.Cattegory = Category_Cb.SelectedOption.GetAttribute("disabled");
@@ -385,8 +385,8 @@ namespace MLH_Selenium.PageObject
             panelSetting.LegendRight = LegendRight_Rad.GetAttribute("checked");
             panelSetting.LegendBottom = LegendBottom_Rad.GetAttribute("checked");
             panelSetting.LegendLeft = LegendLeft_Rad.GetAttribute("checked");
-            panelSetting.CaptionX = CaptionX_txt.Text;
-            panelSetting.CaptionY = CaptionY_txt.Text;
+            panelSetting.CaptionX = CaptionX_txt.GetAttribute("value");
+            panelSetting.CaptionY = CaptionY_txt.GetAttribute("value");
             return panelSetting;
         }
 
@@ -558,32 +558,43 @@ namespace MLH_Selenium.PageObject
 
         public DashboardPage closePanelSettingpage()
         {
-            Cancel_Btn.Click();
+            OK_Btn.Click();
             return new DashboardPage();
+        }
+
+        public DashboardPage closePanelConfigurepage()
+        {
+            OKPanelConfiguration_Btn.Click();
+            return new DashboardPage();
+        }
+
+        public bool checkStatusofAllCheckbox()
+        {
+            var collection = driver.FindElements(By.XPath("//table[@class='GridView']//tr/td[count(//table[@class='GridView']//th[text()='Panel Name'])]/input[@name='chkDelPanel']"));
+            foreach (IWebElement elemement in collection)
+            {
+                if (elemement.Selected)
+                    return true;
+            }
+            return false;
         }
 
         public bool checkAllCheckboxesAreChecked()
         {
             CheckAll_lnk.Click();
-            int rows = int.Parse(findElementByStringAndMethod("//table[@class='GridView']//tr/td[count(//table[@class='GridView']//th[text()='Panel Name'])]").Size.ToString());
-            for (int i = 2; i < rows; i++)
-            {
-                if (findElementByStringAndMethod(string.Format("//table[@class='GridView']//tr[{i}]/td[count(//table[@class='GridView']//th[text()='Panel Name'])]/input[@name='chkDelPanel']", i)).Selected == false)
-                    return false;
-            }
-            return true;
+            return checkStatusofAllCheckbox();
         }
 
         public bool checkAllCheckboxesAreUnChecked()
         {
             UncheckAll_lnk.Click();
-            int rows = int.Parse(findElementByStringAndMethod("//table[@class='GridView']//tr/td[count(//table[@class='GridView']//th[text()='Panel Name'])]").Size.ToString());
-            for (int i = 2; i < rows; i++)
-            {
-                if (findElementByStringAndMethod(string.Format("//table[@class='GridView']//tr[{i}]/td[count(//table[@class='GridView']//th[text()='Panel Name'])]/input[@name='chkDelPanel']", i)).Selected == true)
-                    return true;
-            }
-            return false;
+            return checkStatusofAllCheckbox();
+        }
+
+        public ManagePanelPage clickCreateNewPanel()
+        {
+            CreatePanel_Btn.Click();
+            return this;
         }
         #endregion
     }

@@ -303,6 +303,12 @@ namespace MLH_Selenium.PageObject
             return new ManageProfilePage();
         }
 
+        public ManagePanelPage goToManagePanel()
+        {
+            goToPage("Administer/Panels");
+            return new ManagePanelPage();
+        }
+
         /// <summary>
         /// Deletes a page.
         /// </summary>
@@ -803,6 +809,8 @@ namespace MLH_Selenium.PageObject
             findElementByStringAndMethod(string.Format("//table[@width='100%']//tr//td//a[contains(@title,'{0}')]", name.Replace(" ", Common.Constant.nonBreakingSpace))).Click();
             return new ManagePanelPage();
         }
+
+
         #endregion
     }
 }
