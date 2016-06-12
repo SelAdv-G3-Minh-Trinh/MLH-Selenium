@@ -129,7 +129,6 @@ namespace MLH_Selenium.PageObject
             DataProfileName_txt.SendKeys(data.Name);
         }
 
-
         /// <summary>
         /// Submits the data profile with more information.
         /// </summary>

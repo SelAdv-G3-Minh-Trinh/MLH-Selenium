@@ -787,20 +787,6 @@ namespace MLH_Selenium.PageObject
         }
 
         /// <summary>
-        /// Removes the panel chart.
-        /// </summary>
-        /// <param name="panelName">Name of the panel.</param>
-        /// <author>Linh Dang</author>
-        /// <createdDate>6/7/2016</createdDate>
-        /// <modifyBy>Minh Trinh</modifyBy>
-        /// <modifyDate></modifyDate>
-        public void removePanelChart(string panelName)
-        {
-            findElementByStringAndMethod(string.Format("//div[@title='{0}']/../following-sibling::div//ul//li[1]//div[@class='hm']", panelName)).Click();
-            findElementByStringAndMethod(string.Format("//div[@title='{0}']/../following-sibling::div//ul//li[1]//div[@class='cc']//span[@title='Remove panel']", panelName)).Click();
-        }
-
-        /// <summary>
         /// Gotoes the name of the panel configuration page by.
         /// </summary>
         /// <param name="name">The name.</param>
