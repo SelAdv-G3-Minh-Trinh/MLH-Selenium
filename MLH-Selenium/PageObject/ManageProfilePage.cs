@@ -604,7 +604,7 @@ namespace MLH_Selenium.PageObject
         /// <author>Linh Dang</author>
         /// <createdDate>6/8/2016</createdDate>
         public void clickNextButton()
-        {
+        {            
             Next_btn.Click();
         }
 

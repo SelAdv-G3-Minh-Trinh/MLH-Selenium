@@ -170,6 +170,7 @@ namespace MLH_Selenium.Extension
         /// <createdDate>5/9/2016</createdDate>
         public void Click()
         {
+            Thread.Sleep(100);
             Element.Click();
         }
 
