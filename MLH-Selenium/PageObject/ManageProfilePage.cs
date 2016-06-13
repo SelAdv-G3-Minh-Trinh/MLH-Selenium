@@ -21,7 +21,9 @@ namespace MLH_Selenium.PageObject
         /// <createdDate>6/5/2016</createdDate>
         public WebElement DataProfileName_txt
         {
-            get { return findElementByStringAndMethod("//input[@id='txtProfileName']"); }
+            get {
+                Thread.Sleep(100);
+                return findElementByStringAndMethod("//input[@id='txtProfileName']"); }
         }
 
         /// <summary>
@@ -348,6 +350,7 @@ namespace MLH_Selenium.PageObject
         /// <createdDate>6/8/2016</createdDate>
         public string getProfileNameAtDisplayField()
         {
+            Thread.Sleep(100);
             return findElementByStringAndMethod("//table[@id='profilesettings']//tr/td/strong").Text;
         }
 
@@ -361,9 +364,9 @@ namespace MLH_Selenium.PageObject
         /// <modifyDate>6/9/2016</modifyDate>
         public bool checkCheckboxinField()
         {
-            ReadOnlyCollection<IWebElement> elements = driver.FindElements(By.XPath("//table[@id='profilesettings']/tbody/tr/td"));
+            ReadOnlyCollection<IWebElement> elements = driver.FindElements(By.XPath("//table[@id='profilesettings']/tbody/tr/td/label"));
 
-            foreach (WebElement element in elements)
+            foreach (IWebElement element in elements)
             {
                 if (!element.GetAttribute("innerHTML").Contains("<input") || !element.GetAttribute("innerHTML").Contains("type=\"checkbox\""))
                     return false;
@@ -479,8 +482,8 @@ namespace MLH_Selenium.PageObject
         public bool checkRelatedDatePopulated(string type)
         {
             ItemType_ddl.SelectByText(type.ToLower());
-
-            ReadOnlyCollection<IWebElement> relatedData = driver.FindElements(By.XPath("//select[@id='cbbSubReport']/option"));
+            Thread.Sleep(500);
+            ReadOnlyCollection<IWebElement> relatedData = driver.FindElements(By.XPath("//select[@id='cbbSubReport']/option"), Constant.timeout);            
             int indexrow = getRowIndexofIteminList(type, "Related Data");
             foreach (IWebElement data in relatedData)
             {
@@ -520,6 +523,7 @@ namespace MLH_Selenium.PageObject
         /// <createdDate>6/8/2016</createdDate>
         public bool navigateToProfileSettingPage(string name)
         {
+            Thread.Sleep(300);
             WebElement element = findElementByStringAndMethod(string.Format("//td[@class='body_content_table_td']//li[text()='{0}']", name));
             if (element.GetAttribute("onclick") != null)
             {

@@ -382,7 +382,7 @@ namespace MLH_Selenium.TestCases
 
             //21   Select 'Test Case Results' in 'Item Type' drop down list
             //22   VP Check 'Related Data' items listed correctly0
-            Assert.IsTrue(profile.checkRelatedDatePopulated("Test Cases Results"), "Related data is wrong");
+            Assert.IsTrue(profile.checkRelatedDatePopulated("Test Case Results"), "Related data is wrong");
         }
 
         /// <summary>
@@ -540,7 +540,7 @@ namespace MLH_Selenium.TestCases
             ManageProfilePage profile = dashboard.gotoAddProfile();
 
             DataProfile data = new DataProfile();
-            data.InitPanelInformation();
+            data.InitPanelInformation();                
             //6    Enter Name field
             //7    Click Item Type listbox
             //8    Select specific Item Type

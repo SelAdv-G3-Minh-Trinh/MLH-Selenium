@@ -192,6 +192,7 @@ namespace MLH_Selenium.Extension
         /// <createdDate>5/9/2016</createdDate>
         public ReadOnlyCollection<IWebElement> FindElements(By by, int timeout)
         {
+            ReadOnlyCollection<IWebElement> elements = null;
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             if (timeout >= 0)
@@ -200,6 +201,7 @@ namespace MLH_Selenium.Extension
                 {
                     WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(timeout));
                     wait.Until(ExpectedConditions.ElementIsVisible(by));
+                    elements = Driver.FindElements(by);
                 }
                 catch (StaleElementReferenceException)
                 {
@@ -213,7 +215,7 @@ namespace MLH_Selenium.Extension
                 }              
             }
             stopwatch.Stop();
-            return Driver.FindElements(by);
+            return elements;
         }
 
         /// <summary>
@@ -292,7 +294,7 @@ namespace MLH_Selenium.Extension
                 }
             }
             stopwatch.Stop();
-            return Driver.FindElement(by);
+            return element;
         }
 
         /// <summary>

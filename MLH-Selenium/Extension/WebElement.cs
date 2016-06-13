@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using System.Collections.ObjectModel;
 using OpenQA.Selenium.Interactions;
+using System.Threading;
 
 namespace MLH_Selenium.Extension
 {
