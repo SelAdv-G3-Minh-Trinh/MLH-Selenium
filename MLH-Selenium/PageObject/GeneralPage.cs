@@ -772,7 +772,8 @@ namespace MLH_Selenium.PageObject
         /// <modifyBy>Minh Trinh</modifyBy>
         /// <modifyDate></modifyDate>
         public ManagePanelPage gotoEditPanelbyClickingEditIcon(string panelName)
-        {            
+        {
+            Thread.Sleep(500);
             findElementByStringAndMethod(string.Format("//div[@title='{0}']/../following-sibling::div//ul//li[@title='Edit Panel']", panelName)).Click();
             return new ManagePanelPage();
         }
