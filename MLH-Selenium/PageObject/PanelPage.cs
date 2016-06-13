@@ -248,8 +248,8 @@ namespace MLH_Selenium.PageObject
                     {
                         count++;
                         break;
-                    }
                 }
+            }
             }
 
             if (count == chartTypes.Length)
@@ -461,17 +461,17 @@ namespace MLH_Selenium.PageObject
         }
 
         public PanelPage gotoEditPanel(string panelName)
-        {
+            {
             findElementByStringAndMethod(string.Format("//a[.='{0}']/../following-sibling::td/a[text()='Edit']", panelName)).Click();
             return this;
         }
 
         public bool checkSettingFormLocation (string settingName)
-        {
+                {
             bool result = false;
             if(findElementByStringAndMethod(string.Format("//fieldset[@id='fdSettings']//legend[text()='{0}']", settingName))!=null)
                 if (PanelName_Txt.Location.Y < findElementByStringAndMethod(string.Format("//fieldset[@id='fdSettings']//legend[text()='{0}']", settingName)).Location.Y)
-                result = true;
+                    result = true;
             return result;
         }
 
@@ -517,7 +517,7 @@ namespace MLH_Selenium.PageObject
             panel.Folder = Folder_txt.Text;
 
             return panel;
-        }
+                }
 
         public DashboardPage editPanelSettingValue (PanelSetting old, PanelSetting newvalue)
         {
@@ -525,7 +525,7 @@ namespace MLH_Selenium.PageObject
                 && old.Series == newvalue.Series && old.LegendNone == newvalue.LegendNone && old.LegendTop == newvalue.LegendTop && old.LegendRight == newvalue.LegendRight
                 && old.LegendBottom == newvalue.LegendBottom && old.LegendLeft == newvalue.LegendLeft && old.CaptionX == newvalue.CaptionX && old.CaptionY == newvalue.CaptionY)
                 OK_Btn.Click();
-            else
+                else
             {
                 if (old.ChartTitle != newvalue.ChartTitle)
                     ChartTitle_txt.SendKeys(newvalue.ChartTitle);
@@ -567,7 +567,7 @@ namespace MLH_Selenium.PageObject
             CheckAll_lnk.Click();
             int rows = int.Parse(findElementByStringAndMethod("//table[@class='GridView']//tr/td[count(//table[@class='GridView']//th[text()='Panel Name'])]").Size.ToString());
             for (int i = 2; i < rows; i++)
-            {
+        {
                 if (findElementByStringAndMethod(string.Format("//table[@class='GridView']//tr[{i}]/td[count(//table[@class='GridView']//th[text()='Panel Name'])]/input[@name='chkDelPanel']", i)).Selected == false)
                     return false;
             }
