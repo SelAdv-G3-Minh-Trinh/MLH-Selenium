@@ -339,6 +339,11 @@ namespace MLH_Selenium.TestCases
             panels.Close();
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC037 - Verify that "Category", "Series" and "Caption" field are enabled and disabled correctly corresponding to each type of the "Chart Type".
+        /// </summary>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>6/13/2016</createdDate>
         [TestMethod]
         public void DA_PANEL_TC037()
         {
@@ -406,6 +411,11 @@ namespace MLH_Selenium.TestCases
             Assert.IsTrue(panels.isSeriesCaptionTextboxEnable(), "Category Caption checkbox is enable");
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC038 - Verify that all settings within "Add New Panel" and "Edit Panel" form stay unchanged when user switches between "2D" and "3D" radio buttons			
+        /// </summary>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>6/13/2016</createdDate>
         [TestMethod]
         public void DA_PANEL_TC038()
         {
@@ -507,6 +517,11 @@ namespace MLH_Selenium.TestCases
             Assert.Equals(true, showtitle);
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC039 - Verify that all settings within "Add New Panel" and "Edit Panel" form stay unchanged when user switches between "Legends" radio buttons			
+        /// </summary>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>6/13/2016</createdDate>
         [TestMethod]
         public void DA_PANEL_TC039()
         {
@@ -1110,6 +1125,11 @@ namespace MLH_Selenium.TestCases
             //Close TA Dashboard
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC051 - Verify that user is unable to change "Display Name" of any Panel if there is special character except '@' inputted			
+        /// </summary>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>6/13/2016</createdDate>
         [TestMethod]
         public void DA_PANEl_TC51()
         {
@@ -1152,6 +1172,11 @@ namespace MLH_Selenium.TestCases
             Assert.AreEqual(expected, actual);
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC052 - Verify that user is unable to edit  "Height *" field to anything apart from integer number with in 300-800 range			
+        /// </summary>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>6/13/2016</createdDate>
         [TestMethod]
         public void DA_PANEl_TC52()
         {
@@ -1195,6 +1220,11 @@ namespace MLH_Selenium.TestCases
 
         }
 
+        /// <summary>
+        /// DA_LOGIN_TC053 - Verify that newly created panel are populated and sorted correctly in Panel lists under "Choose panels" form			
+        /// </summary>
+        /// <author>Hoang Ha</author>
+        /// <createdDate>6/13/2016</createdDate>
         [TestMethod]
         public void DA_PANEl_TC53()
         {
