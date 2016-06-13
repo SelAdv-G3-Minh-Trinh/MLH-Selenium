@@ -8,6 +8,14 @@ namespace MLH_Selenium.PageObject
     public class ManagePagesPage : GeneralPage
     {
         #region Elements
+        /// <summary>
+        /// Gets the page name_ text.
+        /// </summary>
+        /// <value>
+        /// The page name_ text.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/10/2016</createdDate>
         public WebElement PageName_Txt
         {
             get
@@ -16,6 +24,14 @@ namespace MLH_Selenium.PageObject
             }
         }
 
+        /// <summary>
+        /// Gets the parent page_ CMB.
+        /// </summary>
+        /// <value>
+        /// The parent page_ CMB.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/10/2016</createdDate>
         public SelectElement ParentPage_Cmb
         {
             get
@@ -24,6 +40,14 @@ namespace MLH_Selenium.PageObject
             }
         }
 
+        /// <summary>
+        /// Gets the number page_ CMB.
+        /// </summary>
+        /// <value>
+        /// The number page_ CMB.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/10/2016</createdDate>
         public SelectElement NumberPage_Cmb
         {
             get
@@ -33,6 +57,14 @@ namespace MLH_Selenium.PageObject
             }
         }
 
+        /// <summary>
+        /// Gets the after page_ CMB.
+        /// </summary>
+        /// <value>
+        /// The after page_ CMB.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/10/2016</createdDate>
         public SelectElement AfterPage_Cmb
         {
             get
@@ -41,6 +73,14 @@ namespace MLH_Selenium.PageObject
             }
         }
 
+        /// <summary>
+        /// Gets the public_ CHK.
+        /// </summary>
+        /// <value>
+        /// The public_ CHK.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/10/2016</createdDate>
         public WebElement Public_Chk
         {
             get
@@ -49,6 +89,14 @@ namespace MLH_Selenium.PageObject
             }
         }
 
+        /// <summary>
+        /// Gets the o k_ BTN.
+        /// </summary>
+        /// <value>
+        /// The o k_ BTN.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/10/2016</createdDate>
         public WebElement OK_Btn
         {
             get
@@ -57,6 +105,14 @@ namespace MLH_Selenium.PageObject
             }
         }
 
+        /// <summary>
+        /// Gets the cancel_ BTN.
+        /// </summary>
+        /// <value>
+        /// The cancel_ BTN.
+        /// </value>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/10/2016</createdDate>
         public WebElement Cancel_Btn
         {
             get
@@ -68,6 +124,14 @@ namespace MLH_Selenium.PageObject
 
         #region Actions
 
+        /// <summary>
+        /// Submits the page information.
+        /// </summary>
+        /// <param name="page">The page.</param>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/10/2016</createdDate>
+        /// <modifyBy>Minh Trinh</modifyBy>
+        /// <modifyDate>5/117/2016</modifyDate>
         public void submitPageInformation(Page page)
         {
             PageName_Txt.Clear();
@@ -81,12 +145,30 @@ namespace MLH_Selenium.PageObject
             Thread.Sleep(500);
         }
 
+        /// <summary>
+        /// Adds the newpage.
+        /// </summary>
+        /// <param name="page">The page.</param>
+        /// <returns>Dashboard Page displays</returns>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/10/2016</createdDate>
+        /// <modifyBy>Minh Trinh</modifyBy>
+        /// <modifyDate>5/117/2016</modifyDate>
         public DashboardPage addNewpage(Page page)
         {
             submitPageInformation(page);
             return new DashboardPage(); 
         }
 
+        /// <summary>
+        /// Edits the page.
+        /// </summary>
+        /// <param name="page">The page.</param>
+        /// <returns>Dashboard page displays</returns>
+        /// <author>Linh Dang</author>
+        /// <createdDate>5/10/2016</createdDate>
+        /// <modifyBy>Minh Trinh</modifyBy>
+        /// <modifyDate>5/117/2016</modifyDate>
         public DashboardPage editPage(Page page)
         {
             submitPageInformation(page);

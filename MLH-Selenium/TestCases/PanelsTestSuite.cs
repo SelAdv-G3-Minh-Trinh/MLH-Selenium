@@ -46,7 +46,7 @@ namespace MLH_Selenium.TestCases
             //7    Enter Panel name into Display Name textbox
             //8    Select any value in Series* dropdown list. Click Ok button	
             //9    Click Ok button in Panel Configuration popup
-            PanelPage panels = new PanelPage();
+            ManagePanelPage panels = new ManagePanelPage();
             panels = dashboard.goToAddPanelByChoosePanel();
 
             Panel panel = new Panel();
@@ -93,7 +93,7 @@ namespace MLH_Selenium.TestCases
             //5    Click Add New link
             //6    Try to click other controls when Add New Panel dialog is opening
             //7    VP All control / form are disabled or locked when Add New Panel dialog is opening
-            PanelPage panel = new PanelPage();
+            ManagePanelPage panel = new ManagePanelPage();
 
             dashboard.goToPage("Administer/Panels");
             panel = dashboard.gotoAddPanel();
@@ -132,7 +132,7 @@ namespace MLH_Selenium.TestCases
             //6    Click on "Add new" link
             //7    Click on OK button
             //8    VP Warning message: "Display Name is required field" show up
-            PanelPage panels = new PanelPage();
+            ManagePanelPage panels = new ManagePanelPage();
             dashboard.goToPage("Administer/Panels");
             panels = dashboard.gotoAddPanel();
 
@@ -179,7 +179,7 @@ namespace MLH_Selenium.TestCases
             //8    VP Message "Invalid display name. The name can't contain high ASCII characters or any of following characters: /:*?<>|"#{[]{};" is displayed
             //9    Close Warning Message box           
             dashboard.goToPage("Administer/Panels");
-            PanelPage panels = dashboard.gotoAddPanel();
+            ManagePanelPage panels = dashboard.gotoAddPanel();
 
             Panel panel = new Panel();
             panel.InitPanelInformation();
@@ -226,7 +226,7 @@ namespace MLH_Selenium.TestCases
             //4    Click on Add new link
             //5    VP Chart panel setting form is displayed "chart setting" under Display Name field
             dashboard.goToPage("Administer/Panels");
-            PanelPage panels = dashboard.gotoAddPanel();
+            ManagePanelPage panels = dashboard.gotoAddPanel();
 
             Assert.IsTrue(panels.checkSettingFormLocation("Chart Settings"), "Setting does not display");
             //6    Select Indicator type
@@ -270,7 +270,7 @@ namespace MLH_Selenium.TestCases
             //5    Enter display name to "Display name" field.Duplicated panel
             //6    Click on OK button            
             dashboard.goToPage("Administer/Panels");
-            PanelPage panels = dashboard.gotoAddPanel();
+            ManagePanelPage panels = dashboard.gotoAddPanel();
 
             Panel panel = new Panel();
             panel.InitPanelInformation();
@@ -319,7 +319,7 @@ namespace MLH_Selenium.TestCases
             //6    Enter a display name to display name field giang -panel
             //7    Click on OK button
             dashboard.goToPage("Administer/Panels");
-            PanelPage panels = dashboard.gotoAddPanel();
+            ManagePanelPage panels = dashboard.gotoAddPanel();
 
             Panel panel = new Panel();
             panel.InitPanelInformation();
@@ -369,7 +369,7 @@ namespace MLH_Selenium.TestCases
             //7    Click on Administer/ Panels link
             //8    Click on add new link
             //9    VP Verify that "giang - data" data profiles are populated correctly under the "Data Profile" dropped down menu.
-            PanelPage panels = new PanelPage();
+            ManagePanelPage panels = new ManagePanelPage();
             profile.goToPage("Administer/Panels");
             panels = profile.gotoAddPanel();
 
@@ -421,7 +421,7 @@ namespace MLH_Selenium.TestCases
             //7    Click Ok button
             //8    VP Message "Invalid display name. The name can't contain high ASCII characters or any of following characters: /:*?<>|"#{[]{};" is displayed
             //9    Close Warning Message box
-            PanelPage panels = new PanelPage();
+            ManagePanelPage panels = new ManagePanelPage();
             dashboard.goToPage("Administer/Panels");
             panels = dashboard.gotoAddPanel();
 
@@ -484,7 +484,7 @@ namespace MLH_Selenium.TestCases
             dashboard = pages.addNewpage(page);
             //8    Click 'Choose Panels' button
             //9    Click 'Create new panel' button
-            PanelPage panels = new PanelPage();
+            ManagePanelPage panels = new ManagePanelPage();
             panels = dashboard.goToAddPanelByChoosePanel();
 
             //10   Click 'Chart Type' drop - down menu
@@ -528,7 +528,7 @@ namespace MLH_Selenium.TestCases
             dashboard = pages.addNewpage(page);
             //8    Click 'Choose Panels' button below 'main_hung' button
             //9    Click 'Create new panel' button
-            PanelPage panels = new PanelPage();
+            ManagePanelPage panels = new ManagePanelPage();
             panels = dashboard.goToAddPanelByChoosePanel();
             //10   Click 'Chart Type' drop - down menu
             //11   Select 'Pie' Chart Type
@@ -601,7 +601,7 @@ namespace MLH_Selenium.TestCases
             //3    Click Administer link
             //4    Click Panel link
             //5    Click Add New link
-            PanelPage panels = new PanelPage();
+            ManagePanelPage panels = new ManagePanelPage();
             dashboard.goToPage("Administer/Panels");
             panels = dashboard.gotoAddPanel();
 
@@ -728,7 +728,7 @@ namespace MLH_Selenium.TestCases
             //15   Click on any Chart panel instance
             //16   Click 'Select Page*' drop - down menu
             //17   VP 'Select Page*' drop - down menu contains 3 items: 'main_hung1', 'main_hung2' and 'main_hung3'
-            PanelPage panels = new PanelPage();
+            ManagePanelPage panels = new ManagePanelPage();
             panels.goToPanelConfigPage("Test Case Execution Failure Trend");
 
             Assert.IsTrue(panels.checkPageBelongsToSelectPage(page1.PageName), "Item does not display in drop down list");
@@ -775,7 +775,7 @@ namespace MLH_Selenium.TestCases
             //14   Click OK button
             //15   VP Check that error message 'Panel height must be greater than or equal to 300 and lower than or equal to 800' display
             //16   Click OK button
-            PanelPage panels = new PanelPage();
+            ManagePanelPage panels = new ManagePanelPage();
             panels = dashboard.goToPanelConfigPage("Test Case Execution Failure Trend");
 
             Panel panel = new Panel();
@@ -860,7 +860,7 @@ namespace MLH_Selenium.TestCases
             //13   Leave 'Height *' field empty
             //14   Click OK button
             //15   VP Check that 'Panel height is required field' message display
-            PanelPage panels = new PanelPage();
+            ManagePanelPage panels = new ManagePanelPage();
             panels = dashboard.goToPanelConfigPage("Test Case Execution Failure Trend");
 
             Panel panel = new Panel();
@@ -906,7 +906,7 @@ namespace MLH_Selenium.TestCases
             //5    Click Create New Panel button
             //6    Enter all required fields on Add New Panel page
             //7    Click Ok button
-            PanelPage panels = new PanelPage();
+            ManagePanelPage panels = new ManagePanelPage();
             panels = dashboard.goToAddPanelByChoosePanel();
 
             Panel panel = new Panel();
@@ -961,7 +961,7 @@ namespace MLH_Selenium.TestCases
             //8    Leave empty on Folder field
             //9    Click Ok button on Panel Configuration dialog
             //10   VP There is message "Panel folder is incorrect"
-            PanelPage panels = new PanelPage();
+            ManagePanelPage panels = new ManagePanelPage();
             panels = dashboard.goToAddPanelByChoosePanel();
 
             Panel panel = new Panel();
@@ -1020,7 +1020,7 @@ namespace MLH_Selenium.TestCases
             //5    Click Create New Panel button
             //6    Enter all required fields on Add New Panel page
             //7    Click Ok button
-            PanelPage panels = new PanelPage();
+            ManagePanelPage panels = new ManagePanelPage();
             panels = dashboard.goToAddPanelByChoosePanel();
 
             Panel panel = new Panel();
@@ -1072,7 +1072,7 @@ namespace MLH_Selenium.TestCases
             //5    Click Create New Panel button
             //6    Enter all required fields on Add New Panel page
             //7    Click Ok button
-            PanelPage panels = new PanelPage();
+            ManagePanelPage panels = new ManagePanelPage();
             panels = dashboard.goToAddPanelByChoosePanel();
 
             Panel panel = new Panel();
@@ -1121,7 +1121,7 @@ namespace MLH_Selenium.TestCases
             //5    Click Create New Panel button
             //6    Enter all required fields on Add New Panel page
             //7    Click Ok button
-            PanelPage panels = new PanelPage();
+            ManagePanelPage panels = new ManagePanelPage();
             panels = dashboard.goToAddPanelByChoosePanel();
 
             Panel panel = new Panel();
@@ -1164,7 +1164,7 @@ namespace MLH_Selenium.TestCases
             //5     Click Add New link
             //6    Enter a valid name into Display Name field
             //7   VP The new panel is created successfully
-            PanelPage panels = new PanelPage();
+            ManagePanelPage panels = new ManagePanelPage();
             dashboard.goToPage("Administer/Panels");
             panels = dashboard.gotoAddPanel();
 
@@ -1207,7 +1207,7 @@ namespace MLH_Selenium.TestCases
             //5     Click Add New link
             dashboard.GotoAddPanels();
             //6     Create a new panel
-            PanelPage panelpage = new PanelPage();
+            ManagePanelPage panelpage = new ManagePanelPage();
             panelpage.CreatePanel("Logigear", "Name");
             //7     Click Edit link
             //8     Edit panel name with special characters
@@ -1310,7 +1310,7 @@ namespace MLH_Selenium.TestCases
             //9     Click 'Create new panel' button
             //10    Enter a name to Display Name
             //11    Click OK button
-            PanelPage panels = new PanelPage();
+            ManagePanelPage panels = new ManagePanelPage();
             panels = dashboard.goToAddPanelByChoosePanel();
 
             Panel panel = new Panel();
@@ -1640,7 +1640,7 @@ namespace MLH_Selenium.TestCases
             //3    Click Choose Panels button
             //4    Click Test Module Implementation By Priority link
             //5    Click Ok button on Panel Configuration dialog
-            PanelPage panels = dashboard.gotoPanelConfigPageByName(panelname);
+            ManagePanelPage panels = dashboard.gotoPanelConfigPageByName(panelname);
 
             Panel panel = new Panel();
             panel = panels.getPanelConfigValue(panel);
@@ -1704,7 +1704,10 @@ namespace MLH_Selenium.TestCases
             //10   Select Pie
             //11   VP Check original "Pie" - Edit Panel form is displayed
             //12   Close "Edit Panel" form
-            PanelPage panels = dashboard.gotoPanelConfigPageByName(panelname);
+            ManagePanelPage panels = dashboard.gotoPanelConfigPageByName(panelname);
+            dashboard = panels.closePanelConfigurepage();
+            panels = dashboard.gotoEditPanelbyClickingEditIcon(panelname);
+
             PanelSetting old = new PanelSetting();
             old = panels.getSettingValue(old);
 
@@ -1723,7 +1726,10 @@ namespace MLH_Selenium.TestCases
             //17   Select Pie
             //18   VP Check original "Pie" - Edit Panel form is displayed
             //19   Close "Edit Panel" form
-            PanelPage panels1 = dashboard.gotoPanelConfigPageByName(panelname);
+            ManagePanelPage panels1 = dashboard.gotoPanelConfigPageByName(panelname);
+            dashboard = panels1.closePanelConfigurepage();
+            panels1 = dashboard.gotoEditPanelbyClickingEditIcon(panelname);
+
             PanelSetting old1 = new PanelSetting();
             old1 = panels.getSettingValue(old1);
 
@@ -1742,7 +1748,10 @@ namespace MLH_Selenium.TestCases
             //24   Select Pie
             //25   VP Check original "Pie" - Edit Panel form is displayed
             //26   Close "Edit Panel" form
-            PanelPage panels2 = dashboard.gotoPanelConfigPageByName(panelname);
+            ManagePanelPage panels2 = dashboard.gotoPanelConfigPageByName(panelname);
+            dashboard = panels2.closePanelConfigurepage();
+            panels2 = dashboard.gotoEditPanelbyClickingEditIcon(panelname);
+
             PanelSetting old2 = new PanelSetting();
             old2 = panels.getSettingValue(old2);
 
@@ -1760,7 +1769,10 @@ namespace MLH_Selenium.TestCases
             //30   Click on Chart Type dropped down menu
             //31   Select Pie
             //32   VP Check original "Pie" - Edit Panel form is displayed
-            PanelPage panels3 = dashboard.gotoPanelConfigPageByName(panelname);
+            ManagePanelPage panels3 = dashboard.gotoPanelConfigPageByName(panelname);
+            dashboard = panels3.closePanelConfigurepage();
+            panels3 = dashboard.gotoEditPanelbyClickingEditIcon(panelname);
+
             PanelSetting old3 = new PanelSetting();
             old3 = panels.getSettingValue(old3);
 
@@ -1815,7 +1827,7 @@ namespace MLH_Selenium.TestCases
             //13   Enter a name to Display Name
             //14   Click OK button
             //15   Click Cancel button
-            PanelPage panels1 = new PanelPage();
+            ManagePanelPage panels1 = new ManagePanelPage();
             Panel panel1 = new Panel();
             panel1.InitPanelInformation();
             panels1 = dashboard.goToAddPanelByChoosePanel().addNewPageWithoutConfig(panel1);
@@ -1823,19 +1835,19 @@ namespace MLH_Selenium.TestCases
             //17   Enter a name to Display Name
             //18   Click OK button
             //19   Click Cancel button
-            PanelPage panels2 = new PanelPage();
+            ManagePanelPage panels2 = new ManagePanelPage();
             Panel panel2 = new Panel();
             panel2.InitPanelInformation();
-            panels2 = dashboard.goToAddPanelByChoosePanel().addNewPageWithoutConfig(panel2);
+            panels2 = panels1.clickCreateNewPanel().addNewPageWithoutConfig(panel2);
             //20   Click 'Administer' link
             //21   Click 'Panels' link
-            panels2.goToPage("Administer/Panels");
+            panels2 = panels2.goToManagePanel();
             //22   Click 'Check All' link
             //23   VP Check that 'hung_a' checkbox and 'hung_b' checkbox are checked
             Assert.IsTrue(panels2.checkAllCheckboxesAreChecked(), "checkbox is not checked.");
             //24   Click 'Uncheck All' link
             //25   VP Check that 'hung_a' checkbox and 'hung_b' checkbox are unchecked
-            Assert.IsTrue(panels2.checkAllCheckboxesAreUnChecked(), "checkbox is checked.");
+            Assert.IsFalse(panels2.checkAllCheckboxesAreUnChecked(), "checkbox is checked.");
         }
     }
 }

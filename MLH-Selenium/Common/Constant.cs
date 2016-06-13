@@ -22,19 +22,25 @@ namespace MLH_Selenium.Common
         public static string[] itemTypes = { "Test Modules", "Test Cases", "Test Objectives", "Data Sets", "Actions",
                                             "Interface Entities", "Test Results", "Test Case Results"};
 
-        public static string[,] listRelatedData = new string [8,3] { { "Test Modules", "Related Test Results","Related Test Cases" }, {"Test Cases","Related Run Results","Related Objectives" } , { "Test Objectives","Related Run Results","Related Test Cases"},
-                                                        { "Data Sets","",""}, { "Actions","Action Arguments",""}, { "Interface Entities","Interface Elements",""},
-                                                        { "Test Results","Related Test Modules","Related Test Cases"}, { "Test Case Results","",""} };
+        public static string[,] listRelatedData = new string [8,6] {
+                                                        {"Test Modules","None", "Related test results","Related bugs","Related test cases","" }, 
+                                                        {"Test Cases","None","Related run results","Related bugs","Related objectives","Related steps" } ,
+                                                        { "Test Objectives","None", "Related run results","Related test cases","",""},
+                                                        { "Data Sets","None","","","",""}, 
+                                                        { "Actions","None", "Action arguments","","",""},
+                                                        { "Interface Entities","None","Interface elements","","",""},
+                                                        { "Test Results","None", "Related bugs", "Related test modules","Related test cases",""}, 
+                                                        { "Test Case Results","None","","","",""} };
 
-        public static string[,] listRelatedFields = new string[8,18] {
-                                                        { "Test Modules","Name","Description","Version","Priority","Last update date","Creation date","Notes","Check out machine","Location","Recent result","Assigned user","Status","Last updated by","Created by","Check out user","",""},
-                                                        { "Test Cases","Name","Title","Notes"," Location","Recent result","","","","","","","","","","","",""},
-                                                        { "Test Objectives","Name","Title","Notes","Location","Recent result","Source","","","","","","","","","","",""},
-                                                        { "Data Sets","Name","Description","Assigned user","Last update date","Creation date","Notes","Check out machine","Location","Version","Status","Last updated by","Created by","Check out user","","","",""},
-                                                        { "Actions","Name","Description","Assigned user","Last update date","Creation date","Notes","Check out machine","Location","Version","Status","Last updated by","Created by","Verbose description","Check out user","","",""},
-                                                        { "Interface Entities","Name","Description","Assigned user","Last update date","Creation date","Notes","Check out machine","Location","Version","Status","Last updated by","Created by","Check out user","","","",""},
-                                                        { "Test Results","Name","Reported by","Start time","Duration","Variation","Passed","Warnings","Automated/Manual","Notes","Location","Date of run","End time","Comment","Result","Failed","Errors","Run Machine"},
-                                                        { "Test Case Results","Name","Date of run","Passed","Warnings","Notes","Location","Result","Failed","Errors","","","","","","","",""} };
+        public static string[,] listRelatedFields = new string[8,26] {
+{ "Test Modules","--- Select field ---","Name","Location","Description","Recent result","Source","Version","Assigned user","Priority","Status","Last update date","Last updated by","Creation date","Created by","Notes","Check out by","URL","","","","","","","",""},
+{ "Test Cases","-- Select field ---","ID","Location","Title"," Recent result","Notes","Source","URL","","","","","","","","","","","","","","","","",""},
+{ "Test Objectives","--- Select field ---","ID","Location","Title","Recent result","Notes","Source","URL","","","","","","","","","","","","","","","","",""},
+{ "Data Sets","--- Select field ---","Name","Location","Description","Version","Assigned user","Status","Last update date","Last updated by","Creation date","Created by","Notes","Check out by","URL","","","","","","","","","","",""},
+{ "Actions","--- Select field ---","Name","Location","Description","Version","Assigned user","Status","Last update date","Last updated by","Creation date","Created by","Notes","Check out by","URL","","","","","","","","","","",""},
+{ "Interface Entities","--- Select field ---","Name","Location","Description","Version","Assigned user","Status","Last update date","Last updated by","Creation date","Created by","Notes","Check out by","URL","","","","","","","","","","",""},
+{ "Test Results","--- Select field ---","Name","Location","Reported by","Date of run","Start time","End time","Duration","Comment","Variation","Result","Passed","Failed","Warnings","Errors","Automated/Manual","Run Machine","Notes","URL","Baseline","OS","Device OS","Device Name","Build Number","AUTVersion"},
+{ "Test Case Results","--- Select field ---","Name","Location","Date of run","Result","Passed","Failed","Warnings","Errors","Notes","URL","Build Number","","","","","","","","","","","","",""} };
 
         public const string adminUser = "administrator";
         public const string adminPassword = "";

@@ -304,6 +304,18 @@ namespace MLH_Selenium.PageObject
         }
 
         /// <summary>
+        /// Goes to manage panel.
+        /// </summary>
+        /// <returns>Manage Panel Page displays</returns>
+        /// <author>Linh Dang</author>
+        /// <createdDate>6/12/2016</createdDate>
+        public ManagePanelPage goToManagePanel()
+        {
+            goToPage("Administer/Panels");
+            return new ManagePanelPage();
+        }
+
+        /// <summary>
         /// Deletes a page.
         /// </summary>
         /// <param name="linkPath">The link path.</param>
@@ -569,10 +581,10 @@ namespace MLH_Selenium.PageObject
         /// <returns>Panel page displays</returns>
         /// <author>Linh Dang</author>
         /// <createdDate>6/5/2016</createdDate>
-        public PanelPage gotoAddPanel()
+        public ManagePanelPage gotoAddPanel()
         {
             AddNew_Lnk.Click();
-            return new PanelPage();
+            return new ManagePanelPage();
         }
 
         /// <summary>
@@ -607,12 +619,12 @@ namespace MLH_Selenium.PageObject
         /// <returns>panel page displays</returns>
         /// <author>Linh Dang</author>
         /// <createdDate>5/23/2016</createdDate>
-        public PanelPage goToAddPanelByChoosePanel()
+        public ManagePanelPage goToAddPanelByChoosePanel()
         {
             ChoosePanel_Btn.Click();
             CreatePanel_Btn.Click();
 
-            return new PanelPage();
+            return new ManagePanelPage();
         }
 
         /// <summary>
@@ -624,12 +636,12 @@ namespace MLH_Selenium.PageObject
         /// <createdDate>5/30/2016</createdDate>
         /// <modifyBy>Minh Trinh</modifyBy>
         /// <modifyDate>6/02/2016</modifyDate>
-        public PanelPage goToPanelConfigPage(string name)
+        public ManagePanelPage goToPanelConfigPage(string name)
         {
             ChoosePanel_Btn.Click();
 
             findElementByStringAndMethod(string.Format("//a[text()='{0}']", name.Replace(" ", Constant.nonBreakingSpace))).Click();
-            return new PanelPage();
+            return new ManagePanelPage();
         }
 
         /// <summary>
@@ -752,11 +764,11 @@ namespace MLH_Selenium.PageObject
         /// <createdDate>6/7/2016</createdDate>
         /// <modifyBy>Minh Trinh</modifyBy>
         /// <modifyDate>6/8/2016</modifyDate>
-        public PanelPage gotoChoosePanel()
+        public ManagePanelPage gotoChoosePanel()
         {
             Thread.Sleep(500);
             ChoosePanel_Btn.Click();
-            return new PanelPage();
+            return new ManagePanelPage();
         }
 
         /// <summary>
@@ -768,24 +780,10 @@ namespace MLH_Selenium.PageObject
         /// <createdDate>6/7/2016</createdDate>
         /// <modifyBy>Minh Trinh</modifyBy>
         /// <modifyDate></modifyDate>
-        public PanelPage gotoEditPanelbyClickingEditIcon(string panelName)
+        public ManagePanelPage gotoEditPanelbyClickingEditIcon(string panelName)
         {            
             findElementByStringAndMethod(string.Format("//div[@title='{0}']/../following-sibling::div//ul//li[@title='Edit Panel']", panelName)).Click();
-            return new PanelPage();
-        }
-
-        /// <summary>
-        /// Removes the panel chart.
-        /// </summary>
-        /// <param name="panelName">Name of the panel.</param>
-        /// <author>Linh Dang</author>
-        /// <createdDate>6/7/2016</createdDate>
-        /// <modifyBy>Minh Trinh</modifyBy>
-        /// <modifyDate></modifyDate>
-        public void removePanelChart(string panelName)
-        {
-            findElementByStringAndMethod(string.Format("//div[@title='{0}']/../following-sibling::div//ul//li[1]//div[@class='hm']", panelName)).Click();
-            findElementByStringAndMethod(string.Format("//div[@title='{0}']/../following-sibling::div//ul//li[1]//div[@class='cc']//span[@title='Remove panel']", panelName)).Click();
+            return new ManagePanelPage();
         }
 
         /// <summary>
@@ -797,11 +795,11 @@ namespace MLH_Selenium.PageObject
         /// <createdDate>6/7/2016</createdDate>
         /// <modifyBy>Minh Trinh</modifyBy>
         /// <modifyDate</modifyDate>
-        public PanelPage gotoPanelConfigPageByName(string name)
+        public ManagePanelPage gotoPanelConfigPageByName(string name)
         {
             gotoChoosePanel();
             findElementByStringAndMethod(string.Format("//table[@width='100%']//tr//td//a[contains(@title,'{0}')]", name.Replace(" ", Common.Constant.nonBreakingSpace))).Click();
-            return new PanelPage();
+            return new ManagePanelPage();
         }
         #endregion
     }

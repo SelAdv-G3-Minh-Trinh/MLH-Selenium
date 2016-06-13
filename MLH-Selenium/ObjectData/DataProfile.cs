@@ -18,7 +18,7 @@ namespace MLH_Selenium.ObjectData
         /// The name.
         /// </value>
         /// <author>Linh Dang</author>
-        /// <createdDate>5/22/2016</createdDate>
+        /// <createdDate>6/5/2016</createdDate>
         public string Name
         {
             get { return name; }
@@ -32,7 +32,7 @@ namespace MLH_Selenium.ObjectData
         /// The type.
         /// </value>
         /// <author>Linh Dang</author>
-        /// <createdDate>5/22/2016</createdDate>
+        /// <createdDate>6/5/2016</createdDate>
         public string Type
         {
             get
@@ -53,7 +53,7 @@ namespace MLH_Selenium.ObjectData
         /// The related data.
         /// </value>
         /// <author>Linh Dang</author>
-        /// <createdDate>5/22/2016</createdDate>
+        /// <createdDate>6/5/2016</createdDate>
         public string RelatedData
         {
             get
@@ -74,14 +74,14 @@ namespace MLH_Selenium.ObjectData
         /// Initializes a new instance of the <see cref="DataProfile"/> class.
         /// </summary>
         /// <author>Linh Dang</author>
-        /// <createdDate>5/22/2016</createdDate>
+        /// <createdDate>6/5/2016</createdDate>
         public DataProfile() { }
 
         /// <summary>
         /// Initializes the panel information.
         /// </summary>
         /// <author>Linh Dang</author>
-        /// <createdDate>5/22/2016</createdDate>
+        /// <createdDate>6/5/2016</createdDate>
         public void InitPanelInformation()
         {
             this.name = Utilities.GenerateRandomString(5);
